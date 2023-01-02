@@ -1,5 +1,4 @@
 :root {
-  --safety: rgb(248, 163, 58);
   --mountain: rgb(51, 49, 47);
   --mountainTop: rgb(243, 244, 247);
   --newClay: rgb(228, 223, 218);
@@ -11,8 +10,12 @@
 
 html body {
   background: var(--mountainTop);
-  color: var(--mountainTop);
+  color: var(--mountain);
   margin: 0;
+}
+
+h1 {
+  color: var(--mountainTop);
 }
 
 .box {
