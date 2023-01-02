@@ -1,38 +1,39 @@
-.App {
-  text-align: center;
+:root {
+  --mountain: rgb(51, 49, 47);
+  --mountainTop: rgb(229, 229, 232);
+  --newClay: rgb(228, 223, 218);
+  --brightWaters: rgb(110, 188, 227);
+  --sea: rgb(124, 181, 167);
+  --darkSea: rgb(117, 163, 152);
+  --lightHouse: rgb(252, 121, 91);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html body {
+  background: var(--mountainTop);
+  color: var(--mountain);
+  margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1, h2 {
+  color: var(--mountainTop);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.box {
+  background-color: var(--mountain);
 }
 
-.App-link {
-  color: #61dafb;
+.mainText {
+  color: var(--brightWaters);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.textBox {
+margin: 0;
+}
+.search {
+  background-color: var(--sea);
+  border: none;
+}
+
+.search:hover {
+  background-color:var(--darkSea);
 }
