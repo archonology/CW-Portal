@@ -1,15 +1,33 @@
-root {
-  --tiger: rgb(248, 194, 58);
+:root {
+  --safety: rgb(248, 163, 58);
   --mountain: rgb(51, 49, 47);
   --mountainTop: rgb(243, 244, 247);
   --newClay: rgb(228, 223, 218);
-  --brightWaters: rgb(58, 185, 248);
-  --greenGrass: rgb(46, 238, 43);
-  --lightHouse: rgb(250, 86, 57);
+  --brightWaters: rgb(110, 188, 227);
+  --sea: rgb(124, 181, 167);
+  --darkSea: rgb(117, 163, 152);
+  --lightHouse: rgb(252, 121, 91);
 }
 
 html body {
-  background: rgb(243, 244, 247);
-  color: rgb(51, 49, 47);
+  background: var(--mountainTop);
+  color: var(--mountainTop);
   margin: 0;
+}
+
+.box {
+  background-color: var(--mountain);
+}
+
+.mainText {
+  color: var(--brightWaters);
+}
+
+.search {
+  background-color: var(--sea);
+  border: none;
+}
+
+.search:hover {
+  background-color:var(--darkSea);
 }
