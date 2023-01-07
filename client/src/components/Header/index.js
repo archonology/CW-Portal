@@ -34,7 +34,10 @@ function Header() {
                       title="Resources"
                       id={`offcanvasNavbarDropdown-expand-md}`}
                     >
-                      <NavDropdown.Item as={Link} to={"/resources" + "/" + ResourceList[0].title}>{ResourceList[0].title}</NavDropdown.Item>
+                      {ResourceList.map((resource) => (
+                      <NavDropdown.Item as={Link} key={resource} to={"/resources" + resource.url}>{resource.title}</NavDropdown.Item>
+                      ))};
+
 
 
 

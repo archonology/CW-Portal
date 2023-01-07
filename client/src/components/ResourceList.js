@@ -1,6 +1,7 @@
 const ResourceList = [
     {
         title: "ICWA",
+        url: "/icwa",
         description: "description",
         links: [{
             link: "link1"
@@ -9,6 +10,7 @@ const ResourceList = [
     },
     {
         title: "Social Work Code of Ethics",
+        url: "/ethics",
         description: "description",
         links: [{
             link: "link1",
@@ -17,6 +19,7 @@ const ResourceList = [
     },
     {
         title: "Data Privacy",
+        url: "/dataprivacy",
         description: "description",
         links: [{
             link: "link1",
@@ -25,6 +28,7 @@ const ResourceList = [
     },
     {
         title: "History",
+        url: "/history",
         description: "description",
         links: [{
             link: "link1",
@@ -33,6 +37,7 @@ const ResourceList = [
     },
     {
         title: "Advocacy",
+        url: "/advocacy",
         description: "description",
         links: [{
             link: "link1",
@@ -41,6 +46,7 @@ const ResourceList = [
     },
     {
         title: "Working with Domestic Violence",
+        url: "/domesticviolence",
         description: "description",
         links: [{
             link: "link1",
@@ -49,6 +55,7 @@ const ResourceList = [
     },
     {
         title: "Abuse",
+        url: "/abuse",
         description: "description",
         links: [{
             link: "link1",
@@ -57,6 +64,7 @@ const ResourceList = [
     },
     {
         title: "Substance Use Disorder",
+        url: "/sud",
         description: "description",
         links: [{
             link: "link1",
@@ -65,6 +73,7 @@ const ResourceList = [
     },
     {
         title: "Education Neglect & Truancy",
+        url: "/edneglect",
         description: "description",
         links: [{
             link: "link1",
@@ -73,6 +82,7 @@ const ResourceList = [
     },
     {
         title: "The Court System & CHIPS",
+        url: "/courts",
         description: "description",
         links: [{
             link: "link1",
@@ -81,6 +91,7 @@ const ResourceList = [
     },
     {
         title: "Child Protection & The Law",
+        url: "/cplaw",
         description: "description",
         links: [{
             link: "link1",

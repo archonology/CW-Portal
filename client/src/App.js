@@ -61,7 +61,10 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/resources/:resource" element={<Resources />} />
+                {ResourceList.map((resource) => (
+                <Route key={resource} path= {"/resources" + resource.url } element={<Resources />} />
+                ))};
+
                 <Route path="*" element={<Home />} />
               </Routes>
           </div>
