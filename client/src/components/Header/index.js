@@ -7,6 +7,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
+import ResourceList from "../ResourceList";
+
+console.log(ResourceList[0].title);
 
 function Header() {
     return (
@@ -31,25 +34,10 @@ function Header() {
                       title="Resources"
                       id={`offcanvasNavbarDropdown-expand-md}`}
                     >
-                      <NavDropdown.Item as={Link} to="/icwa">ICWA</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/ethics">Social Work Code of Ethics</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/dataprivacy">Data Privacy</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/history">History</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/advocacy">Advocacy</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/dv">Domestic Violence</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/abuse">Abuse</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/sud">Substance Use Disorder</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/edneglect">Education Neglect and Truancy</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/court">The Court System & CHIPS</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/cplaw">Child Protection & the Law</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/incarceration">Incarceration in the Family</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/mentalhealth">Mental Health</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/parenting">Parenting Resources</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/caseplanning">Case Planning</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/interviewing">Interviewing</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/fostercare">Foster Care in MN</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/ssis">SSIS & Data Systems</NavDropdown.Item>
-                      <NavDropdown.Item as={Link} to="/iv-e">Title IV-E</NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to={"/resources" + "/" + ResourceList[0].title}>{ResourceList[0].title}</NavDropdown.Item>
+
+
+
                       {/* <NavDropdown.Divider />
                       <NavDropdown.Item href="#action22">
                         something added?
