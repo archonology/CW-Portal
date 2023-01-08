@@ -11,7 +11,7 @@
 } */
 
 :root {   
-  --base: rgb(54, 54, 55); 
+  --base: rgb(60, 49, 60); 
   --alt: rgb(229, 229, 232);
   --primary: rgb(228, 223, 218);
   --secondary: rgb(110, 188, 227);
@@ -36,11 +36,6 @@ h1, h2 {
   font-size: larger;
   color: var(--secondary);
 }
-
-.box {
- 
-}
-
 
 .textBox {
 margin: 0;
