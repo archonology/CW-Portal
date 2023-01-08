@@ -24,7 +24,7 @@ const ResourceCard = () => {
                 <CardMedia
                     sx={{ height: 140 }}
                     image={"https://capacity.childwelfare.gov/sites/default/files/styles/hero_desktop/public/media-image/GettyImages-1084390966-1920px%20-%20mirror.jpg?h=bf8618f3&itok=XH04zm0t"}
-                    title="green iguana"
+                    title="capacity colab cover"
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
@@ -46,6 +46,38 @@ const ResourceCard = () => {
                     </IconButton> */}
                     <IconButton>
                         <PublicIcon sx={{ color: "#8bc34a" }} />
+                    </IconButton>
+                    {/* <Button size="small">Save to a List</Button> */}
+                    {/* <Button size="small">Visit the Site</Button> */}
+                </CardActions>
+            </Card>
+
+            <Card sx={{ maxWidth: 345, margin: 2, boxShadow: 10 }}>
+                <CardMedia
+                    sx={{ height: 140 }}
+                    image={"https://static.wixstatic.com/media/2a3c6b_62a92c0a95f0439a9a5590af54efa626.jpg/v1/fill/w_351,h_155,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/2a3c6b_62a92c0a95f0439a9a5590af54efa626.jpg"}
+                    title="vpc"
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Violence Prevention Center
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    The foundation of Violence Prevention Center is deeply imbedded in the nationwide, grassroots movement  to address and end violence against women. Our organization was incorporated in 1986 as the Cook County  Women’s Collective. The Cook County Women’s Collective was started by passionate community members  who saw a need for services and education regarding women and girls who were being subjected to violence.  
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <IconButton>
+                        <FavoriteIcon sx={{ }} />
+                    </IconButton>
+                    <IconButton>
+                        <AssignmentIcon sx={{ }} />
+                    </IconButton>
+                    {/* <IconButton>
+                        <IosShareIcon sx={{ }} />
+                    </IconButton> */}
+                    <IconButton>
+                        <PublicIcon sx={{  }} />
                     </IconButton>
                     {/* <Button size="small">Save to a List</Button> */}
                     {/* <Button size="small">Visit the Site</Button> */}

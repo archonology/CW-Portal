@@ -9,8 +9,7 @@ const ResourceItems = () => {
                     <h2>{resource.title}</h2>
                     <p className="mainText">{resource.description}</p>
                 </div>
-            ))};
-
+            ))}
         </>
     );
 };
