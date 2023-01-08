@@ -21,12 +21,20 @@ import Footer from "./components/Footer";
 import "./App.css";
 import ResourceList from "./components/ResourceList";
 
-// import ResourceItems from "./components/ResourceItems";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 
 
 // Construct the main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: "/graphql",
+});
+
+//dark theme by default
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
@@ -51,6 +59,8 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+            {/* keeps the default theme dark across site */}
+            <ThemeProvider theme={darkTheme}>
         <Router>
           <div>
             <Header />
@@ -72,6 +82,7 @@ function App() {
             <Footer />
           </div>
         </Router>
+        </ThemeProvider>
     </ApolloProvider>
   );
 }
