@@ -14,7 +14,9 @@ import Grid from '@mui/material/Grid';
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import IosShareIcon from '@mui/icons-material/IosShare';
+import PublicIcon from '@mui/icons-material/Public';
 const ResourceCard = () => {
     return (
         <>
@@ -36,8 +38,17 @@ const ResourceCard = () => {
                     <IconButton>
                         <FavoriteIcon sx={{ color: "#e57373" }} />
                     </IconButton>
-                    <Button size="small">Save to a List</Button>
-                    <Button size="small">Visit the Site</Button>
+                    <IconButton>
+                        <AssignmentIcon sx={{ color: "#4fc3f7" }} />
+                    </IconButton>
+                    {/* <IconButton>
+                        <IosShareIcon sx={{ }} />
+                    </IconButton> */}
+                    <IconButton>
+                        <PublicIcon sx={{ color: "#8bc34a" }} />
+                    </IconButton>
+                    {/* <Button size="small">Save to a List</Button> */}
+                    {/* <Button size="small">Visit the Site</Button> */}
                 </CardActions>
             </Card>
         </>
