@@ -28,12 +28,12 @@ const Home = () => {
         spacing={0}
         direction="column"
         alignItems="center"
-        justify="center"
         style={{}}
       >
 
-        <Box sx={{ flexGrow: 1 }} alignContent="center">
-          <Grid container spacing={1}>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container
+        spacing={0}>
 
             <ResourceCard />
 
