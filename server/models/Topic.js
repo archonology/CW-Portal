@@ -10,7 +10,7 @@ const topicSchema = new Schema({
   text: {
     type: String,
   },
-  imageURL: {
+  image: {
     type: String,
   },
   resources: [    {

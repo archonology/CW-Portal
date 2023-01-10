@@ -12,7 +12,7 @@ const resourceSchema = new Schema({
     text: {
         type: String,
     },
-    imageURL: {
+    image: {
         type: String,
     },
     link: {

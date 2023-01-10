@@ -67,5 +67,19 @@ const resolvers = {
             return { token, user };
         },
 
+        createTopic: async (parent, { topic, url, text, image }, context) => {
+            if (context.admin) {
+                const newTopic = await Topic.create({ topic, url, text, image });
+                const updatedAdmin = await Admin.findOneAndUpdate(
+                    { _id: context.admin._id },
+                    { $addToSet: { topics: newTopic._id } },
+                    { new: true }
+                ).populate('topics');
+
+                return updatedAdmin;
+            }
+            throw new AuthenticationError("Please login as an Admin to continue.");
+        }
+
     }
 }
