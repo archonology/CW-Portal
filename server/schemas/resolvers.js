@@ -10,14 +10,33 @@ const resolvers = {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select("-__v -password");
                 return userData;
-            };
+            }
+            throw new AuthenticationError("Please login or sign up to continue.");
+        },
 
+        admin: async (parent, args, context) => {
             if (context.admin) {
                 const adminData = await Admin.findOne({ _id: context.user._id })
                     .select("-__v -password");
                 return adminData;
             }
-            throw new AuthenticationError("Please login or sign up to continue.");
+            throw new AuthenticationError("Please login as admin to continue.");
+        },
+
+        topic: async (parent, { _id }) => {
+            try {
+                return Topic.findOne({ _id })
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        resource: async (parent, { _id }) => {
+            try {
+                return Resource.findOne({ _id })
+            } catch (err) {
+                console.log(err);
+            }
         },
     },
 

@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-const resourceSchema = require("./Resource");
 
 
 // define user schema
@@ -23,10 +22,26 @@ const userSchema = new Schema(
             match: [/^[A-Za-z]\w{7,14}$/, "Password must be between 7-14 characters."]
         },
         // set lists
-        favorites: [resourceSchema],
-        do: [resourceSchema],
-        doing: [resourceSchema],
-        done: [resourceSchema],
+        favorites: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Resource',
+        },
+        ],
+        do: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Resource',
+        },
+        ],
+        doing: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Resource',
+        },
+        ],
+        done: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Resource',
+        },
+        ],
     }
 );
 

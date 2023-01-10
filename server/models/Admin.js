@@ -22,22 +22,37 @@ const adminSchema = new Schema(
             required: true,
             match: [/^[A-Za-z]\w{7,14}$/, "Password must be between 7-14 characters."]
         },
-        topics: [    {
+        topics: [{
             type: Schema.Types.ObjectId,
             ref: 'Topic',
-          },
+        },
         ],
-        resources: [    {
+        resources: [{
             type: Schema.Types.ObjectId,
             ref: 'Resource',
-          },
+        },
         ],
-
         // set lists
-        favorites: [resourceSchema],
-        do: [resourceSchema],
-        doing: [resourceSchema],
-        done: [resourceSchema],
+        favorites: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Resource',
+        },
+        ],
+        do: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Resource',
+        },
+        ],
+        doing: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Resource',
+        },
+        ],
+        done: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Resource',
+        },
+        ],
     }
 
 );

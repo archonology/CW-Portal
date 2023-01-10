@@ -41,20 +41,27 @@ const typeDefs = gql`
         link: String
     }
 
+    type Query {
+        me: User
+        admin: Admin
+        topic(_id: ID!): Topic
+        resource(_id: ID!): Resource
+    }
+
     type Mutation {
-        createAdmin(username: String!, email: String!, password: String!): Auth
-        createUser(username: String!, email: String!, password: String!): Auth
-        loginAdmin(email: String!, password: String!): Auth
-        loginUser(email: String!, password: String!): Auth
+        createAdmin(username: String!, email: String!, password: String!): Admin
+        createUser(username: String!, email: String!, password: String!): User
+        loginAdmin(email: String!, password: String!): Admin
+        loginUser(email: String!, password: String!): User
         createTopic(topic: String!, url: String! text: String!, image: String!): Admin
         createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Admin            
         addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin
-        updateTopic(_id: ID!, topic: String!, text: String!, image: String!): Admin
-        updateResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin        
-        deleteTopic(_id: ID!): Admin
-        deleteResource(_id: ID!): Admin
-        addResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): User
-        deleteResource(_id: ID!): User
+        adminUpdateTopic(_id: ID!, topic: String!, text: String!, image: String!): Admin
+        adminUpdateResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin        
+        adminDeleteTopic(_id: ID!): Admin
+        adminDeleteResource(_id: ID!): Admin
+        userAddResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): User
+        userDeleteResource(_id: ID!): User
     }
 
 `;
