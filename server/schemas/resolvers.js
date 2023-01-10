@@ -79,6 +79,40 @@ const resolvers = {
                 return updatedAdmin;
             }
             throw new AuthenticationError("Please login as an Admin to continue.");
+        },
+
+        createResource: async (parent, { title, url, text, image, link }, context) => {
+            if (context.admin) {
+                const newResource = await Resource.create({ title, url, text, image, link });
+                const updatedAdmin = await Admin.findOneAndUpdate(
+                    { _id: context.admin._id },
+                    { $addToSet: { resources: newResource._id } },
+                    { new: true }
+                ).populate('resources');
+
+                return updatedAdmin;
+            }
+            throw new AuthenticationError("Please login as an Admin to continue.");
+        },
+
+        addResourceToTopic: async (parent, args, context) => {
+            if (context.admin) {
+
+                const updatedAdmin = await Admin.findOneAndUpdate(
+                    { _id: context.admin_id },
+                    { $addToSet: { topics: { ...args } } },
+                    { new: true }
+                ).populate({
+                    path: 'topics',
+                    populate: {
+                        path: 'resources',
+                    },
+                });
+
+                return updatedAdmin;
+
+            }
+            throw new AuthenticationError("Please login as an Admin to continue.");
         }
 
     }

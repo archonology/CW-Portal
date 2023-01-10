@@ -18,7 +18,7 @@ const resourceSchema = new Schema({
     link: {
         type: String,
         required: true,
-    }
+    },
 });
 
 module.exports = resourceSchema;

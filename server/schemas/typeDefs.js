@@ -47,10 +47,10 @@ const typeDefs = gql`
         loginAdmin(email: String!, password: String!): Auth
         loginUser(email: String!, password: String!): Auth
         createTopic(topic: String!, url: String! text: String!, image: String!): Admin
-        createResource(title: String!, url: String!, text: String!, imageURL: String!, link: String!): Admin        
-        addResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin
-        updateTopic(topic: String!, text: String!, image: String!): Admin
-        updateResource(title: String!, url: String!, text: String!, image: String!, link: String!): Admin        
+        createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Admin            
+        addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin
+        updateTopic(_id: ID!, topic: String!, text: String!, image: String!): Admin
+        updateResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin        
         deleteTopic(_id: ID!): Admin
         deleteResource(_id: ID!): Admin
         addResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): User
