@@ -21,4 +21,6 @@ const resourceSchema = new Schema({
     },
 });
 
-module.exports = resourceSchema;
+const Resource = model('Resource', resourceSchema);
+
+module.exports = Resource;

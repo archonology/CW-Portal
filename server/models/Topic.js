@@ -1,5 +1,4 @@
 const { Schema } = require("mongoose");
-const resourceSchema = require("./Resource");
 
 // define deck schema
 const topicSchema = new Schema({
@@ -19,5 +18,6 @@ const topicSchema = new Schema({
   },
 ],
 });
+const Topic = model('Topic', topicSchema);
 
-module.exports = topicSchema;
+module.exports = Topic;

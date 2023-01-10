@@ -113,7 +113,9 @@ const resolvers = {
 
             }
             throw new AuthenticationError("Please login as an Admin to continue.");
-        }
+        },
 
-    }
-}
+    },
+};
+
+module.export = resolvers;
