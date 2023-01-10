@@ -13,7 +13,11 @@ const topicSchema = new Schema({
   imageURL: {
     type: String,
   },
-  resources: [resourceSchema],
+  resources: [    {
+    type: Schema.Types.ObjectId,
+    ref: 'Resource',
+  },
+],
 });
 
 module.exports = topicSchema;

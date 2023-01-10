@@ -27,6 +27,11 @@ const adminSchema = new Schema(
             ref: 'Topic',
           },
         ],
+        resources: [    {
+            type: Schema.Types.ObjectId,
+            ref: 'Resource',
+          },
+        ],
 
         // set lists
         favorites: [resourceSchema],
