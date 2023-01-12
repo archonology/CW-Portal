@@ -16,7 +16,6 @@ function TabPanel(props) {
     return (
         <div
             role="tabpanel"
-            hidden={value !== index}
             id={`simple-tabpanel-${index}`}
             aria-labelledby={`simple-tab-${index}`}
             {...other}
@@ -198,7 +197,7 @@ const Login = () => {
                                         name="username"
                                         autoComplete="current-username"
                                         value={formState.username}
-                                        onChange={handleChange}
+                                        onChange={handleFormChange}
                                     />
                                 </div>
                                 <div>
