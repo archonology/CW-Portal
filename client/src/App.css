@@ -18,7 +18,8 @@
   --third: rgb(124, 181, 167);
   --lightHouse: rgb(252, 121, 91);
   --lighterHouse: rgb(246, 135, 110);
-  --beacon: rgb(131, 210, 111);
+  --lightbeacon: rgb(131, 210, 111);
+  --beacon: rgb(113, 179, 97);
 }
 
 html body {
@@ -40,17 +41,22 @@ h1, h2 {
   color: var(--alt);
 }
 
-.box {
+.searchbox {
+  border: none;
 }
 
 .textBox {
 margin: 0;
 }
 .search {
-  background-color: var(--lightHouse);
+  background-color: var(--beacon);
   border: none;
 }
 
+.span {
+  color: var(--lightbeacon);
+}
+
 .search:hover {
-  background-color:var(--lighterHouse);
+  background-color:var(--lightbeacon);
 }

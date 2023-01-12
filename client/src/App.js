@@ -71,7 +71,7 @@ function App() {
           </div>
           <div>
               <Routes>
-                <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/secreturl" element={<AdminLogin />} />
@@ -80,7 +80,7 @@ function App() {
                 <Route key={resource} path= {"/resources" + resource.url } element={<Resources />} />
                 ))};
 
-                <Route path="*" element={<Home />} />
+                <Route path="/*" element={<Home />} />
               </Routes>
           </div>
           <div>
