@@ -49,6 +49,12 @@ const typeDefs = gql`
         resources: [Resource]
     }
 
+    type Auth {
+        token: ID!
+        user: User
+        admin: Admin
+      }
+
     type Query {
         me: User
         admin: Admin
