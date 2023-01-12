@@ -96,30 +96,61 @@ mutation createResource(title: String!, url: String!, text: String!, image: Stri
 }
 `;
 
-export const UPDATE_TOPIC = gql`
-
+export const ADD_RESOURCE_TO_TOPIC = gql`
+mutation addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!) {
+    addResourceToTopic(){
+        _id
+        topic
+        resources {
+            _id
+            title
+            url
+            text
+            image
+            link
+        }
+    }
+}
 `;
 
-export const UPDATE_SUBTOPIC = gql`
 
+export const ADD_RESOURCE_TO_SUBTOPIC = gql`
+mutation addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!) {
+    addResourceToTopic(){
+        _id
+        title
+        resources {
+            _id
+            title
+            url
+            text
+            image
+            link
+        }
+    }
+}
 `;
 
-export const UPDATE_RESOURCE = gql`
+// export const UPDATE_SUBTOPIC = gql`
 
-`;
+// `;
 
-export const DELETE_TOPIC = gql`
+// export const UPDATE_RESOURCE = gql`
 
-`;
+// `;
 
-export const DELETE_SUBTOPIC = gql`
+// export const DELETE_TOPIC = gql`
 
-`;
+// `;
 
-export const DELETE_RESOURCE = gql`
+// export const DELETE_SUBTOPIC = gql`
 
-`;
+// `;
 
-export const ADD_TO_LIST = gql`
+// export const DELETE_RESOURCE = gql`
 
-`;
+// `;
+
+// export const ADD_TO_LIST = gql`
+
+// `;

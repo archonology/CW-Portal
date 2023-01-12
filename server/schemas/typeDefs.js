@@ -5,8 +5,6 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
-        topics: [Topic]
-        resources: [Resource]
         favorites: [Resource]
         do: [Resource]
         doing: [Resource]
@@ -59,6 +57,8 @@ const typeDefs = gql`
     type Query {
         me: User
         admin: Admin
+        topics: [Topic]
+        resources: [Resource]
         topic(_id: ID!): Topic
         resource(_id: ID!): Resource
     }
