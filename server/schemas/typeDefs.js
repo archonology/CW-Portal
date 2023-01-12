@@ -64,10 +64,10 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createAdmin(username: String!, email: String!, password: String!): Admin
+        createAdmin(username: String!, email: String!, password: String!): Auth
         createUser(username: String!, email: String!, password: String!): Auth
-        loginAdmin(email: String!, password: String!): Admin
-        loginUser(email: String!, password: String!): User
+        loginAdmin(email: String!, password: String!): Auth
+        loginUser(email: String!, password: String!): Auth
         createTopic(topic: String!, url: String! text: String!, image: String!): Topic
         createSubtopic(title: String!, url: String! text: String!): Topic
         createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Resource            
