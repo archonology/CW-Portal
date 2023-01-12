@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-const resourceSchema = require("./Resource");
 
 
 // define user schema
