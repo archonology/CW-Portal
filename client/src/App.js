@@ -15,6 +15,10 @@ import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import Resources from "./pages/Resources";
 
+// adminLogin is not in the navbar: admin will need to know the url to navigate to this page, so that it isn't available to the public at large. use env after development phase to conceal url route
+
+import AdminLogin from ".pages/AdminLogin";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -70,6 +74,7 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/secretUrl" element={<AdminLogin />} />
                 <Route path="/contact" element={<Contact />} />
                 {ResourceList.map((resource) => (
                 <Route key={resource} path= {"/resources" + resource.url } element={<Resources />} />
