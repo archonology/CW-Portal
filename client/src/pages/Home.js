@@ -18,7 +18,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 const Home = () => {
   return (
     <>
-      <Container className="text-center p-5 mt-5 box">
+      <Container fluid className="text-center p-5 mt-5 box">
         <h1>Welcome to the Public Child Welfare Portal</h1>
         <p className="mainText">This is a site dedicated to child welfare workers in MN. It is a hub for resources commonly needed by new and experience CW workers. Users are also able to create accounts so that they can save favorite resource links and created simple, learning to-do lists.</p>
       </Container>
@@ -28,7 +28,7 @@ const Home = () => {
         spacing={0}
         direction="column"
         alignItems="center"
-        style={{}}
+        style={{ backgroundColor: "#263238", padding: "5rem"}}
       >
 
         <Box sx={{ flexGrow: 1 }}>

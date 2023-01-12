@@ -15,14 +15,16 @@ function Header() {
     return (
         <>
           <Navbar bg="dark" variant="dark" className="mb-3 p-3" expand="md">
-            <Container fluid>
+            <Container fluid >
               <Navbar.Brand as={Link} to="/" className="">Public Child Welfare Portal</Navbar.Brand>
               <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`}  />
               <Navbar.Offcanvas 
                 id={`offcanvasNavbar-expand-md}`}
                 aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
                 placement="end"
+                className="bg-dark variant-dark"
               >
+                {/* can I change the color of the X button? */}
                 <Offcanvas.Header closeButton >
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md}`}>
                     Public Child Welfare Portal
@@ -30,7 +32,8 @@ function Header() {
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                   <Nav className="justify-content-end flex-grow-1 pe-3">
-                    <NavDropdown 
+                    <NavDropdown
+                    menuVariant="dark"
                       title="Resources"
                       id={`offcanvasNavbarDropdown-expand-md}`}
                     >
@@ -51,7 +54,7 @@ function Header() {
                     <Form.Control
                       type="search"
                       placeholder="Search"
-                      className="me-2"
+                      className="me-2 bg-black searchbox text-white"
                       aria-label="Search"
                     />
                     <Button className="search">Search</Button>

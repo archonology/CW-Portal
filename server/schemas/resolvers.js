@@ -40,7 +40,7 @@ const resolvers = {
         },
     },
 
-    Mutatation: {
+    Mutation: {
 
         createAdmin: async (parent, { username, email, password }) => {
             const admin = await Admin.create({ username, email, password });
@@ -49,7 +49,7 @@ const resolvers = {
         },
 
         createUser: async (parent, { username, email, password }) => {
-            const user = await Admin.create({ username, email, password });
+            const user = await User.create({ username, email, password });
             const token = signToken(user);
             return { token, user };
         },
@@ -86,55 +86,55 @@ const resolvers = {
             return { token, user };
         },
 
-        createTopic: async (parent, { topic, url, text, image }, context) => {
-            if (context.admin) {
-                const newTopic = await Topic.create({ topic, url, text, image });
-                const updatedAdmin = await Admin.findOneAndUpdate(
-                    { _id: context.admin._id },
-                    { $addToSet: { topics: newTopic._id } },
-                    { new: true }
-                ).populate('topics');
+        // createTopic: async (parent, { topic, url, text, image }, context) => {
+        //     if (context.admin) {
+        //         const newTopic = await Topic.create({ topic, url, text, image });
+        //         const updatedAdmin = await Admin.findOneAndUpdate(
+        //             { _id: context.admin._id },
+        //             { $addToSet: { topics: newTopic._id } },
+        //             { new: true }
+        //         ).populate('topics');
 
-                return updatedAdmin;
-            }
-            throw new AuthenticationError("Please login as an Admin to continue.");
-        },
+        //         return updatedAdmin;
+        //     }
+        //     throw new AuthenticationError("Please login as an Admin to continue.");
+        // },
 
-        createResource: async (parent, { title, url, text, image, link }, context) => {
-            if (context.admin) {
-                const newResource = await Resource.create({ title, url, text, image, link });
-                const updatedAdmin = await Admin.findOneAndUpdate(
-                    { _id: context.admin._id },
-                    { $addToSet: { resources: newResource._id } },
-                    { new: true }
-                ).populate('resources');
+        // createResource: async (parent, { title, url, text, image, link }, context) => {
+        //     if (context.admin) {
+        //         const newResource = await Resource.create({ title, url, text, image, link });
+        //         const updatedAdmin = await Admin.findOneAndUpdate(
+        //             { _id: context.admin._id },
+        //             { $addToSet: { resources: newResource._id } },
+        //             { new: true }
+        //         ).populate('resources');
 
-                return updatedAdmin;
-            }
-            throw new AuthenticationError("Please login as an Admin to continue.");
-        },
+        //         return updatedAdmin;
+        //     }
+        //     throw new AuthenticationError("Please login as an Admin to continue.");
+        // },
 
-        addResourceToTopic: async (parent, args, context) => {
-            if (context.admin) {
+        // addResourceToTopic: async (parent, args, context) => {
+        //     if (context.admin) {
 
-                const updatedAdmin = await Admin.findOneAndUpdate(
-                    { _id: context.admin_id },
-                    { $addToSet: { topics: { ...args } } },
-                    { new: true }
-                ).populate({
-                    path: 'topics',
-                    populate: {
-                        path: 'resources',
-                    },
-                });
+        //         const updatedAdmin = await Admin.findOneAndUpdate(
+        //             { _id: context.admin_id },
+        //             { $addToSet: { topics: { ...args } } },
+        //             { new: true }
+        //         ).populate({
+        //             path: 'topics',
+        //             populate: {
+        //                 path: 'resources',
+        //             },
+        //         });
 
-                return updatedAdmin;
+        //         return updatedAdmin;
 
-            }
-            throw new AuthenticationError("Please login as an Admin to continue.");
-        },
+        //     }
+        //     throw new AuthenticationError("Please login as an Admin to continue.");
+        // },
 
     },
 };
 
-module.export = resolvers;
+module.exports = resolvers;

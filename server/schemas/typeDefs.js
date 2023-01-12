@@ -5,8 +5,6 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
-        topics: [Topic]
-        resources: [Resource]
         favorites: [Resource]
         do: [Resource]
         doing: [Resource]
@@ -30,6 +28,7 @@ const typeDefs = gql`
         text: String
         image: String
         resources: [Resource]
+        subtopics: [Subtopic]
     }
 
     type Resource {
@@ -41,24 +40,41 @@ const typeDefs = gql`
         link: String
     }
 
+    type Subtopic {
+        _id: ID
+        title: String
+        url: String
+        text: String
+        resources: [Resource]
+    }
+
+    type Auth {
+        token: ID!
+        user: User
+        admin: Admin
+      }
+
     type Query {
         me: User
         admin: Admin
+        topics: [Topic]
+        resources: [Resource]
         topic(_id: ID!): Topic
         resource(_id: ID!): Resource
     }
 
     type Mutation {
-        createAdmin(username: String!, email: String!, password: String!): Admin
-        createUser(username: String!, email: String!, password: String!): User
-        loginAdmin(email: String!, password: String!): Admin
-        loginUser(email: String!, password: String!): User
-        createTopic(topic: String!, url: String! text: String!, image: String!): Admin
-        createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Admin            
-        addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin
-        adminUpdateTopic(_id: ID!, topic: String!, text: String!, image: String!): Admin
-        adminUpdateResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin        
-        adminDeleteTopic(_id: ID!): Admin
+        createAdmin(username: String!, email: String!, password: String!): Auth
+        createUser(username: String!, email: String!, password: String!): Auth
+        loginAdmin(email: String!, password: String!): Auth
+        loginUser(email: String!, password: String!): Auth
+        createTopic(topic: String!, url: String! text: String!, image: String!): Topic
+        createSubtopic(title: String!, url: String! text: String!): Topic
+        createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Resource            
+        addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Topic
+        adminUpdateTopic(_id: ID!, topic: String!, text: String!, image: String!): Topic
+        adminUpdateResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Resource        
+        adminDeleteTopic(_id: ID!): Topic
         adminDeleteResource(_id: ID!): Admin
         userAddResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): User
         userDeleteResource(_id: ID!): User
