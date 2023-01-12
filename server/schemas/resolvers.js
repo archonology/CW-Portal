@@ -49,7 +49,7 @@ const resolvers = {
         },
 
         createUser: async (parent, { username, email, password }) => {
-            const user = await Admin.create({ username, email, password });
+            const user = await User.create({ username, email, password });
             const token = signToken(user);
             return { token, user };
         },
@@ -137,4 +137,4 @@ const resolvers = {
     },
 };
 
-module.export = resolvers;
+module.exports = resolvers;

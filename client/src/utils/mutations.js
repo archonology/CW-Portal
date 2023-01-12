@@ -28,9 +28,11 @@ export const CREATE_ADMIN = gql`
 mutation createAdmin($username: String!, $email: String!, $password: String!) {
     createAdmin(username: $username, email: $email, password: $password) {
         token
-        _id
-        username
-        email
+        admin {
+            _id
+            username
+            email
+        }
     }
 }
 `;
@@ -39,9 +41,11 @@ export const CREATE_USER = gql`
 mutation createUser($username: String!, $email: String!, $password: String!) {
     createUser(username: $username, email: $email, password: $password) {
         token
-        _id
-        username
-        email
+        user {
+            _id
+            username
+            email
+        }
     }
 }
 `;

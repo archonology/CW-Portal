@@ -45,7 +45,7 @@ function a11yProps(index) {
 const Login = () => {
     const [formState, setFormState] = useState({ email: "", password: "" });
     const [login, { error, data }] = useMutation(LOGIN_USER);
-    const [createUser, { err, dat }] = useMutation(CREATE_USER);
+    const [createUser, { err, data2 }] = useMutation(CREATE_USER);
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -88,11 +88,11 @@ const Login = () => {
         event.preventDefault();
 
         try {
-            const { dat } = await createUser({
+            const { data2 } = await createUser({
                 variables: { ...formState },
             });
 
-            Auth.login(data.createUser.token);
+            Auth.login(data2.createUser.token);
         } catch (e) {
             console.error(e);
         }
@@ -182,8 +182,7 @@ const Login = () => {
                             <Box
                                 component="form"
                                 sx={{
-                                    "& .MuiTextField-root": { m: 1, minWidth: "300px", },
-                                    borderColor: "teal",
+                                    "& .MuiTextField-root": { m: 1, minWidth: "300px", }
                                 }}
                                 noValidate
                                 autoComplete="off"
@@ -224,7 +223,12 @@ const Login = () => {
                                     />
                                 </div>
                                 <div>
-                                    <Button type="submit">Sign up</Button>
+                                    <Button
+                                        variant="contained"
+                                        type="submit"
+                                        sx={{m: 1}}
+                                        >Sign up
+                                    </Button>
                                 </div>
                             </Box>
                         </Grid>
