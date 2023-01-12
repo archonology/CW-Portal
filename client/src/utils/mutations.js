@@ -7,6 +7,7 @@ mutation loginAdmin($email: String!, $password: String!) {
       admin {
         _id
         username
+        email
       }
     }
   }
@@ -19,6 +20,7 @@ mutation loginUser($email: String!, $password: String!) {
       user {
         _id
         username
+        email
       }
     }
   }

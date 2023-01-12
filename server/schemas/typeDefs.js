@@ -48,9 +48,13 @@ const typeDefs = gql`
         resources: [Resource]
     }
 
-    type Auth {
+    type UserAuth {
         token: ID!
         user: User
+      }
+
+      type AdminAuth {
+        token: ID!
         admin: Admin
       }
 
@@ -64,10 +68,10 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createAdmin(username: String!, email: String!, password: String!): Auth
-        createUser(username: String!, email: String!, password: String!): Auth
-        loginAdmin(email: String!, password: String!): Auth
-        loginUser(email: String!, password: String!): Auth
+        createAdmin(username: String!, email: String!, password: String!): AdminAuth
+        createUser(username: String!, email: String!, password: String!): UserAuth
+        loginAdmin(email: String!, password: String!): AdminAuth
+        loginUser(email: String!, password: String!): UserAuth
         createTopic(topic: String!, url: String! text: String!, image: String!): Topic
         createSubtopic(title: String!, url: String! text: String!): Topic
         createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Resource            

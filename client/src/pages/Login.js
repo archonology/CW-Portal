@@ -7,7 +7,8 @@ import Box from '@mui/material/Box';
 import { Grid, Button, Link, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useMutation } from "@apollo/client";
-import { LOGIN_USER, CREATE_USER } from "../utils/mutations";
+import { LOGIN_USER } from "../utils/mutations";
+import { CREATE_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 function TabPanel(props) {
@@ -44,7 +45,7 @@ function a11yProps(index) {
 
 const Login = () => {
     const [formState, setFormState] = useState({ email: "", password: "" });
-    const [login, { error, data }] = useMutation(LOGIN_USER);
+    const [loginUser, { error, data }] = useMutation(LOGIN_USER);
     const [createUser, { err, data2 }] = useMutation(CREATE_USER);
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
@@ -67,13 +68,13 @@ const Login = () => {
         event.preventDefault();
 
         try {
-            const { data } = await login({
+            const { data } = await loginUser({
                 variables: { ...formState },
             });
 
-            Auth.login(data.login.token);
-        } catch (e) {
-            console.error(e);
+            Auth.login(data.loginUser.user.token);
+        } catch (error) {
+            console.error(error);
         }
         // clear form values
         setFormState({
@@ -93,8 +94,8 @@ const Login = () => {
             });
 
             Auth.login(data2.createUser.token);
-        } catch (e) {
-            console.error(e);
+        } catch (err) {
+            console.error(err);
         }
     };
 

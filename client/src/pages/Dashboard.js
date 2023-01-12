@@ -95,7 +95,7 @@ const Dashboard = () => {
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            edge="start"
+            edge="false"
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
             <MenuIcon />

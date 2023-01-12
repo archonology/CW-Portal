@@ -1,4 +1,5 @@
 // use this to decode a token and get the user's information out of it
+import Alert from 'react-bootstrap/Alert';
 import decode from 'jwt-decode';
 
 // create a new class to instantiate for a user
@@ -35,8 +36,10 @@ class AuthService {
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/search');
-    alert("login successful!");
+    window.location.assign('/dashboard');
+    return (
+      <Alert severity="success">Login Successful!</Alert>
+    );
   }
 
   logout() {
@@ -46,7 +49,7 @@ class AuthService {
     window.location.assign('/home');
     alert("logout successful!");
   }
-  
+
 }
 
 export default new AuthService();
