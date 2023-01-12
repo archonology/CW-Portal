@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { Button, IconButton } from '@mui/material';
+import { Button, IconButton, Divider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -34,6 +34,7 @@ const ResourceCard = () => {
                         The Center for Tribes collaborates with American Indian and Alaska Native nations to help strengthen Tribal child and family systems and services in order to nurture the safety, permanency, and well-being of children, youth, and families.
                     </Typography>
                 </CardContent>
+                <Divider variant="middle" />
                 <CardActions>
                     <IconButton>
                         <FavoriteIcon sx={{ color: "#e57373" }} />

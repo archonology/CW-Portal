@@ -15,13 +15,14 @@ function Header() {
     return (
         <>
           <Navbar bg="dark" variant="dark" className="mb-3 p-3" expand="md">
-            <Container fluid>
+            <Container fluid >
               <Navbar.Brand as={Link} to="/" className="">Public Child Welfare Portal</Navbar.Brand>
               <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`}  />
               <Navbar.Offcanvas 
                 id={`offcanvasNavbar-expand-md}`}
                 aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
                 placement="end"
+                className="bg-dark"
               >
                 <Offcanvas.Header closeButton >
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md}`}>
