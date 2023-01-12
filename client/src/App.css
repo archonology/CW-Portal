@@ -12,7 +12,7 @@
 
 :root {   
   --base: rgb(36, 44, 49); 
-  --alt: rgb(229, 229, 232);
+  --alt: rgb(177, 178, 178);
   --primary: rgb(228, 223, 218);
   --secondary: rgb(110, 188, 227);
   --third: rgb(124, 181, 167);
@@ -23,18 +23,21 @@
 
 html body {
   background: var(--base);
-  color: var(--alt);
+  color: var(--primary);
   margin: 0;
 }
 
+.navdropdown {
+  background-color: var(--base);
+}
+
 h1, h2 {
-  font-family: monospace;
-  color: var(--mountainTop);
+  color: var(--primary);
 }
 
 .mainText {
   font-size: larger;
-  color: var(--secondary);
+  color: var(--alt);
 }
 
 .box {

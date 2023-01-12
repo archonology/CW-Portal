@@ -22,8 +22,9 @@ function Header() {
                 id={`offcanvasNavbar-expand-md}`}
                 aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
                 placement="end"
-                className="bg-dark"
+                className="bg-dark variant-dark"
               >
+                {/* can I change the color of the X button? */}
                 <Offcanvas.Header closeButton >
                   <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md}`}>
                     Public Child Welfare Portal
