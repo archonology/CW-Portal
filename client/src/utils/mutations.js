@@ -47,7 +47,7 @@ mutation createUser($username: String!, $email: String!, $password: String!) {
 `;
 
 export const CREATE_TOPIC = gql`
-mutation createTopic(topic: String!, url: String! text: String!, image: String!) {
+mutation createTopic($topic: String!, $url: String! $text: String!, $image: String!) {
     createTopic(topic: $topic, url: $url, text: $text, image: $image) {
         topic
         url
@@ -66,7 +66,7 @@ mutation createTopic(topic: String!, url: String! text: String!, image: String!)
 `;
 
 export const CREATE_SUBTOPIC = gql`
-mutation createSubtopic(title: String!, url: String! text: String!) {
+mutation createSubtopic($title: String!, $url: String! $text: String!) {
     createSubtopic(title: $title, url: $url, text: $text) {
         title
         url
@@ -84,7 +84,7 @@ mutation createSubtopic(title: String!, url: String! text: String!) {
 `;
 
 export const CREATE_RESOURCE = gql`
-mutation createResource(title: String!, url: String!, text: String!, image: String!, link: String!) {
+mutation createResource($title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
     createResource(title: $title, url: $url, text: $text, image: $image, link: $link){
         _id
         title
@@ -97,8 +97,8 @@ mutation createResource(title: String!, url: String!, text: String!, image: Stri
 `;
 
 export const ADD_RESOURCE_TO_TOPIC = gql`
-mutation addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!) {
-    addResourceToTopic(){
+mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
+    addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link){
         _id
         topic
         resources {
@@ -115,8 +115,8 @@ mutation addResourceToTopic(_id: ID!, title: String!, url: String!, text: String
 
 
 export const ADD_RESOURCE_TO_SUBTOPIC = gql`
-mutation addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!) {
-    addResourceToTopic(){
+mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
+    addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link){
         _id
         title
         resources {
