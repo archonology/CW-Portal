@@ -30,6 +30,7 @@ const typeDefs = gql`
         text: String
         image: String
         resources: [Resource]
+        subtopics: [Subtopic]
     }
 
     type Resource {
@@ -39,6 +40,13 @@ const typeDefs = gql`
         text: String
         image: String
         link: String
+    }
+
+    type Subtopic {
+        _id: ID
+        title: String
+        text: String
+        resources: [Resource]
     }
 
     type Query {
