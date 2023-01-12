@@ -100,8 +100,14 @@ const Login = () => {
 
     return (
         <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Box>
+                <Tabs
+                sx={{ m: 3 }} 
+                value={value} 
+                onChange={handleChange}
+                textColor="primary"
+                indicatorColor="primary" 
+                aria-label="User login and sign up tabs">
                     <Tab label="Login" {...a11yProps(0)} />
                     <Tab label="Sign up" {...a11yProps(1)} />
                 </Tabs>
@@ -156,7 +162,10 @@ const Login = () => {
                                     />
                                 </div>
                                 <div>
-                                    <Button type="submit">Login</Button>
+                                    <Button 
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{m: 1}}>Login</Button>
                                 </div>
                             </Box>
                         </Grid>
