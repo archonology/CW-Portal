@@ -64,9 +64,6 @@ function Header() {
                 <Button className="search">Search</Button>
               </Form>
 
-
-
-
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>

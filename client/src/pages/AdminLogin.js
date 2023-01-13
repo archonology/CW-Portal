@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Grid, Button, Link, TextField } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { Grid, Button, TextField } from "@mui/material";
 import { useMutation } from "@apollo/client";
-import { LOGIN_ADMIN, CREATE_ADMIN } from "../utils/mutations";
+import { LOGIN_ADMIN } from "../utils/mutations";
+import { Link } from 'react-router-dom';
 import Auth from "../utils/auth";
 
 function TabPanel(props) {
@@ -44,9 +43,7 @@ function a11yProps(index) {
 
 const AdminLogin = () => {
     const [loginState, setLoginState] = useState({ email: "", password: "" });
-    const [signupState, setSignupState] = useState({ username: "", email: "", password: "" });
     const [loginAdmin, { error, data }] = useMutation(LOGIN_ADMIN);
-    const [createAdmin, { err, data2 }] = useMutation(CREATE_ADMIN);
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -61,18 +58,6 @@ const AdminLogin = () => {
             [name]: value,
         });
     };
-
-
-    // update state based on signup form input changes
-    const handleSignupFormChange = (event) => {
-        const { name, value } = event.target;
-
-        setSignupState({
-            ...signupState,
-            [name]: value,
-        });
-    };
-
 
     // submit Login form
     const handleLoginSubmit = async (event) => {
@@ -95,27 +80,6 @@ const AdminLogin = () => {
     };
 
 
-    // submit Signup form
-    const handleSignupSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            const { data2 } = await createAdmin({
-                variables: { ...signupState },
-            });
-
-            Auth.login(data2.createAdmin.token);
-        } catch (err) {
-            console.error(err);
-        }
-        // clear form values
-        setSignupState({
-            username: "",
-            email: "",
-            password: "",
-        });
-    };
-
     return (
         <Box sx={{ width: '100%' }}>
             <Box>
@@ -127,7 +91,6 @@ const AdminLogin = () => {
                     textColor="secondary"
                     indicatorColor="secondary">
                     <Tab label="Admin Login" {...a11yProps(0)} />
-                    <Tab label="Admin Sign up" {...a11yProps(1)} />
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0} >
@@ -183,79 +146,14 @@ const AdminLogin = () => {
                                         type="submit"
                                         color="secondary"
                                         variant="contained"
-                                        sx={{ m: 1 }}>Admin Login</Button>
-                                </div>
-                            </Box>
-                        </Grid>
-                    </Box>
-                </Grid>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <Grid
-                    container
-                    spacing={0}
-                    direction="column"
-                    alignItems="right"
-                    justifyContent="right"
-                    style={{ minHeight: "25vh" }}
-                >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            color: "#fff",
-                        }}
-                    >
-                        <Grid item>
-                            <Box
-                                component="form"
-                                sx={{
-                                    "& .MuiTextField-root": { m: 1, minWidth: "300px", }
-                                }}
-                                noValidate
-                                autoComplete="off"
-                                onSubmit={handleSignupSubmit}
-                            >
-                                <div>
-                                    <TextField
-                                        id="signup-username-input"
-                                        label="Username"
-                                        type="username"
-                                        name="username"
-                                        autoComplete="current-username"
-                                        value={signupState.username}
-                                        onChange={handleSignupFormChange}
-                                    />
-                                </div>
-                                <div>
-                                    <TextField
-                                        id="signup-email-input"
-                                        label="Email"
-                                        type="email"
-                                        name="email"
-                                        autoComplete="current-email"
-                                        value={signupState.email}
-                                        onChange={handleSignupFormChange}
-                                    />
-                                </div>
-                                <div>
-                                    <TextField
-                                        id="signup-password-input"
-                                        label="Password"
-                                        type="password"
-                                        name="password"
-                                        autoComplete="current-password"
-                                        // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
-                                        value={signupState.password}
-                                        onChange={handleSignupFormChange}
-                                    />
-                                </div>
-                                <div>
+                                        sx={{ m: 1 }}>Admin Login
+                                    </Button>
                                     <Button
-                                        type="submit"
-                                        color="secondary"
+                                        as={Link}
+                                        to="/adminsignup"
                                         variant="contained"
-                                        sx={{ m: 1 }}
-                                    >Admin Sign Up
+                                        color="warning"
+                                        sx={{ margin: 1, paddingBlock: 1.25, textDecoration: "none", }}>Signup Form
                                     </Button>
                                 </div>
                             </Box>

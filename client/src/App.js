@@ -19,6 +19,7 @@ import Resources from "./pages/Resources";
 // adminLogin is not in the navbar: admin will need to know the url to navigate to this page, so that it isn't available to the public at large. use env after development phase to conceal url route
 
 import AdminLogin from "./pages/AdminLogin";
+import AdminSignup from "./pages/AdminSignup";
 
 import Header from "./components/Header/index";
 import Footer from "./components/Footer";
@@ -64,32 +65,33 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-            {/* keeps the default theme dark across site */}
-            <ThemeProvider theme={darkTheme}>
+      {/* keeps the default theme dark across site */}
+      <ThemeProvider theme={darkTheme}>
         <Router>
           <div>
             <Header />
           </div>
           <div>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/secreturl" element={<AdminLogin />} />
-                <Route path="/contact" element={<Contact />} />
-                {ResourceList.map((resource) => (
-                <Route key={resource} path= {"/resources" + resource.url } element={<Resources />} />
-                ))};
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/adminlogin" element={<AdminLogin />} />
+              <Route path="/adminsignup" element={<AdminSignup />} />
+              <Route path="/contact" element={<Contact />} />
+              {ResourceList.map((resource) => (
+                <Route key={resource} path={"/resources" + resource.url} element={<Resources />} />
+              ))};
 
-                <Route path="/*" element={<Home />} />
-              </Routes>
+              <Route path="/*" element={<Home />} />
+            </Routes>
           </div>
           <div>
             <Footer />
           </div>
         </Router>
-        </ThemeProvider>
+      </ThemeProvider>
     </ApolloProvider>
   );
 }
