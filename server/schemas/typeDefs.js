@@ -54,11 +54,11 @@ const typeDefs = gql`
         admin: Admin
       }
 
-
-
     type Query {
         me: User
+        users: [User]
         admin: Admin
+        admins: [Admin]
         topics: [Topic]
         resources: [Resource]
         topic(_id: ID!): Topic

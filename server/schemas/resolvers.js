@@ -23,6 +23,15 @@ const resolvers = {
             throw new AuthenticationError("Please login as admin to continue.");
         },
 
+        admins: async () => {
+            return await Admin.find({});
+        },
+
+        topics: async () => {
+            return await Topic.find({});
+        },
+
+
         topic: async (parent, { _id }) => {
             try {
                 return Topic.findOne({ _id })
@@ -87,11 +96,11 @@ const resolvers = {
         },
 
         createTopic: async (parent, { topic, url, text, image }) => {
-            if(!topic) {
+            if(topic) {
                 const newTopic = await Topic.create({ topic, url, text, image });
                 return newTopic;
             }
-            throw new AuthenticationError("Please login as an Admin to continue.");
+            throw new AuthenticationError("Something went wrong!");
         },
 
         // createResource: async (parent, { title, url, text, image, link }, context) => {
