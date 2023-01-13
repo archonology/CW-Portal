@@ -44,10 +44,10 @@ function a11yProps(index) {
 }
 
 const Login = () => {
-    const [loginState, setLoginState] = useState({ email: "", password: "" });
-    const [signupState, setSignupState] = useState({ username: "", email: "", password: "" });
+    const [loginFormData, setLoginFormData] = useState({ email: "", password: "" });
+    const [signupFormData, setSignupFormData] = useState({ username: "", email: "", password: "" });
     const [loginUser, { error, data }] = useMutation(LOGIN_USER);
-    const [createUser, { err, data2 }] = useMutation(CREATE_USER);
+    const [createUser, { err, dat }] = useMutation(CREATE_USER);
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -57,8 +57,8 @@ const Login = () => {
     const handleLoginFormChange = (event) => {
         const { name, value } = event.target;
 
-        setLoginState({
-            ...loginState,
+        setLoginFormData({
+            ...loginFormData,
             [name]: value,
         });
     };
@@ -68,8 +68,8 @@ const Login = () => {
     const handleSignupFormChange = (event) => {
         const { name, value } = event.target;
 
-        setSignupState({
-            ...signupState,
+        setSignupFormData({
+            ...signupFormData,
             [name]: value,
         });
     };
@@ -81,15 +81,15 @@ const Login = () => {
 
         try {
             const { data } = await loginUser({
-                variables: { ...loginState },
+                variables: { ...loginFormData },
             });
-
-            Auth.login(data.loginUser.user.token);
+            console.log(data);
+            Auth.login(data.loginUser.token);
         } catch (error) {
             console.error(error);
         }
         // clear form values
-        setLoginState({
+        setLoginFormData({
             email: "",
             password: "",
         });
@@ -101,16 +101,16 @@ const Login = () => {
         event.preventDefault();
 
         try {
-            const { data2 } = await createUser({
-                variables: { ...signupState },
+            const { dat } = await createUser({
+                variables: { ...signupFormData },
             });
-
-            Auth.login(data2.createUser.token);
+            console.log(dat);
+            Auth.login(dat.createUser.token);
         } catch (err) {
             console.error(err);
         }
         // clear form values
-        setSignupState({
+        setSignupFormData({
             username: "",
             email: "",
             password: "",
@@ -164,7 +164,7 @@ const Login = () => {
                                         type="email"
                                         name="email"
                                         autoComplete="current-email"
-                                        value={loginState.email}
+                                        value={loginFormData.email}
                                         onChange={handleLoginFormChange}
                                     />
                                 </div>
@@ -176,7 +176,7 @@ const Login = () => {
                                         name="password"
                                         autoComplete="current-password"
                                         // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
-                                        value={loginState.password}
+                                        value={loginFormData.password}
                                         onChange={handleLoginFormChange}
                                     />
                                 </div>
@@ -223,7 +223,7 @@ const Login = () => {
                                         type="username"
                                         name="username"
                                         autoComplete="current-username"
-                                        value={signupState.username}
+                                        value={signupFormData.username}
                                         onChange={handleSignupFormChange}
                                     />
                                 </div>
@@ -234,7 +234,7 @@ const Login = () => {
                                         type="email"
                                         name="email"
                                         autoComplete="current-email"
-                                        value={signupState.email}
+                                        value={signupFormData.email}
                                         onChange={handleSignupFormChange}
                                     />
                                 </div>
@@ -246,7 +246,7 @@ const Login = () => {
                                         name="password"
                                         autoComplete="current-password"
                                         // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
-                                        value={signupState.password}
+                                        value={signupFormData.password}
                                         onChange={handleSignupFormChange}
                                     />
                                 </div>
