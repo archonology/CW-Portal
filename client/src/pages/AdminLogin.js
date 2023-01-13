@@ -71,9 +71,9 @@ const AdminLogin = () => {
                 variables: { ...formState },
             });
 
-            Auth.loginAdmin(data.loginAdmin.token);
-        } catch (e) {
-            console.error(e);
+            Auth.login(data.loginAdmin.admin.token);
+        } catch (error) {
+            console.error(error);
         }
         // clear form values
         setFormState({
@@ -93,8 +93,8 @@ const AdminLogin = () => {
             });
 
             Auth.login(data2.createAdmin.token);
-        } catch (e) {
-            console.error(e);
+        } catch (err) {
+            console.error(err);
         }
     };
 
@@ -165,7 +165,7 @@ const AdminLogin = () => {
                                     type="submit"
                                     color="secondary"
                                     variant="contained"
-                                    sx={{m: 1}}>Login</Button>
+                                    sx={{m: 1}}>Admin Login</Button>
                                 </div>
                             </Box>
                         </Grid>
@@ -237,7 +237,7 @@ const AdminLogin = () => {
                                     color="secondary"
                                     variant="contained"
                                     sx={{m: 1}}
-                                    >Sign up
+                                    >Admin Sign Up
                                     </Button>
                                 </div>
                             </Box>
