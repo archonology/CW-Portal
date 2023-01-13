@@ -53,9 +53,9 @@ mutation createUser($username: String!, $email: String!, $password: String!) {
 `;
 
 export const CREATE_TOPIC = gql`
-mutation createTopic($topic: String!, $url: String! $text: String!, $image: String!) {
-    createTopic(topic: $topic, url: $url, text: $text, image: $image) {
-        topic
+mutation createTopic($title: String!, $url: String! $text: String!, $image: String!) {
+    createTopic(title: $title, url: $url, text: $text, image: $image) {
+        title
         url
         text
         image
