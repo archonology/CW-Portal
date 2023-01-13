@@ -27,9 +27,14 @@ const resolvers = {
             return await Admin.find({});
         },
 
+        users: async () => {
+            return await User.find({});
+        },
+
         topics: async () => {
             return await Topic.find({});
         },
+
 
 
         topic: async (parent, { _id }) => {
@@ -95,9 +100,9 @@ const resolvers = {
             return { token, user };
         },
 
-        createTopic: async (parent, { topic, url, text, image }) => {
-            if(topic) {
-                const newTopic = await Topic.create({ topic, url, text, image });
+        createTopic: async ({ title, url, text, image }) => {
+            if(title) {
+                const newTopic = await Topic.create({ title, url, text, image });
                 return newTopic;
             }
             throw new AuthenticationError("Something went wrong!");
