@@ -37,9 +37,8 @@ class AuthService {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
     window.location.assign('/dashboard');
-    return (
-      <Alert severity="success">Login Successful!</Alert>
-    );
+      alert("login successful");
+
   }
 
   logout() {

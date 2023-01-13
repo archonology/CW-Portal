@@ -43,7 +43,8 @@ function a11yProps(index) {
 }
 
 const AdminLogin = () => {
-    const [formState, setFormState] = useState({ email: "", password: "" });
+    const [loginState, setLoginState] = useState({ email: "", password: "" });
+    const [signupState, setSignupState] = useState({ username: "", email: "", password: "" });
     const [loginAdmin, { error, data }] = useMutation(LOGIN_ADMIN);
     const [createAdmin, { err, data2 }] = useMutation(CREATE_ADMIN);
     const [value, setValue] = React.useState(0);
@@ -51,12 +52,23 @@ const AdminLogin = () => {
         setValue(newValue);
     };
 
-    // update state based on form input changes
-    const handleFormChange = (event) => {
+    // update state based on login form input changes
+    const handleLoginFormChange = (event) => {
         const { name, value } = event.target;
 
-        setFormState({
-            ...formState,
+        setLoginState({
+            ...loginState,
+            [name]: value,
+        });
+    };
+
+
+    // update state based on signup form input changes
+    const handleSignupFormChange = (event) => {
+        const { name, value } = event.target;
+
+        setSignupState({
+            ...signupState,
             [name]: value,
         });
     };
@@ -68,7 +80,7 @@ const AdminLogin = () => {
 
         try {
             const { data } = await loginAdmin({
-                variables: { ...formState },
+                variables: { ...loginState },
             });
 
             Auth.login(data.loginAdmin.admin.token);
@@ -76,7 +88,7 @@ const AdminLogin = () => {
             console.error(error);
         }
         // clear form values
-        setFormState({
+        setLoginState({
             email: "",
             password: "",
         });
@@ -89,13 +101,19 @@ const AdminLogin = () => {
 
         try {
             const { data2 } = await createAdmin({
-                variables: { ...formState },
+                variables: { ...signupState },
             });
 
             Auth.login(data2.createAdmin.token);
         } catch (err) {
             console.error(err);
         }
+        // clear form values
+        setSignupState({
+            username: "",
+            email: "",
+            password: "",
+        });
     };
 
     return (
@@ -144,8 +162,8 @@ const AdminLogin = () => {
                                         type="email"
                                         name="email"
                                         autoComplete="current-email"
-                                        value={formState.email}
-                                        onChange={handleFormChange}
+                                        value={loginState.email}
+                                        onChange={handleLoginFormChange}
                                     />
                                 </div>
                                 <div>
@@ -156,16 +174,16 @@ const AdminLogin = () => {
                                         name="password"
                                         autoComplete="current-password"
                                         // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
-                                        value={formState.password}
-                                        onChange={handleFormChange}
+                                        value={loginState.password}
+                                        onChange={handleLoginFormChange}
                                     />
                                 </div>
                                 <div>
-                                    <Button                                     
-                                    type="submit"
-                                    color="secondary"
-                                    variant="contained"
-                                    sx={{m: 1}}>Admin Login</Button>
+                                    <Button
+                                        type="submit"
+                                        color="secondary"
+                                        variant="contained"
+                                        sx={{ m: 1 }}>Admin Login</Button>
                                 </div>
                             </Box>
                         </Grid>
@@ -204,8 +222,8 @@ const AdminLogin = () => {
                                         type="username"
                                         name="username"
                                         autoComplete="current-username"
-                                        value={formState.username}
-                                        onChange={handleFormChange}
+                                        value={signupState.username}
+                                        onChange={handleSignupFormChange}
                                     />
                                 </div>
                                 <div>
@@ -215,8 +233,8 @@ const AdminLogin = () => {
                                         type="email"
                                         name="email"
                                         autoComplete="current-email"
-                                        value={formState.email}
-                                        onChange={handleFormChange}
+                                        value={signupState.email}
+                                        onChange={handleSignupFormChange}
                                     />
                                 </div>
                                 <div>
@@ -227,16 +245,16 @@ const AdminLogin = () => {
                                         name="password"
                                         autoComplete="current-password"
                                         // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
-                                        value={formState.password}
-                                        onChange={handleFormChange}
+                                        value={signupState.password}
+                                        onChange={handleSignupFormChange}
                                     />
                                 </div>
                                 <div>
                                     <Button
-                                    type="submit"
-                                    color="secondary"
-                                    variant="contained"
-                                    sx={{m: 1}}
+                                        type="submit"
+                                        color="secondary"
+                                        variant="contained"
+                                        sx={{ m: 1 }}
                                     >Admin Sign Up
                                     </Button>
                                 </div>

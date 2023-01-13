@@ -44,7 +44,8 @@ function a11yProps(index) {
 }
 
 const Login = () => {
-    const [formState, setFormState] = useState({ email: "", password: "" });
+    const [loginState, setLoginState] = useState({ email: "", password: "" });
+    const [signupState, setSignupState] = useState({ username: "", email: "", password: "" });
     const [loginUser, { error, data }] = useMutation(LOGIN_USER);
     const [createUser, { err, data2 }] = useMutation(CREATE_USER);
     const [value, setValue] = React.useState(0);
@@ -52,12 +53,23 @@ const Login = () => {
         setValue(newValue);
     };
 
-    // update state based on form input changes
-    const handleFormChange = (event) => {
+    // update state based on login form input changes
+    const handleLoginFormChange = (event) => {
         const { name, value } = event.target;
 
-        setFormState({
-            ...formState,
+        setLoginState({
+            ...loginState,
+            [name]: value,
+        });
+    };
+
+
+    // update state based on signup form input changes
+    const handleSignupFormChange = (event) => {
+        const { name, value } = event.target;
+
+        setSignupState({
+            ...signupState,
             [name]: value,
         });
     };
@@ -69,7 +81,7 @@ const Login = () => {
 
         try {
             const { data } = await loginUser({
-                variables: { ...formState },
+                variables: { ...loginState },
             });
 
             Auth.login(data.loginUser.user.token);
@@ -77,7 +89,7 @@ const Login = () => {
             console.error(error);
         }
         // clear form values
-        setFormState({
+        setLoginState({
             email: "",
             password: "",
         });
@@ -90,25 +102,31 @@ const Login = () => {
 
         try {
             const { data2 } = await createUser({
-                variables: { ...formState },
+                variables: { ...signupState },
             });
 
             Auth.login(data2.createUser.token);
         } catch (err) {
             console.error(err);
         }
+        // clear form values
+        setSignupState({
+            username: "",
+            email: "",
+            password: "",
+        });
     };
 
     return (
         <Box sx={{ width: '100%' }}>
             <Box>
                 <Tabs
-                sx={{ m: 3 }} 
-                value={value} 
-                onChange={handleChange}
-                textColor="primary"
-                indicatorColor="primary" 
-                aria-label="User login and sign up tabs">
+                    sx={{ m: 3 }}
+                    value={value}
+                    onChange={handleChange}
+                    textColor="primary"
+                    indicatorColor="primary"
+                    aria-label="User login and sign up tabs">
                     <Tab label="Login" {...a11yProps(0)} />
                     <Tab label="Sign up" {...a11yProps(1)} />
                 </Tabs>
@@ -146,8 +164,8 @@ const Login = () => {
                                         type="email"
                                         name="email"
                                         autoComplete="current-email"
-                                        value={formState.email}
-                                        onChange={handleFormChange}
+                                        value={loginState.email}
+                                        onChange={handleLoginFormChange}
                                     />
                                 </div>
                                 <div>
@@ -158,15 +176,15 @@ const Login = () => {
                                         name="password"
                                         autoComplete="current-password"
                                         // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
-                                        value={formState.password}
-                                        onChange={handleFormChange}
+                                        value={loginState.password}
+                                        onChange={handleLoginFormChange}
                                     />
                                 </div>
                                 <div>
-                                    <Button 
-                                    type="submit"
-                                    variant="contained"
-                                    sx={{m: 1}}>Login</Button>
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        sx={{ m: 1 }}>Login</Button>
                                 </div>
                             </Box>
                         </Grid>
@@ -205,8 +223,8 @@ const Login = () => {
                                         type="username"
                                         name="username"
                                         autoComplete="current-username"
-                                        value={formState.username}
-                                        onChange={handleFormChange}
+                                        value={signupState.username}
+                                        onChange={handleSignupFormChange}
                                     />
                                 </div>
                                 <div>
@@ -216,8 +234,8 @@ const Login = () => {
                                         type="email"
                                         name="email"
                                         autoComplete="current-email"
-                                        value={formState.email}
-                                        onChange={handleFormChange}
+                                        value={signupState.email}
+                                        onChange={handleSignupFormChange}
                                     />
                                 </div>
                                 <div>
@@ -228,16 +246,16 @@ const Login = () => {
                                         name="password"
                                         autoComplete="current-password"
                                         // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
-                                        value={formState.password}
-                                        onChange={handleFormChange}
+                                        value={signupState.password}
+                                        onChange={handleSignupFormChange}
                                     />
                                 </div>
                                 <div>
                                     <Button
                                         variant="contained"
                                         type="submit"
-                                        sx={{m: 1}}
-                                        >Sign up
+                                        sx={{ m: 1 }}
+                                    >Sign up
                                     </Button>
                                 </div>
                             </Box>
