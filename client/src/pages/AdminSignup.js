@@ -64,13 +64,13 @@ const AdminSignup = () => {
         event.preventDefault();
 
         try {
-            const { data2 } = await createAdmin({
+            const { data } = await createAdmin({
                 variables: { ...signupState },
             });
 
-            Auth.login(data2.createAdmin.token);
-        } catch (err) {
-            console.error(err);
+            Auth.login(data.createAdmin.token);
+        } catch (error) {
+            console.error(error);
         }
         // clear form values
         setSignupState({
