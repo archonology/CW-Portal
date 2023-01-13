@@ -23,7 +23,7 @@ const typeDefs = gql`
 
     type Topic {
         _id: ID
-        topic: String
+        title: String
         url: String
         text: String
         image: String
@@ -56,7 +56,9 @@ const typeDefs = gql`
 
     type Query {
         me: User
+        users: [User]
         admin: Admin
+        admins: [Admin]
         topics: [Topic]
         resources: [Resource]
         topic(_id: ID!): Topic
@@ -68,16 +70,18 @@ const typeDefs = gql`
         createUser(username: String!, email: String!, password: String!): Auth
         loginAdmin(email: String!, password: String!): Auth
         loginUser(email: String!, password: String!): Auth
-        createTopic(topic: String!, url: String! text: String!, image: String!): Topic
+        createTopic(title: String!, url: String! text: String!, image: String!): Topic
         createSubtopic(title: String!, url: String! text: String!): Topic
         createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Resource            
         addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Topic
-        adminUpdateTopic(_id: ID!, topic: String!, text: String!, image: String!): Topic
-        adminUpdateResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Resource        
-        adminDeleteTopic(_id: ID!): Topic
-        adminDeleteResource(_id: ID!): Admin
-        userAddResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): User
-        userDeleteResource(_id: ID!): User
+        updateTopic(_id: ID!, title: String!, text: String!, image: String!): Topic
+        updateResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Resource        
+        deleteTopic(_id: ID!): Topic
+        deleteResource(_id: ID!): Resource
+        userAddToList(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): User
+        adminAddToList(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin
+        userRemoveFromList(_id: ID!): User
+        adminRemoveFromList(_id: ID!): Admin
     }
 
 `;

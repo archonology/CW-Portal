@@ -5,8 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { Grid, Button, TextField } from "@mui/material";
 import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../utils/mutations";
-import { Link } from 'react-router-dom';
+import { CREATE_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 
 function TabPanel(props) {
@@ -41,39 +40,40 @@ function a11yProps(index) {
     };
 }
 
-const Login = () => {
-    const [loginFormData, setLoginFormData] = useState({ email: "", password: "" });
-    const [loginUser, { error, data }] = useMutation(LOGIN_USER);
+const Signup = () => {
+    const [signupFormData, setSignupFormData] = useState({ username: "", email: "", password: "" });
+    const [createUser, { error, data }] = useMutation(CREATE_USER);
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    // update state based on login form input changes
-    const handleLoginFormChange = (event) => {
+    // update state based on signup form input changes
+    const handleSignupFormChange = (event) => {
         const { name, value } = event.target;
 
-        setLoginFormData({
-            ...loginFormData,
+        setSignupFormData({
+            ...signupFormData,
             [name]: value,
         });
     };
 
-    // submit Login form
-    const handleLoginSubmit = async (event) => {
+    // submit Signup form
+    const handleSignupSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const { data } = await loginUser({
-                variables: { ...loginFormData },
+            const { data } = await createUser({
+                variables: { ...signupFormData },
             });
             console.log(data);
-            Auth.login(data.loginUser.token);
+            Auth.login(data.createUser.token);
         } catch (error) {
             console.error(error);
         }
         // clear form values
-        setLoginFormData({
+        setSignupFormData({
+            username: "",
             email: "",
             password: "",
         });
@@ -89,7 +89,7 @@ const Login = () => {
                     textColor="primary"
                     indicatorColor="primary"
                     aria-label="User login and sign up tabs">
-                    <Tab label="Login" {...a11yProps(0)} />
+                    <Tab label="Sign up" {...a11yProps(0)} />
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -111,48 +111,52 @@ const Login = () => {
                             <Box
                                 component="form"
                                 sx={{
-                                    "& .MuiTextField-root": { m: 1, minWidth: "300px", },
-                                    borderColor: "teal",
+                                    "& .MuiTextField-root": { m: 1, minWidth: "300px", }
                                 }}
                                 noValidate
                                 autoComplete="off"
-                                onSubmit={handleLoginSubmit}
+                                onSubmit={handleSignupSubmit}
                             >
                                 <div>
                                     <TextField
-                                        id="login-email-input"
-                                        label="Email"
-                                        type="email"
-                                        name="email"
-                                        autoComplete="current-email"
-                                        value={loginFormData.email}
-                                        onChange={handleLoginFormChange}
+                                        id="signup-username-input"
+                                        label="Username"
+                                        type="username"
+                                        name="username"
+                                        autoComplete="current-username"
+                                        value={signupFormData.username}
+                                        onChange={handleSignupFormChange}
                                     />
                                 </div>
                                 <div>
                                     <TextField
-                                        id="login-password-input"
+                                        id="signup-email-input"
+                                        label="Email"
+                                        type="email"
+                                        name="email"
+                                        autoComplete="current-email"
+                                        value={signupFormData.email}
+                                        onChange={handleSignupFormChange}
+                                    />
+                                </div>
+                                <div>
+                                    <TextField
+                                        id="signup-password-input"
                                         label="Password"
                                         type="password"
                                         name="password"
                                         autoComplete="current-password"
                                         // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
-                                        value={loginFormData.password}
-                                        onChange={handleLoginFormChange}
+                                        value={signupFormData.password}
+                                        onChange={handleSignupFormChange}
                                     />
                                 </div>
                                 <div>
                                     <Button
+                                        variant="contained"
                                         type="submit"
-                                        variant="contained"
-                                        sx={{ m: 1 }}>Login
-                                    </Button>
-                                    <Button
-                                        as={Link}
-                                        to="/signup"
-                                        variant="contained"
-                                        color="warning"
-                                        sx={{ margin: 1, paddingBlock: 1.25, textDecoration: "none", }}>Signup Form
+                                        sx={{ m: 1 }}
+                                    >Sign up
                                     </Button>
                                 </div>
                             </Box>
@@ -164,4 +168,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;

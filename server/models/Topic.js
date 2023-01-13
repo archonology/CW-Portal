@@ -2,10 +2,10 @@ const { Schema, model } = require("mongoose");
 const subTopicSchema = require('./SubTopic');
 
 
-// define deck schema
+// define topic schema
 const topicSchema = new Schema(
     {
-        topic: {
+        title: {
             type: String,
             required: true,
         },

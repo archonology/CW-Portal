@@ -23,6 +23,20 @@ const resolvers = {
             throw new AuthenticationError("Please login as admin to continue.");
         },
 
+        admins: async () => {
+            return await Admin.find({});
+        },
+
+        users: async () => {
+            return await User.find({});
+        },
+
+        topics: async () => {
+            return await Topic.find({});
+        },
+
+
+
         topic: async (parent, { _id }) => {
             try {
                 return Topic.findOne({ _id })
@@ -86,19 +100,13 @@ const resolvers = {
             return { token, user };
         },
 
-        // createTopic: async (parent, { topic, url, text, image }, context) => {
-        //     if (context.admin) {
-        //         const newTopic = await Topic.create({ topic, url, text, image });
-        //         const updatedAdmin = await Admin.findOneAndUpdate(
-        //             { _id: context.admin._id },
-        //             { $addToSet: { topics: newTopic._id } },
-        //             { new: true }
-        //         ).populate('topics');
-
-        //         return updatedAdmin;
-        //     }
-        //     throw new AuthenticationError("Please login as an Admin to continue.");
-        // },
+        createTopic: async ({ title, url, text, image }) => {
+            if(title) {
+                const newTopic = await Topic.create({ title, url, text, image });
+                return newTopic;
+            }
+            throw new AuthenticationError("Something went wrong!");
+        },
 
         // createResource: async (parent, { title, url, text, image, link }, context) => {
         //     if (context.admin) {
