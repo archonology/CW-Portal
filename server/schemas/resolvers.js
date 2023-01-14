@@ -120,6 +120,15 @@ const resolvers = {
             );
             return updateTopic;
         },
+
+        addSubtopicToTopic: async (parent, { title, url, text, topicId }) => {
+            const updateTopic = await Topic.findOneAndUpdate(
+                { _id: topicId },
+                { $addToSet: { subtopics: { title, url, text } } },
+                { new: true }
+            );
+            return updateTopic;
+        },
     }
 }
 

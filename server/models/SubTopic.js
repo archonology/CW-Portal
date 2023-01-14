@@ -7,6 +7,9 @@ const subTopicSchema = new Schema(
             type: String,
             required: true,
         },
+        url: {
+            type: String,
+        },
         text: {
             type: String,
         },
