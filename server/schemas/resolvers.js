@@ -100,22 +100,16 @@ const resolvers = {
             return { token, user };
         },
 
-        createTopic: async ({ title, url, text, image }) => {
-            if(title) {
-                const newTopic = await Topic.create({ title, url, text, image });
-                return newTopic;
-            }
-            throw new AuthenticationError("Something went wrong!");
+        createTopic: async (parent, { title, url, text, image }) => {
+            const newTopic = await Topic.create({ title, url, text, image }, { new: true });
+            return newTopic;
         },
 
-        // createResource: async (parent, { title, url, text, image, link }, context) => {
-        //     if (context.admin) {
-        //         const newResource = await Resource.create({ title, url, text, image, link });
-        //         const updatedAdmin = await Admin.findOneAndUpdate(
-        //             { _id: context.admin._id },
-        //             { $addToSet: { resources: newResource._id } },
-        //             { new: true }
-        //         ).populate('resources');
+        createResource: async (parent, { title, url, text, image, link }) => {
+            const newResource = await Resource.create({ title, url, text, image, link }, { new: true });
+            return newResource;
+        },
+
 
         //         return updatedAdmin;
         //     }
