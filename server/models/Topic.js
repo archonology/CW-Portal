@@ -9,6 +9,10 @@ const topicSchema = new Schema(
             type: String,
             required: true,
         },
+        url: {
+            type: String,
+            required: true,
+        },
         text: {
             type: String,
         },

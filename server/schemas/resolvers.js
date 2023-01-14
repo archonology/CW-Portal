@@ -35,14 +35,16 @@ const resolvers = {
             return await Topic.find({});
         },
 
-
-
         topic: async (parent, { _id }) => {
             try {
                 return Topic.findOne({ _id })
             } catch (err) {
                 console.log(err);
             }
+        },
+
+        resources: async () => {
+            return await Resource.find({});
         },
 
         resource: async (parent, { _id }) => {
@@ -101,12 +103,12 @@ const resolvers = {
         },
 
         createTopic: async (parent, { title, url, text, image }) => {
-            const newTopic = await Topic.create({ title, url, text, image }, { new: true });
+            const newTopic = await Topic.create({ title, url, text, image });
             return newTopic;
         },
 
         createResource: async (parent, { title, url, text, image, link }) => {
-            const newResource = await Resource.create({ title, url, text, image, link }, { new: true });
+            const newResource = await Resource.create({ title, url, text, image, link });
             return newResource;
         },
 
