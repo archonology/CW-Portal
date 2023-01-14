@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const subTopicSchema = require('./SubTopic');
 
 
 // define topic schema
@@ -24,7 +23,11 @@ const topicSchema = new Schema(
             ref: 'Resource',
         },
         ],
-        subtopics: [subTopicSchema]
+        subtopics: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Subtopic',
+        },
+        ],
     }
 );
 

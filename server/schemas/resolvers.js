@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Admin, User, Topic, Resource } = require('../models');
+const { Admin, User, Topic, Subtopic, Resource } = require('../models');
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -38,6 +38,18 @@ const resolvers = {
         topic: async (parent, { _id }) => {
             try {
                 return Topic.findOne({ _id })
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        subtopics: async () => {
+            return await Subtopic.find({});
+        },
+
+        subtopic: async (parent, { _id }) => {
+            try {
+                return Subtopic.findOne({ _id })
             } catch (err) {
                 console.log(err);
             }
@@ -107,6 +119,11 @@ const resolvers = {
             return newTopic;
         },
 
+        createSubtopic: async (parent, args) => {
+            const newSubtopic = await Subtopic.create({ ...args });
+            return newSubtopic;
+        },
+
         createResource: async (parent, args) => {
             const newResource = await Resource.create({ ...args });
             return newResource;
@@ -121,10 +138,19 @@ const resolvers = {
             return updateTopic;
         },
 
-        addSubtopicToTopic: async (parent, { title, url, text, topicId }) => {
+        addSubtopicToTopic: async (parent, args) => {
             const updateTopic = await Topic.findOneAndUpdate(
-                { _id: topicId },
-                { $addToSet: { subtopics: { title, url, text } } },
+                { _id: args.topicId },
+                { $addToSet: { subtopics: { ...args } } },
+                { new: true }
+            );
+            return updateTopic;
+        },
+
+        addResourceToSubtopic: async (parent, { resourceData, subtopicId }) => {
+            const updateTopic = await Subtopic.findOneAndUpdate(
+                { _id: subtopicId },
+                { $addToSet: { resources: { ...resourceData } } },
                 { new: true }
             );
             return updateTopic;
