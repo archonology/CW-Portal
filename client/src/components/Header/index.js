@@ -9,7 +9,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import ResourceList from "../ResourceList";
 import Auth from "../../utils/auth";
-console.log(ResourceList[0].title);
+
+import CloseButton from 'react-bootstrap/CloseButton';
 
 function Header() {
   console.log(Auth.adminLoggedIn);
@@ -23,10 +24,11 @@ function Header() {
             id={`offcanvasNavbar-expand-md}`}
             aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
             placement="end"
-            className="bg-dark variant-dark"
+            className="bg-dark variant-white"
           >
             {/* can I change the color of the X button? */}
-            <Offcanvas.Header closeButton >
+            <Offcanvas.Header closeButton closeVariant="white">
+              
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md}`}>
                 Public Child Welfare Portal
               </Offcanvas.Title>
