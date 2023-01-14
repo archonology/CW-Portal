@@ -12,6 +12,7 @@ import Auth from "../../utils/auth";
 console.log(ResourceList[0].title);
 
 function Header() {
+  console.log(Auth.loggedIn);
   return (
     <>
       <Navbar bg="dark" variant="dark" className="mb-3 p-3" expand="md">
@@ -42,6 +43,7 @@ function Header() {
                   ))};
                 </NavDropdown>                
                 {Auth.loggedIn() ? (
+                
                   <>
                     <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
                   </>

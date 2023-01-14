@@ -68,7 +68,7 @@ const AdminLogin = () => {
                 variables: { ...loginState },
             });
 
-            Auth.login(data.loginAdmin.admin.token);
+            Auth.login(data.loginAdmin.token);
         } catch (error) {
             console.error(error);
         }

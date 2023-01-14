@@ -115,6 +115,7 @@ const Dashboard = () => {
           <Tab label="To-Do" {...a11yProps(1)} />
           <Tab label="Doing" {...a11yProps(2)} />
           <Tab label="Done" {...a11yProps(3)} />
+          <Tab label="Manage Site Build" {...a11yProps(4)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
