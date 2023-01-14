@@ -150,6 +150,7 @@ const AdminLogin = () => {
                                     </Button>
                                     <Button
                                         as={Link}
+                                        className="link"
                                         to="/adminsignup"
                                         variant="contained"
                                         color="warning"

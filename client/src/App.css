@@ -69,3 +69,7 @@ font-weight: bold;
 .logging:hover {
   color: var(--secondary);
 }
+
+.link:hover {
+  color: var(--base);
+}

@@ -42,7 +42,7 @@ function Header() {
                     <NavDropdown.Item as={Link} key={resource} to={"/resources" + resource.url}>{resource.title}</NavDropdown.Item>
                   ))};
                 </NavDropdown>                
-                {Auth.loggedIn() ? (
+                {Auth.loggedIn() || Auth.adminLoggedIn() ? (
                 
                   <>
                     <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
