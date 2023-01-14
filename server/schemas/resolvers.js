@@ -102,43 +102,25 @@ const resolvers = {
             return { token, user };
         },
 
-        createTopic: async (parent, { title, url, text, image }) => {
-            const newTopic = await Topic.create({ title, url, text, image });
+        createTopic: async (parent, args) => {
+            const newTopic = await Topic.create({ ...args });
             return newTopic;
         },
 
-        createResource: async (parent, { title, url, text, image, link }) => {
-            const newResource = await Resource.create({ title, url, text, image, link });
+        createResource: async (parent, args) => {
+            const newResource = await Resource.create({ ...args });
             return newResource;
         },
 
-
-        //         return updatedAdmin;
-        //     }
-        //     throw new AuthenticationError("Please login as an Admin to continue.");
-        // },
-
-        // addResourceToTopic: async (parent, args, context) => {
-        //     if (context.admin) {
-
-        //         const updatedAdmin = await Admin.findOneAndUpdate(
-        //             { _id: context.admin_id },
-        //             { $addToSet: { topics: { ...args } } },
-        //             { new: true }
-        //         ).populate({
-        //             path: 'topics',
-        //             populate: {
-        //                 path: 'resources',
-        //             },
-        //         });
-
-        //         return updatedAdmin;
-
-        //     }
-        //     throw new AuthenticationError("Please login as an Admin to continue.");
-        // },
-
-    },
-};
+        addResourceToTopic: async (parent, { resourceData, topicId }) => {
+            const updateTopic = await Topic.findOneAndUpdate(
+                { _id: topicId },
+                { $addToSet: { resources: { ...resourceData } } },
+                { new: true }
+            );
+            return updateTopic;
+        },
+    }
+}
 
 module.exports = resolvers;
