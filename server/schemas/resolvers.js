@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Admin, User, Topic, Resource } = require('../models');
+const { Admin, User, Topic, Subtopic, Resource } = require('../models');
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -35,14 +35,28 @@ const resolvers = {
             return await Topic.find({});
         },
 
-
-
         topic: async (parent, { _id }) => {
             try {
                 return Topic.findOne({ _id })
             } catch (err) {
                 console.log(err);
             }
+        },
+
+        subtopics: async () => {
+            return await Subtopic.find({});
+        },
+
+        subtopic: async (parent, { _id }) => {
+            try {
+                return Subtopic.findOne({ _id })
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        resources: async () => {
+            return await Resource.find({});
         },
 
         resource: async (parent, { _id }) => {
@@ -100,49 +114,48 @@ const resolvers = {
             return { token, user };
         },
 
-        createTopic: async ({ title, url, text, image }) => {
-            if(title) {
-                const newTopic = await Topic.create({ title, url, text, image });
-                return newTopic;
-            }
-            throw new AuthenticationError("Something went wrong!");
+        createTopic: async (parent, args) => {
+            const newTopic = await Topic.create({ ...args });
+            return newTopic;
         },
 
-        // createResource: async (parent, { title, url, text, image, link }, context) => {
-        //     if (context.admin) {
-        //         const newResource = await Resource.create({ title, url, text, image, link });
-        //         const updatedAdmin = await Admin.findOneAndUpdate(
-        //             { _id: context.admin._id },
-        //             { $addToSet: { resources: newResource._id } },
-        //             { new: true }
-        //         ).populate('resources');
+        createSubtopic: async (parent, args) => {
+            const newSubtopic = await Subtopic.create({ ...args });
+            return newSubtopic;
+        },
 
-        //         return updatedAdmin;
-        //     }
-        //     throw new AuthenticationError("Please login as an Admin to continue.");
-        // },
+        createResource: async (parent, args) => {
+            const newResource = await Resource.create({ ...args });
+            return newResource;
+        },
 
-        // addResourceToTopic: async (parent, args, context) => {
-        //     if (context.admin) {
+        addResourceToTopic: async (parent, { resourceData, topicId }) => {
+            const updateTopic = await Topic.findOneAndUpdate(
+                { _id: topicId },
+                { $addToSet: { resources: { ...resourceData } } },
+                { new: true }
+            );
+            return updateTopic;
+        },
 
-        //         const updatedAdmin = await Admin.findOneAndUpdate(
-        //             { _id: context.admin_id },
-        //             { $addToSet: { topics: { ...args } } },
-        //             { new: true }
-        //         ).populate({
-        //             path: 'topics',
-        //             populate: {
-        //                 path: 'resources',
-        //             },
-        //         });
+        addSubtopicToTopic: async (parent, args) => {
+            const updateTopic = await Topic.findOneAndUpdate(
+                { _id: args.topicId },
+                { $addToSet: { subtopics: { ...args } } },
+                { new: true }
+            );
+            return updateTopic;
+        },
 
-        //         return updatedAdmin;
-
-        //     }
-        //     throw new AuthenticationError("Please login as an Admin to continue.");
-        // },
-
-    },
-};
+        addResourceToSubtopic: async (parent, { resourceData, subtopicId }) => {
+            const updateTopic = await Subtopic.findOneAndUpdate(
+                { _id: subtopicId },
+                { $addToSet: { resources: { ...resourceData } } },
+                { new: true }
+            );
+            return updateTopic;
+        },
+    }
+}
 
 module.exports = resolvers;

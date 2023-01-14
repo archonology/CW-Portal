@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 // define deck schema
 const subTopicSchema = new Schema(
@@ -6,6 +6,9 @@ const subTopicSchema = new Schema(
         title: {
             type: String,
             required: true,
+        },
+        url: {
+            type: String,
         },
         text: {
             type: String,
@@ -18,4 +21,6 @@ const subTopicSchema = new Schema(
     }
 );
 
-module.exports = subTopicSchema;
+const Subtopic = model('Subtopic', subTopicSchema);
+
+module.exports = Subtopic;

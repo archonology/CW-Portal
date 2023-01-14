@@ -48,6 +48,15 @@ const typeDefs = gql`
         resources: [Resource]
     }
 
+    input ResourceInput {
+        _id: ID
+        title: String
+        url: String
+        text: String
+        image: String
+        link: String
+    }
+
     type Auth {
         token: ID!
         user: User
@@ -60,8 +69,10 @@ const typeDefs = gql`
         admin: Admin
         admins: [Admin]
         topics: [Topic]
+        subtopics: [Subtopic]
         resources: [Resource]
         topic(_id: ID!): Topic
+        subtopic(_id: ID!): Subtopic
         resource(_id: ID!): Resource
     }
 
@@ -71,17 +82,11 @@ const typeDefs = gql`
         loginAdmin(email: String!, password: String!): Auth
         loginUser(email: String!, password: String!): Auth
         createTopic(title: String!, url: String! text: String!, image: String!): Topic
-        createSubtopic(title: String!, url: String! text: String!): Topic
+        createSubtopic(title: String!, url: String! text: String!): Subtopic
         createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Resource            
-        addResourceToTopic(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Topic
-        updateTopic(_id: ID!, title: String!, text: String!, image: String!): Topic
-        updateResource(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Resource        
-        deleteTopic(_id: ID!): Topic
-        deleteResource(_id: ID!): Resource
-        userAddToList(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): User
-        adminAddToList(_id: ID!, title: String!, url: String!, text: String!, image: String!, link: String!): Admin
-        userRemoveFromList(_id: ID!): User
-        adminRemoveFromList(_id: ID!): Admin
+        addResourceToTopic(resourceData: ResourceInput!, topicId: ID!): Topic
+        addSubtopicToTopic( _id: ID!, title: String!, url: String!, text: String! topicId: ID!): Topic
+        addResourceToSubtopic(resourceData: ResourceInput!, subtopicId: ID!): Subtopic
     }
 
 `;
