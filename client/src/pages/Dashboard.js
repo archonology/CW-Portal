@@ -54,6 +54,16 @@ const Dashboard = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
+      <div className="m-4">
+      <Button
+        as={Link}
+        className="link"
+        to="/contentcreator"
+        variant="contained"
+        color="warning"
+        sx={{ margin: 2, paddingBlock: 1.25, textDecoration: "none", }}>Content Creator
+      </Button>
+      </div>
       <Box>
         {Auth.adminLoggedIn() ? (
           <Tabs
@@ -72,7 +82,6 @@ const Dashboard = () => {
             <Tab label="To-Do" {...a11yProps(1)} />
             <Tab label="Doing" {...a11yProps(2)} />
             <Tab label="Done" {...a11yProps(3)} />
-            <Tab label="Manage Site Content" {...a11yProps(4)} />
 
           </Tabs>) : (
           <Tabs
@@ -104,35 +113,35 @@ const Dashboard = () => {
       <TabPanel value={value} index={3}>
       </TabPanel>
       <TabPanel value={value} index={4}>
-          <Grid         
-        container
-        spacing={0}
-        direction="column"
-        alignItems="right">
-        <Button
-          as={Link}
-          to="/"
-          variant="contained"
-          color="primary"
-          className="link"
-          sx={{ margin: 1, ml: 3, padding: 1, width: "200px", textAlign: "center", textDecoration: "none", }}>Topics
-        </Button>
-        <Button
-          as={Link}
-          to="/"
-          variant="contained"
-          color="secondary"
-          className="link"
-          sx={{ margin: 1, ml: 3, padding: 1, width: "200px", textAlign: "center", textDecoration: "none", }}>Subtopics
-        </Button>
-        <Button
-          as={Link}
-          to="/"
-          variant="contained"
-          color="success"
-          className="link"
-          sx={{ margin: 1, ml: 3, padding: 1, width: "200px", textAlign: "center", textDecoration: "none", }}>Resources
-        </Button>
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="right">
+          <Button
+            as={Link}
+            to="/"
+            variant="contained"
+            color="primary"
+            className="link"
+            sx={{ margin: 1, ml: 3, padding: 1, width: "200px", textAlign: "center", textDecoration: "none", }}>Topics
+          </Button>
+          <Button
+            as={Link}
+            to="/"
+            variant="contained"
+            color="secondary"
+            className="link"
+            sx={{ margin: 1, ml: 3, padding: 1, width: "200px", textAlign: "center", textDecoration: "none", }}>Subtopics
+          </Button>
+          <Button
+            as={Link}
+            to="/"
+            variant="contained"
+            color="success"
+            className="link"
+            sx={{ margin: 1, ml: 3, padding: 1, width: "200px", textAlign: "center", textDecoration: "none", }}>Resources
+          </Button>
         </Grid>
 
       </TabPanel>

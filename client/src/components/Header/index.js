@@ -18,7 +18,7 @@ function Header() {
     <>
       <Navbar bg="dark" variant="dark" className="mb-3 p-3" expand="md">
         <Container fluid >
-          <Navbar.Brand as={Link} to="/" className="">Public Child Welfare Portal</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/" className="">The Child Welfare Portal</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-md}`}
@@ -26,11 +26,10 @@ function Header() {
             placement="end"
             className="bg-dark variant-white"
           >
-            {/* can I change the color of the X button? */}
             <Offcanvas.Header closeButton closeVariant="white">
-              
+
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md}`}>
-                Public Child Welfare Portal
+                The Child Welfare Portal
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
@@ -43,9 +42,9 @@ function Header() {
                   {ResourceList.map((resource) => (
                     <NavDropdown.Item as={Link} key={resource} to={"/resources" + resource.url}>{resource.title}</NavDropdown.Item>
                   ))};
-                </NavDropdown>                
+                </NavDropdown>
                 {Auth.loggedIn() || Auth.adminLoggedIn() ? (
-                
+
                   <>
                     <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
                   </>
