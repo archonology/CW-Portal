@@ -20,12 +20,15 @@ import AddIcon from '@mui/icons-material/Add';
 import HomeIcon from '@mui/icons-material/Home';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
+import Topics from '../components/Topics';
+import Subtopics from '../components/Subtopics';
+import ResourceCard from '../components/ResourceCards';
 import { Button, ButtonGroup, Grid } from "@mui/material";
-import Container from 'react-bootstrap/Container';
 
-import { useQuery } from '@apollo/client';
-import { QUERY_ALL_TOPICS } from '../utils/queries';
-import { useParams } from "react-router-dom";
+
+// import { useQuery } from '@apollo/client';
+// import { QUERY_ALL_TOPICS, QUERY_ALL_SUBTOPICS, QUERY_ALL_RESOURCES } from '../utils/queries';
+// import { useParams } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -78,15 +81,15 @@ const ContentCreator = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  // set up useQuery get the data from the backend
-  const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
+  // // set up useQuery get the data from the backend
+  // const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
 
-  // objects to keep the data
+  // // objects to keep the data
 
-  const topicData = data?.topics || {};
+  // const topicData = data?.topics || {};
 
-  if (loading) return alert("loading");
-  if (error) return `Error! ${error}`;
+  // if (loading) return alert("loading");
+  // if (error) return `Error! ${error}`;
 
 
 
@@ -173,18 +176,28 @@ const ContentCreator = () => {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {topicData.map((resource) => {
-          return (
-            <>
-            <Typography key={resource._id} fluid className="text-left box">
-            <h2>{resource.title}</h2>
-            <p className="mainText">{resource.text}</p>
-            </Typography>
-            </>
-          );
-        })}
+        <Topics />
+        <Subtopics />
+        <h5>ALL RESOURCES</h5>
+        <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        style={{ backgroundColor: "#263238", padding: "5rem"}}
+      >
+
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container
+        spacing={0}>
+
+            <ResourceCard />
+
+          </Grid>
+        </Box>
+      </Grid>
         <>
-        </>        
+        </>
       </Main>
     </Box>
   );

@@ -37,6 +37,10 @@ h1, h2 {
   color: var(--primary);
 }
 
+h5 {
+  color: var(--lighterHouse);
+}
+
 .mainText {
   font-size: larger;
   color: var(--alt);

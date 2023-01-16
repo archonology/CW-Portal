@@ -122,18 +122,18 @@ export const QUERY_ALL_SUBTOPICS = gql`
 query subtopics {
     subtopics {
         _id
-        topic
+        title
         url
         text
         resources {
-            _id: ID
-            title: String
-            url: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          url
+          link
+          image
         }
-    }
+      }
 }
 `;
 

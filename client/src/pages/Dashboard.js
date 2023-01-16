@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Auth from "../utils/auth";
-import ResourceCard from "../components/Resources";
+import ResourceCard from "../components/ResourceCards";
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Grid } from "@mui/material";
 
