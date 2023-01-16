@@ -9,8 +9,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import ResourceList from "../ResourceList";
 import Auth from "../../utils/auth";
+import SearchIcon from '@mui/icons-material/Search';
 
-import CloseButton from 'react-bootstrap/CloseButton';
 
 function Header() {
   console.log(Auth.adminLoggedIn);
@@ -64,7 +64,9 @@ function Header() {
                   className="me-2 bg-black searchbox text-white"
                   aria-label="Search"
                 />
-                <Button className="search">Search</Button>
+                <Button className="search">
+                  <SearchIcon></SearchIcon>
+                </Button>
               </Form>
 
             </Offcanvas.Body>

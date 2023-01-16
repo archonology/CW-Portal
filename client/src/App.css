@@ -50,7 +50,7 @@ h1, h2 {
 margin: 0;
 }
 .search {
-  background-color: var(--beacon);
+  background-color: var(--blue);
   border: none;
 }
 
@@ -68,7 +68,7 @@ font-weight: bold;
 }
 
 .search:hover {
-  background-color:var(--lightbeacon);
+  background-color:var(--lightblue);
 }
 
 .logging:hover {

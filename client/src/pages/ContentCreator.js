@@ -22,6 +22,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Grid } from "@mui/material";
 
+import { useQuery } from '@apollo/client';
+import { QUERY_ALL_TOPICS, QUERY_ALL_RESOURCES, } from '../utils/queries';
+
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(

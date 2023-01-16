@@ -88,7 +88,7 @@ export const QUERY_ALL_TOPICS = gql`
 query topics {
     topics {
         _id
-        topic
+        title
         url
         text
         image
@@ -104,6 +104,7 @@ query topics {
             _id
             title
             url
+            text
             resources {
                 _id: ID
                 title: String
@@ -112,6 +113,25 @@ query topics {
                 image: String
                 link: String
             }
+        }
+    }
+}
+`;
+
+export const QUERY_ALL_SUBTOPICS = gql`
+query subtopics {
+    subtopics {
+        _id
+        topic
+        url
+        text
+        resources {
+            _id: ID
+            title: String
+            url: String
+            text: String
+            image: String
+            link: String
         }
     }
 }
@@ -158,6 +178,24 @@ query topic($_id: ID!) {
                 image: String
                 link: String
             }
+        }
+    }
+}
+`;
+
+export const QUERY_ONE_SUBTOPIC = gql`
+query subtopic($_id: ID!) {
+    subtopic(_id: $_id) {
+        _id
+        title
+        url
+        text
+        resources {
+            _id: ID
+            url: String
+            text: String
+            image: String
+            link: String
         }
     }
 }
