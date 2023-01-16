@@ -25,13 +25,11 @@ const OneTopic = () => {
 
     return (
         <>
-            <Container fluid className="text-center p-5 mt-5 box">
-                <h5>ONE TOPIC</h5>
+            <Container fluid className="text-left p-5 mt-5 box">
 
-                <Typography fluid className="text-left box">
-                    <h2>{topicData.title}</h2>
-                    <p className="mainText">{topicData.text}</p>
-                </Typography>
+                <h2 className="topic-headers">{topicData.title}</h2>
+                <p className="mainText">{topicData.text}</p>
+
                 <hr></hr>
             </Container>
         </>

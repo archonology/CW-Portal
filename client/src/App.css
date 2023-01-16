@@ -41,6 +41,10 @@ h5 {
   color: var(--lighterHouse);
 }
 
+.topic-headers {
+  color: var(--lighterHouse);
+}
+
 .mainText {
   font-size: larger;
   color: var(--alt);

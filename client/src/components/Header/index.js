@@ -60,11 +60,15 @@ function Header() {
 
                   <>
                     <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
+                    <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                   </>
                 ) : (
+                  <>
                   <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
+                  <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
+                  </>
                 )}
-                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                
 
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                 <Nav.Link as={Link} to="/donate">Donate</Nav.Link>
