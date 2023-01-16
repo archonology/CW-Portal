@@ -24,7 +24,7 @@ import { Button, ButtonGroup, Grid } from "@mui/material";
 import Container from 'react-bootstrap/Container';
 
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_RESOURCES } from '../utils/queries';
+import { QUERY_ALL_TOPICS } from '../utils/queries';
 import { useParams } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -79,17 +79,14 @@ const ContentCreator = () => {
   const [open, setOpen] = React.useState(false);
 
   // set up useQuery get the data from the backend
-  const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
+  const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
 
   // objects to keep the data
 
-  const resourceData = data?.resources || {};
+  const topicData = data?.topics || {};
 
   if (loading) return alert("loading");
   if (error) return `Error! ${error}`;
-
-  console.log(resourceData);
-
 
 
 
@@ -176,17 +173,17 @@ const ContentCreator = () => {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <Typography paragraph>
-          DEFAULT: view all topics, subtopics, and resources.
-        </Typography>
-        <>
-        {/* map through topics */}
-        {resourceData.map((resource) => {
-          console.log(resource);
-        <h2 key={resource._id}>
-        {resource.text}
-      </h2>
+        {topicData.map((resource) => {
+          return (
+            <>
+            <Typography key={resource._id} fluid className="text-left box">
+            <h2>{resource.title}</h2>
+            <p className="mainText">{resource.text}</p>
+            </Typography>
+            </>
+          );
         })}
+        <>
         </>        
       </Main>
     </Box>
