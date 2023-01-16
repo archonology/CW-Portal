@@ -9,25 +9,27 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import ResourceList from "../ResourceList";
 import Auth from "../../utils/auth";
-console.log(ResourceList[0].title);
+import SearchIcon from '@mui/icons-material/Search';
+
 
 function Header() {
+  console.log(Auth.adminLoggedIn);
   return (
     <>
       <Navbar bg="dark" variant="dark" className="mb-3 p-3" expand="md">
         <Container fluid >
-          <Navbar.Brand as={Link} to="/" className="">Public Child Welfare Portal</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/" className="">The Child Welfare Portal</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-md}`}
             aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
             placement="end"
-            className="bg-dark variant-dark"
+            className="bg-dark variant-white"
           >
-            {/* can I change the color of the X button? */}
-            <Offcanvas.Header closeButton >
+            <Offcanvas.Header closeButton closeVariant="white">
+
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md}`}>
-                Public Child Welfare Portal
+                The Child Welfare Portal
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
@@ -40,8 +42,9 @@ function Header() {
                   {ResourceList.map((resource) => (
                     <NavDropdown.Item as={Link} key={resource} to={"/resources" + resource.url}>{resource.title}</NavDropdown.Item>
                   ))};
-                </NavDropdown>                
-                {Auth.loggedIn() ? (
+                </NavDropdown>
+                {Auth.loggedIn() || Auth.adminLoggedIn() ? (
+
                   <>
                     <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
                   </>
@@ -61,7 +64,9 @@ function Header() {
                   className="me-2 bg-black searchbox text-white"
                   aria-label="Search"
                 />
-                <Button className="search">Search</Button>
+                <Button className="search">
+                  <SearchIcon></SearchIcon>
+                </Button>
               </Form>
 
             </Offcanvas.Body>

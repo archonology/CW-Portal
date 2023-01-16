@@ -87,46 +87,66 @@ query admin {
 export const QUERY_ALL_TOPICS = gql`
 query topics {
     topics {
+      _id
+      title
+      url
+      text
+      resources {
+        image
         _id
-        topic
+        link
+        title
+        text
+        url
+      }
+      subtopics {
+        _id        
+        text
+        title
+        url
+        resources {
+          link
+          title
+          url
+          text
+          image
+          _id
+        }
+
+      }
+    }
+  }
+`;
+
+export const QUERY_ALL_SUBTOPICS = gql`
+query subtopics {
+    subtopics {
+        _id
+        title
         url
         text
-        image
         resources {
-            _id: ID
-            title: String
-            url: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          url
+          link
+          image
         }
-        subtopics {
-            _id
-            title
-            url
-            resources {
-                _id: ID
-                title: String
-                url: String
-                text: String
-                image: String
-                link: String
-            }
-        }
-    }
+      }
 }
 `;
 
 export const QUERY_ALL_RESOURCES = gql`
 query resources {
     resources {
-        _id: ID
-        title: String
-        url: String
-        text: String
-        image: String
-        link: String
-    }
+        _id
+        title
+        text
+        link
+        image
+        url
+      }
 }
 `;
 
@@ -158,6 +178,24 @@ query topic($_id: ID!) {
                 image: String
                 link: String
             }
+        }
+    }
+}
+`;
+
+export const QUERY_ONE_SUBTOPIC = gql`
+query subtopic($_id: ID!) {
+    subtopic(_id: $_id) {
+        _id
+        title
+        url
+        text
+        resources {
+            _id: ID
+            url: String
+            text: String
+            image: String
+            link: String
         }
     }
 }

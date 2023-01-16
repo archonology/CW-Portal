@@ -152,6 +152,7 @@ const Login = () => {
                                         to="/signup"
                                         variant="contained"
                                         color="warning"
+                                        className="link"
                                         sx={{ margin: 1, paddingBlock: 1.25, textDecoration: "none", }}>Signup Form
                                     </Button>
                                 </div>

@@ -68,7 +68,7 @@ const AdminLogin = () => {
                 variables: { ...loginState },
             });
 
-            Auth.login(data.loginAdmin.admin.token);
+            Auth.adminLogin(data.loginAdmin.adminToken);
         } catch (error) {
             console.error(error);
         }
@@ -150,6 +150,7 @@ const AdminLogin = () => {
                                     </Button>
                                     <Button
                                         as={Link}
+                                        className="link"
                                         to="/adminsignup"
                                         variant="contained"
                                         color="warning"

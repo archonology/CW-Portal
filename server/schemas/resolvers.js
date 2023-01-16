@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { Admin, User, Topic, Subtopic, Resource } = require('../models');
-const { signToken } = require("../utils/auth");
+const { signToken, signAdminToken } = require("../utils/auth");
 
 const resolvers = {
     Query: {
@@ -32,7 +32,10 @@ const resolvers = {
         },
 
         topics: async () => {
-            return await Topic.find({});
+            const topicData = await Topic.find({})
+                .populate('subtopics')
+                .populate('resources');
+            return topicData;
         },
 
         topic: async (parent, { _id }) => {
@@ -56,7 +59,8 @@ const resolvers = {
         },
 
         resources: async () => {
-            return await Resource.find({});
+            const resourceData = await Resource.find({});
+            return resourceData;
         },
 
         resource: async (parent, { _id }) => {
@@ -72,8 +76,8 @@ const resolvers = {
 
         createAdmin: async (parent, { username, email, password }) => {
             const admin = await Admin.create({ username, email, password });
-            const token = signToken(admin);
-            return { token, admin };
+            const adminToken = signAdminToken(admin);
+            return { adminToken, admin };
         },
 
         createUser: async (parent, { username, email, password }) => {
@@ -94,8 +98,8 @@ const resolvers = {
                 throw new AuthenticationError('Password is incorrect.');
             }
 
-            const token = signToken(admin);
-            return { token, admin };
+            const adminToken = signAdminToken(admin);
+            return { adminToken, admin };
         },
 
         loginUser: async (parent, { email, password }) => {
