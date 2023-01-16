@@ -32,7 +32,10 @@ const resolvers = {
         },
 
         topics: async () => {
-            return await Topic.find({});
+            const topicData = await Topic.find({})
+                .populate('subtopics')
+                .populate('resources');
+            return topicData;
         },
 
         topic: async (parent, { _id }) => {
@@ -56,7 +59,8 @@ const resolvers = {
         },
 
         resources: async () => {
-            return await Resource.find({});
+            const resourceData = await Resource.find({});
+            return resourceData;
         },
 
         resource: async (parent, { _id }) => {

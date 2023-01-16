@@ -87,35 +87,35 @@ query admin {
 export const QUERY_ALL_TOPICS = gql`
 query topics {
     topics {
+      _id
+      title
+      url
+      text
+      resources {
+        image
         _id
+        link
+        title
+        text
+        url
+      }
+      subtopics {
+        _id        
+        text
         title
         url
-        text
-        image
         resources {
-            _id: ID
-            title: String
-            url: String
-            text: String
-            image: String
-            link: String
+          link
+          title
+          url
+          text
+          image
+          _id
         }
-        subtopics {
-            _id
-            title
-            url
-            text
-            resources {
-                _id: ID
-                title: String
-                url: String
-                text: String
-                image: String
-                link: String
-            }
-        }
+
+      }
     }
-}
+  }
 `;
 
 export const QUERY_ALL_SUBTOPICS = gql`
@@ -140,13 +140,13 @@ query subtopics {
 export const QUERY_ALL_RESOURCES = gql`
 query resources {
     resources {
-        _id: ID
-        title: String
-        url: String
-        text: String
-        image: String
-        link: String
-    }
+        _id
+        title
+        text
+        link
+        image
+        url
+      }
 }
 `;
 

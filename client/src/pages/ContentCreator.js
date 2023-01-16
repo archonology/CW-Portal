@@ -21,9 +21,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Grid } from "@mui/material";
+import Container from 'react-bootstrap/Container';
 
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_TOPICS, QUERY_ALL_RESOURCES, } from '../utils/queries';
+import { QUERY_ALL_RESOURCES } from '../utils/queries';
+import { useParams } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -75,6 +77,21 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const ContentCreator = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  // set up useQuery get the data from the backend
+  const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
+
+  // objects to keep the data
+
+  const resourceData = data?.resources || {};
+
+  if (loading) return alert("loading");
+  if (error) return `Error! ${error}`;
+
+  console.log(resourceData);
+
+
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -162,19 +179,15 @@ const ContentCreator = () => {
         <Typography paragraph>
           DEFAULT: view all topics, subtopics, and resources.
         </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <>
+        {/* map through topics */}
+        {resourceData.map((resource) => {
+          console.log(resource);
+        <h2 key={resource._id}>
+        {resource.text}
+      </h2>
+        })}
+        </>        
       </Main>
     </Box>
   );
