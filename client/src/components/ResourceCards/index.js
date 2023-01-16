@@ -36,9 +36,9 @@ const ResourceCard = () => {
         <>
             {resourceData.map((resource) => {
                 return (
-                    <Card sx={{ maxWidth: 345, margin: 2, boxShadow: 10 }}>
+                    <Card sx={{ maxWidth: 400, minWidth: 300, margin: 2, boxShadow: 10 }}>
                         <CardMedia
-                            sx={{ height: 140 }}
+                            sx={{ height: "auto" }}
                             image={resource.image}
                             title="capacity colab cover"
                         />

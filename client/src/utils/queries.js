@@ -154,32 +154,33 @@ export const QUERY_ONE_TOPIC = gql`
 query topic($_id: ID!) {
     topic(_id: $_id) {
         _id
-        topic
+        title
         url
         text
         image
-        resources {
-            _id: ID
-            title: String
-            url: String
-            text: String
-            image: String
-            link: String
-        }
         subtopics {
+          _id
+          title
+          text
+          url
+          resources {
             _id
             title
+            text
             url
-            resources {
-                _id: ID
-                title: String
-                url: String
-                text: String
-                image: String
-                link: String
-            }
+            link
+            image
+          }
         }
-    }
+        resources {
+          _id
+          title
+          text
+          url
+          link
+          image
+        }
+      }
 }
 `;
 
