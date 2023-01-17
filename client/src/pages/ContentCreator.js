@@ -24,6 +24,7 @@ import Topics from '../components/Topics';
 import Subtopics from '../components/Subtopics';
 import ResourceCard from '../components/ResourceCards';
 import { Button, ButtonGroup, Grid } from "@mui/material";
+import Auth from "../utils/auth";
 
 
 // import { useQuery } from '@apollo/client';
@@ -78,6 +79,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const ContentCreator = () => {
+  // ensure user is logged in and is an admin
+  Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -152,7 +156,7 @@ const ContentCreator = () => {
         </List>
         <Divider />
         <List>
-          {[{ name: 'Add Topic', link: "/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator" }, { name: 'Add Resource', link: "/contentcreator" }].map((text, index) => (
+          {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator" }, { name: 'Add Resource', link: "/contentcreator" }].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton as={Link} className="link2" to={text.link}>
                 <AddIcon>
