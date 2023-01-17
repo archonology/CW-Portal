@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -10,15 +10,19 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from "./pages/Home";
+import OneTopic from "./components/OneTopic";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import Resources from "./pages/Resources";
+import Donate from "./pages/Donate";
 import ContentCreator from "./pages/ContentCreator";
+import AddTopic from "./pages/AddTopic";
+import AddSubtopic from "./pages/AddSubtopic";
+import AddResource from "./pages/AddResource";
 
 // adminLogin is not in the navbar: admin will need to know the url to navigate to this page, so that it isn't available to the public at large. use env after development phase to conceal url route
-
 import AdminLogin from "./pages/AdminLogin";
 import AdminSignup from "./pages/AdminSignup";
 
@@ -29,6 +33,8 @@ import "./App.css";
 import ResourceList from "./components/ResourceList";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+
 
 
 
@@ -43,6 +49,12 @@ const darkTheme = createTheme({
     mode: "dark",
   },
 });
+
+const Message = ({ message }) => (
+  <section>
+    <p>{message}</p>
+  </section>
+);
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
@@ -64,7 +76,24 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      setMessage("Order placed! You will receive an email confirmation.");
+    }
+
+    if (query.get("canceled")) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, []);
   return (
+
     <ApolloProvider client={client}>
       {/* keeps the default theme dark across site */}
       <ThemeProvider theme={darkTheme}>
@@ -75,10 +104,18 @@ function App() {
           <div>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/resources/:_id" element={<OneTopic />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/contentcreator" element={<ContentCreator />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="contentcreator/addtopic" element={<AddTopic />} />
+              <Route path="contentcreator/addsubtopic" element={<AddSubtopic />} />
+              <Route path="contentcreator/addresource" element={<AddResource />} />
+              {/* build in progess on donation features */}
+              {message ? (
+                <Message message={message} />
+              ) : (<Route path="/donate" element={<Donate />} />)}
               <Route path="/adminlogin" element={<AdminLogin />} />
               <Route path="/adminsignup" element={<AdminSignup />} />
               <Route path="/contact" element={<Contact />} />

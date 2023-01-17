@@ -14,7 +14,7 @@
   --base: rgb(36, 44, 49); 
   --alt: rgb(177, 178, 178);
   --primary: rgb(228, 223, 218);
-  --lightblue: rgb(110, 188, 227);
+  --lightblue: rgb(122, 205, 247);
   --blue: rgb(89, 146, 174);
   --lightHouse: rgb(252, 121, 91);
   --lighterHouse: rgb(246, 135, 110);
@@ -41,9 +41,17 @@ h5 {
   color: var(--lighterHouse);
 }
 
+.topic-headers {
+  color: var(--lighterHouse);
+}
+
+.subtopic-headers {
+  color: var(--lightblue);
+}
+
 .mainText {
   font-size: larger;
-  color: var(--alt);
+  color: var(--white);
 }
 
 .searchbox {
@@ -61,6 +69,20 @@ margin: 0;
 .logging {
 font-weight: bold;
 
+}
+.avatar {
+  background-image: url("../public/Vector-Multicolor-Flower-Design.jpg");
+  background-position: 30%;
+}
+
+.bgresource {
+/* background-image: linear-gradient(var(--lighterHouse), var(--lightblue), var(--violet)); */
+background-image: linear-gradient(var(--base), var(--blue), var(--beacon));
+
+}
+
+img {
+  border: none;
 }
 
 .link2 {
@@ -85,4 +107,8 @@ font-weight: bold;
 
 .link2:hover {
   color: var(--white);
+}
+
+.link3:hover {
+  color: var(--violet);
 }

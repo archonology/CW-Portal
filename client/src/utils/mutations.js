@@ -53,11 +53,12 @@ mutation createUser($username: String!, $email: String!, $password: String!) {
 `;
 
 export const CREATE_TOPIC = gql`
-mutation createTopic($title: String!, $url: String! $text: String!, $image: String!) {
-    createTopic(title: $title, url: $url, text: $text, image: $image) {
+mutation createTopic($title: String!, $url: String! $text: String!, $image: String!, $link: String!) {
+    createTopic(title: $title, url: $url, text: $text, image: $image, link: $link) {
         title
         url
         text
+        link
         image
         resources {
             _id
@@ -67,16 +68,33 @@ mutation createTopic($title: String!, $url: String! $text: String!, $image: Stri
             image
             link
         }
+        subtopics {
+            title
+            url
+            text
+            link
+            image
+            resources {
+                _id
+                title
+                url
+                text
+                image
+                link
+            }
+        }
     }
 }
 `;
 
 export const CREATE_SUBTOPIC = gql`
-mutation createSubtopic($title: String!, $url: String! $text: String!) {
-    createSubtopic(title: $title, url: $url, text: $text) {
+mutation createSubtopic($title: String!, $url: String! $text: String!, $link: String!, $image: String!) {
+    createSubtopic(title: $title, url: $url, text: $text, link: $link, image: $image) {
         title
         url
         text
+        link
+        image
         resources {
             _id
             title
@@ -103,10 +121,8 @@ mutation createResource($title: String!, $url: String!, $text: String!, $image: 
 `;
 
 export const ADD_RESOURCE_TO_TOPIC = gql`
-mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
-    addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link){
-        _id
-        topic
+mutation addResourceToTopic($resourceData: ResourceInput!, $topicId: ID!) {
+    addResourceToTopic(resouceData: $resourceData, topicId: $topicId){
         resources {
             _id
             title
@@ -124,7 +140,6 @@ export const ADD_RESOURCE_TO_SUBTOPIC = gql`
 mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
     addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link){
         _id
-        title
         resources {
             _id
             title

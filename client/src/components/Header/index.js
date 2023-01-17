@@ -10,10 +10,21 @@ import { Link } from 'react-router-dom';
 import ResourceList from "../ResourceList";
 import Auth from "../../utils/auth";
 import SearchIcon from '@mui/icons-material/Search';
+import { useQuery } from '@apollo/client';
+import { QUERY_ALL_TOPICS } from "../../utils/queries";
 
 
 function Header() {
-  console.log(Auth.adminLoggedIn);
+
+  // set up useQuery get the data from the backend
+  const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
+
+  // object to keep the topic data
+  const topicData = data?.topics || {};
+  // check load time and errors
+  if (loading) return "loading";
+  if (error) return `Error! ${error}`;
+
   return (
     <>
       <Navbar bg="dark" variant="dark" className="mb-3 p-3" expand="md">
@@ -39,22 +50,27 @@ function Header() {
                   title="Resources"
                   id={`offcanvasNavbarDropdown-expand-md}`}
                 >
-                  {ResourceList.map((resource) => (
-                    <NavDropdown.Item as={Link} key={resource} to={"/resources" + resource.url}>{resource.title}</NavDropdown.Item>
-                  ))};
+                  {/* here the resource topics are mapped through to be synced with backend */}
+                  {topicData.map((topic) => (
+                    <NavDropdown.Item as={Link} key={topic._id} to={`/resources/${topic._id}`}>{topic.title} </NavDropdown.Item>
+                  ))}
                 </NavDropdown>
                 {Auth.loggedIn() || Auth.adminLoggedIn() ? (
 
                   <>
                     <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
+                    <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                   </>
                 ) : (
+                  <>
                   <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
+                  <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
+                  </>
                 )}
-                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                
 
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-                <Nav.Link as={Link} to="/donate">Donate</Nav.Link>
+                <Nav.Link as={Link} to="/">Donate</Nav.Link>
 
               </Nav>
               <Form className="d-flex">

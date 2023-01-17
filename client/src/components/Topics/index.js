@@ -1,8 +1,10 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_TOPICS } from "../../utils/queries";
-
-import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import Container from 'react-bootstrap/Container';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const Topics = () => {
     // set up useQuery get the data from the backend
@@ -16,16 +18,23 @@ const Topics = () => {
 
     return (
         <>
-            <h5>ALL TOPICS</h5>
             {topicData.map((topic) => {
                 return (
-                    <>
-                        <Typography key={topic._id} fluid className="text-left box">
-                            <h2>{topic.title}</h2>
-                            <p className="mainText">{topic.text}</p>
-                        </Typography>
+                    <Container key={topic._id} fluid>
+                        <Stack direction="row" spacing={2} margin={1}>
+                            <Avatar
+                                alt={"Topic"}
+                                src={topic.image}
+                                sx={{ width: 100, height: 100, marginTop: 0 }}
+                                className="avatar"
+                            />
+                            <div>
+                                <h3 className="topic-headers">{topic.title}</h3>
+                                <p className="mainText">{topic.text}</p>
+                            </div>
+                        </Stack>
                         <hr></hr>
-                    </>
+                    </Container>
                 );
             })}
             <hr></hr>

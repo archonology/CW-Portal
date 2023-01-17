@@ -1,3 +1,4 @@
+const stripe = require('stripe')('pk_live_51MQNOOFnF1SzAEmZzpsXsKCcZm02BoVdi14u4SrvqQk6MT0znsnFqJIxdJyKAcVLsEKWveRBGkzuCvsnGJyUvsLb007SeEMLYp');
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
@@ -18,6 +19,8 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use(express.static('public'));
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
@@ -25,6 +28,26 @@ if (process.env.NODE_ENV === 'production') {
 // Create a route that will serve up the `../client/build/index.html` page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+// donations via stripe init
+const YOUR_DOMAIN = 'http://localhost:3000/';
+
+app.post('/create-checkout-session', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        price: '{{PRICE_ID}}',
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: `${YOUR_DOMAIN}?success=true`,
+    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+  });
+
+  res.redirect(303, session.url);
 });
 
 // Create a new instance of an Apollo server with the GraphQL schema
@@ -39,7 +62,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
     })
   })
   };
-  
+
 // Call the async function to start the server
   startApolloServer(typeDefs, resolvers);
  
