@@ -121,7 +121,7 @@ mutation createResource($title: String!, $url: String!, $text: String!, $image: 
 `;
 
 export const ADD_RESOURCE_TO_TOPIC = gql`
-mutation addResourceToTopic($resourceData: ResourceInput!, topicId: ID!) {
+mutation addResourceToTopic($resourceData: ResourceInput!, $topicId: ID!) {
     addResourceToTopic(resouceData: $resourceData, topicId: $topicId){
         resources {
             _id

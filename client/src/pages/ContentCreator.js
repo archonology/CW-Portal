@@ -156,7 +156,7 @@ const ContentCreator = () => {
         </List>
         <Divider />
         <List>
-          {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator" }, { name: 'Add Resource', link: "/contentcreator" }].map((text, index) => (
+          {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator/addsubtopic" }, { name: 'Add Resource', link: "/contentcreator/addresource" }].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton as={Link} className="link2" to={text.link}>
                 <AddIcon>
@@ -184,22 +184,22 @@ const ContentCreator = () => {
         <Subtopics />
         <h5>ALL RESOURCES</h5>
         <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        style={{ backgroundColor: "#263238", padding: "5rem"}}
-      >
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          style={{ backgroundColor: "#263238", padding: "5rem" }}
+        >
 
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container
-        spacing={0}>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container
+              spacing={0}>
 
-            <ResourceCard />
+              <ResourceCard />
 
-          </Grid>
-        </Box>
-      </Grid>
+            </Grid>
+          </Box>
+        </Grid>
         <>
         </>
       </Main>

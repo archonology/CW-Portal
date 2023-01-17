@@ -73,7 +73,7 @@ const Dashboard = () => {
               <Tab label="To-Do" {...a11yProps(1)} />
               <Tab label="Doing" {...a11yProps(2)} />
               <Tab label="Done" {...a11yProps(3)} />
-              <Tab label="Content Creator" {...a11yProps(4)} />
+              <Tab label="Content Creator" {...a11yProps(4)} as={Link} to="/contentcreator"  className="link3" sx={{color: "#ffd54f", textDecoration: "none", fontWeight: "bold"}} />
 
             </Tabs>) : (
             <Tabs
@@ -110,17 +110,11 @@ const Dashboard = () => {
         </TabPanel>
         <TabPanel value={value} index={4} >
           <div>
-            <Button
-              as={Link}
-              className="link"
-              to="/contentcreator"
-              variant="contained"
-              color="warning"
-              sx={{ paddingBlock: 1.25, textDecoration: "none", margin: "1rem" }}>Content Creator
-            </Button>
           </div>
         </TabPanel>
       </Box>
+
+      
     </>
   );
 };

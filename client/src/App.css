@@ -90,3 +90,7 @@ font-weight: bold;
 .link2:hover {
   color: var(--white);
 }
+
+.link3:hover {
+  color: var(--violet);
+}

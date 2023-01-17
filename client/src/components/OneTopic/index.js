@@ -3,7 +3,8 @@ import { useQuery } from '@apollo/client';
 import { QUERY_ONE_TOPIC } from "../../utils/queries";
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
-import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
 const OneTopic = () => {
 
@@ -25,13 +26,22 @@ const OneTopic = () => {
 
     return (
         <>
-            <Container fluid className="text-left p-4 box">
-
-                <h2 className="topic-headers">{topicData.title}</h2>
-                <p className="mainText">{topicData.text}</p>
-
+        
+            <Container fluid>
+                <Stack direction="row" spacing={2}  margin={1}>
+                    <Avatar
+                        alt={topicData.title + "image"}
+                        src={topicData.image}
+                        sx={{ width: 100, height: 100, marginTop: 2 }}
+                    />
+                    <div>
+                        <h2 className="topic-headers">{topicData.title}</h2>
+                        <p className="mainText">{topicData.text}</p>
+                    </div>
+                </Stack>
                 <hr></hr>
             </Container>
+
         </>
     );
 };
