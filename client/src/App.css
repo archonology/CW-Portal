@@ -75,6 +75,16 @@ font-weight: bold;
   background-position: 30%;
 }
 
+.bgresource {
+/* background-image: linear-gradient(var(--lighterHouse), var(--lightblue), var(--violet)); */
+background-image: linear-gradient(var(--base), var(--blue), var(--beacon));
+
+}
+
+img {
+  border: none;
+}
+
 .link2 {
   color: var(--white);
 }

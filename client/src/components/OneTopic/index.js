@@ -26,13 +26,14 @@ const OneTopic = () => {
 
     return (
         <>
-        
+
             <Container fluid>
                 <Stack direction="row" spacing={2}  margin={1}>
                     <Avatar
-                        alt={topicData.title + "image"}
+                        alt={"T"}
                         src={topicData.image}
-                        sx={{ width: 100, height: 100, marginTop: 2 }}
+                        sx={{ width: 100, height: 100, marginTop: 1.5 }}
+                        className="avatar"
                     />
                     <div>
                         <h2 className="topic-headers">{topicData.title}</h2>

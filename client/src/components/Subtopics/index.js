@@ -23,7 +23,7 @@ const Subtopics = () => {
                     <Container key={subtopic._id} fluid>
                         <Stack direction="row" spacing={2} margin={1}>
                             <Avatar
-                                alt={"S"}
+                                alt={"Subtopic image"}
                                 src={subtopic.image}
                                 sx={{ width: 100, height: 100, marginTop: 0 }}
                                 className="avatar"

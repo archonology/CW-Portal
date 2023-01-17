@@ -242,24 +242,15 @@ const ContentCreator = () => {
 
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Grid
-              container
-              spacing={0}
-              direction="column"
-              alignItems="center"
-              style={{ backgroundColor: "#263238", padding: "5rem" }}
-            >
 
-              <Box sx={{ flexGrow: 1 }}>
-                <Grid container
-                  spacing={0}>
+          <Grid direction="row" container sx={{ padding: "1rem"}}>
+        <Grid container spacing={0} justifyContent="center">
 
-                  {/* see all resources */}
-                  <ResourceCard />
+          <ResourceCard />
 
-                </Grid>
-              </Box>
-            </Grid>
+        </Grid>
+      </Grid>
+
           </TabPanel>
 
         </Box>

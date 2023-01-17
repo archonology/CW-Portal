@@ -72,7 +72,7 @@ const Dashboard = () => {
               <Tab label="To-Do" {...a11yProps(1)} />
               <Tab label="Doing" {...a11yProps(2)} />
               <Tab label="Done" {...a11yProps(3)} />
-              <Tab label="Content Creator" {...a11yProps(4)} as={Link} to="/contentcreator"  className="link3" sx={{color: "#ffd54f", textDecoration: "none", fontWeight: "bold"}} />
+              <Tab label="Content Creator" {...a11yProps(4)} as={Link} to="/contentcreator"  className="link3" sx={{color: "#eceff1", textDecoration: "none", fontWeight: "bold"}} />
 
             </Tabs>) : (
             <Tabs
