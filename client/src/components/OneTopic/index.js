@@ -25,7 +25,7 @@ const OneTopic = () => {
 
     return (
         <>
-            <Container fluid className="text-left p-5 mt-5 box">
+            <Container fluid className="text-left p-4 box">
 
                 <h2 className="topic-headers">{topicData.title}</h2>
                 <p className="mainText">{topicData.text}</p>

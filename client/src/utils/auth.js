@@ -60,7 +60,6 @@ class AuthService {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
     window.location.assign('/dashboard');
-    alert("login successful");
 
   }
 
@@ -68,7 +67,6 @@ class AuthService {
     // Saves admin token to localStorage
     localStorage.setItem('admin_id_token', adminToken);
     window.location.assign('/dashboard');
-    alert("login successful");
 
   }
 
@@ -78,7 +76,6 @@ class AuthService {
     localStorage.removeItem('admin_id_token');
     // this will reload the page and reset the state of the application
     window.location.assign('/home');
-    alert("logout successful!");
   }
 
 

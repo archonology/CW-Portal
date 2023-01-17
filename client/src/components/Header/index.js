@@ -37,6 +37,7 @@ function Header() {
             aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
             placement="end"
             className="bg-dark variant-white"
+            auto-collapseOnSelect
           >
             <Offcanvas.Header closeButton closeVariant="white">
 
@@ -53,7 +54,7 @@ function Header() {
                 >
                   {/* here the resource topics are mapped through to be synced with backend */}
                   {topicData.map((topic) => (
-                    <NavDropdown.Item as={Link} key={topic._id} to={`/resources/${topic._id}`}>{topic.title}</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} key={topic._id} to={`/resources/${topic._id}`}>{topic.title} </NavDropdown.Item>
                   ))}
                 </NavDropdown>
                 {Auth.loggedIn() || Auth.adminLoggedIn() ? (
@@ -71,7 +72,7 @@ function Header() {
                 
 
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-                <Nav.Link as={Link} to="/donate">Donate</Nav.Link>
+                <Nav.Link as={Link} to="/">Donate</Nav.Link>
 
               </Nav>
               <Form className="d-flex">
