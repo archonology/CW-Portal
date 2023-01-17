@@ -24,6 +24,9 @@ import Topics from '../components/Topics';
 import Subtopics from '../components/Subtopics';
 import ResourceCard from '../components/ResourceCards';
 import { Button, ButtonGroup, Grid } from "@mui/material";
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import Auth from "../utils/auth";
 
 
@@ -36,7 +39,7 @@ const drawerWidth = 240;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(0),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -78,6 +81,45 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+// the tabs in the main body of the contentCreator
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  // const buttons = [
+  //   <Button key="one">See</Button>,
+  //   <Button key="two">Add Subtopic</Button>,
+  //   <Button key="three">Three</Button>,
+  // ];
+
+  return (
+    <div
+      role="tabpanel"
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 2, mt: 3 }}>
+          {children}
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
 const ContentCreator = () => {
   // ensure user is logged in and is an admin
   Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
@@ -85,16 +127,10 @@ const ContentCreator = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  // // set up useQuery get the data from the backend
-  // const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
-
-  // // objects to keep the data
-
-  // const topicData = data?.topics || {};
-
-  // if (loading) return alert("loading");
-  // if (error) return `Error! ${error}`;
-
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
 
   const handleDrawerOpen = () => {
@@ -144,18 +180,6 @@ const ContentCreator = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          {[{ name: 'View Topics', link: "/contentcreator" }, { name: 'View Subtopics', link: "/contentcreator" }, { name: 'View Resources', link: "/contentcreator" }].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton as={Link} className="link2" to={text.link}>
-                <VisibilityIcon>
-                </VisibilityIcon>
-                <ListItemText primary={text.name} className="m-1" />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
           {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator/addsubtopic" }, { name: 'Add Resource', link: "/contentcreator/addresource" }].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton as={Link} className="link2" to={text.link}>
@@ -178,30 +202,68 @@ const ContentCreator = () => {
           </ListItemButton>
         </List>
       </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-        <Topics />
-        <Subtopics />
-        <h5>ALL RESOURCES</h5>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          style={{ backgroundColor: "#263238", padding: "5rem" }}
-        >
+      <Main open={open} >
+        <DrawerHeader  />
 
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container
-              spacing={0}>
+        <Box sx={{ width: '100%', marginTop: 0 }}>
+          <Box>
 
-              <ResourceCard />
+            <Tabs
+              sx={{ alignContent: "center" }}
+              // variant="fullWidth"
+              value={value}
+              onChange={handleChange}
+              centered
+              textColor="inherit"
+              variant="scrollable"
+              scrollButtons
+              allowScrollButtonsMobile
+              aria-label="scrollable Dashboard List Tabs"
+              indicatorColor="secondary">
+              <Tab label="Topics" {...a11yProps(0)} />
+              <Tab label="SubTopics" {...a11yProps(1)} />
+              <Tab label="Resources" {...a11yProps(2)} />
+            </Tabs>
 
-            </Grid>
           </Box>
-        </Grid>
-        <>
-        </>
+          <TabPanel value={value} index={0}>
+            <Grid direction="row" container >
+              <Grid container spacing={0}>
+
+                {/* see all topics */}
+                <Topics />
+
+              </Grid>
+            </Grid>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+
+            {/* see all subtopics */}
+            <Subtopics />
+
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              style={{ backgroundColor: "#263238", padding: "5rem" }}
+            >
+
+              <Box sx={{ flexGrow: 1 }}>
+                <Grid container
+                  spacing={0}>
+
+                  {/* see all resources */}
+                  <ResourceCard />
+
+                </Grid>
+              </Box>
+            </Grid>
+          </TabPanel>
+
+        </Box>
       </Main>
     </Box>
   );

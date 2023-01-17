@@ -91,6 +91,8 @@ query topics {
       title
       url
       text
+      link
+      image
       resources {
         image
         _id
@@ -104,6 +106,8 @@ query topics {
         text
         title
         url
+        link
+        image
         resources {
           link
           title
@@ -125,6 +129,8 @@ query subtopics {
         title
         url
         text
+        link
+        image
         resources {
           _id
           title
@@ -158,11 +164,14 @@ query topic($_id: ID!) {
         url
         text
         image
+        link
         subtopics {
           _id
           title
           text
           url
+          link
+          image
           resources {
             _id
             title
@@ -191,6 +200,8 @@ query subtopic($_id: ID!) {
         title
         url
         text
+        link
+        image
         resources {
             _id: ID
             url: String

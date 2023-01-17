@@ -53,8 +53,8 @@ mutation createUser($username: String!, $email: String!, $password: String!) {
 `;
 
 export const CREATE_TOPIC = gql`
-mutation createTopic($title: String!, $url: String! $text: String!, $image: String!) {
-    createTopic(title: $title, url: $url, text: $text, image: $image) {
+mutation createTopic($title: String!, $url: String! $text: String!, $image: String!, $link: String!) {
+    createTopic(title: $title, url: $url, text: $text, image: $image, link: $link) {
         title
         url
         text
@@ -88,8 +88,8 @@ mutation createTopic($title: String!, $url: String! $text: String!, $image: Stri
 `;
 
 export const CREATE_SUBTOPIC = gql`
-mutation createSubtopic($title: String!, $url: String! $text: String!) {
-    createSubtopic(title: $title, url: $url, text: $text) {
+mutation createSubtopic($title: String!, $url: String! $text: String!, $link: String!, $image: String!) {
+    createSubtopic(title: $title, url: $url, text: $text, link: $link, image: $image) {
         title
         url
         text

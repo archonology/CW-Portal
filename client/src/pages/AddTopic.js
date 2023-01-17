@@ -22,6 +22,7 @@ const AddTopic = () => {
         title: "",
         url: "",
         text: "",
+        link: "",
         image: ""
     });
 
@@ -29,12 +30,12 @@ const AddTopic = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-    
+
         setFormState({
-          ...formState,
-          [name]: value,
+            ...formState,
+            [name]: value,
         });
-      };
+    };
 
 
     const handleFormSubmit = async (event) => {
@@ -74,7 +75,7 @@ const AddTopic = () => {
                         name="title"
                         value={formState.title}
                         onChange={handleChange}
-                        onBlur={() => {handleChange.title.trim()}}
+                        onBlur={() => { handleChange.title.trim() }}
                         label="Topic Title"
                         id="titleName"
                         variant="standard"
@@ -84,7 +85,7 @@ const AddTopic = () => {
                         name="url"
                         value={formState.url}
                         onChange={handleChange}
-                        onBlur={() => {handleChange.url.trim()}}
+                        onBlur={() => { handleChange.url.trim() }}
                         label="Browser Url"
                         id="urlName"
                         variant="standard"
@@ -102,10 +103,20 @@ const AddTopic = () => {
                     ></TextField>
 
                     <TextField
+                        name="link"
+                        value={formState.link}
+                        onChange={handleChange}
+                        onBlur={() => { handleChange.link.trim() }}
+                        label="Subtopic Link"
+                        id="link"
+                        variant="standard"
+                    ></TextField>
+
+                    <TextField
                         name="image"
                         value={formState.image}
                         onChange={handleChange}
-                        onBlur={() => {handleChange.image.trim()}}
+                        onBlur={() => { handleChange.image.trim() }}
                         label="Image URL"
                         id="image"
                         variant="standard"

@@ -26,7 +26,7 @@ const AddSubtopic = () => {
         image: ""
     });
 
-    const [newTopic, { error, data }] = useMutation(CREATE_SUBTOPIC);
+    const [newSubtopic, { error, data }] = useMutation(CREATE_SUBTOPIC);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -42,7 +42,7 @@ const AddSubtopic = () => {
         event.preventDefault();
 
         try {
-            const { data } = await newTopic({
+            const { data } = await newSubtopic({
                 variables: { ...formState }
             });
             // directs back to content creator on submission
@@ -55,7 +55,7 @@ const AddSubtopic = () => {
     return (
         <>
             <Container sx={{ marginTop: "10em" }}>
-                <h2>Create a New Topic</h2>
+                <h2>Create a New Subtopic</h2>
                 <Box
                     component="form"
                     onSubmit={handleFormSubmit}
