@@ -18,10 +18,6 @@ const AddTopic = () => {
 
     Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
 
-    const [titleInput, setTitleInput] = useState("");
-    const [urlInput, setUrlInput] = useState("");
-    const [textInput, setTextInput] = useState("");
-    const [imageInput, setImageInput] = useState("");
     const [formState, setFormState] = useState({
         title: "",
         url: "",
@@ -29,13 +25,23 @@ const AddTopic = () => {
         image: ""
     });
 
-    const [createTopic, { error, data }] = useMutation(CREATE_TOPIC);
+    const [newTopic, { error, data }] = useMutation(CREATE_TOPIC);
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+    
+        setFormState({
+          ...formState,
+          [name]: value,
+        });
+      };
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const { data } = await createTopic({
+            const { data } = await newTopic({
                 variables: { ...formState }
             });
             // directs back to content creator on submission
@@ -62,32 +68,32 @@ const AddTopic = () => {
                         alignItems: "center",
                     }}
                 >
+                    <br></br>
                     {/* user sets title, text, url, image */}
                     <TextField
-                        name="titleInput"
-                        value={titleInput}
-                        onChange={(e) => setTitleInput(e.target.value)}
-                        onBlur={() => setTitleInput(titleInput.trim())}
+                        name="title"
+                        value={formState.title}
+                        onChange={handleChange}
+                        onBlur={() => {handleChange.title.trim()}}
                         label="Topic Title"
                         id="titleName"
                         variant="standard"
                     ></TextField>
 
                     <TextField
-                        name="urlInput"
-                        value={urlInput}
-                        onChange={(e) => setUrlInput(e.target.value)}
-                        onBlur={() => setUrlInput(urlInput.trim())}
+                        name="url"
+                        value={formState.url}
+                        onChange={handleChange}
+                        onBlur={() => {handleChange.url.trim()}}
                         label="Browser Url"
                         id="urlName"
                         variant="standard"
                     ></TextField>
 
                     <TextField
-                        name="textInput"
-                        value={textInput}
-                        onChange={(e) => setTextInput(e.target.value)}
-                        onBlur={() => setTextInput(textInput.trim())}
+                        name="text"
+                        value={formState.text}
+                        onChange={handleChange}
                         label="Description"
                         id="description"
                         multiline
@@ -95,6 +101,22 @@ const AddTopic = () => {
                         variant="standard"
                     ></TextField>
 
+                    <TextField
+                        name="image"
+                        value={formState.image}
+                        onChange={handleChange}
+                        onBlur={() => {handleChange.image.trim()}}
+                        label="Image URL"
+                        id="image"
+                        variant="standard"
+                    ></TextField>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        style={{ maxWidth: "100px" }}
+                    >
+                        Submit
+                    </Button>
                 </Box>
             </Container>
         </>
