@@ -70,6 +70,10 @@ margin: 0;
 font-weight: bold;
 
 }
+.avatar {
+  background-image: url("../public/Vector-Multicolor-Flower-Design.jpg");
+  background-position: 30%;
+}
 
 .link2 {
   color: var(--white);

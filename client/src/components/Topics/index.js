@@ -4,6 +4,7 @@ import { QUERY_ALL_TOPICS } from "../../utils/queries";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Container from 'react-bootstrap/Container';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const Topics = () => {
     // set up useQuery get the data from the backend
@@ -20,19 +21,20 @@ const Topics = () => {
             {topicData.map((topic) => {
                 return (
                     <Container key={topic._id} fluid>
-                    <Stack direction="row" spacing={2}  margin={1}>
-                        <Avatar
-                            alt={topic.title + "image"}
-                            src={topic.image}
-                            sx={{ width: 100, height: 100, marginTop: 0 }}
-                        />
-                        <div>
-                            <h3 className="topic-headers">{topic.title}</h3>
-                            <p className="mainText">{topic.text}</p>
-                        </div>
-                    </Stack>
-                    <hr></hr>
-                </Container>
+                        <Stack direction="row" spacing={2} margin={1}>
+                            <Avatar
+                                alt={"Topic"}
+                                src={topic.image}
+                                sx={{ width: 100, height: 100, marginTop: 0 }}
+                                className="avatar"
+                            />
+                            <div>
+                                <h3 className="topic-headers">{topic.title}</h3>
+                                <p className="mainText">{topic.text}</p>
+                            </div>
+                        </Stack>
+                        <hr></hr>
+                    </Container>
                 );
             })}
             <hr></hr>

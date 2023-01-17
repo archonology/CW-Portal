@@ -25,7 +25,6 @@ function Header() {
   if (loading) return "loading";
   if (error) return `Error! ${error}`;
 
-  console.log(Auth.adminLoggedIn);
   return (
     <>
       <Navbar bg="dark" variant="dark" className="mb-3 p-3" expand="md">
@@ -37,7 +36,6 @@ function Header() {
             aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
             placement="end"
             className="bg-dark variant-white"
-            auto-collapseOnSelect
           >
             <Offcanvas.Header closeButton closeVariant="white">
 

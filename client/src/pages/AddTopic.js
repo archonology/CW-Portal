@@ -107,7 +107,7 @@ const AddTopic = () => {
                         value={formState.link}
                         onChange={handleChange}
                         onBlur={() => { handleChange.link.trim() }}
-                        label="Subtopic Link"
+                        label="Topic Link"
                         id="link"
                         variant="standard"
                     ></TextField>

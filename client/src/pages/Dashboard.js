@@ -62,7 +62,6 @@ const Dashboard = () => {
               // variant="fullWidth"
               value={value}
               onChange={handleChange}
-              centered
               textColor="inherit"
               variant="scrollable"
               scrollButtons
@@ -79,7 +78,6 @@ const Dashboard = () => {
             <Tabs
               sx={{ ml: 1 }}
               // variant="fullWidth"
-              centered
               value={value}
               onChange={handleChange}
               textColor="inherit"

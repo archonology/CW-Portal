@@ -203,7 +203,7 @@ const ContentCreator = () => {
         </List>
       </Drawer>
       <Main open={open} >
-        <DrawerHeader  />
+        <DrawerHeader />
 
         <Box sx={{ width: '100%', marginTop: 0 }}>
           <Box>
@@ -213,7 +213,6 @@ const ContentCreator = () => {
               // variant="fullWidth"
               value={value}
               onChange={handleChange}
-              centered
               textColor="inherit"
               variant="scrollable"
               scrollButtons
