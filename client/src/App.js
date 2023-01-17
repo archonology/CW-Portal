@@ -20,6 +20,7 @@ import Donate from "./pages/Donate";
 import ContentCreator from "./pages/ContentCreator";
 import AddTopic from "./pages/AddTopic";
 import AddSubtopic from "./pages/AddSubtopic";
+import AddResource from "./pages/AddResource";
 
 // adminLogin is not in the navbar: admin will need to know the url to navigate to this page, so that it isn't available to the public at large. use env after development phase to conceal url route
 import AdminLogin from "./pages/AdminLogin";
@@ -110,7 +111,7 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="contentcreator/addtopic" element={<AddTopic />} />
               <Route path="contentcreator/addsubtopic" element={<AddSubtopic />} />
-
+              <Route path="contentcreator/addresource" element={<AddResource />} />
               {/* build in progess on donation features */}
               {message ? (
                 <Message message={message} />
