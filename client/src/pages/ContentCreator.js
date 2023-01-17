@@ -152,7 +152,7 @@ const ContentCreator = () => {
         </List>
         <Divider />
         <List>
-          {[{ name: 'Add Topic', link: "/" }, { name: 'Add Subtopic', link: "/contentcreator" }, { name: 'Add Resource', link: "/contentcreator" }].map((text, index) => (
+          {[{ name: 'Add Topic', link: "/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator" }, { name: 'Add Resource', link: "/contentcreator" }].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton as={Link} className="link2" to={text.link}>
                 <AddIcon>
