@@ -58,6 +58,7 @@ mutation createTopic($title: String!, $url: String! $text: String!, $image: Stri
         title
         url
         text
+        link
         image
         resources {
             _id
@@ -71,6 +72,8 @@ mutation createTopic($title: String!, $url: String! $text: String!, $image: Stri
             title
             url
             text
+            link
+            image
             resources {
                 _id
                 title
@@ -90,6 +93,8 @@ mutation createSubtopic($title: String!, $url: String! $text: String!) {
         title
         url
         text
+        link
+        image
         resources {
             _id
             title
@@ -116,10 +121,8 @@ mutation createResource($title: String!, $url: String!, $text: String!, $image: 
 `;
 
 export const ADD_RESOURCE_TO_TOPIC = gql`
-mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
-    addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link){
-        _id
-        topic
+mutation addResourceToTopic($resourceData: ResourceInput!, topicId: ID!) {
+    addResourceToTopic(resouceData: $resourceData, topicId: $topicId){
         resources {
             _id
             title
@@ -137,7 +140,6 @@ export const ADD_RESOURCE_TO_SUBTOPIC = gql`
 mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
     addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link){
         _id
-        title
         resources {
             _id
             title

@@ -26,6 +26,7 @@ const typeDefs = gql`
         title: String
         url: String
         text: String
+        link: String
         image: String
         resources: [Resource]
         subtopics: [Subtopic]
@@ -45,6 +46,8 @@ const typeDefs = gql`
         title: String
         url: String
         text: String
+        link: String
+        image: String
         resources: [Resource]
     }
 
@@ -82,11 +85,11 @@ const typeDefs = gql`
         createUser(username: String!, email: String!, password: String!): Auth
         loginAdmin(email: String!, password: String!): Auth
         loginUser(email: String!, password: String!): Auth
-        createTopic(title: String!, url: String! text: String!, image: String!): Topic
-        createSubtopic(title: String!, url: String! text: String!): Subtopic
+        createTopic(title: String!, url: String! text: String!, link: String!, image: String!): Topic
+        createSubtopic(title: String!, url: String! text: String!, link: String!, image: String!): Subtopic
         createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Resource            
         addResourceToTopic(resourceData: ResourceInput!, topicId: ID!): Topic
-        addSubtopicToTopic( _id: ID!, title: String!, url: String!, text: String! topicId: ID!): Topic
+        addSubtopicToTopic( _id: ID!, title: String!, url: String!, text: String!, link: String!, image: String!, topicId: ID!): Topic
         addResourceToSubtopic(resourceData: ResourceInput!, subtopicId: ID!): Subtopic
     }
 

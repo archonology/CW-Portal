@@ -13,6 +13,9 @@ const subTopicSchema = new Schema(
         text: {
             type: String,
         },
+        link: {
+            type: String,
+        },
         resources: [{
             type: Schema.Types.ObjectId,
             ref: 'Resource',
