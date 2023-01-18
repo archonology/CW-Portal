@@ -67,6 +67,7 @@ mutation createTopic($title: String!, $url: String! $text: String!, $image: Stri
             link
         }
         subtopics {
+            _id
             title
             text
             resources {

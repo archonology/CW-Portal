@@ -36,7 +36,7 @@ function TopicList({ resource }) {
     const handleAddtoTopic = async (resource, topic) => {
         try {
             const { data } = await addResourceToTopic({
-                variables: { title: resource.title, url: resource.url, text: resource.text, image: resource.image, link: resource.link, topicId: topic._id },
+                variables: { _id: resource._id, title: resource.title, text: resource.text, image: resource.image, link: resource.link, topicId: topic._id },
             });
 
             // Display the success message when card added to deck
