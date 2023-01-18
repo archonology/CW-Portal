@@ -69,7 +69,7 @@ const ResourceCard = () => {
             {resourceData.map((resource) => {
                 return (
 
-                    <Card key={resource._id} sx={{ maxWidth: 400, minWidth: 300, margin: 2, boxShadow: 10 }}  >
+                    <Card key={resource._id} sx={{ maxWidth: 525, minWidth: 325, margin: 2, boxShadow: 10 }}  >
                         <CardMedia
                             component="img"
                             alt="resource image"
@@ -103,9 +103,17 @@ const ResourceCard = () => {
 
                                     <Tooltip title="Add to a Topic">
                                         <IconButton onClick={handleClickOpenTopics}>
-                                            <AddCircleOutlineIcon /><Typography>T</Typography>
+                                            <AddCircleOutlineIcon /><Typography>Topic</Typography>
                                         </IconButton>
                                     </Tooltip>
+
+                                    <Tooltip title="Add to a Subtopic">
+                                        <IconButton onClick={handleClickOpenTopics}>
+                                            <AddCircleOutlineIcon /><Typography>Subtopic</Typography>
+                                        </IconButton>
+                                    </Tooltip>
+
+            
 
                                     <Tooltip title="Delete Resource">
                                         <IconButton onClick={() => handleDelete(resource._id)}>
