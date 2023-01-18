@@ -20,7 +20,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ALL_RESOURCES, QUERY_ALL_TOPICS } from "../../utils/queries";
-import { DELETE_RESOURCE, ADD_SUBTOPIC_TO_TOPIC, ADD_RESOURCE_TO_TOPIC, ADD_RESOURCE_TO_SUBTOPIC } from "../../utils/mutations";
+import { DELETE_RESOURCE } from "../../utils/mutations";
 import { Link } from 'react-router-dom';
 
 import ResourceToTopicDialog from "../ResourceToTopicDialog";
@@ -32,7 +32,6 @@ import Auth from "../../utils/auth";
 const ResourceCard = () => {
     // set up useQuery to get resource data from the backend
     const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
-    const { loadTopic, errTopic, dataTopic } = useQuery(QUERY_ALL_TOPICS);
     const [openTopic, setOpenTopic] = React.useState(false);
 
     // handle delete resource and refetch minus the deleted resource
@@ -41,7 +40,7 @@ const ResourceCard = () => {
     });
 
     // object to keep the topic data
-    const resourceData = data?.resources || {};
+    const resourceData = data?.resources || [];
     // check load time and errors
     if (loading) return "loading";
     if (error) return `Error! ${error}`;

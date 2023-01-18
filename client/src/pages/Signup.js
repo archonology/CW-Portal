@@ -155,6 +155,7 @@ const Signup = () => {
                                     <Button
                                         variant="contained"
                                         type="submit"
+                                        color="success"
                                         sx={{ m: 1 }}
                                     >Sign up
                                     </Button>
