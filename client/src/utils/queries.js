@@ -105,9 +105,6 @@ query topics {
         _id        
         text
         title
-        url
-        link
-        image
         resources {
           link
           title
@@ -127,10 +124,7 @@ query subtopics {
     subtopics {
         _id
         title
-        url
         text
-        link
-        image
         resources {
           _id
           title
@@ -169,9 +163,6 @@ query topic($_id: ID!) {
           _id
           title
           text
-          url
-          link
-          image
           resources {
             _id
             title
@@ -190,26 +181,6 @@ query topic($_id: ID!) {
           image
         }
       }
-}
-`;
-
-export const QUERY_ONE_SUBTOPIC = gql`
-query subtopic($_id: ID!) {
-    subtopic(_id: $_id) {
-        _id
-        title
-        url
-        text
-        link
-        image
-        resources {
-            _id: ID
-            url: String
-            text: String
-            image: String
-            link: String
-        }
-    }
 }
 `;
 

@@ -44,10 +44,7 @@ const typeDefs = gql`
     type Subtopic {
         _id: ID
         title: String
-        url: String
         text: String
-        link: String
-        image: String
         resources: [Resource]
     }
 
@@ -86,11 +83,11 @@ const typeDefs = gql`
         loginAdmin(email: String!, password: String!): Auth
         loginUser(email: String!, password: String!): Auth
         createTopic(title: String!, url: String! text: String!, link: String!, image: String!): Topic
-        createSubtopic(title: String!, url: String! text: String!, link: String!, image: String!): Subtopic
+        createSubtopic(title: String!, text: String!): Subtopic
         createResource(title: String!, url: String!, text: String!, image: String!, link: String!): Resource            
-        addResourceToTopic(resourceData: ResourceInput!, topicId: ID!): Topic
-        addSubtopicToTopic( _id: ID!, title: String!, url: String!, text: String!, link: String!, image: String!, topicId: ID!): Topic
-        addResourceToSubtopic(resourceData: ResourceInput!, subtopicId: ID!): Subtopic
+        addResourceToTopic(id: ID!, title: String!, url: String!, text: String!, link: String!, image: String!, topicId: ID!): Topic
+        addSubtopicToTopic( _id: ID!, title: String!, text: String!, topicId: ID!): Topic
+        addResourceToSubtopic(id: ID!, title: String!, url: String!, text: String!, link: String!, image: String!, subtopicId: ID!): Subtopic
         deleteResource(_id: ID!): Resource
         deleteSubtopic(_id: ID!): Subtopic
         deleteTopic(_id: ID!): Topic

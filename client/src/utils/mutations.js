@@ -88,13 +88,10 @@ mutation createTopic($title: String!, $url: String! $text: String!, $image: Stri
 `;
 
 export const CREATE_SUBTOPIC = gql`
-mutation createSubtopic($title: String!, $url: String! $text: String!, $link: String!, $image: String!) {
-    createSubtopic(title: $title, url: $url, text: $text, link: $link, image: $image) {
+mutation createSubtopic($title: String!, $text: String!) {
+    createSubtopic(title: $title, text: $text) {
         title
-        url
         text
-        link
-        image
         resources {
             _id
             title
@@ -121,8 +118,8 @@ mutation createResource($title: String!, $url: String!, $text: String!, $image: 
 `;
 
 export const ADD_RESOURCE_TO_TOPIC = gql`
-mutation addResourceToTopic($resourceData: ResourceInput!, $topicId: ID!) {
-    addResourceToTopic(resouceData: $resourceData, topicId: $topicId){
+mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!, $topicId: ID!) {
+    addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link, topicId: $topicId){
         resources {
             _id
             title
@@ -136,21 +133,21 @@ mutation addResourceToTopic($resourceData: ResourceInput!, $topicId: ID!) {
 `;
 
 
-export const ADD_RESOURCE_TO_SUBTOPIC = gql`
-mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
-    addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link){
-        _id
-        resources {
-            _id
-            title
-            url
-            text
-            image
-            link
-        }
-    }
-}
-`;
+// export const ADD_RESOURCE_TO_SUBTOPIC = gql`
+// mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
+//     addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link){
+//         _id
+//         resources {
+//             _id
+//             title
+//             url
+//             text
+//             image
+//             link
+//         }
+//     }
+// }
+// `;
 
 export const DELETE_RESOURCE = gql`
 mutation deleteResource($_id: ID!) {
