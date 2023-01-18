@@ -14,15 +14,15 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Subtopics from "../Subtopics";
 import ResourceCard from "../ResourceCards";
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
-    // const buttons = [
-    //   <Button key="one">See</Button>,
-    //   <Button key="two">Add Subtopic</Button>,
-    //   <Button key="three">Three</Button>,
-    // ];
 
     return (
         <div
@@ -62,11 +62,17 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
+
 const OneTopic = () => {
+    const [expanded, setExpanded] = React.useState(false);
 
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+
+    const handleAccordChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
     };
 
     // get teh id with useParams
@@ -128,21 +134,39 @@ const OneTopic = () => {
                 <TabPanel value={value} index={0}>
 
                     {/* see all subtopics for one topic */}
-                    <Stack spacing={1}>
+                    <Stack spacing={0}>
 
-                        <Item>
-                            <h4 className="subtopic-headers">
-                                Subtopic Name
-                            </h4>
-                            <p className="mainText">All about this sample info</p>
-                        </Item>
 
-                        <Item>
-                            <h4 className="subtopic-headers">
-                                Subtopic Name
-                            </h4>
-                            <p className="mainText">All about this sample info</p>
-                        </Item>
+                        <Accordion expanded={expanded === 'panel1'} onChange={handleAccordChange('panel1')} sx={{ padding: 2, backgroundColor: "transparent" }} >
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1bh-content"
+                                id="panel1bh-header"
+                            >
+                                {/* <Avatar
+                                    alt={"Subtopic image"}
+                                    src={topicData.image}
+                                    sx={{ width: 40, height: 40, marginLeft: 0, marginRight: 2 }}
+                                    className="avatar"
+                                /> */}
+                                <Typography sx={{ width: '33%', flexShrink: 0, fontSize: 'larger' }} className="subtopic-headers">
+                                    Name of the Subtopic
+                                </Typography>
+                                <Typography sx={{ color: 'text.secondary' }} >Description of the subtopic. Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
+                                    Aliquam eget maximus est, id dignissim quam.</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+
+                                <Grid direction="row" container sx={{ padding: "1rem" }}>
+                                    <Grid container spacing={0} justifyContent="center">
+
+                                        <ResourceCard />
+
+                                    </Grid>
+                                </Grid>
+                            </AccordionDetails>
+                        </Accordion>
+
 
                     </Stack>
 

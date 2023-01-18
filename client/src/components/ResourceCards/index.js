@@ -39,7 +39,7 @@ const ResourceCard = () => {
                     <Card key={resource._id} sx={{ maxWidth: 400, minWidth: 300, margin: 2, boxShadow: 10 }}  >
                         <CardMedia
                             component="img"
-                            alt=""
+                            alt="resource image"
                             height="140"
                             image={resource.image}
                             className="bgresource"
