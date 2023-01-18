@@ -63,21 +63,15 @@ mutation createTopic($title: String!, $url: String! $text: String!, $image: Stri
         resources {
             _id
             title
-            url
-            text
             image
             link
         }
         subtopics {
             title
-            url
             text
-            link
-            image
             resources {
                 _id
                 title
-                url
                 text
                 image
                 link
@@ -95,7 +89,6 @@ mutation createSubtopic($title: String!, $text: String!) {
         resources {
             _id
             title
-            url
             text
             image
             link
@@ -105,11 +98,10 @@ mutation createSubtopic($title: String!, $text: String!) {
 `;
 
 export const CREATE_RESOURCE = gql`
-mutation createResource($title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
-    createResource(title: $title, url: $url, text: $text, image: $image, link: $link){
+mutation createResource($title: String!, $text: String!, $image: String!, $link: String!) {
+    createResource(title: $title, text: $text, image: $image, link: $link){
         _id
         title
-        url
         text
         image
         link
@@ -118,12 +110,11 @@ mutation createResource($title: String!, $url: String!, $text: String!, $image: 
 `;
 
 export const ADD_RESOURCE_TO_TOPIC = gql`
-mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!, $topicId: ID!) {
-    addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link, topicId: $topicId){
+mutation addResourceToTopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!, $topicId: ID!) {
+    addResourceToTopic(_id: $_id, title: $title, text: $text, image: $image, link: $link, topicId: $topicId){
         resources {
             _id
             title
-            url
             text
             image
             link

@@ -9,7 +9,6 @@ query me {
         favorites {
             _id: ID
             title: String
-            url: String
             text: String
             image: String
             link: String
@@ -17,7 +16,6 @@ query me {
         do {
             _id: ID
             title: String
-            url: String
             text: String
             image: String
             link: String
@@ -25,7 +23,6 @@ query me {
         doing {
             _id: ID
             title: String
-            url: String
             text: String
             image: String
             link: String
@@ -33,7 +30,6 @@ query me {
         done {
             _id: ID
             title: String
-            url: String
             text: String
             image: String
             link: String
@@ -51,7 +47,6 @@ query admin {
         favorites {
             _id: ID
             title: String
-            url: String
             text: String
             image: String
             link: String
@@ -59,7 +54,6 @@ query admin {
         do {
             _id: ID
             title: String
-            url: String
             text: String
             image: String
             link: String
@@ -67,7 +61,6 @@ query admin {
         doing {
             _id: ID
             title: String
-            url: String
             text: String
             image: String
             link: String
@@ -75,7 +68,6 @@ query admin {
         done {
             _id: ID
             title: String
-            url: String
             text: String
             image: String
             link: String
@@ -99,7 +91,6 @@ query topics {
         link
         title
         text
-        url
       }
       subtopics {
         _id        
@@ -108,7 +99,6 @@ query topics {
         resources {
           link
           title
-          url
           text
           image
           _id
@@ -129,7 +119,6 @@ query subtopics {
           _id
           title
           text
-          url
           link
           image
         }
@@ -145,7 +134,6 @@ query resources {
         text
         link
         image
-        url
       }
 }
 `;
@@ -167,7 +155,6 @@ query topic($_id: ID!) {
             _id
             title
             text
-            url
             link
             image
           }
@@ -176,7 +163,6 @@ query topic($_id: ID!) {
           _id
           title
           text
-          url
           link
           image
         }
@@ -189,7 +175,6 @@ query resource($_id: ID!) {
     resource(_id: $_id) {
         _id: ID
         title: String
-        url: String
         text: String
         image: String
         link: String

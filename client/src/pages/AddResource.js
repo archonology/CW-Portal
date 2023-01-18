@@ -16,7 +16,6 @@ const AddResource = () => {
 
     const [formState, setFormState] = useState({
         title: "",
-        url: "",
         text: "",
         image: "",
         link: ""
@@ -74,16 +73,6 @@ const AddResource = () => {
                         onBlur={() => { handleChange.title.trim() }}
                         label="Resource Title"
                         id="titleName"
-                        variant="standard"
-                    ></TextField>
-
-                    <TextField
-                        name="url"
-                        value={formState.url}
-                        onChange={handleChange}
-                        onBlur={() => { handleChange.url.trim() }}
-                        label="Browser Url"
-                        id="urlName"
                         variant="standard"
                     ></TextField>
 
