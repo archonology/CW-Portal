@@ -55,7 +55,7 @@ const AddSubtopic = () => {
     return (
         <>
             <Container sx={{ marginTop: "10em" }}>
-                <h2>Create a New Subtopic</h2>
+                <h2>Add a New Subtopic</h2>
                 <Box
                     component="form"
                     onSubmit={handleFormSubmit}
@@ -124,9 +124,10 @@ const AddSubtopic = () => {
                     <Button
                         type="submit"
                         variant="contained"
+                        color="secondary"
                         style={{ maxWidth: "100px" }}
                     >
-                        Submit
+                        Add
                     </Button>
                 </Box>
             </Container>

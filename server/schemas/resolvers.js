@@ -159,6 +159,30 @@ const resolvers = {
             );
             return updateTopic;
         },
+
+        deleteResource: async (parent, { _id }) => {
+            const removeResource = await Resource.deleteOne(
+                { _id: _id },
+                { new: true }
+            );
+            return removeResource;
+        },
+
+        deleteSubtopic: async (parent, { _id }) => {
+            const removeSubtopic = await Subtopic.deleteOne(
+                { _id: _id },
+                { new: true }
+            );
+            return removeSubtopic;
+        },
+
+        deleteTopic: async (parent, { _id }) => {
+            const deleteTopic = await Topic.deleteOne(
+                { _id: _id },
+                { new: true }
+            );
+            return deleteTopic;
+        },
     }
 }
 
