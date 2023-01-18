@@ -160,6 +160,14 @@ mutation deleteResource($_id: ID!) {
   }
 `;
 
+export const DELETE_SUBTOPIC = gql`
+mutation deleteSubtopic($_id: ID!) {
+    deleteSubtopic(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 // export const UPDATE_SUBTOPIC = gql`
 
 // `;
@@ -172,9 +180,6 @@ mutation deleteResource($_id: ID!) {
 
 // `;
 
-// export const DELETE_SUBTOPIC = gql`
-
-// `;
 
 
 

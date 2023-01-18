@@ -166,7 +166,15 @@ const resolvers = {
                 { new: true }
             );
             return removeResource;
-        }
+        },
+
+        deleteSubtopic: async (parent, { _id }) => {
+            const removeSubtopic = await Subtopic.deleteOne(
+                { _id: _id },
+                { new: true }
+            );
+            return removeSubtopic;
+        },
     }
 }
 

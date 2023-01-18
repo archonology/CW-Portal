@@ -42,7 +42,6 @@ const ResourceCard = () => {
     if (error) return `Error! ${error}`;
 
     const handleDelete = async (_id) => {
-        //  Auth.adminLoggedIn() ? Auth.getAdminToken() : null;
 
         try {
             const { dat } = await deleteResource({
