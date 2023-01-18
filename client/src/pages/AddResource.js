@@ -51,7 +51,7 @@ const AddResource = () => {
     return (
         <>
             <Container sx={{ marginTop: "10em" }}>
-                <h2>Create a New Resource</h2>
+                <h2>Add a New Resource</h2>
                 <Box
                     component="form"
                     onSubmit={handleFormSubmit}
@@ -121,9 +121,10 @@ const AddResource = () => {
                     <Button
                         type="submit"
                         variant="contained"
+                        color="secondary"
                         style={{ maxWidth: "100px" }}
                     >
-                        Submit
+                        Add
                     </Button>
                 </Box>
             </Container>
