@@ -41,6 +41,7 @@ function TopicList({ resource }) {
 
             // Display the success message when card added to deck
             enqueueSnackbar(`Added to ${topic.title}`, { variant: "success" });
+            window.location.assign('/contentcreator');
         } catch (err) {
             console.error(err);
         }
