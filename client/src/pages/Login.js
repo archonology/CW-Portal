@@ -118,6 +118,7 @@ const Login = () => {
                                 autoComplete="off"
                                 onSubmit={handleLoginSubmit}
                             >
+
                                 <div>
                                     <TextField
                                         id="login-email-input"
@@ -147,13 +148,16 @@ const Login = () => {
                                         variant="contained"
                                         sx={{ m: 1 }}>Login
                                     </Button>
+
+                                </div>
+                                <div className="mt-3">
                                     <Button
                                         as={Link}
                                         to="/signup"
                                         variant="contained"
-                                        color="warning"
+                                        color="success"
                                         className="link"
-                                        sx={{ margin: 1, paddingBlock: 1.25, textDecoration: "none", }}>Signup Form
+                                        sx={{ margin: 1, paddingBlock: 1.25, textDecoration: "none", }}>Go to Signup Form
                                     </Button>
                                 </div>
                             </Box>

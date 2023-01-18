@@ -142,20 +142,26 @@ const AdminLogin = () => {
                                     />
                                 </div>
                                 <div>
+
                                     <Button
                                         type="submit"
                                         color="secondary"
                                         variant="contained"
                                         sx={{ m: 1 }}>Admin Login
                                     </Button>
+
+                                </div>
+                                <div className="mt-3">
+
                                     <Button
                                         as={Link}
                                         className="link"
                                         to="/adminsignup"
                                         variant="contained"
                                         color="warning"
-                                        sx={{ margin: 1, paddingBlock: 1.25, textDecoration: "none", }}>Signup Form
+                                        sx={{ margin: 1, paddingBlock: 1.25, textDecoration: "none", }}>Go to Signup Form
                                     </Button>
+
                                 </div>
                             </Box>
                         </Grid>

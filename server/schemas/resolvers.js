@@ -133,16 +133,16 @@ const resolvers = {
             return newResource;
         },
 
-        addResourceToTopic: async (parent, { resourceData, topicId }) => {
+        addResourceToTopic: async (parent, { _id, title, text, image, link, topicId }) => {
             const updateTopic = await Topic.findOneAndUpdate(
                 { _id: topicId },
-                { $addToSet: { resources: { ...resourceData } } },
+                { $addToSet: { resources: { _id, title, text, image, link } } },
                 { new: true }
             );
             return updateTopic;
         },
 
-        addSubtopicToTopic: async (parent, args) => {
+        addSubtopicToTopic: async (parent, { args }) => {
             const updateTopic = await Topic.findOneAndUpdate(
                 { _id: args.topicId },
                 { $addToSet: { subtopics: { ...args } } },
@@ -151,10 +151,10 @@ const resolvers = {
             return updateTopic;
         },
 
-        addResourceToSubtopic: async (parent, { resourceData, subtopicId }) => {
+        addResourceToSubtopic: async (parent, { args, subtopicId }) => {
             const updateTopic = await Subtopic.findOneAndUpdate(
                 { _id: subtopicId },
-                { $addToSet: { resources: { ...resourceData } } },
+                { $addToSet: { resources: { ...args } } },
                 { new: true }
             );
             return updateTopic;

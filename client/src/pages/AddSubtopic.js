@@ -5,12 +5,7 @@ import {
     Container,
     TextField,
     Box,
-    Autocomplete,
-    FormControlLabel,
-    Checkbox,
     Button,
-    Grid,
-    Typography,
 } from "@mui/material";
 import Auth from "../utils/auth";
 
@@ -20,10 +15,7 @@ const AddSubtopic = () => {
 
     const [formState, setFormState] = useState({
         title: "",
-        url: "",
-        text: "",
-        link: "",
-        image: ""
+        text: ""
     });
 
     const [newSubtopic, { error, data }] = useMutation(CREATE_SUBTOPIC);
@@ -82,16 +74,6 @@ const AddSubtopic = () => {
                     ></TextField>
 
                     <TextField
-                        name="url"
-                        value={formState.url}
-                        onChange={handleChange}
-                        onBlur={() => { handleChange.url.trim() }}
-                        label="Browser Url"
-                        id="urlName"
-                        variant="standard"
-                    ></TextField>
-
-                    <TextField
                         name="text"
                         value={formState.text}
                         onChange={handleChange}
@@ -102,25 +84,6 @@ const AddSubtopic = () => {
                         variant="standard"
                     ></TextField>
 
-                    <TextField
-                        name="link"
-                        value={formState.link}
-                        onChange={handleChange}
-                        onBlur={() => { handleChange.link.trim() }}
-                        label="Subtopic Link"
-                        id="link"
-                        variant="standard"
-                    ></TextField>
-
-                    <TextField
-                        name="image"
-                        value={formState.image}
-                        onChange={handleChange}
-                        onBlur={() => { handleChange.image.trim() }}
-                        label="Image URL"
-                        id="image"
-                        variant="standard"
-                    ></TextField>
                     <Button
                         type="submit"
                         variant="contained"
