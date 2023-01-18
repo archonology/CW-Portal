@@ -168,6 +168,14 @@ mutation deleteSubtopic($_id: ID!) {
   }
 `;
 
+export const DELETE_TOPIC = gql`
+mutation deleteTopic($_id: ID!) {
+    deleteTopic(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 // export const UPDATE_SUBTOPIC = gql`
 
 // `;
@@ -176,9 +184,7 @@ mutation deleteSubtopic($_id: ID!) {
 
 // `;
 
-// export const DELETE_TOPIC = gql`
 
-// `;
 
 
 

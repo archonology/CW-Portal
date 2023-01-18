@@ -56,6 +56,7 @@ const ResourceCard = () => {
         <>
             {resourceData.map((resource) => {
                 return (
+
                     <Card key={resource._id} sx={{ maxWidth: 400, minWidth: 300, margin: 2, boxShadow: 10 }}  >
                         <CardMedia
                             component="img"

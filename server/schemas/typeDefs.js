@@ -93,6 +93,7 @@ const typeDefs = gql`
         addResourceToSubtopic(resourceData: ResourceInput!, subtopicId: ID!): Subtopic
         deleteResource(_id: ID!): Resource
         deleteSubtopic(_id: ID!): Subtopic
+        deleteTopic(_id: ID!): Topic
     }
 
 `;

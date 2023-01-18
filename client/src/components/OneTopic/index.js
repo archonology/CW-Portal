@@ -91,7 +91,6 @@ const OneTopic = () => {
     if (loading) return "loading";
     if (error) return `Error! ${error}`;
 
-    console.log(topicData.resources);
     return (
         <>
 
@@ -134,21 +133,19 @@ const OneTopic = () => {
                 <TabPanel value={value} index={0}>
 
                     {/* see all subtopics for one topic */}
-               <Subtopics />
-
-
+                    <Subtopics />
 
                 </TabPanel>
                 <TabPanel value={value} index={1}>
+                    <Paper elevation={5}>
+                        <Grid direction="row" container sx={{ padding: "1rem" }}>
+                            <Grid container spacing={0} justifyContent="center">
 
-                    <Grid direction="row" container sx={{ padding: "1rem" }}>
-                        <Grid container spacing={0} justifyContent="center">
+                                <ResourceCard />
 
-                            <ResourceCard />
-
+                            </Grid>
                         </Grid>
-                    </Grid>
-
+                    </Paper>
                 </TabPanel>
 
             </Box>
