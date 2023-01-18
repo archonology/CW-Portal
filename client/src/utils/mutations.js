@@ -152,6 +152,14 @@ mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: St
 }
 `;
 
+export const DELETE_RESOURCE = gql`
+mutation deleteResource($_id: ID!) {
+    deleteResource(_id: $_id) {
+      _id
+    }
+  }
+`;
+
 // export const UPDATE_SUBTOPIC = gql`
 
 // `;
@@ -168,9 +176,7 @@ mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: St
 
 // `;
 
-// export const DELETE_RESOURCE = gql`
 
-// `;
 
 // export const ADD_TO_LIST = gql`
 
