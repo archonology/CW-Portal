@@ -133,9 +133,9 @@ const resolvers = {
             return newResource;
         },
 
-        addResourceToTopic: async (parent, { args, topicId }) => {
+        addResourceToTopic: async (parent, { args }) => {
             const updateTopic = await Topic.findOneAndUpdate(
-                { _id: topicId },
+                { _id: args.topicId },
                 { $addToSet: { resources: { ...args } } },
                 { new: true }
             );
