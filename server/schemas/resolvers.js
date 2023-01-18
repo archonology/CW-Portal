@@ -159,6 +159,14 @@ const resolvers = {
             );
             return updateTopic;
         },
+
+        deleteResource: async (parent, { _id }) => {
+            const removeResource = await Resource.deleteOne(
+                { _id: _id },
+                { new: true }
+            );
+            return removeResource;
+        }
     }
 }
 
