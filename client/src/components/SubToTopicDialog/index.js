@@ -11,40 +11,40 @@ import {
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { QUERY_ALL_TOPICS } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_RESOURCE_TO_TOPIC } from "../../utils/mutations";
+import { ADD_SUBTOPIC_TO_TOPIC } from "../../utils/mutations";
 import { SnackbarProvider, useSnackbar } from "notistack";
 
-export default function ResourceToTopicDialog({ resource }) {
+export default function SubToTopicDialog({ subtopic }) {
 
     return (
         // limits the alert to 3 max
         <SnackbarProvider maxSnack={3}>
-            <TopicList resource={resource} />
+            <TopicList subtopic={subtopic} />
         </SnackbarProvider>
     );
 }
 
-function TopicList({ resource }) {
+function TopicList({ subtopic }) {
 
-    console.log(resource);
+    console.log(subtopic);
 
     const { loading, err, data } = useQuery(QUERY_ALL_TOPICS);
     const topicData = data?.topics || [];
 
+    // define the snackbar
     const { enqueueSnackbar } = useSnackbar();
 
     // useMutation -- and refetch needed to update site content dynamically
-    const [addResourceToTopic, { topicError }] = useMutation(ADD_RESOURCE_TO_TOPIC, {
+    const [addSubtopicToTopic, { topicError }] = useMutation(ADD_SUBTOPIC_TO_TOPIC, {
         refetchQueries: [{ query: QUERY_ALL_TOPICS }],
     });
 
 
     // takes in a card and deck object
-    const handleAddtoTopic = async (resource, topic) => {
-   
+    const handleAddtoTopic = async (subtopic, topic) => {
         try {
-            const { data } = await addResourceToTopic({
-                variables: { _id: resource._id, title: resource.title, text: resource.text, image: resource.image, link: resource.link, topicId: topic._id },
+            const { data } = await addSubtopicToTopic({
+                variables: { _id: subtopic._id, title: subtopic.title, text: subtopic.text, topicId: topic._id },
             });
 
             // Display the success message when card added to deck
@@ -66,8 +66,8 @@ function TopicList({ resource }) {
                     {topicData.map((topic) => {
                         return (
                             <ListItem key={topic._id}>
-                                <Tooltip title="Add to this topic">
-                                    <Button onClick={() => handleAddtoTopic(resource, topic)}>
+                                <Tooltip title="Add to this Topic">
+                                    <Button onClick={() => handleAddtoTopic(subtopic, topic)}>
                                         <AddCircleOutlineIcon />
                                         <ListItemText primary={topic.title} />
                                     </Button>

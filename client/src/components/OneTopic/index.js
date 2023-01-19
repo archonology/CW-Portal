@@ -131,10 +131,10 @@ const OneTopic = () => {
                 </Box>
 
                 <TabPanel value={value} index={0}>
-
-                    {/* see all subtopics for one topic */}
-                    <Subtopics />
-
+                    <Paper>
+                        {/* see all subtopics for one topic */}
+                        <Subtopics />
+                    </Paper>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <Paper elevation={5}>

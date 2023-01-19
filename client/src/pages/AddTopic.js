@@ -20,7 +20,6 @@ const AddTopic = () => {
 
     const [formState, setFormState] = useState({
         title: "",
-        url: "",
         text: "",
         link: "",
         image: ""
@@ -78,16 +77,6 @@ const AddTopic = () => {
                         onBlur={() => { handleChange.title.trim() }}
                         label="Topic Title"
                         id="titleName"
-                        variant="standard"
-                    ></TextField>
-
-                    <TextField
-                        name="url"
-                        value={formState.url}
-                        onChange={handleChange}
-                        onBlur={() => { handleChange.url.trim() }}
-                        label="Browser Url"
-                        id="urlName"
                         variant="standard"
                     ></TextField>
 

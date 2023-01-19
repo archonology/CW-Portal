@@ -9,58 +9,40 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Container from 'react-bootstrap/Container';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import Tooltip from '@mui/material/Tooltip';
 
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DeleteIcon from "@mui/icons-material/Delete";
-import { IconButton, Divider } from '@mui/material';
+
 
 import ResourceCard from "../ResourceCards";
-import { Button, ButtonGroup, Grid } from "@mui/material";
-import Tooltip from '@mui/material/Tooltip';
+import { Grid, IconButton } from "@mui/material";
 import { DELETE_SUBTOPIC } from "../../utils/mutations";
+
+
+// import dialog pops for admin editing
+import SubToTopicDialog from "../SubToTopicDialog";
+import Dialog from "@mui/material/Dialog";
 
 import Auth from "../../utils/auth";
 
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box sx={{ p: 2, mt: 3 }}>
-                    {children}
-                </Box>
-            )}
-        </div>
-    );
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-}
-
 const Subtopics = () => {
     // set up useQuery get the data from the backend
     const { loading, error, data } = useQuery(QUERY_ALL_SUBTOPICS);
+    const [openTopic, setOpenTopic] = React.useState(false);
+
+    // object to keep the topic data
+    const subtopicData = data?.subtopics || [];
 
     const [deleteSubtopic, { err, dat }] = useMutation(DELETE_SUBTOPIC, {
         refetchQueries: [{ query: QUERY_ALL_SUBTOPICS }],
@@ -69,20 +51,24 @@ const Subtopics = () => {
     const [expanded, setExpanded] = React.useState(false);
 
     // handle the tab changes
-    const [value, setValue] = React.useState(0);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    // const [value, setValue] = React.useState(0);
+    // const handleChange = (event, newValue) => {
+    //     setValue(newValue);
+    // };
 
     const handleAccordChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    // object to keep the topic data
-    const subtopicData = data?.subtopics || {};
-    // check load time and errors
-    if (loading) return "loading";
-    if (error) return `Error! ${error}`;
+    // handles open and close edit buttons for admin
+    const handleClickOpenTopics = () => {
+        setOpenTopic(true);
+    };
+
+    const handleCloseTopics = () => {
+        setOpenTopic(false);
+    };
+
 
     const handleDelete = async (_id) => {
 
@@ -118,9 +104,10 @@ const Subtopics = () => {
 
                                 </AccordionSummary>
 
-                                <AccordionDetails>
+                                <AccordionDetails key={subtopic._id} >
                                     {Auth.adminLoggedIn() ? (
                                         <>
+                                            {/* the admin edit button set */}
                                             <Tooltip title="Delete Resource">
                                                 <IconButton onClick={() => handleDelete(subtopic._id)}>
                                                     <DeleteIcon
@@ -129,15 +116,29 @@ const Subtopics = () => {
                                                     />
                                                 </IconButton>
                                             </Tooltip>
+
+                                            <Tooltip title="Add to a Topic">
+                                                <IconButton onClick={handleClickOpenTopics}>
+                                                    <AddCircleIcon sx={{ color: "#f6685e" }} />
+                                                </IconButton>
+                                            </Tooltip>
+
+                                            {/* run the dialog, manage collapse */}
+                                            <Dialog open={openTopic} onClose={handleCloseTopics}>
+                                                <SubToTopicDialog subtopic={subtopic} />
+                                            </Dialog>
+
                                             <Grid direction="row" container sx={{ padding: "1rem" }}>
-                                            <Grid container spacing={0} justifyContent="center">
+                                                <Grid container spacing={1} justifyContent="center">
 
-                                                <ResourceCard />
+                                                 
 
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
+
                                         </>
                                     ) : (
+
                                         <Grid direction="row" container sx={{ padding: "1rem" }}>
                                             <Grid container spacing={0} justifyContent="center">
 
@@ -145,6 +146,7 @@ const Subtopics = () => {
 
                                             </Grid>
                                         </Grid>
+
                                     )}
                                 </AccordionDetails>
                             </Accordion>
