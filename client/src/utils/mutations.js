@@ -56,7 +56,6 @@ export const CREATE_TOPIC = gql`
 mutation createTopic($title: String!, $url: String! $text: String!, $image: String!, $link: String!) {
     createTopic(title: $title, url: $url, text: $text, image: $image, link: $link) {
         title
-        url
         text
         link
         image

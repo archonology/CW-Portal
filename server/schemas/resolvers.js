@@ -169,6 +169,25 @@ const resolvers = {
             return updatedResource;
         },
 
+        updateSubtopic: async (parent, { _id, title, text }) => {
+            const updatedSubtopic = await Subtopic.findOneAndUpdate(
+                { _id: _id },
+                { $set: { title, text } },
+                { new: true }
+            );
+            return updatedSubtopic;
+        },
+
+        updateTopic: async (parent, { _id, title, text, image, link }) => {
+            const updatedTopic = await Resource.findOneAndUpdate(
+                { _id: _id },
+                { $set: { title, text, image, link } },
+                { new: true }
+            );
+            return updatedTopic;
+        },
+        
+
         deleteResource: async (parent, { _id }) => {
             const removeResource = await Resource.deleteOne(
                 { _id: _id },

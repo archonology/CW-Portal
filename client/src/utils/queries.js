@@ -81,7 +81,6 @@ query topics {
     topics {
       _id
       title
-      url
       text
       link
       image
@@ -143,7 +142,6 @@ query topic($_id: ID!) {
     topic(_id: $_id) {
         _id
         title
-        url
         text
         image
         link
