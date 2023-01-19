@@ -16,6 +16,10 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import PublicIcon from '@mui/icons-material/Public';
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
 import { useQuery, useMutation } from '@apollo/client';
@@ -69,7 +73,7 @@ const ResourceCard = () => {
             {resourceData.map((resource) => {
                 return (
 
-                    <Card key={resource._id} sx={{ maxWidth: 525, minWidth: 325, margin: 2, boxShadow: 10 }}  >
+                    <Card key={resource._id} sx={{ maxWidth: 525, minWidth: 350, margin: 2, boxShadow: 10 }}  >
                         <CardMedia
                             component="img"
                             alt="resource image"
@@ -86,9 +90,10 @@ const ResourceCard = () => {
                             </Typography>
                         </CardContent>
                         <Divider variant="middle" />
-                        <CardActions>
-                            {Auth.adminLoggedIn() ? (
-                                <>
+
+                        {Auth.adminLoggedIn() ? (
+                            <>
+                                <CardActions>
                                     <IconButton>
                                         <FavoriteIcon sx={{ color: "#e57373" }} />
                                     </IconButton>
@@ -100,26 +105,45 @@ const ResourceCard = () => {
                                     <IconButton className="link2" href={resource.link} target={'_blank'} rel={'nonreferrer'}>
                                         <PublicIcon sx={{ color: "#8bc34a" }} />
                                     </IconButton>
-
+                                </CardActions>
+                                <Divider variant="middle" />
+                                {/* tools specific to admin */}
+                                <CardActions>
                                     <Tooltip title="Add to a Topic">
                                         <IconButton onClick={handleClickOpenTopics}>
-                                            <AddCircleOutlineIcon /><Typography>Topic</Typography>
+                                            <AddCircleIcon sx={{ color: "#f6685e" }}/>
                                         </IconButton>
                                     </Tooltip>
 
                                     <Tooltip title="Add to a Subtopic">
                                         <IconButton onClick={handleClickOpenTopics}>
-                                            <AddCircleOutlineIcon /><Typography>Subtopic</Typography>
+                                            <AddCircleOutlineIcon sx={{ color: "#af52bf" }}  />
                                         </IconButton>
                                     </Tooltip>
 
-            
+                                    <Tooltip title="Remove from a Topic">
+                                        <IconButton onClick={handleClickOpenTopics}>
+                                            <RemoveCircleIcon sx={{ color: "#f6685e" }} />
+                                        </IconButton>
+                                    </Tooltip>
+
+                                    <Tooltip title="Remove from a Subtopic">
+                                        <IconButton onClick={handleClickOpenTopics}>
+                                            <RemoveCircleOutlineIcon sx={{ color: "#af52bf" }} />
+                                        </IconButton>
+                                    </Tooltip>
+
+                                    <Tooltip title="Edit">
+                                        <IconButton onClick={handleClickOpenTopics}>
+                                            <EditIcon sx={{ color: "#ffcf33" }}  />
+                                        </IconButton>
+                                    </Tooltip>
 
                                     <Tooltip title="Delete Resource">
                                         <IconButton onClick={() => handleDelete(resource._id)}>
                                             <DeleteIcon
                                                 className="custom-link"
-                                                sx={{ variant: "filled" }}
+                                                sx={{ color: "#b2102f" }} 
                                             />
                                         </IconButton>
                                     </Tooltip>
@@ -127,9 +151,11 @@ const ResourceCard = () => {
                                     <Dialog open={openTopic} onClose={handleCloseTopics}>
                                         <ResourceToTopicDialog resource={resource} />
                                     </Dialog>
-                                </>
-                            ) : (
-                                <>
+                                </CardActions>
+                            </>
+                        ) : (
+                            <>
+                                <CardActions>
                                     <IconButton>
                                         <FavoriteIcon sx={{ color: "#e57373" }} />
                                     </IconButton>
@@ -141,11 +167,10 @@ const ResourceCard = () => {
                                     <IconButton className="link2" href={resource.link} target={'_blank'} rel={'nonreferrer'}>
                                         <PublicIcon sx={{ color: "#8bc34a" }} />
                                     </IconButton>
-                                </>
-                            )}
+                                </CardActions>
+                            </>
 
-
-                        </CardActions>
+                        )}
                     </Card>
 
                 );
