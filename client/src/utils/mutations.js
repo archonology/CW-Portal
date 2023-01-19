@@ -53,8 +53,8 @@ mutation createUser($username: String!, $email: String!, $password: String!) {
 `;
 
 export const CREATE_TOPIC = gql`
-mutation createTopic($title: String!, $url: String! $text: String!, $image: String!, $link: String!) {
-    createTopic(title: $title, url: $url, text: $text, image: $image, link: $link) {
+mutation createTopic($title: String!, $text: String!, $image: String!, $link: String!) {
+    createTopic(title: $title, text: $text, image: $image, link: $link) {
         title
         text
         link
@@ -149,6 +149,17 @@ mutation addResourceToSubtopic($_id: ID!, $title: String!, $text: String!, $imag
 }
 `;
 
+export const ADD_SUBTOPIC_TO_TOPIC = gql`
+mutation addSubtopicToTopic($_id: ID!, $title: String!, $text: String!, $topicId: ID!) {
+  addSubtopicToTopic(_id: $_id, title: $title, text: $text, topicId: $topicId){
+        subtopics {
+            _id
+            title
+            text
+        }
+    }
+}
+`;
 
 
 
@@ -176,15 +187,3 @@ mutation deleteTopic($_id: ID!) {
     }
   }
 `;
-
-// export const UPDATE_SUBTOPIC = gql`
-
-// `;
-
-
-
-
-
-// export const ADD_TO_LIST = gql`
-
-// `;

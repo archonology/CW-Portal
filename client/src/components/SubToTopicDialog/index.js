@@ -9,63 +9,67 @@ import {
     Button,
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { QUERY_ALL_SUBTOPICS } from "../../utils/queries";
+import { QUERY_ALL_TOPICS } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_RESOURCE_TO_SUBTOPIC } from "../../utils/mutations";
+import { ADD_SUBTOPIC_TO_TOPIC } from "../../utils/mutations";
 import { SnackbarProvider, useSnackbar } from "notistack";
 
-export default function ResourceToSubtopicDialog({ resource }) {
-    console.log(resource);
+export default function SubToTopicDialog({ subtopic }) {
+
     return (
         // limits the alert to 3 max
         <SnackbarProvider maxSnack={3}>
-            <SubtopicList resource={resource} />
+            <TopicList subtopic={subtopic} />
         </SnackbarProvider>
     );
 }
 
-function SubtopicList({ resource }) {
+function TopicList({ subtopic }) {
 
-    const { loading, err, data } = useQuery(QUERY_ALL_SUBTOPICS);
-    const subtopicData = data?.subtopics || [];
+    console.log(subtopic);
 
+    const { loading, err, data } = useQuery(QUERY_ALL_TOPICS);
+    const topicData = data?.topics || [];
+
+    // define the snackbar
     const { enqueueSnackbar } = useSnackbar();
 
     // useMutation -- and refetch needed to update site content dynamically
-    const [addResourceToSubtopic, { subtopicError }] = useMutation(ADD_RESOURCE_TO_SUBTOPIC, {
-        refetchQueries: [{ query: QUERY_ALL_SUBTOPICS }]
+    const [addSubtopicToTopic, { topicError }] = useMutation(ADD_SUBTOPIC_TO_TOPIC, {
+        refetchQueries: [{ query: QUERY_ALL_TOPICS }],
     });
 
+
     // takes in a card and deck object
-    const handleAddToSubtopic = async (resource, subtopic) => {
+    const handleAddtoTopic = async (subtopic, topic) => {
         try {
-            const { data } = await addResourceToSubtopic({
-                variables: { _id: resource._id, title: resource.title, text: resource.text, image: resource.image, link: resource.link, subtopicId: subtopic._id },
+            const { data } = await addSubtopicToTopic({
+                variables: { _id: subtopic._id, title: subtopic.title, text: subtopic.text, topicId: topic._id },
             });
 
             // Display the success message when card added to deck
-            enqueueSnackbar(`Added to ${subtopic.title}`, { variant: "success" });
+            enqueueSnackbar(`Added to ${topic.title}`, { variant: "success" });
 
         } catch (err) {
             console.error(err);
-            enqueueSnackbar(`Error adding to ${subtopic.title}`, { variant: "error" });
+            enqueueSnackbar(`Error adding to ${topic.title}`, { variant: "error" });
         }
     };
 
     return (
         <>
-            <DialogTitle>{"Select a Subtopic"}</DialogTitle>
+            <DialogTitle>{"Select a topic"}</DialogTitle>
             <DialogContent sx={{ maxHeight: "400px" }}>
                 {/* overflowY allows for scrolling*/}
                 <List sx={{ overflowY: "scroll" }}>
                     {/* checks for topicData -> topics -> and maps topic titles as list items */}
-                    {subtopicData.map((subtopic) => {
+                    {topicData.map((topic) => {
                         return (
-                            <ListItem key={subtopic._id}>
-                                <Tooltip title="Add to this Subtopic">
-                                    <Button onClick={() => handleAddToSubtopic(resource, subtopic)}>
+                            <ListItem key={topic._id}>
+                                <Tooltip title="Add to this Topic">
+                                    <Button onClick={() => handleAddtoTopic(subtopic, topic)}>
                                         <AddCircleOutlineIcon />
-                                        <ListItemText primary={subtopic.title} />
+                                        <ListItemText primary={topic.title} />
                                     </Button>
                                 </Tooltip>
                             </ListItem>

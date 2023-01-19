@@ -37,17 +37,15 @@ const ResourceCard = () => {
     const [openSubtopic, setOpenSubtopic] = React.useState(false);
     const [openResource, setOpenResource] = React.useState(false);
 
+    // object to keep the topic data
+    const resourceData = data?.resources || [];
+
     // handle delete resource and refetch minus the deleted resource
     const [deleteResource, { err, dat }] = useMutation(DELETE_RESOURCE, {
         refetchQueries: [{ query: QUERY_ALL_RESOURCES }],
     });
 
-    // object to keep the topic data
-    const resourceData = data?.resources || [];
-    // check load time and errors
-    if (loading) return "loading";
-    if (error) return `Error! ${error}`;
-
+    // handles the admin edit button toggling
     const handleClickOpenTopics = () => {
         setOpenTopic(true);
     };

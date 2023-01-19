@@ -26,14 +26,22 @@ export default function ResourceToTopicDialog({ resource }) {
 
 function TopicList({ resource }) {
 
-    const [addResourceToTopic, { topicError }] = useMutation(ADD_RESOURCE_TO_TOPIC);
+    console.log(resource);
+
     const { loading, err, data } = useQuery(QUERY_ALL_TOPICS);
     const topicData = data?.topics || [];
 
     const { enqueueSnackbar } = useSnackbar();
 
+    // useMutation -- and refetch needed to update site content dynamically
+    const [addResourceToTopic, { topicError }] = useMutation(ADD_RESOURCE_TO_TOPIC, {
+        refetchQueries: [{ query: QUERY_ALL_TOPICS }],
+    });
+
+
     // takes in a card and deck object
     const handleAddtoTopic = async (resource, topic) => {
+   
         try {
             const { data } = await addResourceToTopic({
                 variables: { _id: resource._id, title: resource.title, text: resource.text, image: resource.image, link: resource.link, topicId: topic._id },
@@ -41,9 +49,10 @@ function TopicList({ resource }) {
 
             // Display the success message when card added to deck
             enqueueSnackbar(`Added to ${topic.title}`, { variant: "success" });
-    
+
         } catch (err) {
             console.error(err);
+            enqueueSnackbar(`Error adding to ${topic.title}`, { variant: "error" });
         }
     };
 
