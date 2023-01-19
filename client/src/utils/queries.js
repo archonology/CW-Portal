@@ -171,11 +171,11 @@ query topic($_id: ID!) {
 export const QUERY_ONE_RESOURCE = gql`
 query resource($_id: ID!) {
     resource(_id: $_id) {
-        _id: ID
-        title: String
-        text: String
-        image: String
-        link: String
+      _id
+      title
+      text
+      link
+      image
     }
 }
 `;

@@ -24,6 +24,7 @@ import { DELETE_RESOURCE } from "../../utils/mutations";
 // import dialog pop ups for admin resource editting
 import ResourceToTopicDialog from "../ResourceToTopicDialog";
 import ResourceToSubtopicDialog from "../ResourceToSubtopicDialog";
+import EditResourceDialog from "../EditResourceDialog";
 import Dialog from "@mui/material/Dialog";
 
 import Auth from "../../utils/auth";
@@ -34,6 +35,7 @@ const ResourceCard = () => {
     const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
     const [openTopic, setOpenTopic] = React.useState(false);
     const [openSubtopic, setOpenSubtopic] = React.useState(false);
+    const [openResource, setOpenResource] = React.useState(false);
 
     // handle delete resource and refetch minus the deleted resource
     const [deleteResource, { err, dat }] = useMutation(DELETE_RESOURCE, {
@@ -60,6 +62,14 @@ const ResourceCard = () => {
 
     const handleCloseSubtopics = () => {
         setOpenSubtopic(false);
+    };
+
+    const handleClickOpenResource = () => {
+        setOpenResource(true);
+    };
+
+    const handleCloseResource = () => {
+        setOpenResource(false);
     };
 
     const handleDelete = async (_id) => {
@@ -116,13 +126,13 @@ const ResourceCard = () => {
                                 <CardActions>
                                     <Tooltip title="Add to a Topic">
                                         <IconButton onClick={handleClickOpenTopics}>
-                                            <AddCircleIcon sx={{ color: "#f6685e" }}/>
+                                            <AddCircleIcon sx={{ color: "#f6685e" }} />
                                         </IconButton>
                                     </Tooltip>
 
                                     <Tooltip title="Add to a Subtopic">
                                         <IconButton onClick={handleClickOpenSubtopics}>
-                                            <AddCircleOutlineIcon sx={{ color: "#af52bf" }}  />
+                                            <AddCircleOutlineIcon sx={{ color: "#af52bf" }} />
                                         </IconButton>
                                     </Tooltip>
 
@@ -139,8 +149,8 @@ const ResourceCard = () => {
                                     </Tooltip>
 
                                     <Tooltip title="Edit">
-                                        <IconButton onClick={handleClickOpenTopics}>
-                                            <EditIcon sx={{ color: "#ffcf33" }}  />
+                                        <IconButton onClick={handleClickOpenResource}>
+                                            <EditIcon sx={{ color: "#ffcf33" }} />
                                         </IconButton>
                                     </Tooltip>
 
@@ -148,17 +158,24 @@ const ResourceCard = () => {
                                         <IconButton onClick={() => handleDelete(resource._id)}>
                                             <DeleteIcon
                                                 className="custom-link"
-                                                sx={{ color: "#b2102f" }} 
+                                                sx={{ color: "#b2102f" }}
                                             />
                                         </IconButton>
                                     </Tooltip>
+
                                     {/* run the dialog, manage collapse */}
                                     <Dialog open={openTopic} onClose={handleCloseTopics}>
                                         <ResourceToTopicDialog resource={resource} />
                                     </Dialog>
+
                                     <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
                                         <ResourceToSubtopicDialog resource={resource} />
                                     </Dialog>
+
+                                    <Dialog open={openResource} onClose={handleCloseResource}>
+                                        <EditResourceDialog resource={resource} />
+                                    </Dialog>
+
                                 </CardActions>
                             </>
                         ) : (
