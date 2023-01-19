@@ -160,6 +160,15 @@ const resolvers = {
             return updateSubtopic;
         },
 
+        updateResource: async (parent, { _id, title, text, image, link }) => {
+            const updatedResource = await Resource.findOneAndUpdate(
+                { _id: _id },
+                { $set: { title, text, image, link } },
+                { new: true }
+            );
+            return updatedResource;
+        },
+
         deleteResource: async (parent, { _id }) => {
             const removeResource = await Resource.deleteOne(
                 { _id: _id },

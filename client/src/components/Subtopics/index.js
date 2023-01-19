@@ -130,12 +130,12 @@ const Subtopics = () => {
                                                 </IconButton>
                                             </Tooltip>
                                             <Grid direction="row" container sx={{ padding: "1rem" }}>
-                                            <Grid container spacing={0} justifyContent="center">
+                                                <Grid container spacing={0} justifyContent="center">
 
-                                                <ResourceCard />
+                                                    <ResourceCard />
 
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
                                         </>
                                     ) : (
                                         <Grid direction="row" container sx={{ padding: "1rem" }}>
