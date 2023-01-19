@@ -5,15 +5,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { IconButton, Divider } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import IosShareIcon from '@mui/icons-material/IosShare';
 import PublicIcon from '@mui/icons-material/Public';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
@@ -23,11 +18,12 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ALL_RESOURCES, QUERY_ALL_TOPICS } from "../../utils/queries";
+import { QUERY_ALL_RESOURCES } from "../../utils/queries";
 import { DELETE_RESOURCE } from "../../utils/mutations";
-import { Link } from 'react-router-dom';
 
+// import dialog pop ups for admin resource editting
 import ResourceToTopicDialog from "../ResourceToTopicDialog";
+import ResourceToSubtopicDialog from "../ResourceToSubtopicDialog";
 import Dialog from "@mui/material/Dialog";
 
 import Auth from "../../utils/auth";
@@ -37,6 +33,7 @@ const ResourceCard = () => {
     // set up useQuery to get resource data from the backend
     const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
     const [openTopic, setOpenTopic] = React.useState(false);
+    const [openSubtopic, setOpenSubtopic] = React.useState(false);
 
     // handle delete resource and refetch minus the deleted resource
     const [deleteResource, { err, dat }] = useMutation(DELETE_RESOURCE, {
@@ -55,6 +52,14 @@ const ResourceCard = () => {
 
     const handleCloseTopics = () => {
         setOpenTopic(false);
+    };
+
+    const handleClickOpenSubtopics = () => {
+        setOpenSubtopic(true);
+    };
+
+    const handleCloseSubtopics = () => {
+        setOpenSubtopic(false);
     };
 
     const handleDelete = async (_id) => {
@@ -116,7 +121,7 @@ const ResourceCard = () => {
                                     </Tooltip>
 
                                     <Tooltip title="Add to a Subtopic">
-                                        <IconButton onClick={handleClickOpenTopics}>
+                                        <IconButton onClick={handleClickOpenSubtopics}>
                                             <AddCircleOutlineIcon sx={{ color: "#af52bf" }}  />
                                         </IconButton>
                                     </Tooltip>
@@ -128,7 +133,7 @@ const ResourceCard = () => {
                                     </Tooltip>
 
                                     <Tooltip title="Remove from a Subtopic">
-                                        <IconButton onClick={handleClickOpenTopics}>
+                                        <IconButton onClick={handleClickOpenSubtopics}>
                                             <RemoveCircleOutlineIcon sx={{ color: "#af52bf" }} />
                                         </IconButton>
                                     </Tooltip>
@@ -150,6 +155,9 @@ const ResourceCard = () => {
                                     {/* run the dialog, manage collapse */}
                                     <Dialog open={openTopic} onClose={handleCloseTopics}>
                                         <ResourceToTopicDialog resource={resource} />
+                                    </Dialog>
+                                    <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
+                                        <ResourceToSubtopicDialog resource={resource} />
                                     </Dialog>
                                 </CardActions>
                             </>

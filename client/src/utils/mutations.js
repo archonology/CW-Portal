@@ -124,22 +124,23 @@ mutation addResourceToTopic($_id: ID!, $title: String!, $text: String!, $image: 
 }
 `;
 
+export const ADD_RESOURCE_TO_SUBTOPIC = gql`
+mutation addResourceToSubtopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!, $subtopicId: ID!) {
+  addResourceToSubtopic(_id: $_id, title: $title, text: $text, image: $image, link: $link, subtopicId: $subtopicId){
+        resources {
+            _id
+            title
+            text
+            image
+            link
+        }
+    }
+}
+`;
 
-// export const ADD_RESOURCE_TO_SUBTOPIC = gql`
-// mutation addResourceToTopic($_id: ID!, $title: String!, $url: String!, $text: String!, $image: String!, $link: String!) {
-//     addResourceToTopic(_id: $_id, title: $title, url: $url, text: $text, image: $image, link: $link){
-//         _id
-//         resources {
-//             _id
-//             title
-//             url
-//             text
-//             image
-//             link
-//         }
-//     }
-// }
-// `;
+
+
+
 
 export const DELETE_RESOURCE = gql`
 mutation deleteResource($_id: ID!) {

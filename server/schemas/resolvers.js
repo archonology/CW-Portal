@@ -151,13 +151,13 @@ const resolvers = {
             return updateTopic;
         },
 
-        addResourceToSubtopic: async (parent, { args, subtopicId }) => {
-            const updateTopic = await Subtopic.findOneAndUpdate(
+        addResourceToSubtopic: async (parent, { _id, title, text, image, link, subtopicId  }) => {
+            const updateSubtopic = await Subtopic.findOneAndUpdate(
                 { _id: subtopicId },
-                { $addToSet: { resources: { ...args } } },
+                { $addToSet: { resources: { _id, title, text, image, link  } } },
                 { new: true }
             );
-            return updateTopic;
+            return updateSubtopic;
         },
 
         deleteResource: async (parent, { _id }) => {
