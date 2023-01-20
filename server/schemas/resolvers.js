@@ -62,10 +62,10 @@ const resolvers = {
         },
 
         topicResources: async () => {
-            const resourceData = await Resource.find({ doc: "63ca1c0083970d2d63455107"})
-            .populate("doc")
+            const resourceData = await Resource.find({ doc: "63ca1c0083970d2d63455107" })
+                .populate("doc")
 
-           
+
             return resourceData;
         },
 
@@ -134,21 +134,22 @@ const resolvers = {
             return newSubtopic;
         },
 
+        // createResource can also be used as a 'bounce' -- pass it args from an existing resource with just changes to doc/docModel, and it will 'move' or bounce the resource to another topic or subtopic.
         createResource: async (parent, args) => {
             const newResource = await Resource.create({ ...args });
             return newResource;
         },
 
 
-        updateResource: async (parent, { _id, title, text, image, link }) => {
+        updateResource: async (parent, { title, text, image, link, doc, docType }) => {
             const updatedResource = await Resource.findOneAndUpdate(
                 { _id: _id },
-                { $set: { title, text, image, link } },
+                { $set: { title, text, image, link, doc, docType } },
                 { new: true }
             );
             return updatedResource;
         },
-        
+
 
         deleteResource: async (parent, { _id }) => {
             const removeResource = await Resource.deleteOne(

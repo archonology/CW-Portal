@@ -59,52 +59,32 @@ mutation createTopic($title: String!, $text: String!, $image: String!, $link: St
         text
         link
         image
-        resources {
-            _id
-            title
-            image
-            link
-        }
-        subtopics {
-            _id
-            title
-            text
-            resources {
-                _id
-                title
-                text
-                image
-                link
-            }
-        }
     }
 }
 `;
 
 export const CREATE_SUBTOPIC = gql`
-mutation createSubtopic($title: String!, $text: String!) {
-    createSubtopic(title: $title, text: $text) {
+mutation createSubtopic($title: String!, $text: String!, $doc: String!, $docModel: String!) {
+    createSubtopic(title: $title, text: $text, doc: $doc, docModel: $docModel) {
         title
         text
-        resources {
-            _id
-            title
-            text
-            image
-            link
-        }
+        doc
+        docModel
+
     }
 }
 `;
 
 export const CREATE_RESOURCE = gql`
-mutation createResource($title: String!, $text: String!, $image: String!, $link: String!) {
-    createResource(title: $title, text: $text, image: $image, link: $link){
+mutation createResource($title: String!, $text: String!, $image: String!, $link: String!, $doc: String!, $docModel: String!) {
+    createResource(title: $title, text: $text, image: $image, link: $link, doc: $doc, docModel: $docModel){
         _id
         title
         text
         image
         link
+        doc
+        docModel
     }
 }
 `;
@@ -117,51 +97,11 @@ mutation updateResource($_id: ID!, $title: String!, $text: String!, $image: Stri
         text
         image
         link
+        doc
+        docModel
     }
 }
 `;
-
-export const ADD_RESOURCE_TO_TOPIC = gql`
-mutation addResourceToTopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!, $topicId: ID!) {
-    addResourceToTopic(_id: $_id, title: $title, text: $text, image: $image, link: $link, topicId: $topicId){
-        resources {
-            _id
-            title
-            text
-            image
-            link
-        }
-    }
-}
-`;
-
-export const ADD_RESOURCE_TO_SUBTOPIC = gql`
-mutation addResourceToSubtopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!, $subtopicId: ID!) {
-  addResourceToSubtopic(_id: $_id, title: $title, text: $text, image: $image, link: $link, subtopicId: $subtopicId){
-        resources {
-            _id
-            title
-            text
-            image
-            link
-        }
-    }
-}
-`;
-
-export const ADD_SUBTOPIC_TO_TOPIC = gql`
-mutation addSubtopicToTopic($_id: ID!, $title: String!, $text: String!, $topicId: ID!) {
-  addSubtopicToTopic(_id: $_id, title: $title, text: $text, topicId: $topicId){
-        subtopics {
-            _id
-            title
-            text
-        }
-    }
-}
-`;
-
-
 
 
 export const DELETE_RESOURCE = gql`
