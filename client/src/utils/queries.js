@@ -84,26 +84,6 @@ query topics {
       text
       link
       image
-      resources {
-        image
-        _id
-        link
-        title
-        text
-      }
-      subtopics {
-        _id        
-        text
-        title
-        resources {
-          _id
-          link
-          title
-          text
-          image
-        }
-
-      }
     }
   }
 `;
@@ -114,13 +94,8 @@ query subtopics {
         _id
         title
         text
-        resources {
-          _id
-          title
-          text
-          link
-          image
-        }
+        doc
+        docModel
       }
 }
 `;
@@ -133,6 +108,8 @@ query resources {
         text
         link
         image
+        doc
+        docModel
       }
 }
 `;
@@ -145,25 +122,6 @@ query topic($_id: ID!) {
         text
         image
         link
-        subtopics {
-          _id
-          title
-          text
-          resources {
-            _id
-            title
-            text
-            link
-            image
-          }
-        }
-        resources {
-          _id
-          title
-          text
-          link
-          image
-        }
       }
 }
 `;
@@ -174,13 +132,8 @@ query subtopic($_id: ID!) {
           _id
           title
           text
-          resources {
-            _id
-            title
-            text
-            link
-            image
-          }
+          doc
+          docModel
         }
 }
 `;
@@ -193,6 +146,8 @@ query resource($_id: ID!) {
       text
       link
       image
+      doc
+      docModel
     }
 }
 `;
