@@ -77,9 +77,6 @@ const typeDefs = gql`
         createSubtopic(title: String!, text: String!, doc: String!, docModel: String!): Subtopic
         createResource(title: String!, text: String!, image: String!, link: String!, doc: String!, docModel: String!): Resource        
         updateResource(_id: ID!, title: String!, text: String!, link: String!, image: String!): Resource    
-        resourceToTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, doc: String!, docModel: String!): Resource
-        subtopicToTopic(_id: ID!, title: String!, text: String!, doc: String!, docModel: String!): Topic
-        resourceToSubtopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, doc: String!, docModel: String!): Resource
         deleteResource(_id: ID!): Resource
         deleteSubtopic(_id: ID!): Subtopic
         deleteTopic(_id: ID!): Topic

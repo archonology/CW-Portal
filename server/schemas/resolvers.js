@@ -139,40 +139,15 @@ const resolvers = {
             return newResource;
         },
 
-        // resourceToTopic: async (parent, { args }) => {
-        //     const resourceOnTopic = await Resource.create(
-        //         { ...args },
-        //         { new: true }
-        //     );
-        //     return resourceOnTopic;
-        // },
 
-        // addSubtopicToTopic: async (parent, { _id, title, text, topicId }) => {
-        //     const updateTopic = await Topic.findOneAndUpdate(
-        //         { _id: topicId },
-        //         { $addToSet: { subtopics: { _id, title, text } } },
-        //         { new: true }
-        //     );
-        //     return updateTopic;
-        // },
-
-        // addResourceToSubtopic: async (parent, {  _id, title, text, image, link, doc, docModel, subtopicId  }) => {
-        //     const updateSubtopic = await Subtopic.findOneAndUpdate(
-        //         { _id: subtopicId },
-        //         { $addToSet: { resources: {  _id, title, text, image, link, doc, docModel } } },
-        //         { new: true }
-        //     );
-        //     return updateSubtopic;
-        // },
-
-        // updateResource: async (parent, { _id, title, text, image, link }) => {
-        //     const updatedResource = await Resource.findOneAndUpdate(
-        //         { _id: _id },
-        //         { $set: { title, text, image, link } },
-        //         { new: true }
-        //     );
-        //     return updatedResource;
-        // },
+        updateResource: async (parent, { _id, title, text, image, link }) => {
+            const updatedResource = await Resource.findOneAndUpdate(
+                { _id: _id },
+                { $set: { title, text, image, link } },
+                { new: true }
+            );
+            return updatedResource;
+        },
         
 
         deleteResource: async (parent, { _id }) => {
