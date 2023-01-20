@@ -33,8 +33,6 @@ const resolvers = {
 
         topics: async () => {
             const topicData = await Topic.find({})
-                .populate('subtopics')
-                .populate('resources');
             return topicData;
         },
 
@@ -60,6 +58,14 @@ const resolvers = {
 
         resources: async () => {
             const resourceData = await Resource.find({});
+            return resourceData;
+        },
+
+        topicResources: async () => {
+            const resourceData = await Resource.find({ doc: "63ca1c0083970d2d63455107"})
+            .populate("doc")
+
+           
             return resourceData;
         },
 
@@ -133,41 +139,40 @@ const resolvers = {
             return newResource;
         },
 
-        addResourceToTopic: async (parent, { _id, title, text, image, link, topicId }) => {
-            const updateTopic = await Topic.findOneAndUpdate(
-                { _id: topicId },
-                { $addToSet: { resources: { _id, title, text, image, link } } },
-                { new: true }
-            );
-            return updateTopic;
-        },
+        // resourceToTopic: async (parent, { args }) => {
+        //     const resourceOnTopic = await Resource.create(
+        //         { ...args },
+        //         { new: true }
+        //     );
+        //     return resourceOnTopic;
+        // },
 
-        addSubtopicToTopic: async (parent, { _id, title, text, topicId }) => {
-            const updateTopic = await Topic.findOneAndUpdate(
-                { _id: topicId },
-                { $addToSet: { subtopics: { _id, title, text } } },
-                { new: true }
-            );
-            return updateTopic;
-        },
+        // addSubtopicToTopic: async (parent, { _id, title, text, topicId }) => {
+        //     const updateTopic = await Topic.findOneAndUpdate(
+        //         { _id: topicId },
+        //         { $addToSet: { subtopics: { _id, title, text } } },
+        //         { new: true }
+        //     );
+        //     return updateTopic;
+        // },
 
-        addResourceToSubtopic: async (parent, {  _id, title, text, image, link, subtopicId  }) => {
-            const updateSubtopic = await Subtopic.findOneAndUpdate(
-                { _id: subtopicId },
-                { $addToSet: { resources: {  _id, title, text, image, link } } },
-                { new: true }
-            );
-            return updateSubtopic;
-        },
+        // addResourceToSubtopic: async (parent, {  _id, title, text, image, link, doc, docModel, subtopicId  }) => {
+        //     const updateSubtopic = await Subtopic.findOneAndUpdate(
+        //         { _id: subtopicId },
+        //         { $addToSet: { resources: {  _id, title, text, image, link, doc, docModel } } },
+        //         { new: true }
+        //     );
+        //     return updateSubtopic;
+        // },
 
-        updateResource: async (parent, { _id, title, text, image, link }) => {
-            const updatedResource = await Resource.findOneAndUpdate(
-                { _id: _id },
-                { $set: { title, text, image, link } },
-                { new: true }
-            );
-            return updatedResource;
-        },
+        // updateResource: async (parent, { _id, title, text, image, link }) => {
+        //     const updatedResource = await Resource.findOneAndUpdate(
+        //         { _id: _id },
+        //         { $set: { title, text, image, link } },
+        //         { new: true }
+        //     );
+        //     return updatedResource;
+        // },
         
 
         deleteResource: async (parent, { _id }) => {

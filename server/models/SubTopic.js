@@ -11,14 +11,20 @@ const subTopicSchema = new Schema(
         text: {
             type: String,
         },
-        resources: [{
+        doc: {
             type: Schema.Types.ObjectId,
-            ref: 'Resource',
+            required: true,
+            refPath: 'docModel'
         },
-        ],
+        docModel: {
+            type: String,
+            required: true,
+            enum: 'Topic'
+        }
     }
 );
 
 const Subtopic = model('Subtopic', subTopicSchema);
 
 module.exports = Subtopic;
+

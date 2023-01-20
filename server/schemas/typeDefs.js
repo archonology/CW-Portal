@@ -27,8 +27,6 @@ const typeDefs = gql`
         text: String
         link: String
         image: String
-        resources: [Resource]
-        subtopics: [Subtopic]
     }
 
     type Resource {
@@ -37,13 +35,16 @@ const typeDefs = gql`
         text: String
         image: String
         link: String
+        doc: String
+        docModel: String
     }
 
     type Subtopic {
         _id: ID
         title: String
         text: String
-        resources: [Resource]
+        doc: String
+        docModel: String
     }
 
     type Auth {
@@ -61,6 +62,7 @@ const typeDefs = gql`
         topics: [Topic]
         subtopics: [Subtopic]
         resources: [Resource]
+        topicResources: [Resource]
         topic(_id: ID!): Topic
         subtopic(_id: ID!): Subtopic
         resource(_id: ID!): Resource
@@ -72,12 +74,12 @@ const typeDefs = gql`
         loginAdmin(email: String!, password: String!): Auth
         loginUser(email: String!, password: String!): Auth
         createTopic(title: String!, text: String!, link: String!, image: String!): Topic
-        createSubtopic(title: String!, text: String!): Subtopic
-        createResource(title: String!, text: String!, image: String!, link: String!): Resource        
+        createSubtopic(title: String!, text: String!, doc: String!, docModel: String!): Subtopic
+        createResource(title: String!, text: String!, image: String!, link: String!, doc: String!, docModel: String!): Resource        
         updateResource(_id: ID!, title: String!, text: String!, link: String!, image: String!): Resource    
-        addResourceToTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, topicId: ID!): Topic
-        addSubtopicToTopic(_id: ID!, title: String!, text: String!, topicId: ID!): Topic
-        addResourceToSubtopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, subtopicId: ID!): Subtopic
+        resourceToTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, doc: String!, docModel: String!): Resource
+        subtopicToTopic(_id: ID!, title: String!, text: String!, doc: String!, docModel: String!): Topic
+        resourceToSubtopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, doc: String!, docModel: String!): Resource
         deleteResource(_id: ID!): Resource
         deleteSubtopic(_id: ID!): Subtopic
         deleteTopic(_id: ID!): Topic

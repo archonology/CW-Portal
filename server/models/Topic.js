@@ -17,16 +17,6 @@ const topicSchema = new Schema(
         image: {
             type: String,
         },
-        resources: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Resource',
-        },
-        ],
-        subtopics: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Subtopic',
-        },
-        ],
     }
 );
 

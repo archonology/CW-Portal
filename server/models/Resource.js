@@ -16,6 +16,16 @@ const resourceSchema = new Schema(
             type: String,
             required: true,
         },
+        doc: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            refPath: 'docModel'
+        },
+        docModel: {
+            type: String,
+            required: true,
+            enum: ['Topic', 'Subtopic']
+        }
     }
 );
 
