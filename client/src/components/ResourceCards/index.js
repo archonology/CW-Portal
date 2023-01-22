@@ -30,7 +30,7 @@ import Dialog from "@mui/material/Dialog";
 import Auth from "../../utils/auth";
 
 
-const ResourceCard = () => {
+const ResourceCard = ({ resource }) => {
     // set up useQuery to get resource data from the backend
     const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
     const [openTopic, setOpenTopic] = React.useState(false);
@@ -83,8 +83,8 @@ const ResourceCard = () => {
 
     return (
         <>
-            {resourceData.map((resource) => {
-                return (
+            {/* {resourceData.map((resource) => {
+                return ( */}
 
                     <Card key={resource._id} sx={{ maxWidth: 525, minWidth: 350, margin: 2, boxShadow: 10 }}  >
                         <CardMedia
@@ -196,8 +196,7 @@ const ResourceCard = () => {
                         )}
                     </Card>
 
-                );
-            })}
+
         </>
     );
 };

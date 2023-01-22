@@ -77,7 +77,7 @@ const typeDefs = gql`
         updateResource(_id: ID!, title: String!, text: String!, link: String!, image: String!): Resource    
         addResourceToTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, topicId: ID!): Topic
         addSubtopicToTopic(_id: ID!, title: String!, text: String!, topicId: ID!): Topic
-        addResourceToSubtopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, subtopicId: ID!): Subtopic
+        addResourceToSubtopic(_id: ID!, title: String!, text: String!, image: String!, link: String!, subtopicId: ID!): Subtopic
         deleteResource(_id: ID!): Resource
         deleteSubtopic(_id: ID!): Subtopic
         deleteTopic(_id: ID!): Topic

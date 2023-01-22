@@ -44,6 +44,8 @@ const Subtopics = () => {
     // object to keep the topic data
     const subtopicData = data?.subtopics || [];
 
+    console.log(subtopicData);
+
     const [deleteSubtopic, { err, dat }] = useMutation(DELETE_SUBTOPIC, {
         refetchQueries: [{ query: QUERY_ALL_SUBTOPICS }],
     });
@@ -84,10 +86,11 @@ const Subtopics = () => {
     return (
         <>
             {subtopicData.map((subtopic) => {
+                console.log(subtopic.resources);
                 return (
                     <>
-                        <Stack spacing={0}>
 
+                        <Stack spacing={0}>
 
                             <Accordion key={subtopic._id} expanded={expanded === `panel${subtopic._id}`} onChange={handleAccordChange(`panel${subtopic._id}`)} sx={{ padding: 2, backgroundColor: "#212121" }} >
                                 <AccordionSummary
@@ -131,7 +134,16 @@ const Subtopics = () => {
                                             <Grid direction="row" container sx={{ padding: "1rem" }}>
                                                 <Grid container spacing={1} justifyContent="center">
 
-                                                 
+                                                {subtopic?.resources?.map((resource) => {
+                                                    console.log(resource);
+                                                    return (
+                                                        <>
+                                                            <ResourceCard
+                                                                resource={resource}
+                                                            />
+                                                        </>
+                                                    )
+                                                })}
 
                                                 </Grid>
                                             </Grid>
@@ -142,7 +154,7 @@ const Subtopics = () => {
                                         <Grid direction="row" container sx={{ padding: "1rem" }}>
                                             <Grid container spacing={0} justifyContent="center">
 
-                                                <ResourceCard />
+
 
                                             </Grid>
                                         </Grid>
@@ -152,7 +164,9 @@ const Subtopics = () => {
                             </Accordion>
 
 
+
                         </Stack>
+
                     </>
                 );
 
