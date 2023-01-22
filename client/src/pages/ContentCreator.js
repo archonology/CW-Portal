@@ -180,7 +180,7 @@ const ContentCreator = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator/addsubtopic" }, { name: 'Add Resource', link: "/contentcreator/addresource" }].map((text, index) => (
+          {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator/addsubtopic" }, { name: 'Add Resource to Topic', link: "/contentcreator/addresourcetopic" }, { name: 'Add Resource to Subtopic', link: "/contentcreator/addresourcesubtopic" }].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton as={Link} className="link2" to={text.link}>
                 <AddIcon>

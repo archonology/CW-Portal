@@ -1,30 +1,40 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_RESOURCE } from "../utils/mutations";
+import { QUERY_ALL_SUBTOPICS } from "../utils/queries";
 import {
     Container,
     TextField,
     Box,
     Button,
-
 } from "@mui/material";
+import Form from 'react-bootstrap/Form';
 import Auth from "../utils/auth";
 
-const AddResource = () => {
-
+const AddResourceToSubtopic = () => {
     Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
+
+    const { loading, error, data } = useQuery(QUERY_ALL_SUBTOPICS);
+
+    const allSubtopics = data?.subtopics || [];
+
 
     const [formState, setFormState] = useState({
         title: "",
         text: "",
         image: "",
-        link: ""
+        link: "",
+        doc: "",
+        docModel: "Subtopic"
     });
 
-    const [newResource, { error, data }] = useMutation(CREATE_RESOURCE);
+    console.log(allSubtopics);
+
+    const [newResource, { err, dat }] = useMutation(CREATE_RESOURCE);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+        console.log(name, value);
 
         setFormState({
             ...formState,
@@ -32,12 +42,11 @@ const AddResource = () => {
         });
     };
 
-
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const { data } = await newResource({
+            const { dat } = await newResource({
                 variables: { ...formState }
             });
             // directs back to content creator on submission
@@ -64,7 +73,24 @@ const AddResource = () => {
                         alignItems: "center",
                     }}
                 >
-                    <br></br>
+
+                    {/* select the specific title or subtitle */}
+                    <Form.Select
+                        aria-label="select topic"
+                        name="doc"
+                        onChange={handleChange}
+                        className="bg-dark variant-white text-white"
+                    >
+                        <option className="variant-white">Add to which Subtopic:</option>
+                        {allSubtopics.map((subtopic) => {
+                            return (
+                                <>
+                                    <option value={subtopic._id}>{subtopic.title}</option>
+                                </>
+                            )
+                        })}
+                    </Form.Select>
+
                     {/* user sets title, text, url, image */}
                     <TextField
                         name="title"
@@ -121,4 +147,4 @@ const AddResource = () => {
     );
 }
 
-export default AddResource;
+export default AddResourceToSubtopic;
