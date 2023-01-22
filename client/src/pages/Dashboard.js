@@ -96,7 +96,7 @@ const Dashboard = () => {
         <TabPanel value={value} index={0}>
           <Grid direction="row" container >
             <Grid container spacing={0}>
-            <ResourceCard />
+            {/* <ResourceCard /> */}
             </Grid>
           </Grid>
         </TabPanel>

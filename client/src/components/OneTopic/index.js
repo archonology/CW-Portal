@@ -141,7 +141,16 @@ const OneTopic = () => {
                         <Grid direction="row" container sx={{ padding: "1rem" }}>
                             <Grid container spacing={0} justifyContent="center">
 
-                                <ResourceCard />
+                                {topicData?.resources?.map((resource) => {
+                                    console.log(resource);
+                                    return (
+                                        <>
+                                            <ResourceCard
+                                                resource={resource}
+                                            />
+                                        </>
+                                    )
+                                })}
 
                             </Grid>
                         </Grid>
