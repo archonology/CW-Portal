@@ -17,7 +17,6 @@ const Home = () => {
         <Grid direction="row" container sx={{ padding: "2rem" }}>
           <Grid container spacing={0} justifyContent="center">
 
-            {/* <ResourceCard /> */}
 
           </Grid>
         </Grid>
