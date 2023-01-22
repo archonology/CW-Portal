@@ -62,12 +62,13 @@ const resolvers = {
         },
 
         topicResources: async () => {
-            const resourceData = await Resource.find({ doc: "63ca1c0083970d2d63455107" })
+            const resourceData = await Resource.find({ doc: "63ca22b537dfb9988a1a1908" })
                 .populate("doc")
 
 
             return resourceData;
         },
+
 
         resource: async (parent, { _id }) => {
             try {

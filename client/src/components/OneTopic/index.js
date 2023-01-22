@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
-import { QUERY_ONE_TOPIC } from "../../utils/queries";
+import { QUERY_ONE_TOPIC, QUERY_ALL_SUBTOPICS, QUERY_ALL_RESOURCES } from "../../utils/queries";
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Avatar from '@mui/material/Avatar';
@@ -21,6 +21,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
+// handles the tab-panel info and changes
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -66,6 +67,23 @@ const Item = styled(Paper)(({ theme }) => ({
 const OneTopic = () => {
     const [expanded, setExpanded] = React.useState(false);
 
+    // get the topicid with useParams
+    const { _id } = useParams();
+    // set up useQuery get the data from the backend
+    const { loading: topicLoading, error: topicError, data: topicData } = useQuery(
+        _id ? QUERY_ONE_TOPIC : topicError,
+        {
+            variables: { _id: _id },
+        }
+    );
+
+    const { loading: subtopicLoading, error: subtopicError, data: subtopicData } = useQuery(
+        _id ? QUERY_ALL_SUBTOPICS : subtopicError,
+        {
+            variables: { doc: _id },
+        }
+        );
+
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -75,21 +93,16 @@ const OneTopic = () => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    // get teh id with useParams
-    const { _id } = useParams();
-    // set up useQuery get the data from the backend
-    const { loading, error, data } = useQuery(
-        _id ? QUERY_ONE_TOPIC : error,
-        {
-            variables: { _id: _id },
-        }
-    );
-
     // object to keep the topic data
-    const topicData = data?.topic || {};
+    const topic = topicData?.topic || {};
     // check load time and errors
-    if (loading) return "loading";
-    if (error) return `Error! ${error}`;
+    if (topicLoading) return "loading";
+    if (topicError) return `Error! ${topicError}`;
+
+
+    const allSubtopics = subtopicData?.subtopics || [];
+
+    console.log(allSubtopics);
 
     return (
         <>
@@ -98,13 +111,13 @@ const OneTopic = () => {
                 <Stack direction="row" spacing={2} margin={1}>
                     <Avatar
                         alt={"T"}
-                        src={topicData.image}
+                        src={topic.image}
                         sx={{ width: 100, height: 100, marginTop: 1.5 }}
                         className="avatar"
                     />
                     <div>
-                        <h2 className="topic-headers">{topicData.title}</h2>
-                        <p className="mainText">{topicData.text}</p>
+                        <h2 className="topic-headers">{topic.title}</h2>
+                        <p className="mainText">{topic.text}</p>
                     </div>
                 </Stack>
                 <hr></hr>

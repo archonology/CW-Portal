@@ -114,6 +114,7 @@ query resources {
 }
 `;
 
+
 export const QUERY_ONE_TOPIC = gql`
 query topic($_id: ID!) {
     topic(_id: $_id) {

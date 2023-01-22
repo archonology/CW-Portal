@@ -40,6 +40,8 @@ const ResourceCard = () => {
     // object to keep the topic data
     const resourceData = data?.resources || [];
 
+    // console.log(resourceData.doc.title);
+
     // handle delete resource and refetch minus the deleted resource
     const [deleteResource, { err, dat }] = useMutation(DELETE_RESOURCE, {
         refetchQueries: [{ query: QUERY_ALL_RESOURCES }],
