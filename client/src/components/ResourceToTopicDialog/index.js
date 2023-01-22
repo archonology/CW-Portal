@@ -34,27 +34,27 @@ function TopicList({ resource }) {
     const { enqueueSnackbar } = useSnackbar();
 
     // useMutation -- and refetch needed to update site content dynamically
-    const [addResourceToTopic, { topicError }] = useMutation(ADD_RESOURCE_TO_TOPIC, {
-        refetchQueries: [{ query: QUERY_ALL_TOPICS }],
-    });
+    // const [addResourceToTopic, { topicError }] = useMutation(ADD_RESOURCE_TO_TOPIC, {
+    //     refetchQueries: [{ query: QUERY_ALL_TOPICS }],
+    // });
 
 
     // takes in a card and deck object
-    const handleAddtoTopic = async (resource, topic) => {
+    // const handleAddtoTopic = async (resource, topic) => {
    
-        try {
-            const { data } = await addResourceToTopic({
-                variables: { _id: resource._id, title: resource.title, text: resource.text, image: resource.image, link: resource.link, topicId: topic._id },
-            });
+    //     try {
+    //         const { data } = await addResourceToTopic({
+    //             variables: { _id: resource._id, title: resource.title, text: resource.text, image: resource.image, link: resource.link, topicId: topic._id },
+    //         });
 
-            // Display the success message when card added to deck
-            enqueueSnackbar(`Added to ${topic.title}`, { variant: "success" });
+    //         // Display the success message when card added to deck
+    //         enqueueSnackbar(`Added to ${topic.title}`, { variant: "success" });
 
-        } catch (err) {
-            console.error(err);
-            enqueueSnackbar(`Error adding to ${topic.title}`, { variant: "error" });
-        }
-    };
+    //     } catch (err) {
+    //         console.error(err);
+    //         enqueueSnackbar(`Error adding to ${topic.title}`, { variant: "error" });
+    //     }
+    // };
 
     return (
         <>
@@ -67,7 +67,7 @@ function TopicList({ resource }) {
                         return (
                             <ListItem key={topic._id}>
                                 <Tooltip title="Add to this topic">
-                                    <Button onClick={() => handleAddtoTopic(resource, topic)}>
+                                    <Button >
                                         <AddCircleOutlineIcon />
                                         <ListItemText primary={topic.title} />
                                     </Button>

@@ -11,7 +11,7 @@ import {
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { QUERY_ALL_SUBTOPICS } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_RESOURCE_TO_SUBTOPIC } from "../../utils/mutations";
+// import { ADD_RESOURCE_TO_SUBTOPIC } from "../../utils/mutations";
 import { SnackbarProvider, useSnackbar } from "notistack";
 
 export default function ResourceToSubtopicDialog({ resource }) {
@@ -32,25 +32,25 @@ function SubtopicList({ resource }) {
     const { enqueueSnackbar } = useSnackbar();
 
     // useMutation -- and refetch needed to update site content dynamically
-    const [addResourceToSubtopic, { subtopicError }] = useMutation(ADD_RESOURCE_TO_SUBTOPIC, {
-        refetchQueries: [{ query: QUERY_ALL_SUBTOPICS }]
-    });
+    // const [addResourceToSubtopic, { subtopicError }] = useMutation(ADD_RESOURCE_TO_SUBTOPIC, {
+    //     refetchQueries: [{ query: QUERY_ALL_SUBTOPICS }]
+    // });
 
     // takes in a card and deck object
-    const handleAddToSubtopic = async (resource, subtopic) => {
-        try {
-            const { data } = await addResourceToSubtopic({
-                variables: { _id: resource._id, title: resource.title, text: resource.text, image: resource.image, link: resource.link, subtopicId: subtopic._id },
-            });
+    // const handleAddToSubtopic = async (resource, subtopic) => {
+    //     try {
+    //         const { data } = await addResourceToSubtopic({
+    //             variables: { _id: resource._id, title: resource.title, text: resource.text, image: resource.image, link: resource.link, subtopicId: subtopic._id },
+    //         });
 
-            // Display the success message when card added to deck
-            enqueueSnackbar(`Added to ${subtopic.title}`, { variant: "success" });
+    //         // Display the success message when card added to deck
+    //         enqueueSnackbar(`Added to ${subtopic.title}`, { variant: "success" });
 
-        } catch (err) {
-            console.error(err);
-            enqueueSnackbar(`Error adding to ${subtopic.title}`, { variant: "error" });
-        }
-    };
+    //     } catch (err) {
+    //         console.error(err);
+    //         enqueueSnackbar(`Error adding to ${subtopic.title}`, { variant: "error" });
+    //     }
+    // };
 
     return (
         <>
@@ -63,7 +63,7 @@ function SubtopicList({ resource }) {
                         return (
                             <ListItem key={subtopic._id}>
                                 <Tooltip title="Add to this Subtopic">
-                                    <Button onClick={() => handleAddToSubtopic(resource, subtopic)}>
+                                    <Button>
                                         <AddCircleOutlineIcon />
                                         <ListItemText primary={subtopic.title} />
                                     </Button>

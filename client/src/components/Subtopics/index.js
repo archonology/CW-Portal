@@ -41,7 +41,7 @@ const Subtopics = () => {
     const { loading, error, data } = useQuery(QUERY_ALL_SUBTOPICS);
     const [openTopic, setOpenTopic] = React.useState(false);
 
-    // object to keep the topic data
+    // object to keep the subtopic data
     const subtopicData = data?.subtopics || [];
 
     const [deleteSubtopic, { err, dat }] = useMutation(DELETE_SUBTOPIC, {

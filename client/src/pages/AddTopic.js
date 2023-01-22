@@ -5,12 +5,7 @@ import {
     Container,
     TextField,
     Box,
-    Autocomplete,
-    FormControlLabel,
-    Checkbox,
     Button,
-    Grid,
-    Typography,
 } from "@mui/material";
 import Auth from "../utils/auth";
 

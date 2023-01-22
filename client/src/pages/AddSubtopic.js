@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_SUBTOPIC } from "../utils/mutations";
+import { QUERY_ALL_TOPICS } from "../utils/queries";
 import {
     Container,
     TextField,
@@ -9,24 +10,45 @@ import {
 } from "@mui/material";
 import Auth from "../utils/auth";
 
-const AddSubtopic = () => {
+import Form from 'react-bootstrap/Form';
 
+
+
+
+
+const AddSubtopic = () => {
     Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
+
+    const { loading, err, data } = useQuery(QUERY_ALL_TOPICS);
+
+    const topicData = data?.topics || [];
+
+    console.log(topicData);
 
     const [formState, setFormState] = useState({
         title: "",
-        text: ""
+        text: "",
+        doc: "",
+        docModel: "Topic"
     });
 
-    const [newSubtopic, { error, data }] = useMutation(CREATE_SUBTOPIC);
+    const [newSubtopic, { error, dat }] = useMutation(CREATE_SUBTOPIC);
+    const [topic, setTopic] = React.useState('');
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+
+        console.log(name, value);
 
         setFormState({
             ...formState,
             [name]: value,
         });
+    };
+
+    const handleValueChange = (event) => {
+        console.log(event.target.value)
+        setFormState({ doc: event.target.value });
     };
 
 
@@ -37,6 +59,7 @@ const AddSubtopic = () => {
             const { data } = await newSubtopic({
                 variables: { ...formState }
             });
+            console.log(data);
             // directs back to content creator on submission
             window.location.assign('/contentcreator');
 
@@ -62,6 +85,24 @@ const AddSubtopic = () => {
                     }}
                 >
                     <br></br>
+                    {/* add to a topic */}
+
+                    <Form.Select
+                        aria-label="select topic"
+                        name="doc"
+                        onChange={handleChange}
+                        className="bg-dark variant-white text-white"
+                    >
+                        <option className="variant-white">Add to Topic:</option>
+                        {topicData.map((topic) => {
+                            return (
+                                <>
+                                    <option value={topic._id}>{topic.title}</option>
+                                </>
+                            )
+                        })}
+                    </Form.Select>
+
                     {/* user sets title, text, url, image */}
                     <TextField
                         name="title"
