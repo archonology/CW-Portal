@@ -1,7 +1,4 @@
 import React from "react";
-import { useQuery } from '@apollo/client';
-import { QUERY_ONE_TOPIC } from "../../utils/queries";
-import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -59,7 +56,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-const OneTopic = ({}) => {
+const Topic = ({ topic }) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const [value, setValue] = React.useState(0);
@@ -71,39 +68,23 @@ const OneTopic = ({}) => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    // get teh id with useParams
-    const { _id } = useParams();
-    // set up useQuery get the data from the backend
-    const { loading, error, data } = useQuery(
-        _id ? QUERY_ONE_TOPIC : error,
-        {
-            variables: { _id: _id },
-        }
-    );
-
-    // object to keep the topic data
-    const topicData = data?.topic || {};
-    // check load time and errors
-    if (loading) return "loading";
-    if (error) return `Error! ${error}`;
 
     return (
         <>
-
-            <Container fluid>
+            <Container key={topic._id} fluid>
                 <Stack direction="row" spacing={2} margin={1}>
                     <Avatar
                         alt={"T"}
-                        src={topicData.image}
+                        src={topic.image}
                         sx={{ width: 100, height: 100, marginTop: 1.5 }}
                         className="avatar"
                     />
                     <div>
-                        <h2 className="topic-headers">{topicData.title}</h2>
-                        <p className="mainText">{topicData.text}</p>
+                        <h2 className="topic-headers">{topic.title}</h2>
+                        <p className="mainText">{topic.text}</p>
                     </div>
                 </Stack>
-                <hr></hr>
+
             </Container>
 
             <Box sx={{ width: '100%', marginTop: 0 }}>
@@ -129,16 +110,15 @@ const OneTopic = ({}) => {
                 <TabPanel value={value} index={0}>
                     <Paper>
                         {/* see all subtopics for one topic */}
-                        {topicData?.subtopics?.map((subtopic) => {
-                                    console.log(subtopic);
-                                    return (
-                                        <>
-                                            <Subtopic
-                                                subtopic={subtopic}
-                                            />
-                                        </>
-                                    )
-                                })}
+                        {topic?.subtopics?.map((subtopic) => {
+                            return (
+                                <>
+                                    <Subtopic
+                                        subtopic={subtopic}
+                                    />
+                                </>
+                            )
+                        })}
                     </Paper>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
@@ -146,8 +126,7 @@ const OneTopic = ({}) => {
                         <Grid direction="row" container sx={{ padding: "1rem" }}>
                             <Grid container spacing={0} justifyContent="center">
 
-                                {topicData?.resources?.map((resource) => {
-                                    console.log(resource);
+                                {topic?.resources?.map((resource) => {
                                     return (
                                         <>
                                             <ResourceCard
@@ -168,4 +147,4 @@ const OneTopic = ({}) => {
     );
 };
 
-export default OneTopic;
+export default Topic;

@@ -15,7 +15,6 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
-import Resources from "./pages/Resources";
 import Donate from "./pages/Donate";
 import ContentCreator from "./pages/ContentCreator";
 import AddTopic from "./pages/AddTopic";
@@ -30,8 +29,6 @@ import Header from "./components/Header/index";
 import Footer from "./components/Footer";
 
 import "./App.css";
-import ResourceList from "./components/ResourceList";
-
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 
@@ -119,10 +116,6 @@ function App() {
               <Route path="/adminlogin" element={<AdminLogin />} />
               <Route path="/adminsignup" element={<AdminSignup />} />
               <Route path="/contact" element={<Contact />} />
-              {ResourceList.map((resource) => (
-                <Route key={resource} path={"/resources" + resource.url} element={<Resources />} />
-              ))};
-
               <Route path="/*" element={<Home />} />
             </Routes>
           </div>

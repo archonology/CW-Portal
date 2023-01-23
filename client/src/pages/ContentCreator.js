@@ -22,7 +22,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
 import Topics from '../components/Topics';
 import Subtopics from '../components/Subtopics';
-import ResourceCard from '../components/ResourceCards';
+import ResourceCard from '../components/OneResource';
+import Resources from '../components/Resources';
 import { Button, ButtonGroup, Grid } from "@mui/material";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -246,7 +247,7 @@ const ContentCreator = () => {
           <Grid direction="row" container sx={{ padding: "1rem"}}>
         <Grid container spacing={0} justifyContent="center">
 
-          <ResourceCard />
+          <Resources />
 
         </Grid>
       </Grid>

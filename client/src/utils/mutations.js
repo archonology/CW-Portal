@@ -137,7 +137,7 @@ mutation addResourceToTopic($_id: ID!, $title: String!, $text: String!, $image: 
 
 export const ADD_RESOURCE_TO_SUBTOPIC = gql`
 mutation addResourceToSubtopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!, $subtopicId: ID!) {
-  addResourceToSubtopic(_id: $id, title: $title, text: $text, image: $image, link: $link, subtopicId: $subtopicId){
+  addResourceToSubtopic(_id: $_id, title: $title, text: $text, image: $image, link: $link, subtopicId: $subtopicId){
         resources {
             _id
             title
@@ -161,6 +161,25 @@ mutation addSubtopicToTopic($_id: ID!, $title: String!, $text: String!, $topicId
 }
 `;
 
+export const REMOVE_RESOURCE_FROM_TOPIC = gql`
+mutation removeResourceFromTopic($_id: ID!, $topicId: ID!) {
+  removeResourceFromTopic(_id: $_id, topicId: $topicId){
+        resources {
+            _id
+        }
+    }
+}
+`;
+
+export const REMOVE_RESOURCE_FROM_SUBTOPIC = gql`
+mutation removeResourceFromSubTopic($_id: ID!, $subtopicId: ID!) {
+  removeResourceFromSubTopic(_id: $_id, subtopicId: $subtopicId){
+        resources {
+            _id
+        }
+    }
+}
+`;
 
 
 

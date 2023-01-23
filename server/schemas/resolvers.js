@@ -24,25 +24,39 @@ const resolvers = {
         },
 
         admins: async () => {
-            return await Admin.find({});
+            const adminData = await Admin.find({});
+
+            return adminData;
         },
 
         users: async () => {
-            return await User.find({});
+            const userData = await User.find({});
+
+            return userData;
         },
 
         topics: async () => {
             const topicData = await Topic.find({})
-                .populate('subtopics')
-                .populate('resources');
+                .populate('resources')
+                .populate({
+                    path: 'subtopics',
+                    populate: {
+                        path: 'resources'
+                    }
+                });
             return topicData;
         },
 
         topic: async (parent, { _id }) => {
             try {
                 return Topic.findOne({ _id })
-                .populate('subtopics')
-                .populate('resources');
+                    .populate('resources')
+                    .populate({
+                        path: 'subtopics',
+                        populate: {
+                            path: 'resources'
+                        }
+                    });
             } catch (err) {
                 console.log(err);
             }
@@ -50,14 +64,14 @@ const resolvers = {
 
         subtopics: async () => {
             const subtopicData = await Subtopic.find({})
-            .populate('resources');
-        return subtopicData;
+                .populate('resources');
+            return subtopicData;
         },
 
         subtopic: async (parent, { _id }) => {
             try {
                 return Subtopic.findOne({ _id })
-                .populate('resources');
+                    .populate('resources');
             } catch (err) {
                 console.log(err);
             }
@@ -143,7 +157,7 @@ const resolvers = {
                 { _id: subtopicId },
                 { $addToSet: { resources: { _id, title, text, image, link } } },
                 { new: true }
-            );
+            ).populate('resources');
             return updateSubtopic;
         },
 
@@ -152,7 +166,7 @@ const resolvers = {
                 { _id: topicId },
                 { $addToSet: { resources: { _id, title, text, image, link } } },
                 { new: true }
-            );
+            ).populate('resources');
             return updateTopic;
         },
 
@@ -161,7 +175,13 @@ const resolvers = {
                 { _id: topicId },
                 { $addToSet: { subtopics: { _id, title, text } } },
                 { new: true }
-            );
+            )
+                .populate({
+                    path: 'subtopics',
+                    populate: {
+                        path: 'resources'
+                    }
+                });
             return updateTopic;
         },
 
@@ -173,7 +193,27 @@ const resolvers = {
             );
             return updatedResource;
         },
-        
+
+        removeResourceFromTopic: async (parent, { _id, topicId }) => {
+            const updatedTopic = await Topic.findOneAndUpdate(
+                { _id: topicId },
+                { $pull: { resources: _id } },
+                { new: true }
+            )
+                .populate('resources');
+            return updatedTopic;
+        },
+
+        removeResourceFromSubTopic: async (parent, { _id, subtopicId }) => {
+            const updatedSubtopic = await Subtopic.findOneAndUpdate(
+                { _id: subtopicId },
+                { $pull: { resources: _id } },
+                { new: true }
+            )
+                .populate('resources');
+            return updatedSubtopic;
+        },
+
 
         deleteResource: async (parent, { _id }) => {
             const removeResource = await Resource.deleteOne(

@@ -24,7 +24,8 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
-import ResourceCard from "../ResourceCards";
+import ResourceCard from "../OneResource";
+import Subtopic from "../OneSubtopic";
 import { Grid, IconButton } from "@mui/material";
 import { DELETE_SUBTOPIC } from "../../utils/mutations";
 
@@ -86,87 +87,9 @@ const Subtopics = () => {
     return (
         <>
             {subtopicData.map((subtopic) => {
-                console.log(subtopic.resources);
                 return (
                     <>
-
-                        <Stack spacing={0}>
-
-                            <Accordion key={subtopic._id} expanded={expanded === `panel${subtopic._id}`} onChange={handleAccordChange(`panel${subtopic._id}`)} sx={{ padding: 2, backgroundColor: "#212121" }} >
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1bh-content"
-                                    id="panel1bh-header"
-                                >
-
-                                    <Typography sx={{ width: '33%', flexShrink: 0, fontSize: 'larger', paddingRight: 2 }} className="subtopic-headers">
-                                        {subtopic.title}
-                                    </Typography>
-
-                                    <Typography sx={{ color: 'text.secondary' }} >{subtopic.text}</Typography>
-
-                                </AccordionSummary>
-
-                                <AccordionDetails key={subtopic._id} >
-                                    {Auth.adminLoggedIn() ? (
-                                        <>
-                                            {/* the admin edit button set */}
-                                            <Tooltip title="Delete Resource">
-                                                <IconButton onClick={() => handleDelete(subtopic._id)}>
-                                                    <DeleteIcon
-                                                        className="custom-link"
-                                                        sx={{ variant: "filled" }}
-                                                    />
-                                                </IconButton>
-                                            </Tooltip>
-
-                                            <Tooltip title="Add to a Topic">
-                                                <IconButton onClick={handleClickOpenTopics}>
-                                                    <AddCircleIcon sx={{ color: "#f6685e" }} />
-                                                </IconButton>
-                                            </Tooltip>
-
-                                            {/* run the dialog, manage collapse */}
-                                            <Dialog open={openTopic} onClose={handleCloseTopics}>
-                                                <SubToTopicDialog subtopic={subtopic} />
-                                            </Dialog>
-
-                                            <Grid direction="row" container sx={{ padding: "1rem" }}>
-                                                <Grid container spacing={1} justifyContent="center">
-
-                                                {subtopic?.resources?.map((resource) => {
-                                                    console.log(resource);
-                                                    return (
-                                                        <>
-                                                            <ResourceCard
-                                                                resource={resource}
-                                                            />
-                                                        </>
-                                                    )
-                                                })}
-
-                                                </Grid>
-                                            </Grid>
-
-                                        </>
-                                    ) : (
-
-                                        <Grid direction="row" container sx={{ padding: "1rem" }}>
-                                            <Grid container spacing={0} justifyContent="center">
-
-
-
-                                            </Grid>
-                                        </Grid>
-
-                                    )}
-                                </AccordionDetails>
-                            </Accordion>
-
-
-
-                        </Stack>
-
+                        <Subtopic subtopic={subtopic} />
                     </>
                 );
 

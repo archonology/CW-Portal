@@ -7,7 +7,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
-import ResourceList from "../ResourceList";
 import Auth from "../../utils/auth";
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';

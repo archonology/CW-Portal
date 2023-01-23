@@ -7,7 +7,7 @@ import {
     Box,
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { QUERY_ALL_RESOURCES } from "../../utils/queries";
+import { QUERY_ALL_RESOURCES, QUERY_ONE_RESOURCE } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_RESOURCE } from "../../utils/mutations";
 import { SnackbarProvider, useSnackbar } from "notistack";
@@ -23,7 +23,7 @@ export default function EditResourceDialog({ resource }) {
 }
 
 function Resource({ resource }) {
-
+    console.log(resource);
     // useMutation -- and refetch needed to update site content dynamically
     const [updateResource, { resourceErr }] = useMutation(UPDATE_RESOURCE, {
         refetchQueries: [{ query: QUERY_ALL_RESOURCES }]

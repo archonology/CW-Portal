@@ -9,6 +9,7 @@ import { IconButton, Divider } from '@mui/material';
 
 import Tooltip from '@mui/material/Tooltip';
 import { DELETE_TOPIC } from "../../utils/mutations";
+import Topic from "../Topic";
 
 import Auth from "../../utils/auth";
 
@@ -42,40 +43,7 @@ const Topics = () => {
         <>
             {topicData.map((topic) => {
                 return (
-                    <Container key={topic._id} fluid>
-                        <Stack direction="row" spacing={2} margin={1}>
-                            <Avatar
-                                alt={"Topic"}
-                                src={topic.image}
-                                sx={{ width: 100, height: 100, marginTop: 0 }}
-                                className="avatar"
-                            />
-                            <div>
-                                {Auth.adminLoggedIn() ? (
-                                    <>
-                                        <h3 className="topic-headers">{topic.title}</h3>
-                                        <p className="mainText">{topic.text}</p>
-                                        <Tooltip title="Delete Resource">
-                                            <IconButton onClick={() => handleDelete(topic._id)}>
-                                                <DeleteIcon
-                                                    className="custom-link"
-                                                    sx={{ variant: "filled" }}
-                                                />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </>
-                                ) : (
-                                    <>
-                                        <h3 className="topic-headers">{topic.title}</h3>
-                                        <p className="mainText">{topic.text}</p>
-                                    </>
-                                )}
-
-                            </div>
-
-                        </Stack>
-                        <hr></hr>
-                    </Container>
+                    <Topic topic={topic} />
                 );
             })}
             <hr></hr>
