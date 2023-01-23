@@ -69,7 +69,7 @@ function Header() {
                 
 
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-                <Nav.Link as={Link} to="/">Donate</Nav.Link>
+                <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link>
 
               </Nav>
               <Form className="d-flex">
