@@ -37,8 +37,6 @@ const ResourceCard = ({ resource }) => {
     const [openSubtopic, setOpenSubtopic] = React.useState(false);
     const [openResource, setOpenResource] = React.useState(false);
 
-    // object to keep the topic data
-    const resourceData = data?.resources || [];
 
     // handle delete resource and refetch minus the deleted resource
     const [deleteResource, { err, dat }] = useMutation(DELETE_RESOURCE, {
@@ -83,9 +81,6 @@ const ResourceCard = ({ resource }) => {
 
     return (
         <>
-            {/* {resourceData.map((resource) => {
-                return ( */}
-
             <Card key={resource._id} sx={{ maxWidth: 525, minWidth: 350, margin: 2, boxShadow: 10 }}  >
                 <CardMedia
                     component="img"

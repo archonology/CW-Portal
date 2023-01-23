@@ -36,7 +36,6 @@ const Subtopic = ({ subtopic }) => {
     // object to keep the topic data
     const subtopicData = data?.subtopics || [];
 
-    console.log(subtopicData);
 
     const [deleteSubtopic, { err, dat }] = useMutation(DELETE_SUBTOPIC, {
         refetchQueries: [{ query: QUERY_ALL_SUBTOPICS }],

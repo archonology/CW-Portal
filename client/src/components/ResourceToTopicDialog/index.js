@@ -26,8 +26,6 @@ export default function ResourceToTopicDialog({ resource }) {
 
 function TopicList({ resource }) {
 
-    console.log(resource);
-
     const { loading, err, data } = useQuery(QUERY_ALL_TOPICS);
     const topicData = data?.topics || [];
 
