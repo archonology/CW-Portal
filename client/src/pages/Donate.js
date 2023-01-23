@@ -1,27 +1,27 @@
 import React from "react";
+import Container from 'react-bootstrap/Container';
+import { Box, Button } from "@mui/material";
 
 const Donate = () => {
-
     return (
-        <section>
-            <div className="product">
-                <img
-                    src="https://i.imgur.com/EHyR2nP.png"
-                    alt="The cover of Stubborn Attachments"
-                />
-                <div className="description">
-                    <h3>Stubborn Attachments</h3>
-                    <h5>$20.00</h5>
-                </div>
-            </div>
-            <form action="/create-checkout-session" method="POST">
-                <button type="submit">
-                    Checkout
-                </button>
-            </form>
-        </section>
-    )
+        <>
+            <Container fluid className="text-left p-5 mt-5 box">
+                <h2>Donate</h2>
+                <h4>https://buy.stripe.com/cN26ox1O4eMkf7ifYY</h4>
+                <p className="mainText">explain donate here</p>
 
+            </Container>
+
+            <Button
+                href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY"
+                variant="contained"
+                color="secondary"
+                style={{ maxWidth: "100px" }}
+            >
+                Donate
+            </Button>
+        </>
+    );
 };
 
 

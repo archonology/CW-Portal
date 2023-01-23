@@ -110,9 +110,7 @@ function App() {
               <Route path="contentcreator/addsubtopic" element={<AddSubtopic />} />
               <Route path="contentcreator/addresource" element={<AddResource />} />
               {/* build in progess on donation features */}
-              {message ? (
-                <Message message={message} />
-              ) : (<Route path="/donate" element={<Donate />} />)}
+              <Route path="/donate" element={<Donate />} />
               <Route path="/adminlogin" element={<AdminLogin />} />
               <Route path="/adminsignup" element={<AdminSignup />} />
               <Route path="/contact" element={<Contact />} />

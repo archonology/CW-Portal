@@ -141,7 +141,7 @@ const ResourceCard = ({ resource }) => {
 
                             <Tooltip title="Add to a Topic">
                                 <IconButton onClick={handleClickOpenTopics}>
-                                    <AddCircleIcon sx={{ color: "#00e676" }} />topic
+                                    <AddCircleIcon sx={{ color: "#00e676" }} />
                                 </IconButton>
                             </Tooltip>
 
@@ -152,7 +152,7 @@ const ResourceCard = ({ resource }) => {
 
                             <Tooltip title="Add to a Subtopic">
                                 <IconButton onClick={handleClickOpenSubtopics}>
-                                    <AddCircleOutlineIcon sx={{ color: "#00e676" }} />subtopic
+                                    <AddCircleOutlineIcon sx={{ color: "#00e676" }} />
                                 </IconButton>
                             </Tooltip>
 
@@ -162,7 +162,7 @@ const ResourceCard = ({ resource }) => {
 
                             <Tooltip title="Remove from a Topic">
                                 <IconButton onClick={handleClickOpenXtopics}>
-                                    <RemoveCircleIcon sx={{ color: "#af52bf" }} />tpc
+                                    <RemoveCircleIcon sx={{ color: "#af52bf" }} />
                                 </IconButton>
                             </Tooltip>
 
@@ -172,7 +172,7 @@ const ResourceCard = ({ resource }) => {
 
                             <Tooltip title="Remove from a Subtopic">
                                 <IconButton onClick={handleClickOpenXsubtopics}>
-                                    <RemoveCircleOutlineIcon sx={{ color: "#af52bf" }} />sbt
+                                    <RemoveCircleOutlineIcon sx={{ color: "#af52bf" }} />
                                 </IconButton>
                             </Tooltip>
 
@@ -198,10 +198,6 @@ const ResourceCard = ({ resource }) => {
                                     />
                                 </IconButton>
                             </Tooltip>
-
-
-
-
 
                         </CardActions>
                     </>
