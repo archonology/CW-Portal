@@ -24,6 +24,7 @@ import { DELETE_RESOURCE } from "../../utils/mutations";
 // import dialog pop ups for admin resource editting
 import ResourceToTopicDialog from "../ResourceToTopicDialog";
 import ResourceToSubtopicDialog from "../ResourceToSubtopicDialog";
+import XResourceFromTopicDialog from "../XResourceFromTopicDialog";
 import EditResourceDialog from "../EditResourceDialog";
 import Dialog from "@mui/material/Dialog";
 
@@ -34,6 +35,7 @@ const ResourceCard = ({ resource }) => {
     // set up useQuery to get resource data from the backend
     const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
     const [openTopic, setOpenTopic] = React.useState(false);
+    const [openXtopic, setOpenXtopic] = React.useState(false);
     const [openSubtopic, setOpenSubtopic] = React.useState(false);
     const [openResource, setOpenResource] = React.useState(false);
 
@@ -59,6 +61,15 @@ const ResourceCard = ({ resource }) => {
     const handleCloseSubtopics = () => {
         setOpenSubtopic(false);
     };
+
+    const handleClickOpenXtopics = () => {
+        setOpenXtopic(true);
+    };
+
+    const handleCloseXtopics = () => {
+        setOpenXtopic(false);
+    };
+
 
     const handleClickOpenResource = () => {
         setOpenResource(true);
@@ -117,11 +128,17 @@ const ResourceCard = ({ resource }) => {
                         <Divider variant="middle" />
                         {/* tools specific to admin */}
                         <CardActions>
+
                             <Tooltip title="Add to a Topic">
                                 <IconButton onClick={handleClickOpenTopics}>
                                     <AddCircleIcon sx={{ color: "#f6685e" }} />
                                 </IconButton>
                             </Tooltip>
+
+                            {/* run the dialog, manage collapse */}
+                            <Dialog open={openTopic} onClose={handleCloseTopics}>
+                                <ResourceToTopicDialog resource={resource} />
+                            </Dialog>
 
                             <Tooltip title="Add to a Subtopic">
                                 <IconButton onClick={handleClickOpenSubtopics}>
@@ -129,11 +146,19 @@ const ResourceCard = ({ resource }) => {
                                 </IconButton>
                             </Tooltip>
 
+                            <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
+                                <ResourceToSubtopicDialog resource={resource} />
+                            </Dialog>
+
                             <Tooltip title="Remove from a Topic">
-                                <IconButton onClick={handleClickOpenTopics}>
+                                <IconButton onClick={handleClickOpenXtopics}>
                                     <RemoveCircleIcon sx={{ color: "#f6685e" }} />
                                 </IconButton>
                             </Tooltip>
+
+                            <Dialog open={openXtopic} onClose={handleCloseXtopics}>
+                                <XResourceFromTopicDialog resource={resource} />
+                            </Dialog>
 
                             <Tooltip title="Remove from a Subtopic">
                                 <IconButton onClick={handleClickOpenSubtopics}>
@@ -147,6 +172,10 @@ const ResourceCard = ({ resource }) => {
                                 </IconButton>
                             </Tooltip>
 
+                            <Dialog open={openResource} onClose={handleCloseResource}>
+                                <EditResourceDialog resource={resource} />
+                            </Dialog>
+
                             <Tooltip title="Delete Resource">
                                 <IconButton onClick={() => handleDelete(resource._id)}>
                                     <DeleteIcon
@@ -156,18 +185,9 @@ const ResourceCard = ({ resource }) => {
                                 </IconButton>
                             </Tooltip>
 
-                            {/* run the dialog, manage collapse */}
-                            <Dialog open={openTopic} onClose={handleCloseTopics}>
-                                <ResourceToTopicDialog resource={resource} />
-                            </Dialog>
 
-                            <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
-                                <ResourceToSubtopicDialog resource={resource} />
-                            </Dialog>
 
-                            <Dialog open={openResource} onClose={handleCloseResource}>
-                                <EditResourceDialog resource={resource} />
-                            </Dialog>
+
 
                         </CardActions>
                     </>

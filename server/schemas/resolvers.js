@@ -194,6 +194,16 @@ const resolvers = {
             return updatedResource;
         },
 
+        removeResourceFromTopic: async (parent, { _id, topicId }) => {
+            const updatedTopic = await Topic.findOneAndUpdate(
+                { _id: topicId },
+                { $pull: { resources: _id } },
+                { new: true }
+            )
+                .populate('resources');
+            return updatedTopic;
+        },
+
 
         deleteResource: async (parent, { _id }) => {
             const removeResource = await Resource.deleteOne(

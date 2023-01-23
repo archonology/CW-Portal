@@ -14,6 +14,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Avatar from '@mui/material/Avatar';
 
 
 import ResourceCard from "../OneResource";
@@ -85,12 +86,18 @@ const Subtopic = ({ subtopic }) => {
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                     >
+                        <Avatar
+                            alt={"T"}
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi5iu8AFpy7j6vndtM3GAXTn48vP8QAa2z5Q&usqp=CAU"
+                            sx={{ width: 50, height: 50, marginRight: 2 }}
+                            className="avatar"
+                        />
 
                         <Typography sx={{ width: '33%', flexShrink: 0, fontSize: 'larger', paddingRight: 2 }} className="subtopic-headers">
                             {subtopic.title}
                         </Typography>
 
-                        <Typography sx={{ color: 'text.secondary' }} >{subtopic.text}</Typography>
+                        <Typography sx={{ color: 'text.secondary', paddingRight: 3 }} >{subtopic.text}</Typography>
 
                     </AccordionSummary>
 
