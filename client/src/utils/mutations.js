@@ -171,6 +171,15 @@ mutation removeResourceFromTopic($_id: ID!, $topicId: ID!) {
 }
 `;
 
+export const REMOVE_RESOURCE_FROM_SUBTOPIC = gql`
+mutation removeResourceFromSubTopic($_id: ID!, $subtopicId: ID!) {
+  removeResourceFromSubTopic(_id: $_id, subtopicId: $subtopicId){
+        resources {
+            _id
+        }
+    }
+}
+`;
 
 
 

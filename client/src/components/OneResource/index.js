@@ -29,6 +29,7 @@ import EditResourceDialog from "../EditResourceDialog";
 import Dialog from "@mui/material/Dialog";
 
 import Auth from "../../utils/auth";
+import XResourceFromSubtopicDialog from "../XResourceFromSubtopicDialog";
 
 
 const ResourceCard = ({ resource }) => {
@@ -36,6 +37,7 @@ const ResourceCard = ({ resource }) => {
     const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
     const [openTopic, setOpenTopic] = React.useState(false);
     const [openXtopic, setOpenXtopic] = React.useState(false);
+    const [openXsubtopic, setOpenXsubtopic] = React.useState(false);
     const [openSubtopic, setOpenSubtopic] = React.useState(false);
     const [openResource, setOpenResource] = React.useState(false);
 
@@ -68,6 +70,14 @@ const ResourceCard = ({ resource }) => {
 
     const handleCloseXtopics = () => {
         setOpenXtopic(false);
+    };
+
+    const handleClickOpenXsubtopics = () => {
+        setOpenXsubtopic(true);
+    };
+
+    const handleCloseXsubtopics = () => {
+        setOpenXsubtopic(false);
     };
 
 
@@ -161,10 +171,14 @@ const ResourceCard = ({ resource }) => {
                             </Dialog>
 
                             <Tooltip title="Remove from a Subtopic">
-                                <IconButton onClick={handleClickOpenSubtopics}>
+                                <IconButton onClick={handleClickOpenXsubtopics}>
                                     <RemoveCircleOutlineIcon sx={{ color: "#af52bf" }} />
                                 </IconButton>
                             </Tooltip>
+
+                            <Dialog open={openXsubtopic} onClose={handleCloseXsubtopics}>
+                                <XResourceFromSubtopicDialog resource={resource} />
+                            </Dialog>
 
                             <Tooltip title="Edit">
                                 <IconButton onClick={handleClickOpenResource}>
