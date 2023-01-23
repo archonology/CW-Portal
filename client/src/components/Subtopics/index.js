@@ -24,7 +24,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
-import ResourceCard from "../ResourceCards";
+import ResourceCard from "../OneResource";
 import { Grid, IconButton } from "@mui/material";
 import { DELETE_SUBTOPIC } from "../../utils/mutations";
 

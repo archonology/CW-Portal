@@ -4,7 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Auth from "../utils/auth";
-import ResourceCard from "../components/ResourceCards";
+import ResourceCard from "../components/OneResource";
+import Resources from "../components/Resources";
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Grid, GridItem } from "@mui/material";
 
@@ -96,7 +97,7 @@ const Dashboard = () => {
         <TabPanel value={value} index={0}>
           <Grid direction="row" container >
             <Grid container spacing={0}>
-            {/* <ResourceCard /> */}
+            <Resources />
             </Grid>
           </Grid>
         </TabPanel>

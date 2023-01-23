@@ -1,6 +1,6 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
-import ResourceCard from "../components/ResourceCards";
+import Resources from "../components/Resources";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -17,7 +17,7 @@ const Home = () => {
         <Grid direction="row" container sx={{ padding: "2rem" }}>
           <Grid container spacing={0} justifyContent="center">
 
-
+<Resources />
           </Grid>
         </Grid>
       </Paper>

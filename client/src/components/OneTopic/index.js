@@ -5,20 +5,16 @@ import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { Button, ButtonGroup, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import Subtopics from "../Subtopics";
-import ResourceCard from "../ResourceCards";
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Subtopic from "../OneSubtopic";
+import ResourceCard from "../OneResource";
+
 
 
 function TabPanel(props) {
@@ -133,7 +129,16 @@ const OneTopic = () => {
                 <TabPanel value={value} index={0}>
                     <Paper>
                         {/* see all subtopics for one topic */}
-                        <Subtopics />
+                        {topicData?.subtopics?.map((subtopic) => {
+                                    console.log(subtopic);
+                                    return (
+                                        <>
+                                            <Subtopic
+                                                subtopic={subtopic}
+                                            />
+                                        </>
+                                    )
+                                })}
                     </Paper>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
