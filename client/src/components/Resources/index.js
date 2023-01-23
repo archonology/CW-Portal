@@ -26,6 +26,7 @@ import ResourceToTopicDialog from "../ResourceToTopicDialog";
 import ResourceToSubtopicDialog from "../ResourceToSubtopicDialog";
 import EditResourceDialog from "../EditResourceDialog";
 import Dialog from "@mui/material/Dialog";
+import ResourceCard from "../OneResource";
 
 import Auth from "../../utils/auth";
 
@@ -85,121 +86,14 @@ const Resources = () => {
         <>
             {resourceData.map((resource) => {
                 return (
-
-                    <Card key={resource._id} sx={{ maxWidth: 525, minWidth: 350, margin: 2, boxShadow: 10 }}  >
-                        <CardMedia
-                            component="img"
-                            alt="resource image"
-                            height="140"
-                            image={resource.image}
-                            className="bgresource"
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                {resource.title}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {resource.text}
-                            </Typography>
-                        </CardContent>
-                        <Divider variant="middle" />
-
-                        {Auth.adminLoggedIn() ? (
-                            <>
-                                <CardActions>
-                                    <IconButton>
-                                        <FavoriteIcon sx={{ color: "#e57373" }} />
-                                    </IconButton>
-
-                                    <IconButton>
-                                        <AssignmentIcon sx={{ color: "#4fc3f7" }} />
-                                    </IconButton>
-
-                                    <IconButton className="link2" href={resource.link} target={'_blank'} rel={'nonreferrer'}>
-                                        <PublicIcon sx={{ color: "#8bc34a" }} />
-                                    </IconButton>
-                                </CardActions>
-                                <Divider variant="middle" />
-                                {/* tools specific to admin */}
-                                <CardActions>
-                                    <Tooltip title="Add to a Topic">
-                                        <IconButton onClick={handleClickOpenTopics}>
-                                            <AddCircleIcon sx={{ color: "#f6685e" }} />
-                                        </IconButton>
-                                    </Tooltip>
-
-                                    <Tooltip title="Add to a Subtopic">
-                                        <IconButton onClick={handleClickOpenSubtopics}>
-                                            <AddCircleOutlineIcon sx={{ color: "#af52bf" }} />
-                                        </IconButton>
-                                    </Tooltip>
-
-                                    <Tooltip title="Remove from a Topic">
-                                        <IconButton onClick={handleClickOpenTopics}>
-                                            <RemoveCircleIcon sx={{ color: "#f6685e" }} />
-                                        </IconButton>
-                                    </Tooltip>
-
-                                    <Tooltip title="Remove from a Subtopic">
-                                        <IconButton onClick={handleClickOpenSubtopics}>
-                                            <RemoveCircleOutlineIcon sx={{ color: "#af52bf" }} />
-                                        </IconButton>
-                                    </Tooltip>
-
-                                    <Tooltip title="Edit">
-                                        <IconButton onClick={handleClickOpenResource}>
-                                            <EditIcon sx={{ color: "#ffcf33" }} />
-                                        </IconButton>
-                                    </Tooltip>
-
-                                    <Tooltip title="Delete Resource">
-                                        <IconButton onClick={() => handleDelete(resource._id)}>
-                                            <DeleteIcon
-                                                className="custom-link"
-                                                sx={{ color: "#b2102f" }}
-                                            />
-                                        </IconButton>
-                                    </Tooltip>
-
-                                    {/* run the dialog, manage collapse */}
-                                    <Dialog open={openTopic} onClose={handleCloseTopics}>
-                                        <ResourceToTopicDialog resource={resource} />
-                                    </Dialog>
-
-                                    <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
-                                        <ResourceToSubtopicDialog resource={resource} />
-                                    </Dialog>
-
-                                    <Dialog open={openResource} onClose={handleCloseResource}>
-                                        <EditResourceDialog resource={resource} />
-                                    </Dialog>
-
-                                </CardActions>
-                            </>
-                        ) : (
-                            <>
-                                <CardActions>
-                                    <IconButton>
-                                        <FavoriteIcon sx={{ color: "#e57373" }} />
-                                    </IconButton>
-
-                                    <IconButton>
-                                        <AssignmentIcon sx={{ color: "#4fc3f7" }} />
-                                    </IconButton>
-
-                                    <IconButton className="link2" href={resource.link} target={'_blank'} rel={'nonreferrer'}>
-                                        <PublicIcon sx={{ color: "#8bc34a" }} />
-                                    </IconButton>
-                                </CardActions>
-                            </>
-
-                        )}
-                    </Card>
-
+                    <ResourceCard resource={resource} />
                 )
+
             })}
+
         </>
-    );
+    )
+
 };
 
 export default Resources;
