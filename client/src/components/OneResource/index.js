@@ -141,7 +141,7 @@ const ResourceCard = ({ resource }) => {
 
                             <Tooltip title="Add to a Topic">
                                 <IconButton onClick={handleClickOpenTopics}>
-                                    <AddCircleIcon sx={{ color: "#f6685e" }} />
+                                    <AddCircleIcon sx={{ color: "#00e676" }} />topic
                                 </IconButton>
                             </Tooltip>
 
@@ -152,7 +152,7 @@ const ResourceCard = ({ resource }) => {
 
                             <Tooltip title="Add to a Subtopic">
                                 <IconButton onClick={handleClickOpenSubtopics}>
-                                    <AddCircleOutlineIcon sx={{ color: "#af52bf" }} />
+                                    <AddCircleOutlineIcon sx={{ color: "#00e676" }} />subtopic
                                 </IconButton>
                             </Tooltip>
 
@@ -162,7 +162,7 @@ const ResourceCard = ({ resource }) => {
 
                             <Tooltip title="Remove from a Topic">
                                 <IconButton onClick={handleClickOpenXtopics}>
-                                    <RemoveCircleIcon sx={{ color: "#f6685e" }} />
+                                    <RemoveCircleIcon sx={{ color: "#af52bf" }} />tpc
                                 </IconButton>
                             </Tooltip>
 
@@ -172,7 +172,7 @@ const ResourceCard = ({ resource }) => {
 
                             <Tooltip title="Remove from a Subtopic">
                                 <IconButton onClick={handleClickOpenXsubtopics}>
-                                    <RemoveCircleOutlineIcon sx={{ color: "#af52bf" }} />
+                                    <RemoveCircleOutlineIcon sx={{ color: "#af52bf" }} />sbt
                                 </IconButton>
                             </Tooltip>
 
