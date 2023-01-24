@@ -115,7 +115,7 @@ const ResourceCard = ({ resource, favorites }) => {
     };
 
     const handleSaveToFavs = async (resource) => {
-        
+
         //If the clicked state is currently set to false, change it to true and add card to user's favorites
         if (!clicked) {
             try {
@@ -244,6 +244,11 @@ const ResourceCard = ({ resource, favorites }) => {
                     </>
                 ) : (
                     <>
+
+                    </>
+                )}
+                {Auth.loggedIn() ? (
+                    <>
                         <CardActions>
                             <div onClick={() => handleSaveToFavs(resource)}>
                                 {clicked ? (
@@ -270,8 +275,12 @@ const ResourceCard = ({ resource, favorites }) => {
                             </IconButton>
                         </CardActions>
                     </>
+                ) : (
+                    <>
 
+                    </>
                 )}
+
             </Card>
 
 

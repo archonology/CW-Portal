@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ALL_TOPICS, QUERY_ONE_TOPIC } from "../../utils/queries";
+import { QUERY_ALL_TOPICS, QUERY_ONE_TOPIC, QUERY_ME } from "../../utils/queries";
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Avatar from '@mui/material/Avatar';
@@ -67,7 +67,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-const OneTopic = ({}) => {
+const OneTopic = ({ }) => {
+    const { loading: loadingMe, error: errorMe, data: dataMe } = useQuery(QUERY_ME);
+
+    const userData = dataMe?.me || {};
     const [expanded, setExpanded] = React.useState(false);
 
     const [openTopic, setOpenTopic] = React.useState(false);
@@ -136,10 +139,10 @@ const OneTopic = ({}) => {
                         <h2 className="topic-headers">{topicData.title}</h2>
                         <p className="mainText">{topicData.text}</p>
                     </div>
-                    </Stack>
-                    {Auth.adminLoggedIn() ? (
-                        <>
-                        <Box sx={{ marginLeft: 2}}>
+                </Stack>
+                {Auth.adminLoggedIn() ? (
+                    <>
+                        <Box sx={{ marginLeft: 2 }}>
                             <Tooltip title="Edit">
                                 <IconButton onClick={handleClickOpenTopics}>
                                     <EditIcon sx={{ color: "#ffcf33" }} />
@@ -158,14 +161,14 @@ const OneTopic = ({}) => {
                                     />
                                 </IconButton>
                             </Tooltip>
-                            </Box>
-                        </>
-                    ) : (
-                        <>
+                        </Box>
+                    </>
+                ) : (
+                    <>
 
-                        </>
-                    )}
-  </Container>
+                    </>
+                )}
+            </Container>
 
             <Box sx={{ width: '100%', marginTop: 0 }}>
                 <Box>
@@ -211,7 +214,7 @@ const OneTopic = ({}) => {
                                     return (
                                         <>
                                             <ResourceCard
-                                                resource={resource}
+                                                resource={resource} favorites={userData.favorites}
                                             />
                                         </>
                                     )
