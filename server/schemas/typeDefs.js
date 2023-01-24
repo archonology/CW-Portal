@@ -76,7 +76,7 @@ const typeDefs = gql`
         createTopic(title: String!, text: String!, link: String!, image: String!): Topic
         createSubtopic(title: String!, text: String!, link: String!, image: String!): Subtopic
         createResource(title: String!, text: String!, image: String!, link: String!): Resource 
-        addResourceToFavs(_id: ID!, title: String!, text: String!, image: String!, link: String!): User       
+        addResourceToFavs(_id: ID!, title: String!, text: String!, image: String!, link: String!): User
         updateResource(_id: ID!, title: String!, text: String!, link: String!, image: String!): Resource  
         updateSubtopic(_id: ID!, title: String!, text: String!, link: String!, image: String!): Subtopic
         updateTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!): Topic     

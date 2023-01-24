@@ -11,7 +11,7 @@ const resolvers = {
                     .select("-__v -password");
                 return userData;
             }
-            throw new AuthenticationError("Please login or sign up to continue.");
+            throw new AuthenticationError("Logout as Admin and login as user to access lists.");
         },
 
         admin: async (parent, args, context) => {
@@ -150,7 +150,6 @@ const resolvers = {
         },
 
         removeResourceFromFavs: async (parent, { _id }, context) => {
-            console.log(context.user);
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
@@ -158,7 +157,7 @@ const resolvers = {
                     { new: true }
                 );
                 return updatedUser;
-                }
+            }
         },
 
         createTopic: async (parent, args) => {

@@ -125,6 +125,7 @@ mutation addResourceToFavs($_id: ID!, $title: String!, $text: String!, $image: S
 }
 `;
 
+
 export const UPDATE_RESOURCE = gql`
 mutation updateResource($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
   updateResource(_id: $_id, title: $title, text: $text, image: $image, link: $link){
@@ -213,6 +214,7 @@ mutation removeResourceFromFavs($_id: ID!) {
     }
 }
 `;
+
 
 export const REMOVE_RESOURCE_FROM_TOPIC = gql`
 mutation removeResourceFromTopic($_id: ID!, $topicId: ID!) {

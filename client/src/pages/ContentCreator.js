@@ -191,11 +191,6 @@ const ContentCreator = () => {
             </ListItem>
           ))}
           <hr></hr>
-          <ListItemButton as={Link} className="link2" to='/dashboard'>
-            <DashboardIcon>
-            </DashboardIcon>
-            <ListItem>Return to Dashboard</ListItem>
-          </ListItemButton>
           <ListItemButton as={Link} className="link2" to='/'>
             <HomeIcon>
             </HomeIcon>

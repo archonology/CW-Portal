@@ -18,7 +18,11 @@ import Tooltip from '@mui/material/Tooltip';
 
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ALL_RESOURCES } from "../../utils/queries";
-import { DELETE_RESOURCE, ADD_RESOURCE_TO_FAVS, REMOVE_RESOURCE_FROM_FAVS } from "../../utils/mutations";
+import {
+    DELETE_RESOURCE,
+    ADD_RESOURCE_TO_FAVS,
+    REMOVE_RESOURCE_FROM_FAVS,
+} from "../../utils/mutations";
 
 // import dialog pop ups for admin resource editting
 import ResourceToTopicDialog from "../ResourceToTopicDialog";
@@ -36,6 +40,7 @@ const ResourceCard = ({ resource, favorites }) => {
 
     //If user is logged in, check their favorites to manage heart icon color
     let favState = false;
+
     if (Auth.loggedIn()) {
         const listChecker = favorites.filter(
             (resourceObj) => resourceObj._id === resource._id
@@ -44,6 +49,7 @@ const ResourceCard = ({ resource, favorites }) => {
             favState = true;
         }
     }
+
     const [clicked, setClicked] = useState(favState);
     const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
     const [openTopic, setOpenTopic] = React.useState(false);
@@ -161,21 +167,17 @@ const ResourceCard = ({ resource, favorites }) => {
                 </CardContent>
                 <Divider variant="middle" />
 
+                <CardActions>
+                    <Tooltip title="Visit Site">
+                        <IconButton className="link2" href={resource.link} target={'_blank'} rel={'nonreferrer'}>
+                            <PublicIcon sx={{ color: "#8bc34a" }} />
+                        </IconButton>
+                    </Tooltip>
+
+                </CardActions>
+
                 {Auth.adminLoggedIn() ? (
                     <>
-                        <CardActions>
-                            <IconButton>
-                                <FavoriteIcon sx={{ color: "#e57373" }} />
-                            </IconButton>
-
-                            <IconButton>
-                                <AssignmentIcon sx={{ color: "#4fc3f7" }} />
-                            </IconButton>
-
-                            <IconButton className="link2" href={resource.link} target={'_blank'} rel={'nonreferrer'}>
-                                <PublicIcon sx={{ color: "#8bc34a" }} />
-                            </IconButton>
-                        </CardActions>
                         <Divider variant="middle" />
                         {/* tools specific to admin */}
                         <CardActions>
@@ -254,7 +256,7 @@ const ResourceCard = ({ resource, favorites }) => {
                                 {clicked ? (
                                     <Tooltip title="Remove from Favorites">
                                         <IconButton>
-                                            <FavoriteIcon sx={{ color: "red" }} />
+                                            <FavoriteIcon sx={{ color: "#f6685e" }} />
                                         </IconButton>
                                     </Tooltip>
                                 ) : (
