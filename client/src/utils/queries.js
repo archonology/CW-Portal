@@ -7,32 +7,32 @@ query me {
         username
         email
         favorites {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+            _id
+            title
+            text
+            image
+            link
         }
         do {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
         doing {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
         done {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
     }
 }
@@ -45,32 +45,32 @@ query admin {
         username
         email
         favorites {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
         do {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
         doing {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
         done {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
     }
 }

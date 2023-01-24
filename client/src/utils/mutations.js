@@ -111,6 +111,20 @@ mutation createResource($title: String!, $text: String!, $image: String!, $link:
 }
 `;
 
+export const ADD_RESOURCE_TO_FAVS = gql`
+mutation addResourceToFavs($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
+    addResourceToFavs(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+        favorites {
+            _id
+            title
+            text
+            image
+            link
+        }
+    }
+}
+`;
+
 export const UPDATE_RESOURCE = gql`
 mutation updateResource($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
   updateResource(_id: $_id, title: $title, text: $text, image: $image, link: $link){
@@ -184,6 +198,17 @@ mutation addSubtopicToTopic($_id: ID!, $title: String!, $text: String!, $topicId
             text
             image
             link
+        }
+    }
+}
+`;
+
+
+export const REMOVE_RESOURCE_FROM_FAVS = gql`
+mutation removeResourceFromFavs($_id: ID!) {
+    removeResourceFromFavs(_id: $_id){
+        favorites {
+            _id
         }
     }
 }

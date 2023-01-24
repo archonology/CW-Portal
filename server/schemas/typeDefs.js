@@ -75,13 +75,15 @@ const typeDefs = gql`
         loginUser(email: String!, password: String!): Auth
         createTopic(title: String!, text: String!, link: String!, image: String!): Topic
         createSubtopic(title: String!, text: String!, link: String!, image: String!): Subtopic
-        createResource(title: String!, text: String!, image: String!, link: String!): Resource        
+        createResource(title: String!, text: String!, image: String!, link: String!): Resource 
+        addResourceToFavs(_id: ID!, title: String!, text: String!, image: String!, link: String!): User       
         updateResource(_id: ID!, title: String!, text: String!, link: String!, image: String!): Resource  
         updateSubtopic(_id: ID!, title: String!, text: String!, link: String!, image: String!): Subtopic
         updateTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!): Topic     
         addResourceToTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, topicId: ID!): Topic
         addSubtopicToTopic(title: String!, text: String!, link: String!, image: String!, topicId: ID!): Topic
         addResourceToSubtopic(_id: ID!, title: String!, text: String!, image: String!, link: String!, subtopicId: ID!): Subtopic
+        removeResourceFromFavs(_id: ID!): User
         removeResourceFromTopic(_id: ID!, topicId: ID!): Topic
         removeResourceFromSubTopic(_id: ID!, subtopicId: ID!): Subtopic
         removeSubtopicFromTopic(_id: ID!, topicId: ID!): Topic

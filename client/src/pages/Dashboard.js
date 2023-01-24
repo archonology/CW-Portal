@@ -6,17 +6,12 @@ import Box from '@mui/material/Box';
 import Auth from "../utils/auth";
 import ResourceCard from "../components/OneResource";
 import Resources from "../components/Resources";
+import Favorites from "../components/Favorites";
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Grid, GridItem } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
-  // const buttons = [
-  //   <Button key="one">See</Button>,
-  //   <Button key="two">Add Subtopic</Button>,
-  //   <Button key="three">Three</Button>,
-  // ];
 
   return (
     <div
@@ -77,7 +72,7 @@ const Dashboard = () => {
 
             </Tabs>) : (
             <Tabs
-              sx={{ ml: 1 }}
+              sx={{ }}
               // variant="fullWidth"
               value={value}
               onChange={handleChange}
@@ -95,21 +90,21 @@ const Dashboard = () => {
           )}
         </Box>
         <TabPanel value={value} index={0}>
-          <Grid direction="row" container >
-            <Grid container spacing={0}>
-            <Resources />
-            </Grid>
-          </Grid>
+
+        <Grid direction="row" container sx={{ padding: "1rem"}}>
+        <Grid container spacing={0} justifyContent="center">
+
+        <Favorites />
+
+        </Grid>
+      </Grid>
+            
         </TabPanel>
         <TabPanel value={value} index={1}>
         </TabPanel>
         <TabPanel value={value} index={2}>
         </TabPanel>
         <TabPanel value={value} index={3}>
-        </TabPanel>
-        <TabPanel value={value} index={4} >
-          <div>
-          </div>
         </TabPanel>
       </Box>
 

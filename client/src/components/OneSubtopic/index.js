@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ALL_SUBTOPICS } from "../../utils/queries";
+import { QUERY_ALL_SUBTOPICS, QUERY_ME } from "../../utils/queries";
 import Stack from '@mui/material/Stack';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
@@ -32,6 +32,10 @@ import Auth from "../../utils/auth";
 
 
 const Subtopic = ({ subtopic }) => {
+
+    const { loading: loadingMe, error: errorMe, data: dataMe } = useQuery(QUERY_ME);
+
+    const userData = dataMe?.me || {};
     // set up useQuery get the data from the backend
     const { loading, error, data } = useQuery(QUERY_ALL_SUBTOPICS);
 
@@ -142,20 +146,20 @@ const Subtopic = ({ subtopic }) => {
                                 </Dialog>
 
                                 <Tooltip title="Edit">
-                                <IconButton onClick={handleClickOpenSubtopics}>
-                                    <EditIcon sx={{ color: "#ffcf33" }} />
-                                </IconButton>
-                            </Tooltip>
+                                    <IconButton onClick={handleClickOpenSubtopics}>
+                                        <EditIcon sx={{ color: "#ffcf33" }} />
+                                    </IconButton>
+                                </Tooltip>
 
-                            <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
-                                <EditSubtopicDialog subtopic={subtopic} />
-                            </Dialog>
+                                <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
+                                    <EditSubtopicDialog subtopic={subtopic} />
+                                </Dialog>
 
                                 <Tooltip title="Delete Resource">
                                     <IconButton onClick={() => handleDelete(subtopic._id)}>
                                         <DeleteIcon
                                             className="custom-link"
-                                            sx={{ variant: "filled", color: "#b2102f"  }}
+                                            sx={{ variant: "filled", color: "#b2102f" }}
                                         />
                                     </IconButton>
                                 </Tooltip>
@@ -169,7 +173,7 @@ const Subtopic = ({ subtopic }) => {
                                             return (
                                                 <>
                                                     <ResourceCard
-                                                        resource={resource}
+                                                        resource={resource} favorites={userData.favorites}
                                                     />
                                                 </>
                                             )

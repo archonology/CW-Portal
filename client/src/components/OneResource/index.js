@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -17,7 +18,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ALL_RESOURCES } from "../../utils/queries";
-import { DELETE_RESOURCE } from "../../utils/mutations";
+import { DELETE_RESOURCE, ADD_RESOURCE_TO_FAVS, REMOVE_RESOURCE_FROM_FAVS } from "../../utils/mutations";
 
 // import dialog pop ups for admin resource editting
 import ResourceToTopicDialog from "../ResourceToTopicDialog";
@@ -31,8 +32,19 @@ import XResourceFromSubtopicDialog from "../XResourceFromSubtopicDialog";
 import RemoveCircle from "@mui/icons-material/RemoveCircle";
 
 
-const ResourceCard = ({ resource }) => {
-    // set up useQuery to get resource data from the backend
+const ResourceCard = ({ resource, favorites }) => {
+
+    //If user is logged in, check their favorites to manage heart icon color
+    let favState = false;
+    if (Auth.loggedIn()) {
+        const listChecker = favorites.filter(
+            (resourceObj) => resourceObj._id === resource._id
+        );
+        if (listChecker.length > 0) {
+            favState = true;
+        }
+    }
+    const [clicked, setClicked] = useState(favState);
     const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
     const [openTopic, setOpenTopic] = React.useState(false);
     const [openXtopic, setOpenXtopic] = React.useState(false);
@@ -40,6 +52,9 @@ const ResourceCard = ({ resource }) => {
     const [openSubtopic, setOpenSubtopic] = React.useState(false);
     const [openResource, setOpenResource] = React.useState(false);
 
+    // handle add to favorites
+    const [addResourceToFavs, { e }] = useMutation(ADD_RESOURCE_TO_FAVS);
+    const [removeResourceFromFavs] = useMutation(REMOVE_RESOURCE_FROM_FAVS);
 
     // handle delete resource and refetch minus the deleted resource
     const [deleteResource, { err, dat }] = useMutation(DELETE_RESOURCE, {
@@ -97,7 +112,34 @@ const ResourceCard = ({ resource }) => {
         } catch (err) {
             console.error(err);
         }
-    }
+    };
+
+    const handleSaveToFavs = async (resource) => {
+        
+        //If the clicked state is currently set to false, change it to true and add card to user's favorites
+        if (!clicked) {
+            try {
+                const { data } = await addResourceToFavs({
+                    variables: { ...resource },
+                });
+                setClicked(true);
+                return;
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        //if the current fav state is set to true and the user clicks the button, we want to remove it from our favorites
+        if (clicked) {
+            try {
+                const { data } = await removeResourceFromFavs({
+                    variables: { _id: resource._id }, //Remove the resource based on the _id value
+                });
+                setClicked(false);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    };
 
     return (
         <>
@@ -203,9 +245,21 @@ const ResourceCard = ({ resource }) => {
                 ) : (
                     <>
                         <CardActions>
-                            <IconButton>
-                                <FavoriteIcon sx={{ color: "#e57373" }} />
-                            </IconButton>
+                            <div onClick={() => handleSaveToFavs(resource)}>
+                                {clicked ? (
+                                    <Tooltip title="Remove from Favorites">
+                                        <IconButton>
+                                            <FavoriteIcon sx={{ color: "red" }} />
+                                        </IconButton>
+                                    </Tooltip>
+                                ) : (
+                                    <Tooltip title="Add to Favorites">
+                                        <IconButton>
+                                            <FavoriteBorderIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                )}
+                            </div>
 
                             <IconButton>
                                 <AssignmentIcon sx={{ color: "#4fc3f7" }} />

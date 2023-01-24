@@ -16,7 +16,7 @@ const resolvers = {
 
         admin: async (parent, args, context) => {
             if (context.admin) {
-                const adminData = await Admin.findOne({ _id: context.user._id })
+                const adminData = await Admin.findOne({ _id: context.admin._id })
                     .select("-__v -password");
                 return adminData;
             }
@@ -30,7 +30,7 @@ const resolvers = {
         },
 
         users: async () => {
-            const userData = await User.find({});
+            const userData = await User.find({}).populate('favorites');
 
             return userData;
         },
@@ -135,6 +135,30 @@ const resolvers = {
 
             const token = signToken(user);
             return { token, user };
+        },
+
+        addResourceToFavs: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { favorites: { ...args } } },
+                    { new: true }
+                ).populate('favorites');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
+        removeResourceFromFavs: async (parent, { _id }, context) => {
+            console.log(context.user);
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { favorites: _id } },
+                    { new: true }
+                );
+                return updatedUser;
+                }
         },
 
         createTopic: async (parent, args) => {
