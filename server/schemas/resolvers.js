@@ -203,6 +203,15 @@ const resolvers = {
             return updatedSubtopic;
         },
 
+        updateTopic: async (parent, { _id, title, text, image, link }) => {
+            const updatedTopic = await Topic.findOneAndUpdate(
+                { _id: _id },
+                { $set: { title, text, image, link } },
+                { new: true }
+            );
+            return updatedTopic;
+        },
+
         removeResourceFromTopic: async (parent, { _id, topicId }) => {
             const updatedTopic = await Topic.findOneAndUpdate(
                 { _id: topicId },
