@@ -11,6 +11,12 @@ const subTopicSchema = new Schema(
         text: {
             type: String,
         },
+        image: {
+            type: String,
+        },
+        link: {
+            type: String,
+        },
         resources: [{
             type: Schema.Types.ObjectId,
             ref: 'Resource',

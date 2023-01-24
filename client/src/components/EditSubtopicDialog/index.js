@@ -7,37 +7,37 @@ import {
     Box,
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { QUERY_ALL_RESOURCES, QUERY_ONE_RESOURCE } from "../../utils/queries";
+import { QUERY_ALL_SUBTOPICS } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-import { UPDATE_RESOURCE } from "../../utils/mutations";
+import { UPDATE_SUBTOPIC } from "../../utils/mutations";
 import { SnackbarProvider, useSnackbar } from "notistack";
 
-export default function EditResourceDialog({ resource }) {
+export default function EditSubtopicDialog({ subtopic }) {
 
     return (
         // limits the alert to 3 max
         <SnackbarProvider maxSnack={3}>
-            <Resource resource={resource} />
+            <Resource subtopic={subtopic} />
         </SnackbarProvider>
     );
 }
 
-function Resource({ resource }) {
-   
+function Resource({ subtopic }) {
+
     // useMutation -- and refetch needed to update site content dynamically
-    const [updateResource, { resourceErr }] = useMutation(UPDATE_RESOURCE, {
-        refetchQueries: [{ query: QUERY_ALL_RESOURCES }]
+    const [updateSubtopic, { subtopicErr }] = useMutation(UPDATE_SUBTOPIC, {
+        refetchQueries: [{ query: QUERY_ALL_SUBTOPICS }]
     });
 
     const { enqueueSnackbar } = useSnackbar();
 
     // here formstate defaults to the current data values
     const [formState, setFormState] = useState({
-        _id: `${resource._id}`,
-        title: `${resource.title}`,
-        text: `${resource.text}`,
-        image: `${resource.image}`,
-        link: `${resource.link}`
+        _id: `${subtopic._id}`,
+        title: `${subtopic.title}`,
+        text: `${subtopic.text}`,
+        image: `${subtopic.image}`,
+        link: `${subtopic.link}`
     });
 
     const handleChange = (event) => {
@@ -50,30 +50,30 @@ function Resource({ resource }) {
     };
 
     // takes in a card and deck object
-    const handleResourceUpdate = async (event) => {
+    const handleSubtopicUpdate = async (event) => {
         event.preventDefault();
         try {
-            const { data } = await updateResource({
+            const { data } = await updateSubtopic({
                 variables: { ...formState },
             });
 
             // Display the success message when card added to deck
-            enqueueSnackbar(`${resource.title} was updated!`, { variant: "success" });
+            enqueueSnackbar(`${subtopic.title} was updated!`, { variant: "success" });
 
         } catch (err) {
             console.error(err);
-            enqueueSnackbar(`Error updating ${resource.title}`, { variant: "error" });
+            enqueueSnackbar(`Error updating ${subtopic.title}`, { variant: "error" });
         }
     };
 
     return (
         <>
-            <DialogTitle>{"Update Resource"}</DialogTitle>
+            <DialogTitle>{"Update Subtopic"}</DialogTitle>
             <DialogContent sx={{ maxHeight: "800px", minWidth: "325px" }}>
 
                 <Box
                     component="form"
-                    onSubmit={handleResourceUpdate}
+                    onSubmit={handleSubtopicUpdate}
                     noValidate
                     sx={{
                         display: "grid",
@@ -92,7 +92,7 @@ function Resource({ resource }) {
                         value={formState.title}
                         onChange={handleChange}
                         onBlur={() => { handleChange.title.trim() }}
-                        label="Resource Title"
+                        label="Subtopic Title"
                         id="titleName"
                         variant="standard"
                     ></TextField>
@@ -101,7 +101,7 @@ function Resource({ resource }) {
                         name="text"
                         value={formState.text}
                         onChange={handleChange}
-                        label="Resource Description"
+                        label="Subtopic Description"
                         id="description"
                         multiline
                         maxRows={10}
@@ -123,7 +123,7 @@ function Resource({ resource }) {
                         value={formState.link}
                         onChange={handleChange}
                         onBlur={() => { handleChange.link.trim() }}
-                        label="Resource Link"
+                        label="Subtopic Link"
                         id="link"
                         variant="standard"
                     ></TextField>

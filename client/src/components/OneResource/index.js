@@ -7,13 +7,11 @@ import { IconButton, Divider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import PublicIcon from '@mui/icons-material/Public';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
@@ -30,6 +28,7 @@ import Dialog from "@mui/material/Dialog";
 
 import Auth from "../../utils/auth";
 import XResourceFromSubtopicDialog from "../XResourceFromSubtopicDialog";
+import RemoveCircle from "@mui/icons-material/RemoveCircle";
 
 
 const ResourceCard = ({ resource }) => {
@@ -150,19 +149,9 @@ const ResourceCard = ({ resource }) => {
                                 <ResourceToTopicDialog resource={resource} />
                             </Dialog>
 
-                            <Tooltip title="Add to a Subtopic">
-                                <IconButton onClick={handleClickOpenSubtopics}>
-                                    <AddCircleOutlineIcon sx={{ color: "#00e676" }} />
-                                </IconButton>
-                            </Tooltip>
-
-                            <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
-                                <ResourceToSubtopicDialog resource={resource} />
-                            </Dialog>
-
                             <Tooltip title="Remove from a Topic">
                                 <IconButton onClick={handleClickOpenXtopics}>
-                                    <RemoveCircleIcon sx={{ color: "#af52bf" }} />
+                                    <RemoveCircle sx={{ color: "white" }} />
                                 </IconButton>
                             </Tooltip>
 
@@ -170,9 +159,19 @@ const ResourceCard = ({ resource }) => {
                                 <XResourceFromTopicDialog resource={resource} />
                             </Dialog>
 
+                            <Tooltip title="Add to a Subtopic">
+                                <IconButton onClick={handleClickOpenSubtopics}>
+                                    <AddCircleIcon sx={{ color: "white" }} />
+                                </IconButton>
+                            </Tooltip>
+
+                            <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
+                                <ResourceToSubtopicDialog resource={resource} />
+                            </Dialog>
+
                             <Tooltip title="Remove from a Subtopic">
                                 <IconButton onClick={handleClickOpenXsubtopics}>
-                                    <RemoveCircleOutlineIcon sx={{ color: "#af52bf" }} />
+                                    <RemoveCircleOutlineIcon sx={{ color: "white" }} />
                                 </IconButton>
                             </Tooltip>
 

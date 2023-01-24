@@ -95,6 +95,8 @@ query topics {
         _id        
         text
         title
+        image
+        link
         resources {
           _id
           link
@@ -114,6 +116,8 @@ query subtopics {
         _id
         title
         text
+        image
+        link
         resources {
           _id
           title
@@ -149,6 +153,8 @@ query topic($_id: ID!) {
           _id
           title
           text
+          image
+          link
           resources {
             _id
             title
@@ -174,6 +180,8 @@ query subtopic($_id: ID!) {
           _id
           title
           text
+          image
+          link
           resources {
             _id
             title

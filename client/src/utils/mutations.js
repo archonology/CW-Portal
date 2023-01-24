@@ -69,6 +69,8 @@ mutation createTopic($title: String!, $text: String!, $image: String!, $link: St
             _id
             title
             text
+            image
+            link
             resources {
                 _id
                 title
@@ -121,6 +123,18 @@ mutation updateResource($_id: ID!, $title: String!, $text: String!, $image: Stri
 }
 `;
 
+export const UPDATE_SUBTOPIC = gql`
+mutation updateSubtopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
+    updateSubtopic(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+        _id
+        title
+        text
+        image
+        link
+    }
+}
+`;
+
 export const ADD_RESOURCE_TO_TOPIC = gql`
 mutation addResourceToTopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!, $topicId: ID!) {
     addResourceToTopic(_id: $_id, title: $title, text: $text, image: $image, link: $link, topicId: $topicId){
@@ -156,6 +170,8 @@ mutation addSubtopicToTopic($_id: ID!, $title: String!, $text: String!, $topicId
             _id
             title
             text
+            image
+            link
         }
     }
 }
@@ -175,6 +191,16 @@ export const REMOVE_RESOURCE_FROM_SUBTOPIC = gql`
 mutation removeResourceFromSubTopic($_id: ID!, $subtopicId: ID!) {
   removeResourceFromSubTopic(_id: $_id, subtopicId: $subtopicId){
         resources {
+            _id
+        }
+    }
+}
+`;
+
+export const REMOVE_SUBTOPIC_FROM_TOPIC = gql`
+mutation removeSubtopicFromTopic($_id: ID!, $topicId: ID!) {
+    removeSubtopicFromTopic(_id: $_id, topicId: $topicId){
+        subtopics {
             _id
         }
     }
