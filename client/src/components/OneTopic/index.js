@@ -124,7 +124,6 @@ const OneTopic = ({}) => {
 
     return (
         <>
-
             <Container fluid>
                 <Stack direction="row" spacing={2} margin={1}>
                     <Avatar

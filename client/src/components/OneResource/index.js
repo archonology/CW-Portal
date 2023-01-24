@@ -161,7 +161,7 @@ const ResourceCard = ({ resource }) => {
 
                             <Tooltip title="Add to a Subtopic">
                                 <IconButton onClick={handleClickOpenSubtopics}>
-                                    <AddCircleIcon sx={{ color: "white" }} />
+                                    <AddCircleIcon sx={{ color: "orange" }} />
                                 </IconButton>
                             </Tooltip>
 
