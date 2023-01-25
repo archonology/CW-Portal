@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
+import About from "./pages/About";
 import Donate from "./pages/Donate";
 import ContentCreator from "./pages/ContentCreator";
 import AddTopic from "./pages/AddTopic";
@@ -98,7 +99,7 @@ function App() {
           <div>
             <Header />
           </div>
-          <div>
+          <div className="footspace">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/resources/:_id" element={<OneTopic />} />
@@ -114,10 +115,11 @@ function App() {
               <Route path={process.env.REACT_APP_ADMIN_LOGIN_KEY} element={<AdminLogin />} />
               <Route path={process.env.REACT_APP_ADMIN_SIGNUP_KEY} element={<AdminSignup />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
               <Route path="/*" element={<Home />} />
             </Routes>
           </div>
-          <div>
+          <div >
             <Footer />
           </div>
         </Router>

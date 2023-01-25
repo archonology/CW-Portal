@@ -38,6 +38,14 @@ html body {
   color: var(--beacon);
 }
 
+.footspace {
+  margin-bottom: 7rem;
+}
+
+.meherdevs {
+  color: var(--blue);
+}
+
 h5 {
   color: var(--lighterHouse);
 }
@@ -52,6 +60,16 @@ h5 {
 
 .box {
   max-width: 1000px;
+}
+
+.bio {
+  max-width: 1000px;
+  background-color: rgba(17, 22, 17, 0.226);
+  border-radius: 10px;
+}
+
+a {
+  color: var(--alt);
 }
 
 .mainText {
@@ -116,4 +134,12 @@ img {
 
 .link3:hover {
   color: var(--violet);
+}
+
+a:hover {
+  color: var(--lightblue);
+}
+
+.meherdevs:hover {
+  color: var(--lightblue);
 }
