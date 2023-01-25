@@ -66,7 +66,7 @@ function Contact() {
 
         <div>
 
-            <Container className="p-5 m-2 box">
+            <Container className="p-5 m-2 contact">
                 <h2>Contact Us</h2>
                 <p className=''>We love to hear from you! Share your feedback, or let us know if you see an error or a bad link somewhere in the site.</p>
                 {errorMessage && (
