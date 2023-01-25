@@ -24,6 +24,8 @@
 
 html body {
   background: var(--base);
+  background-image: url("./media/DNGF7977.jpeg");
+  background-position: 50% fixed;
   color: var(--primary);
   margin: 0;
 }
@@ -46,6 +48,10 @@ h5 {
 
 .subtopic-headers {
   color: var(--violet);
+}
+
+.box {
+  max-width: 1000px;
 }
 
 .mainText {

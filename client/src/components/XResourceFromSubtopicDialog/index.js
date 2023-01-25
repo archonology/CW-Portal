@@ -48,11 +48,11 @@ function SubtopicList({ resource }) {
             });
 
             // Display the success message when card added to deck
-            enqueueSnackbar(`Removed ${resource.tile} from ${subtopic.title}`, { variant: "success" });
+            enqueueSnackbar(`Removed ${resource.title} from ${subtopic.title}`, { variant: "success" });
 
         } catch (err) {
             console.error(err);
-            enqueueSnackbar(`Error removing ${resource.tile} from ${subtopic.title}`, { variant: "error" });
+            enqueueSnackbar(`Error removing ${resource.title} from ${subtopic.title}`, { variant: "error" });
         }
     };
 

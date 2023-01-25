@@ -31,7 +31,9 @@ module.exports = {
         console.log('Invalid token');
       }
       return req;
-    } else {
+    }
+
+    if (adminToken) {
       try {
         const { data } = jwt.verify(adminToken, secret, { maxAge: expiration });
         req.admin = data;

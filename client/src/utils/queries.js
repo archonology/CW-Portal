@@ -7,32 +7,32 @@ query me {
         username
         email
         favorites {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+            _id
+            title
+            text
+            image
+            link
         }
         do {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
         doing {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
         done {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
+          _id
+          title
+          text
+          image
+          link
         }
     }
 }
@@ -44,34 +44,6 @@ query admin {
         _id
         username
         email
-        favorites {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
-        }
-        do {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
-        }
-        doing {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
-        }
-        done {
-            _id: ID
-            title: String
-            text: String
-            image: String
-            link: String
-        }
     }
 }
 `;
@@ -95,6 +67,8 @@ query topics {
         _id        
         text
         title
+        image
+        link
         resources {
           _id
           link
@@ -114,6 +88,8 @@ query subtopics {
         _id
         title
         text
+        image
+        link
         resources {
           _id
           title
@@ -149,6 +125,8 @@ query topic($_id: ID!) {
           _id
           title
           text
+          image
+          link
           resources {
             _id
             title
@@ -174,6 +152,8 @@ query subtopic($_id: ID!) {
           _id
           title
           text
+          image
+          link
           resources {
             _id
             title

@@ -1,19 +1,28 @@
 import React from "react";
-import { useQuery } from '@apollo/client';
-import { QUERY_ONE_TOPIC } from "../../utils/queries";
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_ALL_TOPICS, QUERY_ONE_TOPIC, QUERY_ME } from "../../utils/queries";
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Avatar from '@mui/material/Avatar';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from "@mui/icons-material/Delete";
 import Stack from '@mui/material/Stack';
-import { Grid } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import Tooltip from '@mui/material/Tooltip';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Subtopic from "../OneSubtopic";
+import Subtopics from "../Subtopics";
 import ResourceCard from "../OneResource";
+import EditTopicDialog from "../EditTopicDialog";
+import { DELETE_TOPIC } from "../../utils/mutations";
+import Dialog from "@mui/material/Dialog";
+
+import Auth from "../../utils/auth";
 
 
 
@@ -59,13 +68,22 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 
-const OneTopic = ({}) => {
+const OneTopic = ({ }) => {
+    const { loading: loadingMe, error: errorMe, data: dataMe } = useQuery(QUERY_ME);
+
+    const userData = dataMe?.me || {};
     const [expanded, setExpanded] = React.useState(false);
+
+    const [openTopic, setOpenTopic] = React.useState(false);
 
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const [deleteTopic, { err, dat }] = useMutation(DELETE_TOPIC, {
+        refetchQueries: [{ query: QUERY_ALL_TOPICS }],
+    });
 
     const handleAccordChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -87,9 +105,29 @@ const OneTopic = ({}) => {
     if (loading) return "loading";
     if (error) return `Error! ${error}`;
 
+
+
+    const handleClickOpenTopics = () => {
+        setOpenTopic(true);
+    };
+
+    const handleCloseTopics = () => {
+        setOpenTopic(false);
+    };
+
+    const handleDelete = async (_id) => {
+
+        try {
+            const { dat } = await deleteTopic({
+                variables: { _id: _id },
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     return (
         <>
-
             <Container fluid>
                 <Stack direction="row" spacing={2} margin={1}>
                     <Avatar
@@ -103,7 +141,34 @@ const OneTopic = ({}) => {
                         <p className="mainText">{topicData.text}</p>
                     </div>
                 </Stack>
-                <hr></hr>
+                {Auth.adminLoggedIn() ? (
+                    <>
+                        <Box sx={{ marginLeft: 2 }}>
+                            <Tooltip title="Edit">
+                                <IconButton onClick={handleClickOpenTopics}>
+                                    <EditIcon sx={{ color: "#ffcf33" }} />
+                                </IconButton>
+                            </Tooltip>
+
+                            <Dialog open={openTopic} onClose={handleCloseTopics}>
+                                <EditTopicDialog topic={topicData} />
+                            </Dialog>
+
+                            <Tooltip title="Delete Resource">
+                                <IconButton onClick={() => handleDelete(topicData._id)}>
+                                    <DeleteIcon
+                                        className="custom-link"
+                                        sx={{ variant: "filled", color: "#b2102f" }}
+                                    />
+                                </IconButton>
+                            </Tooltip>
+                        </Box>
+                    </>
+                ) : (
+                    <>
+
+                    </>
+                )}
             </Container>
 
             <Box sx={{ width: '100%', marginTop: 0 }}>
@@ -130,19 +195,18 @@ const OneTopic = ({}) => {
                     <Paper>
                         {/* see all subtopics for one topic */}
                         {topicData?.subtopics?.map((subtopic) => {
-                                    console.log(subtopic);
-                                    return (
-                                        <>
-                                            <Subtopic
-                                                subtopic={subtopic}
-                                            />
-                                        </>
-                                    )
-                                })}
+                            return (
+                                <>
+                                    <Subtopic
+                                        subtopic={subtopic}
+                                    />
+                                </>
+                            )
+                        })}
                     </Paper>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Paper elevation={5}>
+          
                         <Grid direction="row" container sx={{ padding: "1rem" }}>
                             <Grid container spacing={0} justifyContent="center">
 
@@ -151,7 +215,7 @@ const OneTopic = ({}) => {
                                     return (
                                         <>
                                             <ResourceCard
-                                                resource={resource}
+                                                resource={resource} favorites={userData.favorites}
                                             />
                                         </>
                                     )
@@ -159,7 +223,7 @@ const OneTopic = ({}) => {
 
                             </Grid>
                         </Grid>
-                    </Paper>
+               
                 </TabPanel>
 
             </Box>

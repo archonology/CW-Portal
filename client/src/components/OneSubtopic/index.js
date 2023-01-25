@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ALL_SUBTOPICS } from "../../utils/queries";
+import { QUERY_ALL_SUBTOPICS, QUERY_ME } from "../../utils/queries";
 import Stack from '@mui/material/Stack';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
@@ -24,15 +24,24 @@ import { DELETE_SUBTOPIC } from "../../utils/mutations";
 
 // import dialog pops for admin editing
 import SubToTopicDialog from "../SubToTopicDialog";
+import EditSubtopicDialog from "../EditSubtopicDialog";
+import XSubtopicFromTopicDialog from "../XSubtopicFromTopicDialog";
 import Dialog from "@mui/material/Dialog";
 
 import Auth from "../../utils/auth";
 
 
 const Subtopic = ({ subtopic }) => {
+
+    const { loading: loadingMe, error: errorMe, data: dataMe } = useQuery(QUERY_ME);
+
+    const userData = dataMe?.me || {};
     // set up useQuery get the data from the backend
     const { loading, error, data } = useQuery(QUERY_ALL_SUBTOPICS);
+
     const [openTopic, setOpenTopic] = React.useState(false);
+    const [openSubtopic, setOpenSubtopic] = React.useState(false);
+    const [openXsubtopic, setOpenXsubtopic] = React.useState(false);
 
     // object to keep the topic data
     const subtopicData = data?.subtopics || [];
@@ -43,12 +52,6 @@ const Subtopic = ({ subtopic }) => {
     });
 
     const [expanded, setExpanded] = React.useState(false);
-
-    // handle the tab changes
-    // const [value, setValue] = React.useState(0);
-    // const handleChange = (event, newValue) => {
-    //     setValue(newValue);
-    // };
 
     const handleAccordChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -61,6 +64,22 @@ const Subtopic = ({ subtopic }) => {
 
     const handleCloseTopics = () => {
         setOpenTopic(false);
+    };
+
+    const handleClickOpenSubtopics = () => {
+        setOpenSubtopic(true);
+    };
+
+    const handleCloseSubtopics = () => {
+        setOpenSubtopic(false);
+    };
+
+    const handleClickOpenXsubtopics = () => {
+        setOpenXsubtopic(true);
+    };
+
+    const handleCloseXsubtopics = () => {
+        setOpenXsubtopic(false);
     };
 
 
@@ -80,7 +99,7 @@ const Subtopic = ({ subtopic }) => {
 
             <Stack spacing={0}>
 
-                <Accordion key={subtopic._id} expanded={expanded === `panel${subtopic._id}`} onChange={handleAccordChange(`panel${subtopic._id}`)} sx={{ padding: 2, backgroundColor: "#212121" }} >
+                <Accordion key={subtopic._id} expanded={expanded === `panel${subtopic._id}`} onChange={handleAccordChange(`panel${subtopic._id}`)} sx={{ padding: 2, backgroundColor: "#212121" }}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
@@ -88,7 +107,7 @@ const Subtopic = ({ subtopic }) => {
                     >
                         <Avatar
                             alt={"T"}
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi5iu8AFpy7j6vndtM3GAXTn48vP8QAa2z5Q&usqp=CAU"
+                            src={subtopic.image}
                             sx={{ width: 50, height: 50, marginRight: 2 }}
                             className="avatar"
                         />
@@ -105,18 +124,9 @@ const Subtopic = ({ subtopic }) => {
                         {Auth.adminLoggedIn() ? (
                             <>
                                 {/* the admin edit button set */}
-                                <Tooltip title="Delete Resource">
-                                    <IconButton onClick={() => handleDelete(subtopic._id)}>
-                                        <DeleteIcon
-                                            className="custom-link"
-                                            sx={{ variant: "filled" }}
-                                        />
-                                    </IconButton>
-                                </Tooltip>
-
                                 <Tooltip title="Add to a Topic">
                                     <IconButton onClick={handleClickOpenTopics}>
-                                        <AddCircleIcon sx={{ color: "#f6685e" }} />
+                                        <AddCircleIcon sx={{ color: "#00e676" }} />
                                     </IconButton>
                                 </Tooltip>
 
@@ -125,6 +135,38 @@ const Subtopic = ({ subtopic }) => {
                                     <SubToTopicDialog subtopic={subtopic} />
                                 </Dialog>
 
+                                <Tooltip title="Remove from a Topic">
+                                    <IconButton onClick={handleClickOpenXsubtopics}>
+                                        <RemoveCircleIcon sx={{ color: "white" }} />
+                                    </IconButton>
+                                </Tooltip>
+
+                                <Dialog open={openXsubtopic} onClose={handleCloseXsubtopics}>
+                                    <XSubtopicFromTopicDialog subtopic={subtopic} />
+                                </Dialog>
+
+                                <Tooltip title="Edit">
+                                    <IconButton onClick={handleClickOpenSubtopics}>
+                                        <EditIcon sx={{ color: "#ffcf33" }} />
+                                    </IconButton>
+                                </Tooltip>
+
+                                <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
+                                    <EditSubtopicDialog subtopic={subtopic} />
+                                </Dialog>
+
+                                <Tooltip title="Delete Resource">
+                                    <IconButton onClick={() => handleDelete(subtopic._id)}>
+                                        <DeleteIcon
+                                            className="custom-link"
+                                            sx={{ variant: "filled", color: "#b2102f" }}
+                                        />
+                                    </IconButton>
+                                </Tooltip>
+
+                            </>
+                        ) : (
+                            <>
                                 <Grid direction="row" container sx={{ padding: "1rem" }}>
                                     <Grid container spacing={1} justifyContent="center">
 
@@ -133,7 +175,7 @@ const Subtopic = ({ subtopic }) => {
                                             return (
                                                 <>
                                                     <ResourceCard
-                                                        resource={resource}
+                                                        resource={resource} favorites={userData.favorites}
                                                     />
                                                 </>
                                             )
@@ -142,22 +184,17 @@ const Subtopic = ({ subtopic }) => {
                                     </Grid>
                                 </Grid>
 
-                            </>
-                        ) : (
 
-                            <Grid direction="row" container sx={{ padding: "1rem" }}>
-                                <Grid container spacing={0} justifyContent="center">
+                                <Grid direction="row" container sx={{ padding: "1rem" }}>
+                                    <Grid container spacing={0} justifyContent="center">
 
 
-
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-
+                            </>
                         )}
                     </AccordionDetails>
                 </Accordion>
-
-
 
             </Stack>
 

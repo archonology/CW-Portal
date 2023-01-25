@@ -4,19 +4,15 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Auth from "../utils/auth";
-import ResourceCard from "../components/OneResource";
-import Resources from "../components/Resources";
+import Favorites from "../components/Favorites";
 import { Link } from 'react-router-dom';
-import { Button, ButtonGroup, Grid, GridItem } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
+import ToDo from "../components/ToDo";
+import Doing from "../components/Doing";
+import Done from "../components/Done";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
-  // const buttons = [
-  //   <Button key="one">See</Button>,
-  //   <Button key="two">Add Subtopic</Button>,
-  //   <Button key="three">Three</Button>,
-  // ];
 
   return (
     <div
@@ -69,15 +65,11 @@ const Dashboard = () => {
               allowScrollButtonsMobile
               aria-label="scrollable Dashboard List Tabs"
               indicatorColor="secondary">
-              <Tab label="Favorites" {...a11yProps(0)} />
-              <Tab label="To-Do" {...a11yProps(1)} />
-              <Tab label="Doing" {...a11yProps(2)} />
-              <Tab label="Done" {...a11yProps(3)} />
-              <Tab label="Content Creator" {...a11yProps(4)} as={Link} to="/contentcreator"  className="link3" sx={{color: "#eceff1", textDecoration: "none", fontWeight: "bold"}} />
+              <Tab label="Content Creator" {...a11yProps(4)} as={Link} to="/contentcreator" className="link3" sx={{ color: "#eceff1", textDecoration: "none", fontWeight: "bold" }} />
 
             </Tabs>) : (
             <Tabs
-              sx={{ ml: 1 }}
+              sx={{}}
               // variant="fullWidth"
               value={value}
               onChange={handleChange}
@@ -95,25 +87,50 @@ const Dashboard = () => {
           )}
         </Box>
         <TabPanel value={value} index={0}>
-          <Grid direction="row" container >
-            <Grid container spacing={0}>
-            <Resources />
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={0} justifyContent="center">
+
+              <Favorites />
+
             </Grid>
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={1}>
+
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={0} justifyContent="center">
+
+              <ToDo />
+
+            </Grid>
+          </Grid>
+
         </TabPanel>
         <TabPanel value={value} index={2}>
+
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={0} justifyContent="center">
+
+              <Doing />
+
+            </Grid>
+          </Grid>
+
         </TabPanel>
         <TabPanel value={value} index={3}>
-        </TabPanel>
-        <TabPanel value={value} index={4} >
-          <div>
-          </div>
+
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={0} justifyContent="center">
+
+              <Done />
+
+            </Grid>
+          </Grid>
+
         </TabPanel>
       </Box>
 
-      
+
     </>
   );
 };

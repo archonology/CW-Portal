@@ -8,15 +8,19 @@ const resolvers = {
         me: async (parent, args, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
-                    .select("-__v -password");
+                    .select("-__v -password")
+                    .populate('favorites')
+                    .populate('do')
+                    .populate('doing')
+                    .populate('done');
                 return userData;
             }
-            throw new AuthenticationError("Please login or sign up to continue.");
+            throw new AuthenticationError("Logout as Admin and login as user to access lists.");
         },
 
         admin: async (parent, args, context) => {
             if (context.admin) {
-                const adminData = await Admin.findOne({ _id: context.user._id })
+                const adminData = await Admin.findOne({ _id: context.admin._id })
                     .select("-__v -password");
                 return adminData;
             }
@@ -30,7 +34,11 @@ const resolvers = {
         },
 
         users: async () => {
-            const userData = await User.find({});
+            const userData = await User.find({})
+            .populate('favorites')
+            .populate('do')
+            .populate('doing')
+            .populate('done');
 
             return userData;
         },
@@ -137,6 +145,98 @@ const resolvers = {
             return { token, user };
         },
 
+        addResourceToFavs: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { favorites: { ...args } } },
+                    { new: true }
+                ).populate('favorites');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
+        addResourceToDo: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { do: { ...args } } },
+                    { new: true }
+                ).populate('do');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
+        addResourceToDoing: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { doing: { ...args } } },
+                    { new: true }
+                ).populate('doing');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
+        addResourceToDone: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { done: { ...args } } },
+                    { new: true }
+                ).populate('done');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
+        removeResourceFromFavs: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { favorites: _id } },
+                    { new: true }
+                ).populate('favorites');
+                return updatedUser;
+            }
+        },
+
+        removeResourceFromDo: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { do: _id } },
+                    { new: true }
+                ).populate('do');
+                return updatedUser;
+            }
+        },
+
+        removeResourceFromDoing: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { doing: _id } },
+                    { new: true }
+                ).populate('doing');
+                return updatedUser;
+            }
+        },
+
+        removeResourceFromDone: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { done: _id } },
+                    { new: true }
+                ).populate('done');
+                return updatedUser;
+            }
+        },
+
         createTopic: async (parent, args) => {
             const newTopic = await Topic.create({ ...args });
             return newTopic;
@@ -170,10 +270,10 @@ const resolvers = {
             return updateTopic;
         },
 
-        addSubtopicToTopic: async (parent, { _id, title, text, topicId }) => {
+        addSubtopicToTopic: async (parent, { _id, title, text, image, link, topicId }) => {
             const updateTopic = await Topic.findOneAndUpdate(
                 { _id: topicId },
-                { $addToSet: { subtopics: { _id, title, text } } },
+                { $addToSet: { subtopics: { _id, title, text, image, link } } },
                 { new: true }
             )
                 .populate({
@@ -194,6 +294,24 @@ const resolvers = {
             return updatedResource;
         },
 
+        updateSubtopic: async (parent, { _id, title, text, image, link }) => {
+            const updatedSubtopic = await Subtopic.findOneAndUpdate(
+                { _id: _id },
+                { $set: { title, text, image, link } },
+                { new: true }
+            );
+            return updatedSubtopic;
+        },
+
+        updateTopic: async (parent, { _id, title, text, image, link }) => {
+            const updatedTopic = await Topic.findOneAndUpdate(
+                { _id: _id },
+                { $set: { title, text, image, link } },
+                { new: true }
+            );
+            return updatedTopic;
+        },
+
         removeResourceFromTopic: async (parent, { _id, topicId }) => {
             const updatedTopic = await Topic.findOneAndUpdate(
                 { _id: topicId },
@@ -212,6 +330,16 @@ const resolvers = {
             )
                 .populate('resources');
             return updatedSubtopic;
+        },
+
+        removeSubtopicFromTopic: async (parent, { _id, topicId }) => {
+            const updatedTopic = await Topic.findOneAndUpdate(
+                { _id: topicId },
+                { $pull: { subtopics: _id } },
+                { new: true }
+            )
+                .populate('subtopics');
+            return updatedTopic;
         },
 
 
