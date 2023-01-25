@@ -1,25 +1,14 @@
-/* :root {
-  --mountain: rgb(51, 49, 47);
-  --mountainTop: rgb(229, 229, 232);
-  --newClay: rgb(228, 223, 218);
-  --brightWaters: rgb(110, 188, 227);
-  --sea: rgb(124, 181, 167);
-  --darkSea: rgb(117, 163, 152);
-  --lightHouse: rgb(252, 121, 91);
-  --lighterHouse: rgb(246, 135, 110);
-  --beacon: rgb(131, 210, 111);
-} */
-
 :root {   
   --base: rgb(36, 44, 49); 
   --alt: rgb(177, 178, 178);
   --primary: rgb(228, 223, 218);
   --lightblue: rgb(122, 205, 247);
   --blue: rgb(89, 146, 174);
-  --lightHouse: rgb(252, 121, 91);
+  --lightHouse: rgb(248, 107, 75);
   --lighterHouse: rgb(246, 135, 110);
   --beacon: rgb(124, 197, 106);
-  --violet: rgb(213, 149, 251);
+  --violet: rgb(203, 123, 250);
+  --lightviolet: rgb(221, 172, 249);
 }
 
 html body {
@@ -52,10 +41,12 @@ h5 {
 
 .topic-headers {
   color: var(--lighterHouse);
+  text-decoration: none;
 }
 
 .subtopic-headers {
-  color: var(--violet);
+  color: var(--lightviolet);
+  text-decoration: none;
 }
 
 .box {
@@ -122,6 +113,16 @@ img {
 
 .search:hover {
   background-color:var(--lightblue);
+}
+
+.topic-headers:hover {
+  color: var(--lightHouse);
+  text-decoration: none;
+}
+
+.subtopic-headers:hover {
+  color: var(--violet);
+  text-decoration: none;
 }
 
 .logging:hover {

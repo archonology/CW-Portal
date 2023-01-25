@@ -112,9 +112,9 @@ const Subtopic = ({ subtopic }) => {
                             className="avatar"
                         />
 
-                        <Typography sx={{ width: '33%', flexShrink: 0, fontSize: 'larger', paddingRight: 2 }} className="subtopic-headers">
+                        <a className="subtopic-headers" href={subtopic.link} target={'_blank'} rel={'nonreferrer'}><Typography sx={{ width: '33%', flexShrink: 0, fontSize: 'larger', paddingRight: 2 }} className="subtopic-headers">
                             {subtopic.title}
-                        </Typography>
+                        </Typography></a>
 
                         <Typography sx={{ color: 'text.secondary', paddingRight: 3 }} >{subtopic.text}</Typography>
 

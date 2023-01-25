@@ -19,7 +19,6 @@ import EditTopicDialog from "../EditTopicDialog";
 import { DELETE_TOPIC } from "../../utils/mutations";
 import { QUERY_ALL_TOPICS } from "../../utils/queries";
 import Dialog from "@mui/material/Dialog";
-
 import Auth from "../../utils/auth";
 
 
@@ -113,7 +112,7 @@ const Topic = ({ topic }) => {
                         className="avatar"
                     />
                     <div>
-                        <h2 className="topic-headers">{topic.title}</h2>
+                    <a className="topic-headers" href={topic.link} target={'_blank'} rel={'nonreferrer'}><h2 className="topic-headers">{topic.title}</h2></a>
                         <p className="mainText">{topic.text}</p>
                     </div>
                 </Stack>

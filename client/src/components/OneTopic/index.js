@@ -21,6 +21,7 @@ import ResourceCard from "../OneResource";
 import EditTopicDialog from "../EditTopicDialog";
 import { DELETE_TOPIC } from "../../utils/mutations";
 import Dialog from "@mui/material/Dialog";
+import { Link } from 'react-router-dom';
 
 import Auth from "../../utils/auth";
 
@@ -137,7 +138,7 @@ const OneTopic = ({ }) => {
                         className="avatar"
                     />
                     <div>
-                        <h2 className="topic-headers">{topicData.title}</h2>
+                        <a className="topic-headers" href={topicData.link} target={'_blank'} rel={'nonreferrer'}><h2 className="topic-headers">{topicData.title}</h2></a>
                         <p className="mainText">{topicData.text}</p>
                     </div>
                 </Stack>
@@ -206,24 +207,24 @@ const OneTopic = ({ }) => {
                     </Paper>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-          
-                        <Grid direction="row" container sx={{ padding: "1rem" }}>
-                            <Grid container spacing={0} justifyContent="center">
 
-                                {topicData?.resources?.map((resource) => {
-                                    console.log(resource);
-                                    return (
-                                        <>
-                                            <ResourceCard
-                                                resource={resource} favorites={userData.favorites}
-                                            />
-                                        </>
-                                    )
-                                })}
+                    <Grid direction="row" container sx={{ padding: "1rem" }}>
+                        <Grid container spacing={0} justifyContent="center">
 
-                            </Grid>
+                            {topicData?.resources?.map((resource) => {
+                                console.log(resource);
+                                return (
+                                    <>
+                                        <ResourceCard
+                                            resource={resource} favorites={userData.favorites}
+                                        />
+                                    </>
+                                )
+                            })}
+
                         </Grid>
-               
+                    </Grid>
+
                 </TabPanel>
 
             </Box>
