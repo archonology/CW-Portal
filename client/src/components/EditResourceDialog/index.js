@@ -7,7 +7,7 @@ import {
     Box,
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { QUERY_ALL_RESOURCES, QUERY_ONE_RESOURCE } from "../../utils/queries";
+import { QUERY_ALL_RESOURCES } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { UPDATE_RESOURCE } from "../../utils/mutations";
 import { SnackbarProvider, useSnackbar } from "notistack";

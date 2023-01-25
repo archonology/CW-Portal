@@ -17,7 +17,7 @@ import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ALL_RESOURCES } from "../../utils/queries";
+import { QUERY_ALL_RESOURCES, QUERY_ME } from "../../utils/queries";
 import {
     DELETE_RESOURCE,
     ADD_RESOURCE_TO_FAVS,
@@ -46,7 +46,7 @@ import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
 
 
-const ResourceCard = ({ resource, favorites, toDo }) => {
+const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
 
     //If user is logged in, check their lists to manage icon color
     let favState = false;
@@ -57,6 +57,8 @@ const ResourceCard = ({ resource, favorites, toDo }) => {
     if (Auth.loggedIn()) {
         const favChecker = favorites.filter((resourceObj) => resourceObj._id === resource._id);
         const toDoChecker = toDo.filter((resourceObj) => resourceObj._id === resource._id);
+        const doingChecker = doing.filter((resourceObj) => resourceObj._id === resource._id);
+        const doneChecker = done.filter((resourceObj) => resourceObj._id === resource._id);
 
         if (favChecker.length > 0) {
             favState = true;
@@ -64,10 +66,18 @@ const ResourceCard = ({ resource, favorites, toDo }) => {
         if (toDoChecker.length > 0) {
             doState = true;
         }
+        if (doingChecker.length > 0) {
+            doingState = true;
+        }
+        if (doneChecker.length > 0) {
+            doneState = true;
+        }
     }
 
     const [clicked, setClicked] = useState(favState);
     const [clickedToDo, setClickedToDo] = useState(doState);
+    const [clickedDoing, setClickedDoing] = useState(doingState);
+    const [clickedDone, setClickedDone] = useState(doneState);
 
 
     const { loading, error, data } = useQuery(QUERY_ALL_RESOURCES);
@@ -77,11 +87,31 @@ const ResourceCard = ({ resource, favorites, toDo }) => {
     const [openSubtopic, setOpenSubtopic] = React.useState(false);
     const [openResource, setOpenResource] = React.useState(false);
 
-    // handle add to favorites
-    const [addResourceToFavs, { e }] = useMutation(ADD_RESOURCE_TO_FAVS);
-    const [addResourceToDo] = useMutation(ADD_RESOURCE_TO_DO);
-    const [removeResourceFromFavs] = useMutation(REMOVE_RESOURCE_FROM_FAVS);
-    const [removeResourceFromDo] = useMutation(REMOVE_RESOURCE_FROM_TODO);
+    // handle adding to lists
+    const [addResourceToFavs, { e }] = useMutation(ADD_RESOURCE_TO_FAVS, {
+        refetchQueries: [{ query: QUERY_ME}]
+    });
+    const [addResourceToDo] = useMutation(ADD_RESOURCE_TO_DO, {
+        refetchQueries: [{ query: QUERY_ME}]
+    });
+    const [addResourceToDoing] = useMutation(ADD_RESOURCE_TO_DOING, {
+        refetchQueries: [{ query: QUERY_ME}]
+    });
+    const [addResourceToDone] = useMutation(ADD_RESOURCE_TO_DONE, {
+        refetchQueries: [{ query: QUERY_ME}]
+    });
+    const [removeResourceFromFavs] = useMutation(REMOVE_RESOURCE_FROM_FAVS, {
+        refetchQueries: [{ query: QUERY_ME}]
+    });
+    const [removeResourceFromDo] = useMutation(REMOVE_RESOURCE_FROM_TODO, {
+        refetchQueries: [{ query: QUERY_ME}]
+    });
+    const [removeResourceFromDoing] = useMutation(REMOVE_RESOURCE_FROM_DOING, {
+        refetchQueries: [{ query: QUERY_ME}]
+    });
+    const [removeResourceFromDone] = useMutation(REMOVE_RESOURCE_FROM_DONE, {
+        refetchQueries: [{ query: QUERY_ME}]
+    });
 
     // handle delete resource and refetch minus the deleted resource
     const [deleteResource, { err, dat }] = useMutation(DELETE_RESOURCE, {
@@ -150,7 +180,6 @@ const ResourceCard = ({ resource, favorites, toDo }) => {
                     variables: { ...resource },
                 });
                 setClicked(true);
-                return;
             } catch (err) {
                 console.error(err);
             }
@@ -177,7 +206,6 @@ const ResourceCard = ({ resource, favorites, toDo }) => {
                     variables: { ...resource },
                 });
                 setClickedToDo(true);
-                return;
             } catch (err) {
                 console.error(err);
             }
@@ -189,6 +217,56 @@ const ResourceCard = ({ resource, favorites, toDo }) => {
                     variables: { _id: resource._id }, //Remove the resource based on the _id value
                 });
                 setClickedToDo(false);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    };
+
+    const handleSaveToDoing = async (resource) => {
+
+        if (!clickedDoing) {
+            try {
+                const { data } = await addResourceToDoing({
+                    variables: { ...resource },
+                });
+                setClickedDoing(true);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        if (clickedDoing) {
+            try {
+                const { data } = await removeResourceFromDoing({
+                    variables: { _id: resource._id },
+                });
+                setClickedDoing(false);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    };
+
+    const handleSaveToDone = async (resource) => {
+
+        if (!clickedDone) {
+            try {
+                const { data } = await addResourceToDone({
+                    variables: { ...resource },
+                });
+                setClickedDone(true);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        if (clickedDone) {
+            try {
+                const { data } = await removeResourceFromDone({
+                    variables: { _id: resource._id },
+                });
+                setClickedDone(false);
             } catch (err) {
                 console.error(err);
             }
@@ -261,19 +339,39 @@ const ResourceCard = ({ resource, favorites, toDo }) => {
 
                             </div>
 
+                            <div onClick={() => handleSaveToDoing(resource)}>
+                                {clickedDoing ? (
+                                    <Tooltip title="Remove From Doing List">
+                                        <IconButton>
+                                            <LooksTwoIcon sx={{ color: "#33bfff" }} />
+                                        </IconButton>
+                                    </Tooltip>
+                                ) : (
+                                    <Tooltip title="Add to Doing List">
+                                        <IconButton>
+                                            <LooksTwoIcon sx={{ color: "white" }} />
+                                        </IconButton>
+                                    </Tooltip>
+                                )}
 
-                            <Tooltip title="Remove From Doing List">
-                                <IconButton>
-                                    <LooksTwoIcon sx={{ color: "#33bfff" }} />
-                                </IconButton>
-                            </Tooltip>
+                            </div>
 
-                            <Tooltip title="Remove From Done List">
-                                <IconButton>
-                                    <Looks3Icon sx={{ color: "#ff9800" }} />
-                                </IconButton>
-                            </Tooltip>
+                            <div onClick={() => handleSaveToDone(resource)}>
+                                {clickedDone ? (
+                                    <Tooltip title="Remove From Done List">
+                                        <IconButton>
+                                            <Looks3Icon sx={{ color: "#ff9800" }} />
+                                        </IconButton>
+                                    </Tooltip>
+                                ) : (
+                                    <Tooltip title="Add to Done List">
+                                        <IconButton>
+                                            <Looks3Icon sx={{ color: "white" }} />
+                                        </IconButton>
+                                    </Tooltip>
+                                )}
 
+                            </div>
 
                         </>
                     ) : (

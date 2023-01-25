@@ -8,7 +8,11 @@ const resolvers = {
         me: async (parent, args, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
-                    .select("-__v -password");
+                    .select("-__v -password")
+                    .populate('favorites')
+                    .populate('do')
+                    .populate('doing')
+                    .populate('done');
                 return userData;
             }
             throw new AuthenticationError("Logout as Admin and login as user to access lists.");
@@ -32,7 +36,9 @@ const resolvers = {
         users: async () => {
             const userData = await User.find({})
             .populate('favorites')
-            .populate('do');
+            .populate('do')
+            .populate('doing')
+            .populate('done');
 
             return userData;
         },
@@ -187,13 +193,24 @@ const resolvers = {
             throw new AuthenticationError("Please log in to add to a list.");
         },
 
+        removeResourceFromFavs: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { favorites: _id } },
+                    { new: true }
+                ).populate('favorites');
+                return updatedUser;
+            }
+        },
+
         removeResourceFromDo: async (parent, { _id }, context) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $pull: { do: _id } },
                     { new: true }
-                );
+                ).populate('do');
                 return updatedUser;
             }
         },
@@ -204,7 +221,7 @@ const resolvers = {
                     { _id: context.user._id },
                     { $pull: { doing: _id } },
                     { new: true }
-                );
+                ).populate('doing');
                 return updatedUser;
             }
         },
@@ -215,7 +232,7 @@ const resolvers = {
                     { _id: context.user._id },
                     { $pull: { done: _id } },
                     { new: true }
-                );
+                ).populate('done');
                 return updatedUser;
             }
         },

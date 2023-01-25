@@ -42,7 +42,7 @@ const ToDo = () => {
                 };
                 return (
                     <>
-                        <ResourceCard key={resourceData._id} resource={resourceData} favorites={userData.favorites} toDo={userData.do} />
+                        <ResourceCard key={resourceData._id} resource={resourceData} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
                     </>
                 )
             })}

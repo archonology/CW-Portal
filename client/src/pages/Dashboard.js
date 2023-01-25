@@ -8,6 +8,8 @@ import Favorites from "../components/Favorites";
 import { Link } from 'react-router-dom';
 import { Grid, Paper } from "@mui/material";
 import ToDo from "../components/ToDo";
+import Doing from "../components/Doing";
+import Done from "../components/Done";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -85,26 +87,46 @@ const Dashboard = () => {
           )}
         </Box>
         <TabPanel value={value} index={0}>
-            <Grid direction="row" container sx={{ padding: "1rem" }}>
-              <Grid container spacing={0} justifyContent="center">
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={0} justifyContent="center">
 
-                <Favorites />
+              <Favorites />
 
-              </Grid>
             </Grid>
+          </Grid>
         </TabPanel>
         <TabPanel value={value} index={1}>
-        <Grid direction="row" container sx={{ padding: "1rem" }}>
-              <Grid container spacing={0} justifyContent="center">
 
-                <ToDo />
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={0} justifyContent="center">
 
-              </Grid>
+              <ToDo />
+
             </Grid>
+          </Grid>
+
         </TabPanel>
         <TabPanel value={value} index={2}>
+
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={0} justifyContent="center">
+
+              <Doing />
+
+            </Grid>
+          </Grid>
+
         </TabPanel>
         <TabPanel value={value} index={3}>
+
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={0} justifyContent="center">
+
+              <Done />
+
+            </Grid>
+          </Grid>
+
         </TabPanel>
       </Box>
 
