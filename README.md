@@ -1,6 +1,9 @@
 # Child Welfare Portal
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Visit Deployed site
+https://childwelfareportal.herokuapp.com
+
 ## Screenshot
 ![Sreenshot](./client/src/media/Screenshot%202023-01-24%20at%209.35.13%20PM.png)    
 ## Table of Contents:
