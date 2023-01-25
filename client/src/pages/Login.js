@@ -114,7 +114,6 @@ const Login = () => {
                                     "& .MuiTextField-root": { m: 1, minWidth: "300px", },
                                     borderColor: "teal",
                                 }}
-                                noValidate
                                 autoComplete="off"
                                 onSubmit={handleLoginSubmit}
                             >

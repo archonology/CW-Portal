@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import { Grid, Button, TextField } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "../utils/mutations";
+import { validateEmail, validatePassword } from '../utils/helpers';
 import Auth from "../utils/auth";
 
 function TabPanel(props) {
@@ -44,6 +45,7 @@ const Signup = () => {
     const [signupFormData, setSignupFormData] = useState({ username: "", email: "", password: "" });
     const [createUser, { error, data }] = useMutation(CREATE_USER);
     const [value, setValue] = React.useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -61,6 +63,22 @@ const Signup = () => {
     // submit Signup form
     const handleSignupSubmit = async (event) => {
         event.preventDefault();
+
+        if (!validateEmail(signupFormData.email)) {
+            setErrorMessage(`
+      Sorry, the email is missing something. 
+      Please check it and try again, 
+      thanks! 🪴
+      `);
+            return;
+        }
+        if (!validatePassword(signupFormData.password)) {
+            setErrorMessage(`
+      Sorry, the password is missing something. 
+      Please make sure it starts with a letter, has a number a special character, and is between 6 and 16 characters long... 🪴
+      `);
+            return;
+        }
 
         try {
             const { data } = await createUser({
@@ -82,6 +100,7 @@ const Signup = () => {
     return (
         <Box sx={{ width: '100%' }}>
             <Box>
+
                 <Tabs
                     sx={{ m: 3 }}
                     value={value}
@@ -117,6 +136,12 @@ const Signup = () => {
                                 autoComplete="off"
                                 onSubmit={handleSignupSubmit}
                             >
+                                {errorMessage && (
+                                    <div>
+                                        <p className="error-text">{errorMessage}</p>
+                                    </div>
+                                )}
+
                                 <div>
                                     <TextField
                                         id="signup-username-input"

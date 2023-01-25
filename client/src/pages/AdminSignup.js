@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { Grid, Button, Link, TextField } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { CREATE_ADMIN } from "../utils/mutations";
+import { validateEmail, validatePassword } from '../utils/helpers';
 import Auth from "../utils/auth";
 
 function TabPanel(props) {
@@ -44,6 +45,7 @@ function a11yProps(index) {
 const AdminSignup = () => {
     const [signupState, setSignupState] = useState({ username: "", email: "", password: "" });
     const [createAdmin, { error, data }] = useMutation(CREATE_ADMIN);
+    const [errorMessage, setErrorMessage] = useState('');
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -63,12 +65,28 @@ const AdminSignup = () => {
     const handleSignupSubmit = async (event) => {
         event.preventDefault();
 
+        if (!validateEmail(signupState.email)) {
+            setErrorMessage(`
+      Sorry, the email is missing something. 
+      Please check it and try again, 
+      thanks! 🪴
+      `);
+            return;
+        }
+        if (!validatePassword(signupState.password)) {
+            setErrorMessage(`
+      Sorry, the password is missing something. 
+      Please make sure it starts with a letter, has a number a special character, and is between 6 and 16 characters long... 🪴
+      `);
+            return;
+        }
+
         try {
             const { data } = await createAdmin({
                 variables: { ...signupState },
             });
 
-            Auth.login(data.createAdmin.token);
+            Auth.adminLogin(data.createAdmin.token);
         } catch (error) {
             console.error(error);
         }
@@ -109,7 +127,7 @@ const AdminSignup = () => {
                         }}
                     >
                         <Grid item>
-                        <Box
+                            <Box
                                 component="form"
                                 sx={{
                                     "& .MuiTextField-root": { m: 1, minWidth: "300px", }
@@ -118,6 +136,11 @@ const AdminSignup = () => {
                                 autoComplete="off"
                                 onSubmit={handleSignupSubmit}
                             >
+                                {errorMessage && (
+                                    <div>
+                                        <p className="error-text">{errorMessage}</p>
+                                    </div>
+                                )}
                                 <div>
                                     <TextField
                                         id="signup-username-input"

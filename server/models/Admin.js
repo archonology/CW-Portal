@@ -14,12 +14,12 @@ const adminSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            match: [/.+@.+\..+/, "Something is missing from your email address!"],
+            match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Something is missing from your email address!"],
         },
         password: {
             type: String,
             required: true,
-            match: [/^[A-Za-z]\w{7,14}$/, "Password must be between 7-14 characters."]
+            match: [/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, "Please make sure password starts with a letter, has a number a special character, and is between 6 and 16 characters long."]
         },
     }
 
