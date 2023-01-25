@@ -156,7 +156,7 @@ const AdminLogin = () => {
                                     <Button
                                         as={Link}
                                         className="link"
-                                        to="/adminsignup"
+                                        to={process.env.REACT_APP_ADMIN_SIGNUP_KEY} 
                                         variant="contained"
                                         color="warning"
                                         sx={{ margin: 1, paddingBlock: 1.25, textDecoration: "none", }}>Go to Signup Form

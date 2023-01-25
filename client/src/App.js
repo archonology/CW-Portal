@@ -8,7 +8,6 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Home from "./pages/Home";
 import OneTopic from "./components/OneTopic";
 import Dashboard from "./pages/Dashboard";
@@ -20,6 +19,7 @@ import ContentCreator from "./pages/ContentCreator";
 import AddTopic from "./pages/AddTopic";
 import AddSubtopic from "./pages/AddSubtopic";
 import AddResource from "./pages/AddResource";
+
 
 // adminLogin is not in the navbar: admin will need to know the url to navigate to this page, so that it isn't available to the public at large. use env after development phase to conceal url route
 import AdminLogin from "./pages/AdminLogin";
@@ -111,8 +111,8 @@ function App() {
               <Route path="contentcreator/addresource" element={<AddResource />} />
               {/* build in progess on donation features */}
               <Route path="/donate" element={<Donate />} />
-              <Route path="/adminlogin" element={<AdminLogin />} />
-              <Route path="/adminsignup" element={<AdminSignup />} />
+              <Route path={process.env.REACT_APP_ADMIN_LOGIN_KEY} element={<AdminLogin />} />
+              <Route path={process.env.REACT_APP_ADMIN_SIGNUP_KEY} element={<AdminSignup />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/*" element={<Home />} />
             </Routes>
