@@ -4,7 +4,7 @@ import { QUERY_ME } from "../../utils/queries";
 import { Container, Grid } from "@mui/material";
 import ResourceCard from "../OneResource";
 
-const Favorites = () => {
+const ToDo = () => {
     const { loading, error, data } = useQuery(QUERY_ME);
 
     const userData = data?.me || {};
@@ -32,7 +32,7 @@ const Favorites = () => {
 
     return (
         <>
-            {userData.favorites.map((resource) => {
+            {userData.do.map((resource) => {
                 const resourceData = {
                     _id: resource._id,
                     title: resource.title,
@@ -50,4 +50,4 @@ const Favorites = () => {
     )
 };
 
-export default Favorites;
+export default ToDo;

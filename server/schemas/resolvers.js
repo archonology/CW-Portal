@@ -30,7 +30,9 @@ const resolvers = {
         },
 
         users: async () => {
-            const userData = await User.find({}).populate('favorites');
+            const userData = await User.find({})
+            .populate('favorites')
+            .populate('do');
 
             return userData;
         },
@@ -149,11 +151,69 @@ const resolvers = {
             throw new AuthenticationError("Please log in to add to a list.");
         },
 
-        removeResourceFromFavs: async (parent, { _id }, context) => {
+        addResourceToDo: async (parent, args, context) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { favorites: _id } },
+                    { $addToSet: { do: { ...args } } },
+                    { new: true }
+                ).populate('do');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
+        addResourceToDoing: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { doing: { ...args } } },
+                    { new: true }
+                ).populate('doing');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
+        addResourceToDone: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { done: { ...args } } },
+                    { new: true }
+                ).populate('done');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
+        removeResourceFromDo: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { do: _id } },
+                    { new: true }
+                );
+                return updatedUser;
+            }
+        },
+
+        removeResourceFromDoing: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { doing: _id } },
+                    { new: true }
+                );
+                return updatedUser;
+            }
+        },
+
+        removeResourceFromDone: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { done: _id } },
                     { new: true }
                 );
                 return updatedUser;

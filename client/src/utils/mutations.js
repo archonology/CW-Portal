@@ -125,6 +125,48 @@ mutation addResourceToFavs($_id: ID!, $title: String!, $text: String!, $image: S
 }
 `;
 
+export const ADD_RESOURCE_TO_DO = gql`
+mutation addResourceToDo($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
+    addResourceToDo(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+        do {
+            _id
+            title
+            text
+            image
+            link
+        }
+    }
+}
+`;
+
+export const ADD_RESOURCE_TO_DOING = gql`
+mutation addResourceToDoing($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
+    addResourceToDoing(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+        doing {
+            _id
+            title
+            text
+            image
+            link
+        }
+    }
+}
+`;
+
+export const ADD_RESOURCE_TO_DONE = gql`
+mutation addResourceToDone($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
+    addResourceToDone(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+        done {
+            _id
+            title
+            text
+            image
+            link
+        }
+    }
+}
+`;
+
 
 export const UPDATE_RESOURCE = gql`
 mutation updateResource($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
@@ -214,6 +256,37 @@ mutation removeResourceFromFavs($_id: ID!) {
     }
 }
 `;
+
+export const REMOVE_RESOURCE_FROM_TODO = gql`
+mutation removeResourceFromDo($_id: ID!) {
+    removeResourceFromDo(_id: $_id){
+        do {
+            _id
+        }
+    }
+}
+`;
+
+export const REMOVE_RESOURCE_FROM_DOING = gql`
+mutation removeResourceFromDoing($_id: ID!) {
+    removeResourceFromDoing(_id: $_id){
+        doing {
+            _id
+        }
+    }
+}
+`;
+
+export const REMOVE_RESOURCE_FROM_DONE = gql`
+mutation removeResourceFromDone($_id: ID!) {
+    removeResourceFromDone(_id: $_id){
+        done {
+            _id
+        }
+    }
+}
+`;
+
 
 
 export const REMOVE_RESOURCE_FROM_TOPIC = gql`

@@ -27,6 +27,7 @@ const Resources = () => {
                     key={resource._id} 
                     resource={resource} 
                     favorites={userData.favorites}
+                    toDo={userData.do}
                       />
                 )
 

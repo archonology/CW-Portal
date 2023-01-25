@@ -44,34 +44,6 @@ query admin {
         _id
         username
         email
-        favorites {
-          _id
-          title
-          text
-          image
-          link
-        }
-        do {
-          _id
-          title
-          text
-          image
-          link
-        }
-        doing {
-          _id
-          title
-          text
-          image
-          link
-        }
-        done {
-          _id
-          title
-          text
-          image
-          link
-        }
     }
 }
 `;
