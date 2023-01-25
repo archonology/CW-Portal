@@ -26,7 +26,7 @@ function Header() {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" className="mb-3 p-3" expand="md">
+      <Navbar bg="dark" variant="dark" className="mb-3 p-4" expand="md" id="#top">
         <Container fluid >
           <Navbar.Brand as={Link} to="/" className="">The Child Welfare Portal</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`} />
@@ -54,25 +54,28 @@ function Header() {
                     <NavDropdown.Item as={Link} key={topic._id} to={`/resources/${topic._id}`}>{topic.title} </NavDropdown.Item>
                   ))}
                 </NavDropdown>
+
+                {/* <Nav.Link as={Link} to="/contact">Contact</Nav.Link> */}
+                <Nav.Link as={Link} to="/about">Aboout Us</Nav.Link>
+                <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link>
+
                 {Auth.loggedIn() || Auth.adminLoggedIn() ? (
 
                   <>
-                    <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
                     <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                    <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
+
                   </>
                 ) : (
                   <>
-                  <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
-                  <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
+                    <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
+                    <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
+
                   </>
                 )}
-                
-
-                <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
-                <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link>
 
               </Nav>
-              <Form className="d-flex">
+              {/* <Form className="d-flex">
                 <Form.Control
                   type="search"
                   placeholder="Search"
@@ -82,7 +85,7 @@ function Header() {
                 <Button className="search">
                   <SearchIcon></SearchIcon>
                 </Button>
-              </Form>
+              </Form> */}
 
             </Offcanvas.Body>
           </Navbar.Offcanvas>
