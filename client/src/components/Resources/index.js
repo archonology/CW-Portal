@@ -24,7 +24,7 @@ const Resources = () => {
             {resourceData.map((resource) => {
                 return (
                     <>
-                    <ResourceCard key={resource._id} resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
+                    <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
                 </>
                 )
 
