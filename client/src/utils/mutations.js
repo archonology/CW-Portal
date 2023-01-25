@@ -235,8 +235,8 @@ mutation addResourceToSubtopic($_id: ID!, $title: String!, $text: String!, $imag
 `;
 
 export const ADD_SUBTOPIC_TO_TOPIC = gql`
-mutation addSubtopicToTopic($_id: ID!, $title: String!, $text: String!, $topicId: ID!) {
-  addSubtopicToTopic(_id: $_id, title: $title, text: $text, topicId: $topicId){
+mutation addSubtopicToTopic($_id: ID!, $title: String!, $text: String!,$image: String!, $link: String!, $topicId: ID!) {
+  addSubtopicToTopic(_id: $_id, title: $title, text: $text, image: $image, link: $link, topicId: $topicId){
         subtopics {
             _id
             title
