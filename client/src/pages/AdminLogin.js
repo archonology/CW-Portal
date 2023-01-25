@@ -7,6 +7,7 @@ import { Grid, Button, TextField } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { LOGIN_ADMIN } from "../utils/mutations";
 import { Link } from 'react-router-dom';
+import { validateEmail } from "../utils/helpers";
 import Auth from "../utils/auth";
 
 function TabPanel(props) {
@@ -44,6 +45,7 @@ function a11yProps(index) {
 const AdminLogin = () => {
     const [loginState, setLoginState] = useState({ email: "", password: "" });
     const [loginAdmin, { error, data }] = useMutation(LOGIN_ADMIN);
+    const [errorMessage, setErrorMessage] = useState('');
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -62,6 +64,15 @@ const AdminLogin = () => {
     // submit Login form
     const handleLoginSubmit = async (event) => {
         event.preventDefault();
+
+        if (!validateEmail(loginState.email)) {
+            setErrorMessage(`
+      Sorry, the email is missing something. 
+      Please check it and try again, 
+      thanks! 🪴
+      `);
+            return;
+        }
 
         try {
             const { data } = await loginAdmin({
@@ -118,6 +129,13 @@ const AdminLogin = () => {
                                 autoComplete="off"
                                 onSubmit={handleLoginSubmit}
                             >
+
+                                {errorMessage && (
+                                    <div>
+                                        <p className="error-text">{errorMessage}</p>
+                                    </div>
+                                )}
+
                                 <div>
                                     <TextField
                                         id="login-email-input"
@@ -156,7 +174,7 @@ const AdminLogin = () => {
                                     <Button
                                         as={Link}
                                         className="link"
-                                        to={process.env.REACT_APP_ADMIN_SIGNUP_KEY} 
+                                        to={process.env.REACT_APP_ADMIN_SIGNUP_KEY}
                                         variant="contained"
                                         color="warning"
                                         sx={{ margin: 1, paddingBlock: 1.25, textDecoration: "none", }}>Go to Signup Form

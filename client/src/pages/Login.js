@@ -7,6 +7,7 @@ import { Grid, Button, TextField } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import { Link } from 'react-router-dom';
+import { validateEmail } from "../utils/helpers";
 import Auth from "../utils/auth";
 
 function TabPanel(props) {
@@ -44,10 +45,12 @@ function a11yProps(index) {
 const Login = () => {
     const [loginFormData, setLoginFormData] = useState({ email: "", password: "" });
     const [loginUser, { error, data }] = useMutation(LOGIN_USER);
+    const [errorMessage, setErrorMessage] = useState('');
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
 
     // update state based on login form input changes
     const handleLoginFormChange = (event) => {
@@ -62,6 +65,15 @@ const Login = () => {
     // submit Login form
     const handleLoginSubmit = async (event) => {
         event.preventDefault();
+
+        if (!validateEmail(loginFormData.email)) {
+            setErrorMessage(`
+      Sorry, the email is missing something. 
+      Please check it and try again, 
+      thanks! 🪴
+      `);
+            return;
+        }
 
         try {
             const { data } = await loginUser({
@@ -117,6 +129,12 @@ const Login = () => {
                                 autoComplete="off"
                                 onSubmit={handleLoginSubmit}
                             >
+
+                             {errorMessage && (
+                                    <div>
+                                        <p className="error-text">{errorMessage}</p>
+                                    </div>
+                                )}
 
                                 <div>
                                     <TextField
