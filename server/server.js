@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Create a route that will serve up the `../client/build/index.html` page
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
