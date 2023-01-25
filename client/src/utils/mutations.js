@@ -84,8 +84,8 @@ mutation createTopic($title: String!, $text: String!, $image: String!, $link: St
 `;
 
 export const CREATE_SUBTOPIC = gql`
-mutation createSubtopic($title: String!, $text: String!) {
-    createSubtopic(title: $title, text: $text) {
+mutation createSubtopic($title: String!, $text: String!, $image: String!, $link: String!) {
+    createSubtopic(title: $title, text: $text, image: $image, link: $link) {
         title
         text
         image
