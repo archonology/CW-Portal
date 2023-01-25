@@ -15,7 +15,9 @@ const AddSubtopic = () => {
 
     const [formState, setFormState] = useState({
         title: "",
-        text: ""
+        text: "",
+        image: "",
+        link: ""
     });
 
     const [newSubtopic, { error, data }] = useMutation(CREATE_SUBTOPIC);
@@ -81,6 +83,26 @@ const AddSubtopic = () => {
                         id="description"
                         multiline
                         maxRows={10}
+                        variant="standard"
+                    ></TextField>
+
+                    <TextField
+                        name="image"
+                        value={formState.image}
+                        onChange={handleChange}
+                        onBlur={() => { handleChange.image.trim() }}
+                        label="Image URL"
+                        id="image"
+                        variant="standard"
+                    ></TextField>
+
+                    <TextField
+                        name="link"
+                        value={formState.link}
+                        onChange={handleChange}
+                        onBlur={() => { handleChange.link.trim() }}
+                        label="Resource Link"
+                        id="link"
                         variant="standard"
                     ></TextField>
 

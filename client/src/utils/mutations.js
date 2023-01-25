@@ -88,6 +88,8 @@ mutation createSubtopic($title: String!, $text: String!) {
     createSubtopic(title: $title, text: $text) {
         title
         text
+        image
+        link
         resources {
             _id
             title
