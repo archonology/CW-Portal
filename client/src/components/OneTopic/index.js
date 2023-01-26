@@ -212,12 +212,9 @@ const OneTopic = ({ }) => {
                         <Grid container spacing={0} justifyContent="center">
 
                             {topicData?.resources?.map((resource) => {
-                                console.log(resource);
                                 return (
                                     <>
-                                        <ResourceCard
-                                            resource={resource} favorites={userData.favorites}
-                                        />
+                                        <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
                                     </>
                                 )
                             })}

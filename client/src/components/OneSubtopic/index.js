@@ -166,17 +166,18 @@ const Subtopic = ({ subtopic }) => {
 
                             </>
                         ) : (
+                            <></>
+
+                            )}
                             <>
                                 <Grid direction="row" container sx={{ padding: "1rem" }}>
                                     <Grid container spacing={1} justifyContent="center">
 
-                                        {subtopic?.resources?.map((resource) => {
+                                        {subtopic?.resources.map((resource) => {
                                             console.log(resource);
                                             return (
                                                 <>
-                                                    <ResourceCard
-                                                        resource={resource} favorites={userData.favorites}
-                                                    />
+                                                    <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
                                                 </>
                                             )
                                         })}
@@ -192,7 +193,7 @@ const Subtopic = ({ subtopic }) => {
                                     </Grid>
                                 </Grid>
                             </>
-                        )}
+                       
                     </AccordionDetails>
                 </Accordion>
 
