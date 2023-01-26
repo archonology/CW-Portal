@@ -44,7 +44,7 @@ const resolvers = {
         },
 
         topics: async () => {
-            const topicData = await Topic.find({})
+            const topicData = await Topic.find({}).sort({title: 1})
                 .populate('resources')
                 .populate({
                     path: 'subtopics',
