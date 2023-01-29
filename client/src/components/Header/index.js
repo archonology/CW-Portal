@@ -56,7 +56,7 @@ function Header() {
                 </NavDropdown>
 
                 {/* <Nav.Link as={Link} to="/contact">Contact</Nav.Link> */}
-                <Nav.Link as={Link} to="/about">Aboout Us</Nav.Link>
+                <Nav.Link as={Link} to="/about">About Us</Nav.Link>
                 <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link>
 
                 {Auth.loggedIn() || Auth.adminLoggedIn() ? (

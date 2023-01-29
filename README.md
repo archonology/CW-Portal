@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Visit Deployed site
-https://childwelfareportal.herokuapp.com
+https://www.childwelfareportal.org/
 
 ## Screenshot
 ![Sreenshot](./client/src/media/Screenshot%202023-01-24%20at%209.35.13%20PM.png)    
@@ -16,7 +16,7 @@ https://childwelfareportal.herokuapp.com
 #### [License Info](#license-info)
 
 ## Description
-For Child Welfare workers in Minnesota, there is a total lack of centralized resources that pertain to the essential duties, tools, history, and background of all things child welfare. Training and access to resources is scattered and far, far from comprehensive. child welfare workers need a comprehensive hub for all the best and most essential resources. That hub needs to be dynamic and easy to update, add, and remove resources from because of the constant changes in the child welfare field. There are many resource sites for CW workers available, but most of them have static data that is difficult to update, thus most of them are full of expired links and out of date info.
+For Child Welfare workers in Minnesota, there is a lack of centralized resources that are up to date and pertain to the essential duties, tools, history, and background of all things child welfare. Training and access to resources is scattered and far, far from comprehensive. child welfare workers need a comprehensive hub for all the best and most essential resources. That hub needs to be dynamic and easy to update, add, and remove resources from because of the constant changes in the child welfare field. There are many resource sites for CW workers available, but most of them have static data that is difficult to update, thus most of them are full of expired links and out of date info.
 
 Enter the Child Welfare Portal. This application addresses the need for dynamic and easy to update data. It is simple to use and organized in three categories of data: Topics, Subtopics, and Resources. Resources can belong to both Topics and Subtopics, and Subtopics belong to Topics. 
 
