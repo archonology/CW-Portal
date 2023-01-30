@@ -45,11 +45,14 @@ function Footer() {
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
 
-              <Nav.Link href="#top">Return to Top</Nav.Link>
+                <Nav.Link href="#top">Return to Top |</Nav.Link>
 
-                
-                <Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
+                <Nav.Link as={Link} to="/about">About</Nav.Link>
+                <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link>
+
+                <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
                 {/* <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link> */}
+
                 <Nav.Link href="https://www.meherdevs.com" target={'_blank'} rel={'nonreferrer'} className="meherdevs">By MeherDevs | 2023</Nav.Link>
 
               </Nav>

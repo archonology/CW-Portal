@@ -43,7 +43,7 @@ const About = () => {
                                 <h3 className="topic-headers">Reed Meher</h3>
                                 <h5 className="subtopic-headers">Full Stack Developer</h5>
                                 <hr></hr>
-                                <p className="about">This is a site dedicated to child welfare workers in MN. It is a hub for resources commonly needed by new and experience CW workers. Users are also able to create accounts so that they can save favorite resource links and created simple, learning to-do lists.</p>
+                                <p className="about">Among many things, Reed is a wanderer, homemaker, artist, writer, musician, teacher, social worker, and graphic designer. Now he's forging all his experience into becoming a <span>Full Stack</span> and <span>Frontend Developer</span>: a dream he's had ever since the long summer days of his youth spent attempting to get the family Commodore 64 to reveal it's secrets through the command line.</p>
                             </div>
                           <a href="https://www.linkedin.com/in/reed-meher" target={'_blank'} rel={'nonreferrer'}><i class="fa-brands fa-linkedin-in"></i></a>
                         </Stack>

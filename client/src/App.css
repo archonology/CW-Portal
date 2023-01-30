@@ -19,6 +19,10 @@ html body {
   margin: 0;
 }
 
+/* .brand {
+  padding-right: 3em;
+} */
+
 .navdropdown {
   background-color: var(--base);
 }

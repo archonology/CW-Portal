@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -13,7 +13,13 @@ import { useQuery } from '@apollo/client';
 import { QUERY_ALL_TOPICS } from "../../utils/queries";
 
 
+
 function Header() {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // set up useQuery get the data from the backend
   const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
@@ -26,56 +32,81 @@ function Header() {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" className="mb-3 p-4" expand="md" id="#top">
+      <Navbar bg="dark" variant="dark" className="mb-2 p-4" expand="md" id="#top">
         <Container fluid >
-          <Navbar.Brand as={Link} to="/" className="">The Child Welfare Portal</Navbar.Brand>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`} />
+
+          <Navbar.Brand as={Link} to="/" className="brand">The Child Welfare Portal</Navbar.Brand>
+
+          <Navbar.Toggle aria-controls="basic-navbar-nav"  className='p-3' />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="justify-content-end flex-grow-1 pe-3">
+
+              <Nav.Link onClick={handleShow}>Resources</Nav.Link>
+
+              {Auth.loggedIn() || Auth.adminLoggedIn() ? (
+
+                <>
+                  <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                  <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
+
+                </>
+              ) : (
+                <>
+                  <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
+                  <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
+
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+          {/* <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-md}`}
             aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
             placement="end"
             className="bg-dark variant-white"
-          >
-            <Offcanvas.Header closeButton closeVariant="white">
+          > */}
+          {/* <Offcanvas.Header closeButton closeVariant="white">
 
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md}`}>
                 The Child Welfare Portal
               </Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Body>
-              <Nav className="justify-content-end flex-grow-1 pe-3">
+            <Offcanvas.Body> */}
+          {/* <Nav className="justify-content-end flex-grow-1 pe-3">
+
                 <NavDropdown
                   menuVariant="dark"
                   title="Resources"
                   id={`offcanvasNavbarDropdown-expand-md}`}
-                >
-                  {/* here the resource topics are mapped through to be synced with backend */}
-                  {topicData.map((topic) => (
+                > */}
+          {/* here the resource topics are mapped through to be synced with backend */}
+          {/* {topicData.map((topic) => (
                     <NavDropdown.Item as={Link} key={topic._id} to={`/resources/${topic._id}`}>{topic.title} </NavDropdown.Item>
                   ))}
-                </NavDropdown>
+                </NavDropdown> */}
 
-                {/* <Nav.Link as={Link} to="/contact">Contact</Nav.Link> */}
-                <Nav.Link as={Link} to="/about">About Us</Nav.Link>
-                <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link>
+          {/* <Nav.Link as={Link} to="/contact">Contact</Nav.Link> */}
+          {/* <Nav.Link as={Link} to="/about">About Us</Nav.Link>
+          <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link> */}
 
-                {Auth.loggedIn() || Auth.adminLoggedIn() ? (
 
-                  <>
-                    <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-                    <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
+          <Offcanvas show={show} onHide={handleClose} className="bg-dark variant-white" placement="end">
+            <Offcanvas.Header closeButton closeVariant="white">
+              <Offcanvas.Title>Topics</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              {topicData.map((topic) => (
+                <ul>
+                  <Nav.Link key={topic._id} as={Link} to={`/resources/${topic._id}`}>{topic.title} </Nav.Link>
+                </ul>
+              ))}
 
-                  </>
-                ) : (
-                  <>
-                    <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
-                    <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
+            </Offcanvas.Body>
+          </Offcanvas>
 
-                  </>
-                )}
-
-              </Nav>
-              {/* <Form className="d-flex">
+          {/* </Nav> */}
+          {/* <Form className="d-flex">
                 <Form.Control
                   type="search"
                   placeholder="Search"
@@ -87,8 +118,8 @@ function Header() {
                 </Button>
               </Form> */}
 
-            </Offcanvas.Body>
-          </Navbar.Offcanvas>
+          {/* </Offcanvas.Body>
+          </Navbar.Offcanvas> */}
         </Container>
       </Navbar>
     </>
