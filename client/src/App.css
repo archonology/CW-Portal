@@ -133,6 +133,14 @@ img {
   color: var(--lightblue);
 }
 
+.topics {
+  color: var(--lighterHouse);
+}
+
+.topics:hover {
+  color: var(--beacon);
+}
+
 .link:hover {
   color: var(--base);
 }

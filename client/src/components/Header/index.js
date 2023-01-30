@@ -17,9 +17,13 @@ import { QUERY_ALL_TOPICS } from "../../utils/queries";
 function Header() {
 
   const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
 
   // set up useQuery get the data from the backend
   const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
@@ -37,11 +41,12 @@ function Header() {
 
           <Navbar.Brand as={Link} to="/" className="brand">The Child Welfare Portal</Navbar.Brand>
 
-          <Navbar.Toggle aria-controls="basic-navbar-nav"  className='p-3' />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className='p-3' />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justify-content-end flex-grow-1 pe-3">
 
               <Nav.Link onClick={handleShow}>Resources</Nav.Link>
+              <Nav.Link onClick={handleShow2}>Quick Links</Nav.Link>
 
               {Auth.loggedIn() || Auth.adminLoggedIn() ? (
 
@@ -93,14 +98,24 @@ function Header() {
 
           <Offcanvas show={show} onHide={handleClose} className="bg-dark variant-white" placement="end">
             <Offcanvas.Header closeButton closeVariant="white">
-              <Offcanvas.Title>Topics</Offcanvas.Title>
+              <Offcanvas.Title>Resources</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               {topicData.map((topic) => (
                 <ul>
-                  <Nav.Link key={topic._id} as={Link} to={`/resources/${topic._id}`}>{topic.title} </Nav.Link>
+                  <Nav.Link key={topic._id} as={Link} to={`/resources/${topic._id}`} className="topics">{topic.title} </Nav.Link>
                 </ul>
               ))}
+
+            </Offcanvas.Body>
+          </Offcanvas>
+
+          <Offcanvas show={show2} onHide={handleClose2} className="bg-dark variant-white" placement="end">
+            <Offcanvas.Header closeButton closeVariant="white">
+              <Offcanvas.Title>Quick Links</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <p>test</p>
 
             </Offcanvas.Body>
           </Offcanvas>
