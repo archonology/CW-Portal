@@ -86,11 +86,8 @@ const OneTopic = ({ }) => {
         refetchQueries: [{ query: QUERY_ALL_TOPICS }],
     });
 
-    const handleAccordChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
 
-    // get teh id with useParams
+    // get the id with useParams
     const { _id } = useParams();
     // set up useQuery get the data from the backend
     const { loading, error, data } = useQuery(
@@ -129,8 +126,8 @@ const OneTopic = ({ }) => {
 
     return (
         <>
-            <Container fluid>
-                <Stack direction="row" spacing={2} margin={1}>
+            <Container fluid className="">
+                <Stack direction="row" spacing={2} margin={2}>
                     <Avatar
                         alt={"T"}
                         src={topicData.image}

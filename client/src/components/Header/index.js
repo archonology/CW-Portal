@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -10,72 +10,114 @@ import { Link } from 'react-router-dom';
 import Auth from "../../utils/auth";
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_TOPICS } from "../../utils/queries";
+import { QUERY_ALL_TOPICS, QUERY_ALL_QUICKLINKS } from "../../utils/queries";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+
+
 
 
 function Header() {
 
+  const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+
   // set up useQuery get the data from the backend
-  const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
+  const { loading: topicLoading, error: topicErr, data: topData } = useQuery(QUERY_ALL_TOPICS);
 
   // object to keep the topic data
-  const topicData = data?.topics || {};
-  // check load time and errors
-  if (loading) return "loading";
-  if (error) return `Error! ${error}`;
+  const topicData = topData?.topics || [];
+
+  const { loading: quickLoading, error: quickErr, data: quickData } = useQuery(QUERY_ALL_QUICKLINKS);
+
+  const quickLinkData = quickData?.quicklinks || [];
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" className="mb-3 p-4" expand="md" id="#top">
+      <Navbar bg="dark" variant="dark" className="mb-2 p-4" expand="md" id="#top">
         <Container fluid >
-          <Navbar.Brand as={Link} to="/" className="">The Child Welfare Portal</Navbar.Brand>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`} />
-          <Navbar.Offcanvas
-            id={`offcanvasNavbar-expand-md}`}
-            aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
-            placement="end"
-            className="bg-dark variant-white"
-          >
-            <Offcanvas.Header closeButton closeVariant="white">
 
-              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md}`}>
-                The Child Welfare Portal
-              </Offcanvas.Title>
+          <Navbar.Brand as={Link} to="/" className="brand">The Child Welfare Portal</Navbar.Brand>
+
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className='p-3' />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="justify-content-end flex-grow-1 pe-3">
+
+              <Nav.Link onClick={handleShow}>Resources</Nav.Link>
+              <Nav.Link onClick={handleShow2}>Quick Links</Nav.Link>
+
+              {Auth.loggedIn() || Auth.adminLoggedIn() ? (
+
+                <>
+                  <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                  <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
+
+                </>
+              ) : (
+                <>
+                  <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
+                  <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
+
+                </>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+
+
+          <Offcanvas show={show} onHide={handleClose} className="bg-dark variant-white" placement="end">
+            <Offcanvas.Header closeButton closeVariant="white">
+              <Offcanvas.Title>Resources</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className="justify-content-end flex-grow-1 pe-3">
-                <NavDropdown
-                  menuVariant="dark"
-                  title="Resources"
-                  id={`offcanvasNavbarDropdown-expand-md}`}
-                >
-                  {/* here the resource topics are mapped through to be synced with backend */}
-                  {topicData.map((topic) => (
-                    <NavDropdown.Item as={Link} key={topic._id} to={`/resources/${topic._id}`}>{topic.title} </NavDropdown.Item>
-                  ))}
-                </NavDropdown>
 
-                {/* <Nav.Link as={Link} to="/contact">Contact</Nav.Link> */}
-                <Nav.Link as={Link} to="/about">About Us</Nav.Link>
-                <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link>
+              {topicData.map((topic) => (
 
-                {Auth.loggedIn() || Auth.adminLoggedIn() ? (
+                <>
+                  <Dropdown key={topic._id} as={ButtonGroup}>
+                    <Button key={topic._id} as={Link} to={`/resources/${topic._id}`} className="topics" variant='dark'>{topic.title} </Button>
 
-                  <>
-                    <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-                    <Nav.Link as={Link} to="/" onClick={Auth.logout} className="logging" >Logout</Nav.Link>
+                    <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
+                    <Dropdown.Menu variant='dark' className='p-3'>
+                      {topic.subtopics.map((subtopic) => {
+                        return (
+                          <>
+                            <Dropdown.Item key={subtopic._id} as={Link} to={`/resources/${topic._id}`} className="subtopics" >{subtopic.title}</Dropdown.Item>
+                          </>
+                        )
 
-                  </>
-                ) : (
-                  <>
-                    <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
-                    <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
+                      })}
+                    </Dropdown.Menu>
+                  </Dropdown>
 
-                  </>
-                )}
+                </>
+              ))}
 
-              </Nav>
-              {/* <Form className="d-flex">
+            </Offcanvas.Body>
+          </Offcanvas>
+
+          <Offcanvas show={show2} onHide={handleClose2} className="bg-dark variant-white" placement="end">
+            <Offcanvas.Header closeButton closeVariant="white">
+              <Offcanvas.Title>Quick Links</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              {quickLinkData.map((quicklink) => (
+                <>
+                  <Nav.Link key={quicklink._id} href={quicklink.link} target={'_blank'} rel={'nonreferrer'} className="quicklink">{quicklink.title}</Nav.Link>
+                </>
+              ))}
+
+            </Offcanvas.Body>
+          </Offcanvas>
+
+          {/* </Nav> */}
+          {/* <Form className="d-flex">
                 <Form.Control
                   type="search"
                   placeholder="Search"
@@ -87,8 +129,8 @@ function Header() {
                 </Button>
               </Form> */}
 
-            </Offcanvas.Body>
-          </Navbar.Offcanvas>
+          {/* </Offcanvas.Body>
+          </Navbar.Offcanvas> */}
         </Container>
       </Navbar>
     </>

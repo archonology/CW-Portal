@@ -1,7 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-
-// define deck schema
 const subTopicSchema = new Schema(
     {
         title: {

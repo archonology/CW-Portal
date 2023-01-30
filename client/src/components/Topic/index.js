@@ -78,10 +78,6 @@ const Topic = ({ topic }) => {
         refetchQueries: [{ query: QUERY_ALL_TOPICS }],
     });
 
-    const handleAccordChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
-
     const handleClickOpenTopics = () => {
         setOpenTopic(true);
     };
@@ -104,7 +100,7 @@ const Topic = ({ topic }) => {
     return (
         <>
             <Container key={topic._id} fluid>
-                <Stack direction="row" spacing={2} margin={1}>
+                <Stack direction="row" spacing={2} margin={2}>
                     <Avatar
                         alt={"T"}
                         src={topic.image}
@@ -116,6 +112,7 @@ const Topic = ({ topic }) => {
                         <p className="mainText">{topic.text}</p>
                     </div>
                 </Stack>
+    
                 {Auth.adminLoggedIn() ? (
                     <>
                         <Box sx={{ marginLeft: 2 }}>
@@ -199,7 +196,7 @@ const Topic = ({ topic }) => {
                         </Grid>
                     </Paper>
                 </TabPanel>
-
+                <hr></hr>
             </Box>
 
         </>

@@ -1,26 +1,41 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { CREATE_RESOURCE } from "../utils/mutations";
 import {
-    Container,
+    DialogTitle,
+    DialogContent,
+    Button,
     TextField,
     Box,
-    Button,
 } from "@mui/material";
-import Auth from "../utils/auth";
+import { useMutation, useQuery } from "@apollo/client";
+import { UPDATE_QUICKLINK } from "../../utils/mutations";
+import { SnackbarProvider, useSnackbar } from "notistack";
+import { QUERY_ALL_QUICKLINKS } from "../../utils/queries";
 
-const AddResource = () => {
+export default function EditQuickLinkDialog({ quicklink }) {
 
-    Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
+    return (
+        // limits the alert to 3 max
+        <SnackbarProvider maxSnack={3}>
+            <Quick quicklink={quicklink} />
+        </SnackbarProvider>
+    );
+}
 
-    const [formState, setFormState] = useState({
-        title: "",
-        text: "",
-        image: "",
-        link: ""
+function Quick({ quicklink }) {
+
+    // useMutation -- and refetch needed to update site content dynamically
+    const [updatedQuickLink, { resourceErr }] = useMutation(UPDATE_QUICKLINK, {
+        refetchQueries: [{ query: QUERY_ALL_QUICKLINKS }]
     });
 
-    const [newResource, { error, data }] = useMutation(CREATE_RESOURCE);
+    const { enqueueSnackbar } = useSnackbar();
+
+    // here formstate defaults to the current data values
+    const [formState, setFormState] = useState({
+        _id: `${quicklink._id}`,
+        title: `${quicklink.title}`,
+        link: `${quicklink.link}`
+    });
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -31,28 +46,31 @@ const AddResource = () => {
         });
     };
 
-
-    const handleFormSubmit = async (event) => {
+    // takes in a card and deck object
+    const handleQuickLinkUpdate = async (event) => {
         event.preventDefault();
-
         try {
-            const { data } = await newResource({
-                variables: { ...formState }
+            const { data } = await updatedQuickLink({
+                variables: { ...formState },
             });
-            // directs back to content creator on submission
-            window.location.assign('/contentcreator');
 
-        } catch (e) {
-            console.error(e);
+            // Display the success message when card added to deck
+            enqueueSnackbar(`${quicklink.title} was updated!`, { variant: "success" });
+
+        } catch (err) {
+            console.error(err);
+            enqueueSnackbar(`Error updating ${quicklink.title}`, { variant: "error" });
         }
     };
+
     return (
         <>
-            <Container sx={{ marginTop: "2em" }}>
-                <h2>Add a New Resource</h2>
+            <DialogTitle>{"Update Quick Link"}</DialogTitle>
+            <DialogContent sx={{ maxHeight: "800px", minWidth: "325px" }}>
+
                 <Box
                     component="form"
-                    onSubmit={handleFormSubmit}
+                    onSubmit={handleQuickLinkUpdate}
                     noValidate
                     sx={{
                         display: "grid",
@@ -61,10 +79,11 @@ const AddResource = () => {
                         marginBottom: "3em",
                         justify: "center",
                         alignItems: "center",
+                        overflowY: "scroll"
                     }}
                 >
                     <br></br>
-                    {/* user sets title, text, url, image */}
+
                     <TextField
                         name="title"
                         value={formState.title}
@@ -72,17 +91,6 @@ const AddResource = () => {
                         onBlur={() => { handleChange.title.trim() }}
                         label="Resource Title"
                         id="titleName"
-                        variant="standard"
-                    ></TextField>
-
-                    <TextField
-                        name="text"
-                        value={formState.text}
-                        onChange={handleChange}
-                        label="Resource Description"
-                        id="description"
-                        multiline
-                        maxRows={10}
                         variant="standard"
                     ></TextField>
 
@@ -95,29 +103,16 @@ const AddResource = () => {
                         id="link"
                         variant="standard"
                     ></TextField>
-
-                    <TextField
-                        name="image"
-                        value={formState.image}
-                        onChange={handleChange}
-                        onBlur={() => { handleChange.image.trim() }}
-                        label="Image URL"
-                        id="image"
-                        variant="standard"
-                    ></TextField>
-
                     <Button
                         type="submit"
                         variant="contained"
                         color="secondary"
                         style={{ maxWidth: "100px" }}
                     >
-                        Add
+                        Update
                     </Button>
                 </Box>
-            </Container>
+            </DialogContent>
         </>
     );
 }
-
-export default AddResource;

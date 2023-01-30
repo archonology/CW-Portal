@@ -113,6 +113,16 @@ mutation createResource($title: String!, $text: String!, $image: String!, $link:
 }
 `;
 
+export const CREATE_QUICKLINK = gql`
+mutation createQuickLink($title: String!, $link: String!) {
+    createQuickLink(title: $title, link: $link){
+        _id
+        title
+        link
+    }
+}
+`;
+
 export const ADD_RESOURCE_TO_FAVS = gql`
 mutation addResourceToFavs($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
     addResourceToFavs(_id: $_id, title: $title, text: $text, image: $image, link: $link){
@@ -165,6 +175,16 @@ mutation addResourceToDone($_id: ID!, $title: String!, $text: String!, $image: S
             image
             link
         }
+    }
+}
+`;
+
+export const UPDATE_QUICKLINK = gql`
+mutation updateQuickLink($_id: ID!, $title: String!, $link: String!) {
+    updateQuickLink(_id: $_id, title: $title, link: $link){
+        _id
+        title
+        link
     }
 }
 `;
@@ -340,6 +360,14 @@ mutation deleteSubtopic($_id: ID!) {
 export const DELETE_TOPIC = gql`
 mutation deleteTopic($_id: ID!) {
     deleteTopic(_id: $_id) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_QUICKLINK = gql`
+mutation deleteQuickLink($_id: ID!) {
+    deleteQuickLink(_id: $_id) {
       _id
     }
   }

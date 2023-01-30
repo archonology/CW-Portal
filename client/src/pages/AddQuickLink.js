@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { CREATE_SUBTOPIC } from "../utils/mutations";
+import { CREATE_QUICKLINK } from "../utils/mutations";
 import {
     Container,
     TextField,
@@ -9,18 +9,16 @@ import {
 } from "@mui/material";
 import Auth from "../utils/auth";
 
-const AddSubtopic = () => {
+const AddQuickLink = () => {
 
     Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
 
     const [formState, setFormState] = useState({
         title: "",
-        text: "",
-        image: "",
         link: ""
     });
 
-    const [newSubtopic, { error, data }] = useMutation(CREATE_SUBTOPIC);
+    const [newQuickLink, { error, data }] = useMutation(CREATE_QUICKLINK);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -36,7 +34,7 @@ const AddSubtopic = () => {
         event.preventDefault();
 
         try {
-            const { data } = await newSubtopic({
+            const { data } = await newQuickLink({
                 variables: { ...formState }
             });
             // directs back to content creator on submission
@@ -49,7 +47,7 @@ const AddSubtopic = () => {
     return (
         <>
             <Container sx={{ marginTop: "2em" }}>
-                <h2>Add a New Subtopic</h2>
+                <h2>Add a New Quick Link</h2>
                 <Box
                     component="form"
                     onSubmit={handleFormSubmit}
@@ -70,19 +68,8 @@ const AddSubtopic = () => {
                         value={formState.title}
                         onChange={handleChange}
                         onBlur={() => { handleChange.title.trim() }}
-                        label="Topic Title"
+                        label="Resource Title"
                         id="titleName"
-                        variant="standard"
-                    ></TextField>
-
-                    <TextField
-                        name="text"
-                        value={formState.text}
-                        onChange={handleChange}
-                        label="Description"
-                        id="description"
-                        multiline
-                        maxRows={10}
                         variant="standard"
                     ></TextField>
 
@@ -93,16 +80,6 @@ const AddSubtopic = () => {
                         onBlur={() => { handleChange.link.trim() }}
                         label="Resource Link"
                         id="link"
-                        variant="standard"
-                    ></TextField>
-
-                    <TextField
-                        name="image"
-                        value={formState.image}
-                        onChange={handleChange}
-                        onBlur={() => { handleChange.image.trim() }}
-                        label="Image URL"
-                        id="image"
                         variant="standard"
                     ></TextField>
 
@@ -120,4 +97,4 @@ const AddSubtopic = () => {
     );
 }
 
-export default AddSubtopic;
+export default AddQuickLink;
