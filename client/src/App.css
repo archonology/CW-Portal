@@ -39,6 +39,10 @@ html body {
   color: var(--blue);
 }
 
+h3 {
+  color: var(--beacon);
+}
+
 h5 {
   color: var(--lighterHouse);
 }
@@ -68,7 +72,7 @@ h5 {
 }
 
 a {
-  color: var(--alt);
+  color: var(--blue);
 }
 
 .mainText {

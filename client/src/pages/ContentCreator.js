@@ -29,11 +29,16 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Auth from "../utils/auth";
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_ALL_QUICKLINKS } from '../utils/queries';
+import { DELETE_QUICKLINK } from '../utils/mutations';
+import EditQuickLinkDialog from '../components/EditQuickLinkDialog';
+import Dialog from "@mui/material/Dialog";
+import EditIcon from '@mui/icons-material/Edit';
+import Tooltip from '@mui/material/Tooltip';
 
+import QuickLink from '../components/QuickLink';
 
-// import { useQuery } from '@apollo/client';
-// import { QUERY_ALL_TOPICS, QUERY_ALL_SUBTOPICS, QUERY_ALL_RESOURCES } from '../utils/queries';
-// import { useParams } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -86,11 +91,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
-  // const buttons = [
-  //   <Button key="one">See</Button>,
-  //   <Button key="two">Add Subtopic</Button>,
-  //   <Button key="three">Three</Button>,
-  // ];
 
   return (
     <div
@@ -125,6 +125,12 @@ const ContentCreator = () => {
   // ensure user is logged in and is an admin
   Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
 
+  const { loading, error, data } = useQuery(QUERY_ALL_QUICKLINKS);
+
+  const quickLinkData = data?.quicklinks || [];
+
+  // const [openQuick, setOpenQuick] = React.useState(false);
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -141,6 +147,18 @@ const ContentCreator = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  // const handleClickOpenQuick = () => {
+  //   setOpenQuick(true);
+  // }
+
+  // const handleCloseQuick = () => {
+  //   setOpenQuick(false);
+  // }
+
+  const [deleteQuickLink, { err, dat }] = useMutation(DELETE_QUICKLINK, {
+    refetchQueries: [{ query: QUERY_ALL_QUICKLINKS }],
+  });
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -181,7 +199,7 @@ const ContentCreator = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator/addsubtopic" }, { name: 'Add Resource', link: "/contentcreator/addresource" }].map((text, index) => (
+          {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator/addsubtopic" }, { name: 'Add Resource', link: "/contentcreator/addresource" }, { name: 'Add Quick Link', link: "/contentcreator/addquicklink" }].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton as={Link} className="link2" to={text.link}>
                 <AddIcon>
@@ -218,6 +236,7 @@ const ContentCreator = () => {
               <Tab label="Topics" {...a11yProps(0)} />
               <Tab label="SubTopics" {...a11yProps(1)} />
               <Tab label="Resources" {...a11yProps(2)} />
+              <Tab label="QuickLinks" {...a11yProps(3)} />
             </Tabs>
 
           </Box>
@@ -239,13 +258,25 @@ const ContentCreator = () => {
           </TabPanel>
           <TabPanel value={value} index={2}>
 
-          <Grid direction="row" container sx={{ padding: "1rem"}}>
-        <Grid container spacing={0} justifyContent="center">
+            <Grid direction="row" container sx={{ padding: "1rem" }}>
+              <Grid container spacing={0} justifyContent="center">
 
-          <Resources />
+                <Resources />
 
-        </Grid>
-      </Grid>
+              </Grid>
+            </Grid>
+
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            {quickLinkData.map((quicklink) => {
+              return (
+                <>
+                  <ul>
+                    <QuickLink quicklink={quicklink} />
+                  </ul>
+                </>
+              );
+            })}
 
           </TabPanel>
 

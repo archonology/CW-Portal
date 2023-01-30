@@ -53,7 +53,7 @@ const AddTopic = () => {
     };
     return (
         <>
-            <Container sx={{ marginTop: "10em" }}>
+            <Container sx={{ marginTop: "2em" }}>
                 <h2>Add a New Topic</h2>
                 <Box
                     component="form"
@@ -110,6 +110,7 @@ const AddTopic = () => {
                         id="image"
                         variant="standard"
                     ></TextField>
+                    
                     <Button
                         type="submit"
                         variant="contained"

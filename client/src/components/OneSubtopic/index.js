@@ -168,32 +168,32 @@ const Subtopic = ({ subtopic }) => {
                         ) : (
                             <></>
 
-                            )}
-                            <>
-                                <Grid direction="row" container sx={{ padding: "1rem" }}>
-                                    <Grid container spacing={1} justifyContent="center">
+                        )}
+                        <>
+                            <Grid direction="row" container sx={{ padding: "1rem" }}>
+                                <Grid container spacing={1} justifyContent="center">
 
-                                        {subtopic?.resources.map((resource) => {
-                                            console.log(resource);
-                                            return (
-                                                <>
-                                                    <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
-                                                </>
-                                            )
-                                        })}
+                                    {subtopic?.resources.map((resource) => {
+                                        console.log(resource);
+                                        return (
+                                            <>
+                                                <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
+                                            </>
+                                        )
+                                    })}
 
-                                    </Grid>
                                 </Grid>
+                            </Grid>
 
 
-                                <Grid direction="row" container sx={{ padding: "1rem" }}>
-                                    <Grid container spacing={0} justifyContent="center">
+                            <Grid direction="row" container sx={{ padding: "1rem" }}>
+                                <Grid container spacing={0} justifyContent="center">
 
 
-                                    </Grid>
                                 </Grid>
-                            </>
-                       
+                            </Grid>
+                        </>
+
                     </AccordionDetails>
                 </Accordion>
 
