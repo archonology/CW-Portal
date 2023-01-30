@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Admin, User, Topic, Subtopic, Resource } = require('../models');
+const { Admin, User, Topic, Subtopic, Resource, QuickLink } = require('../models');
 const { signToken, signAdminToken } = require("../utils/auth");
 
 const resolvers = {
@@ -97,6 +97,11 @@ const resolvers = {
                 console.log(err);
             }
         },
+
+        quicklinks: async () => {
+            const quickLinkData = await QuickLink.find({});
+            return quickLinkData;
+        },
     },
 
     Mutation: {
@@ -143,6 +148,26 @@ const resolvers = {
 
             const token = signToken(user);
             return { token, user };
+        },
+
+        createTopic: async (parent, args) => {
+            const newTopic = await Topic.create({ ...args });
+            return newTopic;
+        },
+
+        createSubtopic: async (parent, args) => {
+            const newSubtopic = await Subtopic.create({ ...args });
+            return newSubtopic;
+        },
+
+        createResource: async (parent, args) => {
+            const newResource = await Resource.create({ ...args });
+            return newResource;
+        },
+
+        createQuickLink: async (parent, args) => {
+            const newQuickLink = await QuickLink.create({ ...args });
+            return newQuickLink;
         },
 
         addResourceToFavs: async (parent, args, context) => {
@@ -237,21 +262,6 @@ const resolvers = {
             }
         },
 
-        createTopic: async (parent, args) => {
-            const newTopic = await Topic.create({ ...args });
-            return newTopic;
-        },
-
-        createSubtopic: async (parent, args) => {
-            const newSubtopic = await Subtopic.create({ ...args });
-            return newSubtopic;
-        },
-
-        createResource: async (parent, args) => {
-            const newResource = await Resource.create({ ...args });
-            return newResource;
-        },
-
         addResourceToSubtopic: async (parent, { _id, title, text, image, link, subtopicId }) => {
             const updateSubtopic = await Subtopic.findOneAndUpdate(
                 { _id: subtopicId },
@@ -312,6 +322,15 @@ const resolvers = {
             return updatedTopic;
         },
 
+        updateQuickLink: async (parent, { _id, title, link }) => {
+            const updatedQuickLink = await QuickLink.findOneAndUpdate(
+                { _id: _id },
+                { $set: { title, link } },
+                { new: true }
+            );
+            return updatedQuickLink;
+        },
+
         removeResourceFromTopic: async (parent, { _id, topicId }) => {
             const updatedTopic = await Topic.findOneAndUpdate(
                 { _id: topicId },
@@ -365,6 +384,14 @@ const resolvers = {
                 { new: true }
             );
             return deleteTopic;
+        },
+
+        deleteQuickLink: async (parent, { _id }) => {
+            const removeQuickLink = await QuickLink.deleteOne(
+                { _id: _id },
+                { new: true }
+            );
+            return removeQuickLink;
         },
     }
 }

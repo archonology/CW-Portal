@@ -113,6 +113,16 @@ query resources {
 }
 `;
 
+export const QUERY_ALL_QUICKLINKS = gql`
+query quicklinks {
+  quicklinks {
+        _id
+        title
+        link
+      }
+}
+`;
+
 export const QUERY_ONE_TOPIC = gql`
 query topic($_id: ID!) {
     topic(_id: $_id) {
