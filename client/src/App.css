@@ -135,6 +135,12 @@ img {
 
 .topics {
   color: var(--lighterHouse);
+  min-width: 220px;
+text-align: left;
+}
+
+.subtopics {
+  color: var(--lightviolet);
 }
 
 .topics:hover {

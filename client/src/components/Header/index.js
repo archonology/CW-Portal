@@ -11,6 +11,10 @@ import Auth from "../../utils/auth";
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_TOPICS } from "../../utils/queries";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import SubToTopicDialog from '../SubToTopicDialog';
 
 
 
@@ -33,6 +37,8 @@ function Header() {
   // check load time and errors
   if (loading) return "loading";
   if (error) return `Error! ${error}`;
+
+  console.log(topicData[2].subtopics[0].title);
 
   return (
     <>
@@ -101,10 +107,29 @@ function Header() {
               <Offcanvas.Title>Resources</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+
               {topicData.map((topic) => (
-                <ul>
-                  <Nav.Link key={topic._id} as={Link} to={`/resources/${topic._id}`} className="topics">{topic.title} </Nav.Link>
-                </ul>
+
+                <>
+                  <Dropdown key={topic._id} as={ButtonGroup}>
+                    <Button key={topic._id} as={Link} to={`/resources/${topic._id}`} className="topics" variant='dark'>{topic.title} </Button>
+
+                    <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
+                    <Dropdown.Menu variant='dark' className='p-3'>
+                      {topic.subtopics.map((subtopic) => {
+                        return (
+                          <>
+                            <Dropdown.Item key={subtopic._id} as={Link} to={`/resources/${topic._id}`} className="subtopics" >{subtopic.title}</Dropdown.Item>
+                          </>
+                        )
+
+                      })}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  {/* <ul>
+                    <Nav.Link key={topic._id} as={Link} to={`/resources/${topic._id}`} className="topics">{topic.title} </Nav.Link>
+                  </ul> */}
+                </>
               ))}
 
             </Offcanvas.Body>

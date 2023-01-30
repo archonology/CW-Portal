@@ -18,32 +18,19 @@ const Topics = () => {
     // set up useQuery get the data from the backend
     const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
 
-    const [deleteTopic, { err, dat }] = useMutation(DELETE_TOPIC, {
-        refetchQueries: [{ query: QUERY_ALL_TOPICS }],
-    });
-
     // object to keep the topic data
     const topicData = data?.topics || {};
     // check load time and errors
     if (loading) return "loading";
     if (error) return `Error! ${error}`;
 
-    const handleDelete = async (_id) => {
-
-        try {
-            const { dat } = await deleteTopic({
-                variables: { _id: _id },
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
     return (
         <>
             {topicData.map((topic) => {
                 return (
+                    <>
                     <Topic topic={topic} />
+                    </>
                 );
             })}
             <hr></hr>
