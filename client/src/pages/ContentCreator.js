@@ -148,13 +148,6 @@ const ContentCreator = () => {
     setOpen(false);
   };
 
-  // const handleClickOpenQuick = () => {
-  //   setOpenQuick(true);
-  // }
-
-  // const handleCloseQuick = () => {
-  //   setOpenQuick(false);
-  // }
 
   const [deleteQuickLink, { err, dat }] = useMutation(DELETE_QUICKLINK, {
     refetchQueries: [{ query: QUERY_ALL_QUICKLINKS }],

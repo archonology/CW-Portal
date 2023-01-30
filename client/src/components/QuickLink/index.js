@@ -7,6 +7,7 @@ import Dialog from "@mui/material/Dialog";
 import EditIcon from '@mui/icons-material/Edit';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
+import DeleteIcon from "@mui/icons-material/Delete";
 
 
 
@@ -53,6 +54,16 @@ const QuickLink = ({ quicklink }) => {
                     <EditIcon sx={{ color: "#ffcf33" }} />
                 </IconButton>
             </Tooltip>
+
+            <Tooltip title="Delete Resource">
+                <IconButton onClick={() => handleDelete(quicklink._id)}>
+                    <DeleteIcon
+                        className="custom-link"
+                        sx={{ color: "#b2102f" }}
+                    />
+                </IconButton>
+            </Tooltip>
+            
             <hr></hr>
             <Dialog open={openQuick} onClose={handleCloseQuick}>
                 <EditQuickLinkDialog quicklink={quicklink} />
