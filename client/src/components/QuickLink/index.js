@@ -63,7 +63,7 @@ const QuickLink = ({ quicklink }) => {
                     />
                 </IconButton>
             </Tooltip>
-            
+
             <hr></hr>
             <Dialog open={openQuick} onClose={handleCloseQuick}>
                 <EditQuickLinkDialog quicklink={quicklink} />

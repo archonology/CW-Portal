@@ -22,7 +22,7 @@ export default function EditQuickLinkDialog({ quicklink }) {
 }
 
 function Quick({ quicklink }) {
-   
+
     // useMutation -- and refetch needed to update site content dynamically
     const [updatedQuickLink, { resourceErr }] = useMutation(UPDATE_QUICKLINK, {
         refetchQueries: [{ query: QUERY_ALL_QUICKLINKS }]
@@ -83,7 +83,7 @@ function Quick({ quicklink }) {
                     }}
                 >
                     <br></br>
-                
+
                     <TextField
                         name="title"
                         value={formState.title}
