@@ -4,9 +4,10 @@
   --primary: rgb(228, 223, 218);
   --lightblue: rgb(122, 205, 247);
   --blue: rgb(109, 177, 211);
-  --lightHouse: rgb(248, 107, 75);
-  --lighterHouse: rgb(246, 135, 110);
-  --beacon: rgb(124, 197, 106);
+  --lightHouse: rgb(231, 106, 71);
+  --lighterHouse: rgb(234, 140, 119);
+  --beacon: rgb(132, 203, 114);
+  --lightbeacon: rgb(165, 212, 153);
   --violet: rgb(203, 123, 250);
   --lightviolet: rgb(221, 172, 249);
 }
@@ -139,7 +140,13 @@ img {
 
 .topics {
   color: var(--lighterHouse);
-  min-width: 220px;
+ min-width: 275px;
+text-align: left;
+}
+
+.topics2 {
+  color: var(--lightbeacon);
+  min-width: 275px;
 text-align: left;
 }
 
@@ -151,12 +158,24 @@ text-align: left;
   color: var(--blue);
 }
 
+.quicklink2 {
+  color: var(--beacon);
+}
+
 .quicklink:hover {
   color: var(--lightblue);
 }
 
+.quicklink2:hover {
+  color: var(--lightbeacon);
+}
+
 .topics:hover {
-  color: var(--beacon);
+  color: var(--lightviolet);
+}
+
+.topics2:hover {
+  color: var(--blue);
 }
 
 .link:hover {
