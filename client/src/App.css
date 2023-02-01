@@ -140,13 +140,13 @@ img {
 
 .topics {
   color: var(--lighterHouse);
- min-width: 275px;
+ min-width: 50px;
 text-align: left;
 }
 
 .topics2 {
   color: var(--lightbeacon);
-  min-width: 275px;
+  min-width: 50px;
 text-align: left;
 }
 
@@ -175,7 +175,7 @@ text-align: left;
 }
 
 .topics2:hover {
-  color: var(--blue);
+  color: var(--lightblue);
 }
 
 .link:hover {
