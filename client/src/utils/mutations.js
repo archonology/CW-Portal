@@ -62,6 +62,7 @@ mutation createTopic($title: String!, $text: String!, $image: String!, $link: St
         resources {
             _id
             title
+            text
             link
         }
         subtopics {
@@ -200,7 +201,6 @@ mutation updateResource($_id: ID!, $title: String!, $text: String!, $link: Strin
         _id
         title
         text
-        image
         link
     }
 }
@@ -249,7 +249,6 @@ mutation addResourceToTopic($_id: ID!, $title: String!, $text: String!, $link: S
             _id
             title
             text
-            image
             link
         }
     }

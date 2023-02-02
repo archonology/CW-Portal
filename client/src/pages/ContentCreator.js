@@ -278,7 +278,7 @@ const ContentCreator = () => {
 
             {postData.map((post) => {
               return (
-                <Container key={post._id} fluid className="bg-dark p-1">
+                <Container key={post._id} fluid className="bg-dark p-1 mb-3">
 
                   <Post post={post} />
 

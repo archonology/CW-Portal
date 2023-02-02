@@ -153,7 +153,6 @@ query topic($_id: ID!) {
           title
           text
           link
-
         }
       }
 }
