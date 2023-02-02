@@ -135,7 +135,7 @@ const OneTopic = ({ }) => {
                         className="avatar"
                     />
                     <div>
-                        <a className="topic-headers" href={topicData.link} target={'_blank'} rel={'nonreferrer'}><h2 className="topic-headers">{topicData.title}</h2></a>
+                        <h2 className="topic-headers">{topicData.title}</h2>
                         <p className="mainText">{topicData.text}</p>
                     </div>
                 </Stack>
@@ -169,7 +169,7 @@ const OneTopic = ({ }) => {
                 )}
             </Container>
 
-            <Box sx={{ width: '100%'}}>
+            <Box sx={{ width: '100%' }}>
                 <Box>
 
                     <Tabs
@@ -190,7 +190,7 @@ const OneTopic = ({ }) => {
                 </Box>
 
                 <TabPanel value={value} index={0}>
-                    <Paper>
+                
                         {/* see all subtopics for one topic */}
                         {topicData?.subtopics?.map((subtopic) => {
                             return (
@@ -201,7 +201,7 @@ const OneTopic = ({ }) => {
                                 </>
                             )
                         })}
-                    </Paper>
+                   
                 </TabPanel>
                 <TabPanel value={value} index={1}>
 

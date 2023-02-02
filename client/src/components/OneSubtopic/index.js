@@ -99,7 +99,7 @@ const Subtopic = ({ subtopic }) => {
 
             <Stack spacing={0}>
 
-                <Accordion key={subtopic._id} expanded={expanded === `panel${subtopic._id}`} onChange={handleAccordChange(`panel${subtopic._id}`)} sx={{ padding: 3, backgroundColor: "#212121" }}>
+                <Accordion key={subtopic._id} expanded={expanded === `panel${subtopic._id}`} onChange={handleAccordChange(`panel${subtopic._id}`)} sx={{ padding: 3 }}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1bh-content"
@@ -108,15 +108,15 @@ const Subtopic = ({ subtopic }) => {
                         <Avatar
                             alt={"T"}
                             src={subtopic.image}
-                            sx={{ width: 50, height: 50, marginRight: 2 }}
+                            sx={{ width: 75, height: 75, marginRight: 2 }}
                             className="avatar"
                         />
 
-                        <a className="subtopic-headers" href={subtopic.link} target={'_blank'} rel={'nonreferrer'}><Typography sx={{ width: '33%', flexShrink: 0, fontSize: 'larger', paddingRight: 3 }} className="subtopic-headers">
+                      <Typography sx={{ width: '100%', flexShrink: 0, textAlign: "left", fontSize: 'larger', paddingRight: 15, marginTop: 1 }} className="subtopic-headers">
                             {subtopic.title}
-                        </Typography></a>
+                        </Typography>
 
-                        <Typography sx={{ color: 'text.secondary', paddingRight: 2 }} >{subtopic.text}</Typography>
+                        {/* <Typography sx={{ color: 'text.secondary', paddingRight: 2 }} >{subtopic.text}</Typography> */}
 
                     </AccordionSummary>
 

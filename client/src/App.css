@@ -125,14 +125,13 @@ img {
   background-color:var(--lightblue);
 }
 
-.topic-headers:hover {
+/* .topic-headers:hover {
   color: var(--lightbeacon);
   text-decoration: none;
-}
+} */
 
 .subtopic-headers:hover {
   color: var(--violet);
-  text-decoration: none;
 }
 
 .logging:hover {

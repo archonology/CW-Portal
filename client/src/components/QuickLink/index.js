@@ -45,7 +45,7 @@ const QuickLink = ({ quicklink }) => {
 
     return (
         <>
-            <h3 key={quicklink._id}>{quicklink.title}</h3>
+            <h4 key={quicklink._id}>{quicklink.title}</h4>
             <a href={quicklink.link} target={'_blank'} rel={'nonreferrer'}>{quicklink.link}</a>
 
 

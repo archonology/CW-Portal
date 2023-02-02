@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { IconButton, Divider } from '@mui/material';
+import { IconButton, Divider, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -275,7 +275,7 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
 
     return (
         <>
-            <Card key={resource._id} sx={{ width: "325px", margin: 2, boxShadow: 10 }}  >
+            <Card key={resource._id} sx={{ width: "325px", margin: 2, boxShadow: 10, backgroundColor: "#212121" }}  >
                 {/* client requested dropping photos for resources */}
                 {/* <CardMedia
                     component="img"
@@ -289,17 +289,20 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
                         {resource.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {resource.text}
+                        {resource.text}<br></br><span><Button
+                    href={resource.link}
+                    target={'_blank'}
+                    rel={'nonreferrer'}
+                    variant="outlined"
+                    color="success"
+                    sx={{ marginTop: 2 }}
+                    size="small" >Visit the Site</Button></span>
                     </Typography>
                 </CardContent>
-                <Divider variant="middle" />
+                {/* <Divider variant="middle" /> */}
 
                 <CardActions>
-                    <Tooltip title="Visit Site">
-                        <IconButton className="link2" href={resource.link} target={'_blank'} rel={'nonreferrer'}>
-                            <PublicIcon sx={{ color: "#8bc34a" }} />
-                        </IconButton>
-                    </Tooltip>
+ 
 
 
 

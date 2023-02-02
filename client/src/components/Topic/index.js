@@ -99,6 +99,7 @@ const Topic = ({ topic }) => {
 
     return (
         <>
+        
             <Container key={topic._id} fluid>
                 <Stack direction="row" spacing={2} margin={2}>
                     <Avatar
@@ -108,11 +109,11 @@ const Topic = ({ topic }) => {
                         className="avatar"
                     />
                     <div>
-                    <a className="topic-headers" href={topic.link} target={'_blank'} rel={'nonreferrer'}><h2 className="topic-headers">{topic.title}</h2></a>
+                        <h2 className="topic-headers">{topic.title}</h2>
                         <p className="mainText">{topic.text}</p>
                     </div>
                 </Stack>
-    
+
                 {Auth.adminLoggedIn() ? (
                     <>
                         <Box sx={{ marginLeft: 2 }}>
@@ -164,7 +165,7 @@ const Topic = ({ topic }) => {
                 </Box>
 
                 <TabPanel value={value} index={0}>
-                    <Paper>
+                
                         {/* see all subtopics for one topic */}
                         {topic?.subtopics?.map((subtopic) => {
                             return (
@@ -175,26 +176,24 @@ const Topic = ({ topic }) => {
                                 </>
                             )
                         })}
-                    </Paper>
+
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Paper elevation={5}>
-                        <Grid direction="row" container sx={{ padding: "1rem" }}>
-                            <Grid container spacing={0} justifyContent="center">
+                    <Grid direction="row" container sx={{ padding: "1rem" }}>
+                        <Grid container spacing={0} justifyContent="center">
 
-                                {topic?.resources?.map((resource) => {
-                                    return (
-                                        <>
-                                            <ResourceCard
-                                                resource={resource}
-                                            />
-                                        </>
-                                    )
-                                })}
+                            {topic?.resources?.map((resource) => {
+                                return (
+                                    <>
+                                        <ResourceCard
+                                            resource={resource}
+                                        />
+                                    </>
+                                )
+                            })}
 
-                            </Grid>
                         </Grid>
-                    </Paper>
+                    </Grid>
                 </TabPanel>
                 <hr></hr>
             </Box>
