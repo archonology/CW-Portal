@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { Admin, User, Topic, Subtopic, Resource, QuickLink } = require('../models');
+const { Admin, User, Topic, Subtopic, Resource, QuickLink, Post } = require('../models');
 const { signToken, signAdminToken } = require("../utils/auth");
 
 const resolvers = {
@@ -102,6 +102,11 @@ const resolvers = {
             const quickLinkData = await QuickLink.find({});
             return quickLinkData;
         },
+
+        posts: async () => {
+            const postData = await Post.find({});
+            return postData;
+        },
     },
 
     Mutation: {
@@ -168,6 +173,11 @@ const resolvers = {
         createQuickLink: async (parent, args) => {
             const newQuickLink = await QuickLink.create({ ...args });
             return newQuickLink;
+        },
+
+        createPost: async (parent, args) => {
+            const newPost = await Post.create({ ...args });
+            return newPost;
         },
 
         addResourceToFavs: async (parent, args, context) => {
@@ -331,6 +341,15 @@ const resolvers = {
             return updatedQuickLink;
         },
 
+        updatePost: async (parent, { _id, title, text, image, link }) => {
+            const updatedPost = await Post.findOneAndUpdate(
+                { _id: _id },
+                { $set: { title, text, image, link } },
+                { new: true }
+            );
+            return updatedPost;
+        },
+
         removeResourceFromTopic: async (parent, { _id, topicId }) => {
             const updatedTopic = await Topic.findOneAndUpdate(
                 { _id: topicId },
@@ -392,6 +411,14 @@ const resolvers = {
                 { new: true }
             );
             return removeQuickLink;
+        },
+
+        deletePost: async (parent, { _id }) => {
+            const deletePost = await Post.deleteOne(
+                { _id: _id },
+                { new: true }
+            );
+            return deletePost;
         },
     }
 }

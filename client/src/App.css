@@ -37,7 +37,8 @@ html body {
 }
 
 .meherdevs {
-  color: var(--blue);
+  color: var(--alt);
+  font-size: smaller;
 }
 
 h3 {

@@ -123,6 +123,18 @@ query quicklinks {
 }
 `;
 
+export const QUERY_ALL_POSTS = gql`
+query posts {
+    posts {
+        _id
+        title
+        text
+        link
+        image
+      }
+}
+`;
+
 export const QUERY_ONE_TOPIC = gql`
 query topic($_id: ID!) {
     topic(_id: $_id) {

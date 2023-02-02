@@ -123,6 +123,18 @@ mutation createQuickLink($title: String!, $link: String!) {
 }
 `;
 
+export const CREATE_POST = gql`
+mutation createPost($title: String!, $text: String!, $image: String!, $link: String!) {
+    createPost(title: $title, text: $text, image: $image, link: $link){
+        _id
+        title
+        text
+        image
+        link
+    }
+}
+`;
+
 export const ADD_RESOURCE_TO_FAVS = gql`
 mutation addResourceToFavs($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
     addResourceToFavs(_id: $_id, title: $title, text: $text, image: $image, link: $link){
@@ -217,6 +229,18 @@ mutation updateSubtopic($_id: ID!, $title: String!, $text: String!, $image: Stri
 export const UPDATE_TOPIC = gql`
 mutation updateTopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
     updateTopic(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+        _id
+        title
+        text
+        image
+        link
+    }
+}
+`;
+
+export const UPDATE_POST = gql`
+mutation updatePost($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
+  updatePost(_id: $_id, title: $title, text: $text, image: $image, link: $link){
         _id
         title
         text
@@ -368,6 +392,14 @@ mutation deleteTopic($_id: ID!) {
 export const DELETE_QUICKLINK = gql`
 mutation deleteQuickLink($_id: ID!) {
     deleteQuickLink(_id: $_id) {
+      _id
+    }
+  }
+`;
+
+export const DELETE_POST = gql`
+mutation deletePost($_id: ID!) {
+    deletePost(_id: $_id) {
       _id
     }
   }

@@ -54,6 +54,15 @@ const typeDefs = gql`
         link: String
     }
 
+    type Post {
+        _id: ID
+        title: String
+        text: String
+        link: String
+        image: String
+    }
+
+
     type Auth {
         token: ID!
         adminToken: ID!
@@ -70,6 +79,7 @@ const typeDefs = gql`
         subtopics: [Subtopic]
         resources: [Resource]
         quicklinks: [QuickLink]
+        posts: [Post]
         topic(_id: ID!): Topic
         subtopic(_id: ID!): Subtopic
         resource(_id: ID!): Resource
@@ -84,6 +94,7 @@ const typeDefs = gql`
         createSubtopic(title: String!, text: String!, link: String!, image: String!): Subtopic
         createResource(title: String!, text: String!, image: String!, link: String!): Resource 
         createQuickLink(title: String!, link: String!): QuickLink
+        createPost(title: String!, text: String!, link: String!, image: String!): Post
         addResourceToFavs(_id: ID!, title: String!, text: String!, image: String!, link: String!): User
         addResourceToDo(_id: ID!, title: String!, text: String!, image: String!, link: String!): User
         addResourceToDone(_id: ID!, title: String!, text: String!, image: String!, link: String!): User
@@ -91,7 +102,8 @@ const typeDefs = gql`
         updateResource(_id: ID!, title: String!, text: String!, link: String!, image: String!): Resource  
         updateSubtopic(_id: ID!, title: String!, text: String!, link: String!, image: String!): Subtopic
         updateTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!): Topic 
-        updateQuickLink(_id: ID!, title: String!, link: String!): QuickLink    
+        updateQuickLink(_id: ID!, title: String!, link: String!): QuickLink
+        updatePost(_id: ID!, title: String!, text: String!, link: String!, image: String!): Post    
         addResourceToTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!, topicId: ID!): Topic
         addSubtopicToTopic(_id: ID!, title: String!, text: String!, image: String!, link: String!, topicId: ID!): Topic
         addResourceToSubtopic(_id: ID!, title: String!, text: String!, image: String!, link: String!, subtopicId: ID!): Subtopic
@@ -106,6 +118,7 @@ const typeDefs = gql`
         deleteSubtopic(_id: ID!): Subtopic
         deleteTopic(_id: ID!): Topic
         deleteQuickLink(_id: ID!): QuickLink
+        deletePost(_id: ID!): Post
     }
 
 `;
