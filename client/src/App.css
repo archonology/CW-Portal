@@ -139,13 +139,13 @@ img {
 }
 
 .topics {
-  color: var(--lighterHouse);
+  color: var(--blue);
  min-width: 50px;
 text-align: left;
 }
 
 .topics2 {
-  color: var(--lightbeacon);
+  color: var(--beacon);
   min-width: 50px;
 text-align: left;
 }
@@ -171,11 +171,11 @@ text-align: left;
 }
 
 .topics:hover {
-  color: var(--lightviolet);
+  color: var(--lightblue);
 }
 
 .topics2:hover {
-  color: var(--lightblue);
+  color: var(--lightbeacon);
 }
 
 .link:hover {
