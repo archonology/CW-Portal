@@ -275,7 +275,7 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
 
     return (
         <>
-            <Card key={resource._id} sx={{ maxWidth: 400, minWidth: 350, margin: 2, boxShadow: 10 }}  >
+            <Card key={resource._id} sx={{ width: "325px", margin: 2, boxShadow: 10 }}  >
                 {/* client requested dropping photos for resources */}
                 {/* <CardMedia
                     component="img"
