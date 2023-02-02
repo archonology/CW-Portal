@@ -216,7 +216,6 @@ const ContentCreator = () => {
 
             <Tabs
               sx={{ alignContent: "center" }}
-              // variant="fullWidth"
               value={value}
               onChange={handleChange}
               textColor="inherit"
