@@ -50,7 +50,7 @@ h5 {
 }
 
 .topic-headers {
-  color: var(--lighterHouse);
+  color: var(--beacon);
   text-decoration: none;
 }
 
@@ -126,7 +126,7 @@ img {
 }
 
 .topic-headers:hover {
-  color: var(--lightHouse);
+  color: var(--lightbeacon);
   text-decoration: none;
 }
 
