@@ -272,19 +272,19 @@ const resolvers = {
             }
         },
 
-        addResourceToSubtopic: async (parent, { _id, title, text, image, link, subtopicId }) => {
+        addResourceToSubtopic: async (parent, { _id, title, text, link, subtopicId }) => {
             const updateSubtopic = await Subtopic.findOneAndUpdate(
                 { _id: subtopicId },
-                { $addToSet: { resources: { _id, title, text, image, link } } },
+                { $addToSet: { resources: { _id, title, text, link } } },
                 { new: true }
             ).populate('resources');
             return updateSubtopic;
         },
 
-        addResourceToTopic: async (parent, { _id, title, text, image, link, topicId }) => {
+        addResourceToTopic: async (parent, { _id, title, text, link, topicId }) => {
             const updateTopic = await Topic.findOneAndUpdate(
                 { _id: topicId },
-                { $addToSet: { resources: { _id, title, text, image, link } } },
+                { $addToSet: { resources: { _id, title, text, link } } },
                 { new: true }
             ).populate('resources');
             return updateTopic;
@@ -305,10 +305,10 @@ const resolvers = {
             return updateTopic;
         },
 
-        updateResource: async (parent, { _id, title, text, image, link }) => {
+        updateResource: async (parent, { _id, title, text, link }) => {
             const updatedResource = await Resource.findOneAndUpdate(
                 { _id: _id },
-                { $set: { title, text, image, link } },
+                { $set: { title, text, link } },
                 { new: true }
             );
             return updatedResource;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import Container from 'react-bootstrap/Container';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,30 +15,24 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import ListItemText from '@mui/material/ListItemText';
 import AddIcon from '@mui/icons-material/Add';
 import HomeIcon from '@mui/icons-material/Home';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
 import Topics from '../components/Topics';
 import Subtopics from '../components/Subtopics';
-import ResourceCard from '../components/OneResource';
 import Resources from '../components/Resources';
-import { Button, ButtonGroup, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Auth from "../utils/auth";
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ALL_QUICKLINKS } from '../utils/queries';
+import { QUERY_ALL_QUICKLINKS, QUERY_ALL_POSTS } from '../utils/queries';
 import { DELETE_QUICKLINK } from '../utils/mutations';
-import EditQuickLinkDialog from '../components/EditQuickLinkDialog';
-import Dialog from "@mui/material/Dialog";
-import EditIcon from '@mui/icons-material/Edit';
-import Tooltip from '@mui/material/Tooltip';
 
 import QuickLink from '../components/QuickLink';
+import Post from '../components/OnePost';
 
 
 const drawerWidth = 240;
@@ -125,9 +120,13 @@ const ContentCreator = () => {
   // ensure user is logged in and is an admin
   Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
 
-  const { loading, error, data } = useQuery(QUERY_ALL_QUICKLINKS);
+  const { loading: quickLinkLoading, error: errQuick, data: dataQuickLink } = useQuery(QUERY_ALL_QUICKLINKS);
 
-  const quickLinkData = data?.quicklinks || [];
+  const quickLinkData = dataQuickLink?.quicklinks || [];
+
+  const { loading: postLoading, error: errPost, data: dataPost } = useQuery(QUERY_ALL_POSTS);
+
+  const postData = dataPost?.posts || [];
 
   // const [openQuick, setOpenQuick] = React.useState(false);
 
@@ -192,7 +191,7 @@ const ContentCreator = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator/addsubtopic" }, { name: 'Add Resource', link: "/contentcreator/addresource" }, { name: 'Add Quick Link', link: "/contentcreator/addquicklink" }].map((text, index) => (
+          {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator/addsubtopic" }, { name: 'Add Resource', link: "/contentcreator/addresource" }, { name: 'Add Quick Link', link: "/contentcreator/addquicklink" }, { name: 'Add Post', link: "/contentcreator/addpost" }].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton as={Link} className="link2" to={text.link}>
                 <AddIcon>
@@ -230,6 +229,7 @@ const ContentCreator = () => {
               <Tab label="SubTopics" {...a11yProps(1)} />
               <Tab label="Resources" {...a11yProps(2)} />
               <Tab label="QuickLinks" {...a11yProps(3)} />
+              <Tab label="Posts" {...a11yProps(4)} />
             </Tabs>
 
           </Box>
@@ -269,6 +269,22 @@ const ContentCreator = () => {
                   </ul>
                 </>
               );
+            })}
+
+          </TabPanel>
+
+          <TabPanel value={value} index={4}>
+
+
+            {postData.map((post) => {
+              return (
+                <Container key={post._id} fluid className="bg-dark p-1">
+
+                  <Post post={post} />
+
+                </Container>
+              )
+
             })}
 
           </TabPanel>

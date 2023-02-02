@@ -10,28 +10,24 @@ query me {
             _id
             title
             text
-            image
             link
         }
         do {
           _id
           title
           text
-          image
           link
         }
         doing {
           _id
           title
           text
-          image
           link
         }
         done {
           _id
           title
           text
-          image
           link
         }
     }
@@ -57,7 +53,6 @@ query topics {
       link
       image
       resources {
-        image
         _id
         link
         title
@@ -74,7 +69,6 @@ query topics {
           link
           title
           text
-          image
         }
 
       }
@@ -95,7 +89,6 @@ query subtopics {
           title
           text
           link
-          image
         }
       }
 }
@@ -108,7 +101,6 @@ query resources {
         title
         text
         link
-        image
       }
 }
 `;
@@ -154,7 +146,6 @@ query topic($_id: ID!) {
             title
             text
             link
-            image
           }
         }
         resources {
@@ -162,7 +153,7 @@ query topic($_id: ID!) {
           title
           text
           link
-          image
+
         }
       }
 }
@@ -181,7 +172,6 @@ query subtopic($_id: ID!) {
             title
             text
             link
-            image
           }
         }
 }
@@ -194,7 +184,6 @@ query resource($_id: ID!) {
       title
       text
       link
-      image
     }
 }
 `;

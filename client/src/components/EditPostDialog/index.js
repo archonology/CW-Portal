@@ -6,37 +6,37 @@ import {
     TextField,
     Box,
 } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { QUERY_ALL_RESOURCES } from "../../utils/queries";
-import { useMutation, useQuery } from "@apollo/client";
-import { UPDATE_RESOURCE } from "../../utils/mutations";
+import { QUERY_ALL_POSTS } from "../../utils/queries";
+import { useMutation } from "@apollo/client";
+import { UPDATE_POST } from "../../utils/mutations";
 import { SnackbarProvider, useSnackbar } from "notistack";
 
-export default function EditResourceDialog({ resource }) {
+export default function EditPostDialog({ post }) {
 
     return (
         // limits the alert to 3 max
         <SnackbarProvider maxSnack={3}>
-            <Resource resource={resource} />
+            <EditPost post={post} />
         </SnackbarProvider>
     );
 }
 
-function Resource({ resource }) {
+function EditPost({ post }) {
 
     // useMutation -- and refetch needed to update site content dynamically
-    const [updateResource, { resourceErr }] = useMutation(UPDATE_RESOURCE, {
-        refetchQueries: [{ query: QUERY_ALL_RESOURCES }]
+    const [updatePost, { postErr }] = useMutation(UPDATE_POST, {
+        refetchQueries: [{ query: QUERY_ALL_POSTS }]
     });
 
     const { enqueueSnackbar } = useSnackbar();
 
     // here formstate defaults to the current data values
     const [formState, setFormState] = useState({
-        _id: `${resource._id}`,
-        title: `${resource.title}`,
-        text: `${resource.text}`,
-        link: `${resource.link}`
+        _id: `${post._id}`,
+        title: `${post.title}`,
+        text: `${post.text}`,
+        image: `${post.image}`,
+        link: `${post.link}`
     });
 
     const handleChange = (event) => {
@@ -49,30 +49,30 @@ function Resource({ resource }) {
     };
 
     // takes in a card and deck object
-    const handleResourceUpdate = async (event) => {
+    const handlepostUpdate = async (event) => {
         event.preventDefault();
         try {
-            const { data } = await updateResource({
+            const { data } = await updatePost({
                 variables: { ...formState },
             });
 
             // Display the success message when card added to deck
-            enqueueSnackbar(`${resource.title} was updated!`, { variant: "success" });
+            enqueueSnackbar(`${post.title} was updated!`, { variant: "success" });
 
         } catch (err) {
             console.error(err);
-            enqueueSnackbar(`Error updating ${resource.title}`, { variant: "error" });
+            enqueueSnackbar(`Error updating ${post.title}`, { variant: "error" });
         }
     };
 
     return (
         <>
-            <DialogTitle>{"Update Resource"}</DialogTitle>
+            <DialogTitle>{"Update Post"}</DialogTitle>
             <DialogContent sx={{ maxHeight: "800px", minWidth: "325px" }}>
 
                 <Box
                     component="form"
-                    onSubmit={handleResourceUpdate}
+                    onSubmit={handlepostUpdate}
                     noValidate
                     sx={{
                         display: "grid",
@@ -91,7 +91,7 @@ function Resource({ resource }) {
                         value={formState.title}
                         onChange={handleChange}
                         onBlur={() => { handleChange.title.trim() }}
-                        label="Resource Title"
+                        label="Post Title"
                         id="titleName"
                         variant="standard"
                     ></TextField>
@@ -100,14 +100,14 @@ function Resource({ resource }) {
                         name="text"
                         value={formState.text}
                         onChange={handleChange}
-                        label="Resource Description"
+                        label="Post Description"
                         id="description"
                         multiline
                         maxRows={10}
                         variant="standard"
                     ></TextField>
 
-                    {/* <TextField
+                    <TextField
                         name="image"
                         value={formState.image}
                         onChange={handleChange}
@@ -115,18 +115,17 @@ function Resource({ resource }) {
                         label="Image URL"
                         id="image"
                         variant="standard"
-                    ></TextField> */}
+                    ></TextField>
 
                     <TextField
                         name="link"
                         value={formState.link}
                         onChange={handleChange}
                         onBlur={() => { handleChange.link.trim() }}
-                        label="Resource Link"
+                        label="Post Link"
                         id="link"
                         variant="standard"
                     ></TextField>
-
                     <Button
                         type="submit"
                         variant="contained"

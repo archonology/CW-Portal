@@ -276,13 +276,14 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
     return (
         <>
             <Card key={resource._id} sx={{ maxWidth: 525, minWidth: 350, margin: 2, boxShadow: 10 }}  >
-                <CardMedia
+                {/* client requested dropping photos for resources */}
+                {/* <CardMedia
                     component="img"
                     alt="resource image"
                     height="140"
                     image={resource.image}
                     className="bgresource"
-                />
+                /> */}
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                         {resource.title}

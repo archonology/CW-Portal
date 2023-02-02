@@ -21,6 +21,7 @@ import AddTopic from "./pages/AddTopic";
 import AddSubtopic from "./pages/AddSubtopic";
 import AddResource from "./pages/AddResource";
 import AddQuickLink from "./pages/AddQuickLink";
+import AddPost from "./pages/AddPost";
 
 
 // adminLogin is not in the navbar: admin will need to know the url to navigate to this page, so that it isn't available to the public at large. use env after development phase to conceal url route
@@ -112,6 +113,7 @@ function App() {
               <Route path="contentcreator/addsubtopic" element={<AddSubtopic />} />
               <Route path="contentcreator/addresource" element={<AddResource />} />
               <Route path="contentcreator/addquicklink" element={<AddQuickLink />} />
+              <Route path="contentcreator/addpost" element={<AddPost />} />
               {/* build in progess on donation features */}
               <Route path="/donate" element={<Donate />} />
               <Route path={process.env.REACT_APP_ADMIN_LOGIN_KEY} element={<AdminLogin />} />

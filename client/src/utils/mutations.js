@@ -62,7 +62,6 @@ mutation createTopic($title: String!, $text: String!, $image: String!, $link: St
         resources {
             _id
             title
-            image
             link
         }
         subtopics {
@@ -75,7 +74,6 @@ mutation createTopic($title: String!, $text: String!, $image: String!, $link: St
                 _id
                 title
                 text
-                image
                 link
             }
         }
@@ -94,7 +92,6 @@ mutation createSubtopic($title: String!, $text: String!, $image: String!, $link:
             _id
             title
             text
-            image
             link
         }
     }
@@ -102,12 +99,11 @@ mutation createSubtopic($title: String!, $text: String!, $image: String!, $link:
 `;
 
 export const CREATE_RESOURCE = gql`
-mutation createResource($title: String!, $text: String!, $image: String!, $link: String!) {
-    createResource(title: $title, text: $text, image: $image, link: $link){
+mutation createResource($title: String!, $text: String!, $link: String!) {
+    createResource(title: $title, text: $text, link: $link){
         _id
         title
         text
-        image
         link
     }
 }
@@ -136,13 +132,12 @@ mutation createPost($title: String!, $text: String!, $image: String!, $link: Str
 `;
 
 export const ADD_RESOURCE_TO_FAVS = gql`
-mutation addResourceToFavs($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
-    addResourceToFavs(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+mutation addResourceToFavs($_id: ID!, $title: String!, $text: String!, $link: String!) {
+    addResourceToFavs(_id: $_id, title: $title, text: $text, link: $link){
         favorites {
             _id
             title
             text
-            image
             link
         }
     }
@@ -150,13 +145,12 @@ mutation addResourceToFavs($_id: ID!, $title: String!, $text: String!, $image: S
 `;
 
 export const ADD_RESOURCE_TO_DO = gql`
-mutation addResourceToDo($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
-    addResourceToDo(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+mutation addResourceToDo($_id: ID!, $title: String!, $text: String!, $link: String!) {
+    addResourceToDo(_id: $_id, title: $title, text: $text, link: $link){
         do {
             _id
             title
             text
-            image
             link
         }
     }
@@ -164,13 +158,12 @@ mutation addResourceToDo($_id: ID!, $title: String!, $text: String!, $image: Str
 `;
 
 export const ADD_RESOURCE_TO_DOING = gql`
-mutation addResourceToDoing($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
-    addResourceToDoing(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+mutation addResourceToDoing($_id: ID!, $title: String!, $text: String!, $link: String!) {
+    addResourceToDoing(_id: $_id, title: $title, text: $text, link: $link){
         doing {
             _id
             title
             text
-            image
             link
         }
     }
@@ -178,13 +171,12 @@ mutation addResourceToDoing($_id: ID!, $title: String!, $text: String!, $image: 
 `;
 
 export const ADD_RESOURCE_TO_DONE = gql`
-mutation addResourceToDone($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
-    addResourceToDone(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+mutation addResourceToDone($_id: ID!, $title: String!, $text: String!, $link: String!) {
+    addResourceToDone(_id: $_id, title: $title, text: $text, link: $link){
         done {
             _id
             title
             text
-            image
             link
         }
     }
@@ -203,8 +195,8 @@ mutation updateQuickLink($_id: ID!, $title: String!, $link: String!) {
 
 
 export const UPDATE_RESOURCE = gql`
-mutation updateResource($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
-  updateResource(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+mutation updateResource($_id: ID!, $title: String!, $text: String!, $link: String!) {
+  updateResource(_id: $_id, title: $title, text: $text, link: $link){
         _id
         title
         text
@@ -251,8 +243,8 @@ mutation updatePost($_id: ID!, $title: String!, $text: String!, $image: String!,
 `;
 
 export const ADD_RESOURCE_TO_TOPIC = gql`
-mutation addResourceToTopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!, $topicId: ID!) {
-    addResourceToTopic(_id: $_id, title: $title, text: $text, image: $image, link: $link, topicId: $topicId){
+mutation addResourceToTopic($_id: ID!, $title: String!, $text: String!, $link: String!, $topicId: ID!) {
+    addResourceToTopic(_id: $_id, title: $title, text: $text, link: $link, topicId: $topicId){
         resources {
             _id
             title
@@ -265,13 +257,12 @@ mutation addResourceToTopic($_id: ID!, $title: String!, $text: String!, $image: 
 `;
 
 export const ADD_RESOURCE_TO_SUBTOPIC = gql`
-mutation addResourceToSubtopic($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!, $subtopicId: ID!) {
-  addResourceToSubtopic(_id: $_id, title: $title, text: $text, image: $image, link: $link, subtopicId: $subtopicId){
+mutation addResourceToSubtopic($_id: ID!, $title: String!, $text: String!, $link: String!, $subtopicId: ID!) {
+  addResourceToSubtopic(_id: $_id, title: $title, text: $text, link: $link, subtopicId: $subtopicId){
         resources {
             _id
             title
             text
-            image
             link
         }
     }

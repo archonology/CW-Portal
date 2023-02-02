@@ -16,7 +16,6 @@ const AddResource = () => {
     const [formState, setFormState] = useState({
         title: "",
         text: "",
-        image: "",
         link: ""
     });
 
@@ -64,7 +63,7 @@ const AddResource = () => {
                     }}
                 >
                     <br></br>
-                    {/* user sets title, text, url, image */}
+                    {/* user sets title, text, url */}
                     <TextField
                         name="title"
                         value={formState.title}
@@ -96,7 +95,7 @@ const AddResource = () => {
                         variant="standard"
                     ></TextField>
 
-                    <TextField
+                    {/* <TextField
                         name="image"
                         value={formState.image}
                         onChange={handleChange}
@@ -104,7 +103,7 @@ const AddResource = () => {
                         label="Image URL"
                         id="image"
                         variant="standard"
-                    ></TextField>
+                    ></TextField> */}
 
                     <Button
                         type="submit"

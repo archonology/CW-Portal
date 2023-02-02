@@ -40,7 +40,7 @@ function SubtopicList({ resource }) {
     const handleAddToSubtopic = async (resource, subtopic) => {
         try {
             const { data } = await addResourceToSubtopic({
-                variables: { _id: resource._id, title: resource.title, text: resource.text, image: resource.image, link: resource.link, subtopicId: subtopic._id },
+                variables: { _id: resource._id, title: resource.title, text: resource.text, link: resource.link, subtopicId: subtopic._id },
             });
 
             // Display the success message when card added to deck
