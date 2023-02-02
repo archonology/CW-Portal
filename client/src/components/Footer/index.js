@@ -52,7 +52,7 @@ function Footer() {
 
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
 
-                <Nav.Link href="https://www.meherdevs.com" target={'_blank'} rel={'nonreferrer'} className="meherdevs">Created by MeherDevs | 2023</Nav.Link>
+                <Nav.Link href="https://www.meherdevs.com" target={'_blank'} rel={'nonreferrer'} className="meherdevs">Site by MeherDevs | 2023</Nav.Link>
 
               </Nav>
 

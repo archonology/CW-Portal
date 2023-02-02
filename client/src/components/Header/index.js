@@ -14,6 +14,7 @@ import { QUERY_ALL_TOPICS, QUERY_ALL_QUICKLINKS } from "../../utils/queries";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { ClassNames } from '@emotion/react';
 
 
 
@@ -77,12 +78,13 @@ function Header() {
             </Offcanvas.Header>
             <Offcanvas.Body>
 
-              {topicData.map((topic) => (
+              {topicData.map((topic, index) => (
 
                 <>
+                
                   <Dropdown key={topic._id} as={ButtonGroup}>
-                    <Button key={topic._id} as={Link} to={`/resources/${topic._id}`} className="topics" variant='dark'>{topic.title} </Button>
-
+                  {index % 2 === 0 ? <Nav.Link key={topic._id} as={Link} to={`/resources/${topic._id}`} className="topics" variant='dark'>{topic.title} </Nav.Link> : <Nav.Link key={topic._id} as={Link} to={`/resources/${topic._id}`} className="topics2" variant='dark'>{topic.title} </Nav.Link> }
+                 
                     <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
                     <Dropdown.Menu variant='dark' className='p-3'>
                       {topic.subtopics.map((subtopic) => {
@@ -95,8 +97,9 @@ function Header() {
                       })}
                     </Dropdown.Menu>
                   </Dropdown>
-
+                  <hr></hr>
                 </>
+                
               ))}
 
             </Offcanvas.Body>
@@ -107,9 +110,12 @@ function Header() {
               <Offcanvas.Title>Quick Links</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              {quickLinkData.map((quicklink) => (
+              {quickLinkData.map((quicklink, index) => (
+
                 <>
-                  <Nav.Link key={quicklink._id} href={quicklink.link} target={'_blank'} rel={'nonreferrer'} className="quicklink">{quicklink.title}</Nav.Link>
+                {index % 2 === 0 ?  <Nav.Link key={quicklink._id} href={quicklink.link} target={'_blank'} rel={'nonreferrer'} className="quicklink">{quicklink.title}</Nav.Link> :  <Nav.Link key={quicklink._id} href={quicklink.link} target={'_blank'} rel={'nonreferrer'} className="quicklink2">{quicklink.title}</Nav.Link> }
+                  {/* <Nav.Link key={quicklink._id} href={quicklink.link} target={'_blank'} rel={'nonreferrer'} className="quicklink">{quicklink.title}</Nav.Link> */}
+                  <hr></hr>
                 </>
               ))}
 

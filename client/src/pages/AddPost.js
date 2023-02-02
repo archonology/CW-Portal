@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { CREATE_RESOURCE } from "../utils/mutations";
+import { CREATE_POST } from "../utils/mutations";
 import {
     Container,
     TextField,
@@ -9,17 +9,18 @@ import {
 } from "@mui/material";
 import Auth from "../utils/auth";
 
-const AddResource = () => {
+const AddPost = () => {
 
     Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
 
     const [formState, setFormState] = useState({
         title: "",
         text: "",
-        link: ""
+        link: "",
+        image: ""
     });
 
-    const [newResource, { error, data }] = useMutation(CREATE_RESOURCE);
+    const [newPost, { error, data }] = useMutation(CREATE_POST);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -35,7 +36,7 @@ const AddResource = () => {
         event.preventDefault();
 
         try {
-            const { data } = await newResource({
+            const { data } = await newPost({
                 variables: { ...formState }
             });
             // directs back to content creator on submission
@@ -48,7 +49,7 @@ const AddResource = () => {
     return (
         <>
             <Container sx={{ marginTop: "2em" }}>
-                <h2>Add a New Resource</h2>
+                <h2>Add a New Post</h2>
                 <Box
                     component="form"
                     onSubmit={handleFormSubmit}
@@ -63,13 +64,13 @@ const AddResource = () => {
                     }}
                 >
                     <br></br>
-                    {/* user sets title, text, url */}
+                    {/* user sets title, text, url, image */}
                     <TextField
                         name="title"
                         value={formState.title}
                         onChange={handleChange}
                         onBlur={() => { handleChange.title.trim() }}
-                        label="Resource Title"
+                        label="Post Title"
                         id="titleName"
                         variant="standard"
                     ></TextField>
@@ -78,10 +79,10 @@ const AddResource = () => {
                         name="text"
                         value={formState.text}
                         onChange={handleChange}
-                        label="Resource Description"
+                        label="Description"
                         id="description"
                         multiline
-                        maxRows={10}
+                        maxRows={30}
                         variant="standard"
                     ></TextField>
 
@@ -90,12 +91,12 @@ const AddResource = () => {
                         value={formState.link}
                         onChange={handleChange}
                         onBlur={() => { handleChange.link.trim() }}
-                        label="Resource Link"
+                        label="Post Link"
                         id="link"
                         variant="standard"
                     ></TextField>
 
-                    {/* <TextField
+                    <TextField
                         name="image"
                         value={formState.image}
                         onChange={handleChange}
@@ -103,8 +104,8 @@ const AddResource = () => {
                         label="Image URL"
                         id="image"
                         variant="standard"
-                    ></TextField> */}
-
+                    ></TextField>
+                    
                     <Button
                         type="submit"
                         variant="contained"
@@ -119,4 +120,4 @@ const AddResource = () => {
     );
 }
 
-export default AddResource;
+export default AddPost;
