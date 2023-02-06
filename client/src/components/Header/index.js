@@ -19,6 +19,7 @@ import { Autocomplete, TextField, Box } from '@mui/material';
 
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import Topic from '../Topic';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -75,7 +76,7 @@ function Header() {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
-  const [searchInput, setSearchInput] = useState({ title: "" });
+  const [searchInput, setSearchInput] = useState('');
 
   // set up useQuery get the data from the backend
   const { loading: topicLoading, error: topicErr, data: topData } = useQuery(QUERY_ALL_TOPICS);
@@ -83,29 +84,32 @@ function Header() {
   // object to keep the topic data
   const topicData = topData?.topics || [];
 
+  // initialize topics object for autosearch feature in navbar
+  const topics = topicData.map((topic) => {
+    return (
+      { label: topic.title, _id: topic._id }
+    )
+  })
+
+  const handleSearch = async (event, topic) => {
+    event.preventDefault();
+console.log(topic)
+    window.location.assign(`/resources/${topic._id}`)
+  }
+  // const handleChange = (e) => {
+  //   e.preventDefault();
+  //   setSearchInput(e.target.value);
+  // };
+
+  // if (searchInput.length > 0) {
+  //   topics.filter((topic) => {
+  //     return topic.title.match(searchInput);
+  //   });
+  // }
+
   const { loading: quickLoading, error: quickErr, data: quickData } = useQuery(QUERY_ALL_QUICKLINKS);
 
   const quickLinkData = quickData?.quicklinks || [];
-
-  // function findMatches(titleToMatch, topicData) {
-  //   return topicData.filter(topic => {
-  //     const regex = new RegExp(titleToMatch, 'gi');
-  //     return topic.title.match(regex);
-  //   })
-  // }
-
-  // function displayMatches() {
-  //   const matchArray = findMatches(this.value, topicData);
-  //   const html = matchArray.map(topic => {
-  //     const regex = new RegExp(this.value, 'gi');
-  //     const topicTitle = topic.title.replace(regex, `<span className="hl">${this.value}</span>`);
-  //     return `
-  //     <li><span>${topicTitle}</span>
-  //     `;
-  //   }).join('');
-
-  // }
-
 
 
 
@@ -137,16 +141,59 @@ function Header() {
                   <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
 
 
-                  <Search>
+                  {/* <Search>
                     <SearchIconWrapper>
                       <SearchIcon />
                     </SearchIconWrapper>
                     <StyledInputBase
                       placeholder="Search…"
                       inputProps={{ 'aria-label': 'search' }}
-                      
+                      onChange={handleChange}
+                      value={searchInput}
                     />
-                  </Search>
+                    <Dropdown.Menu variant='dark'>
+                      {topics.map((topic, index) => {
+                        <Dropdown.Item key={index}>{topic.title}</Dropdown.Item>
+                      })}
+
+                    </Dropdown.Menu>
+                  </Search> */}
+                  <Box
+                    component='form'
+                    noValidate
+                    onSubmit={handleSearch}>
+                    <Autocomplete
+                      id="resource-search"
+                      sx={{ width: 200, marginLeft: 2 }}
+                      options={topics}
+                      value={topics._id}
+                      autoHighlight
+                      getOptionLabel={(option) => option.label}
+                      renderOption={(props, option) => (
+                        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+
+                          {option.label}
+
+                        </Box>
+                      )}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Search Resources"
+                          color='success'
+                          variant='outlined'
+                          inputProps={{
+                            ...params.inputProps,
+                            autoComplete: 'new-password', // disable autocomplete and autofill
+                          }}
+                        />
+                      )}
+                    />
+
+                   {/* <Button type='submit' className='search m-2'>submit</Button> */}
+                  </Box>
+
+
                   {/* <div>
                     <Form className="d-flex">
                       <Form.Control
@@ -154,12 +201,9 @@ function Header() {
                         placeholder="Search"
                         className="bg-black searchbox text-white"
                         aria-label="Search"
+                        onChange={handleChange}
+                        value={searchInput}
                       />
-                      <Dropdown>
-                       <Dropdown.Menu variant='dark' className='p-3 suggestions'>
-
-                       </Dropdown.Menu>
-                       </Dropdown>
                       <Button className="search">
                         <SearchIcon></SearchIcon>
                       </Button>
