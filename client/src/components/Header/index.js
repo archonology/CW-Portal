@@ -15,8 +15,53 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { ClassNames } from '@emotion/react';
+import { Autocomplete, TextField, Box } from '@mui/material';
 
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
 
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginLeft: 0,
+  marginTop: 3,
+  width: '35%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '10ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
 
 
 function Header() {
@@ -30,6 +75,8 @@ function Header() {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
+  const [searchInput, setSearchInput] = useState({ title: "" });
+
   // set up useQuery get the data from the backend
   const { loading: topicLoading, error: topicErr, data: topData } = useQuery(QUERY_ALL_TOPICS);
 
@@ -39,6 +86,28 @@ function Header() {
   const { loading: quickLoading, error: quickErr, data: quickData } = useQuery(QUERY_ALL_QUICKLINKS);
 
   const quickLinkData = quickData?.quicklinks || [];
+
+  // function findMatches(titleToMatch, topicData) {
+  //   return topicData.filter(topic => {
+  //     const regex = new RegExp(titleToMatch, 'gi');
+  //     return topic.title.match(regex);
+  //   })
+  // }
+
+  // function displayMatches() {
+  //   const matchArray = findMatches(this.value, topicData);
+  //   const html = matchArray.map(topic => {
+  //     const regex = new RegExp(this.value, 'gi');
+  //     const topicTitle = topic.title.replace(regex, `<span className="hl">${this.value}</span>`);
+  //     return `
+  //     <li><span>${topicTitle}</span>
+  //     `;
+  //   }).join('');
+
+  // }
+
+
+
 
   return (
     <>
@@ -50,6 +119,7 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" className='p-3' />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justify-content-end flex-grow-1 pe-3">
+
 
               <Nav.Link onClick={handleShow}>Resources</Nav.Link>
               <Nav.Link onClick={handleShow2}>Quick Links</Nav.Link>
@@ -66,6 +136,35 @@ function Header() {
                   <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
                   <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
 
+
+                  <Search>
+                    <SearchIconWrapper>
+                      <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                      placeholder="Search…"
+                      inputProps={{ 'aria-label': 'search' }}
+                      
+                    />
+                  </Search>
+                  {/* <div>
+                    <Form className="d-flex">
+                      <Form.Control
+                        type="search"
+                        placeholder="Search"
+                        className="bg-black searchbox text-white"
+                        aria-label="Search"
+                      />
+                      <Dropdown>
+                       <Dropdown.Menu variant='dark' className='p-3 suggestions'>
+
+                       </Dropdown.Menu>
+                       </Dropdown>
+                      <Button className="search">
+                        <SearchIcon></SearchIcon>
+                      </Button>
+                    </Form>
+                  </div> */}
                 </>
               )}
             </Nav>
@@ -160,6 +259,7 @@ function Header() {
       </Navbar>
     </>
   );
+
 }
 
 export default Header;
