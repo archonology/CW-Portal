@@ -66,7 +66,7 @@ class AuthService {
   adminLogin(adminToken) {
     // Saves admin token to localStorage
     localStorage.setItem('admin_id_token', adminToken);
-    window.location.assign('/contentcreator');
+    window.location.assign('/dashboard');
 
   }
 
