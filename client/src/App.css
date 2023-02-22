@@ -2,8 +2,8 @@
   --base: rgb(36, 44, 49);
   --alt: rgb(177, 178, 178);
   --primary: rgb(228, 223, 218);
-  --lightblue: rgb(122, 205, 247);
-  --blue: rgb(109, 177, 211);
+  --lightblue: rgb(143, 214, 249);
+  --blue: rgb(119, 196, 234);
   --lightHouse: rgb(231, 106, 71);
   --lighterHouse: rgb(234, 140, 119);
   --beacon: rgb(132, 203, 114);
@@ -51,7 +51,7 @@ h3 {
 }
 
 h5 {
-  color: var(--lighterHouse);
+  color: var(--lightblue);
 }
 
 .topic-headers {
