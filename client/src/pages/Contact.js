@@ -66,9 +66,9 @@ function Contact() {
 
         <div>
 
-            <Container className="p-5 m-2 contact">
+            <Container className="p-5 contact">
                 <h2>Contact Us</h2>
-                <p className=''>We love to hear from you! Share your feedback, or let us know if you see an error or a bad link somewhere in the site.</p>
+                <p>Please share your feedback or let us know if you see an error or a bad link somewhere in the site.</p>
                 {errorMessage && (
                     <div>
                         <p className="error-text">{errorMessage}</p>
@@ -79,7 +79,7 @@ function Contact() {
                     container
                     spacing={0}
                     direction="column"
-                    alignItems="right"
+                    alignItems="center"
                     justifyContent="right"
                     style={{ minHeight: "25vh" }}
                 >

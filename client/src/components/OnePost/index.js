@@ -46,12 +46,12 @@ const Post = ({ post }) => {
     return (
         <>
 
-            <Stack key={post._id} direction="row" spacing={5} margin={3}>
-                <Image 
+            <Stack key={post._id} direction="column" spacing={1} margin={4}>
+                {/* <Image 
                 src={post.image}
                 alt={post.title} 
-                fit="contain"></Image>
-                <p><span><h4>{post.title}</h4></span>{post.text}<br></br><span><Button
+                fit="contain"></Image> */}
+                <h4>{post.title}</h4><p>{post.text}<br></br><span><Button
                     href={post.link}
                     target={'_blank'}
                     rel={'nonreferrer'}

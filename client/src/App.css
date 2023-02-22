@@ -1,5 +1,5 @@
-:root {   
-  --base: rgb(36, 44, 49); 
+:root {
+  --base: rgb(36, 44, 49);
   --alt: rgb(177, 178, 178);
   --primary: rgb(228, 223, 218);
   --lightblue: rgb(122, 205, 247);
@@ -12,17 +12,19 @@
   --lightviolet: rgb(221, 172, 249);
 }
 
+
 html body {
   background: var(--base);
-  background-image: url("./media/DNGF7977.jpeg");
-  background-position: 50% fixed;
+  background-image: url("./media/newLeaf2.jpeg");
+  background-position: top;
   color: var(--primary);
   margin: 0;
 }
 
-/* .brand {
-  padding-right: 3em;
-} */
+
+.navbar {
+  background-color: rgba(27, 27, 36, 0.773);
+}
 
 .navdropdown {
   background-color: var(--base);
@@ -33,12 +35,15 @@ html body {
 }
 
 .footspace {
-  margin-bottom: 7rem;
+  margin-bottom: 3rem;
+}
+
+.post {
+  background-color: rgb(29, 31, 33);
 }
 
 .meherdevs {
   color: var(--alt);
-  font-size: smaller;
 }
 
 h3 {
@@ -65,6 +70,7 @@ h5 {
 
 .contact {
   max-width: 600px;
+  text-align: center;
 }
 
 .bio {
@@ -87,25 +93,27 @@ a {
 }
 
 .textBox {
-margin: 0;
+  margin: 0;
 }
+
 .search {
   background-color: var(--blue);
   border: none;
 }
 
 .logging {
-font-weight: bold;
+  font-weight: bold;
 
 }
+
 .avatar {
   background-image: url("../public/Vector-Multicolor-Flower-Design.jpg");
   background-position: 30%;
 }
 
 .bgresource {
-/* background-image: linear-gradient(var(--lighterHouse), var(--lightblue), var(--violet)); */
-background-image: linear-gradient(black, var(--base));
+  /* background-image: linear-gradient(var(--lighterHouse), var(--lightblue), var(--violet)); */
+  background-image: linear-gradient(black, var(--base));
 
 }
 
@@ -122,7 +130,7 @@ img {
 }
 
 .search:hover {
-  background-color:var(--lightblue);
+  background-color: var(--lightblue);
 }
 
 /* .topic-headers:hover {
@@ -140,14 +148,14 @@ img {
 
 .topics {
   color: var(--blue);
- min-width: 50px;
-text-align: left;
+  min-width: 50px;
+  text-align: left;
 }
 
 .topics2 {
   color: var(--beacon);
   min-width: 50px;
-text-align: left;
+  text-align: left;
 }
 
 .subtopics {
