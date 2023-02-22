@@ -12,10 +12,11 @@
   --lightviolet: rgb(221, 172, 249);
 }
 
+
 html body {
   background: var(--base);
-  background-image: url("./media/DNGF7977.jpeg");
-  background-position: 50% fixed;
+  background-image: url("./media/newLeaf2.jpeg");
+  background-position: top;
   color: var(--primary);
   margin: 0;
 }
