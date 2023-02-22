@@ -26,9 +26,9 @@ function Footer() {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" className="p-2 pb-3" expand="md" fixed="bottom">
+      <Navbar bg="transparent" variant="dark" className="p-3 mb-4" expand="md" relative="bottom">
         <Container fluid >
-          <Navbar.Brand as={Link} to="/" className=""></Navbar.Brand>
+          <Navbar.Brand as={Link} to="/" className="p-2"></Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-md}`}
@@ -43,7 +43,7 @@ function Footer() {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className="justify-content-end flex-grow-1 pe-3">
+              <Nav className="justify-content-center flex-grow-1 pe-3">
 
                 {/* <Nav.Link href="#top">Return to Top |</Nav.Link> */}
 
@@ -52,7 +52,7 @@ function Footer() {
 
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
 
-                <Nav.Link href="https://www.meherdevs.com" target={'_blank'} rel={'nonreferrer'} className="meherdevs">Site by MeherDevs | 2023</Nav.Link>
+                <Nav.Link href="https://www.meherdevs.com" target={'_blank'} rel={'nonreferrer'} className="meherdevs">Made by MeherDevs | 2023</Nav.Link>
 
               </Nav>
 

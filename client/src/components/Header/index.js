@@ -42,7 +42,7 @@ function Header() {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" className="mb-2 p-4" expand="md" id="#top">
+      <Navbar  variant="dark" className="mb-2 p-3 navbar" expand="md" id="#top">
         <Container fluid >
 
           <Navbar.Brand as={Link} to="/" className="brand">The Child Welfare Portal</Navbar.Brand>
