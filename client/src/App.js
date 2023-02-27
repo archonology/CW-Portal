@@ -22,6 +22,7 @@ import AddSubtopic from "./pages/AddSubtopic";
 import AddResource from "./pages/AddResource";
 import AddQuickLink from "./pages/AddQuickLink";
 import AddPost from "./pages/AddPost";
+import Search from "./pages/Search";
 
 
 // adminLogin is not in the navbar: admin will need to know the url to navigate to this page, so that it isn't available to the public at large. use env after development phase to conceal url route
@@ -106,6 +107,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/resources/:_id" element={<OneTopic />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/search" element={<Search />} />
               <Route path="/contentcreator" element={<ContentCreator />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />

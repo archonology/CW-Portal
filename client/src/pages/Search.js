@@ -1,88 +1,18 @@
-import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import Container from 'react-bootstrap/Container';
+import React, { useState } from "react";
+import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import AddIcon from '@mui/icons-material/Add';
-import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
-import Topics from '../components/Topics';
-import Subtopics from '../components/Subtopics';
-import Resources from '../components/Resources';
-import { Grid } from "@mui/material";
+import { Grid, TextField, Button } from "@mui/material";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Auth from "../utils/auth";
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ALL_QUICKLINKS, QUERY_ALL_POSTS } from '../utils/queries';
-import { DELETE_QUICKLINK } from '../utils/mutations';
+import { QUERY_SEARCHED_SUBTOPIC, QUERY_SEARCHED_TOPICS, QUERY_SEARCHED_RESOURCE } from '../utils/queries';
 
-import QuickLink from '../components/QuickLink';
-import Post from '../components/OnePost';
+import Nav from 'react-bootstrap/Nav';
 
 
-const drawerWidth = 240;
-
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(0),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${drawerWidth}px`,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-        }),
-    }),
-);
-
-const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: `${drawerWidth}px`,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    }),
-}));
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-}));
-
-// the tabs in the main body of the contentCreator
+// the tabs in the main body of the Search Page
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -95,7 +25,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 2, mt: 3 }}>
+                <Box sx={{ p: 6, paddingTop: 0 }}>
                     {children}
                 </Box>
             )}
@@ -116,17 +46,30 @@ function a11yProps(index) {
     };
 }
 
-const ContentCreator = () => {
-    // ensure user is logged in and is an admin
-    Auth.adminLoggedIn() ? Auth.getAdminToken() : window.location.assign('/');
+const Search = () => {
 
-    const { loading: quickLinkLoading, error: errQuick, data: dataQuickLink } = useQuery(QUERY_ALL_QUICKLINKS);
+    const [formState, setFormState] = useState({ title: "" });
 
-    const quickLinkData = dataQuickLink?.quicklinks || [];
 
-    const { loading: postLoading, error: errPost, data: dataPost } = useQuery(QUERY_ALL_POSTS);
+    const { loading: topicLoading, error: topicError, data: topicData } = useQuery(QUERY_SEARCHED_TOPICS, { variables: { ...formState } });
 
-    const postData = dataPost?.posts || [];
+    const searchedTopicData = topicData?.searchedTopics || [];
+
+    const { loading: subtopicLoading, error: subtopicError, data: subtopicData } = useQuery(QUERY_SEARCHED_SUBTOPIC, { variables: { ...formState } });
+
+    const searchedSubtopicData = subtopicData?.searchedSubtopics || [];
+
+    const { loading: resourceLoading, error: resourceError, data: resourceData } = useQuery(QUERY_SEARCHED_RESOURCE, { variables: { ...formState } });
+
+    const searchedResourceData = resourceData?.searchedResources || [];
+
+    // const { loading: quickLinkLoading, error: errQuick, data: dataQuickLink } = useQuery(QUERY_ALL_QUICKLINKS);
+
+    // const quickLinkData = dataQuickLink?.quicklinks || [];
+
+    // const { loading: postLoading, error: errPost, data: dataPost } = useQuery(QUERY_ALL_POSTS);
+
+    // const postData = dataPost?.posts || [];
 
     // const [openQuick, setOpenQuick] = React.useState(false);
 
@@ -147,151 +90,269 @@ const ContentCreator = () => {
         setOpen(false);
     };
 
+    const handleSearchChange = (event) => {
+        const { name, value } = event.target;
 
-    const [deleteQuickLink, { err, dat }] = useMutation(DELETE_QUICKLINK, {
-        refetchQueries: [{ query: QUERY_ALL_QUICKLINKS }],
-    });
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+
+    };
+
+    // const handleFormSubmit = async (event) => {
+    //     event.preventDefault();
+
+    //     try {
+    //         const { topicData } = await QUERY_SEARCHED_TOPICS({
+    //             variables: { ...formState }
+    //         });
+    //         console.log(topicData);
+
+    //     } catch (e) {
+    //         console.error(e);
+    //     }
+    // };
+
+
+    // const [deleteQuickLink, { err, dat }] = useMutation(DELETE_QUICKLINK, {
+    //     refetchQueries: [{ query: QUERY_ALL_QUICKLINKS }],
+    // });
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position="fixed" open={open}>
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        <span className='span'>Admin</span> / Content Creator
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                }}
-                variant="persistent"
-                anchor="left"
-                open={open}
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List>
-                    {[{ name: 'Add Topic', link: "/contentcreator/addtopic" }, { name: 'Add Subtopic', link: "/contentcreator/addsubtopic" }, { name: 'Add Resource', link: "/contentcreator/addresource" }, { name: 'Add Quick Link', link: "/contentcreator/addquicklink" }, { name: 'Add Post', link: "/contentcreator/addpost" }].map((text, index) => (
-                        <ListItem key={text} disablePadding>
-                            <ListItemButton as={Link} className="link2" to={text.link}>
-                                <AddIcon>
-                                </AddIcon>
-                                <ListItemText primary={text.name} className="m-1" />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                    <hr></hr>
-                    <ListItemButton as={Link} className="link2" to='/'>
-                        <HomeIcon>
-                        </HomeIcon>
-                        <ListItem>Return Home</ListItem>
-                    </ListItemButton>
-                </List>
-            </Drawer>
-            <Main open={open} >
-                <DrawerHeader />
 
-                <Box sx={{ width: '100%', marginTop: 0 }}>
-                    <Box>
+            <Box sx={{ width: '100%', marginTop: 2 }}>
+                <Box>
 
-                        <Tabs
-                            sx={{ alignContent: "center" }}
-                            value={value}
-                            onChange={handleChange}
-                            textColor="inherit"
-                            variant="scrollable"
-                            scrollButtons
-                            allowScrollButtonsMobile
-                            aria-label="scrollable Dashboard List Tabs"
-                            indicatorColor="secondary">
-                            <Tab label="Topics" {...a11yProps(0)} />
-                            <Tab label="SubTopics" {...a11yProps(1)} />
-                            <Tab label="Resources" {...a11yProps(2)} />
-                            <Tab label="QuickLinks" {...a11yProps(3)} />
-                            <Tab label="Posts" {...a11yProps(4)} />
-                        </Tabs>
-
-                    </Box>
-                    <TabPanel value={value} index={0}>
-                        <Grid direction="row" container >
-                            <Grid container spacing={0}>
-
-                                {/* see all topics */}
-                                <Topics />
-
-                            </Grid>
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-
-                        {/* see all subtopics */}
-                        <Subtopics />
-
-                    </TabPanel>
-                    <TabPanel value={value} index={2}>
-
-                        <Grid direction="row" container sx={{ padding: "1rem" }}>
-                            <Grid container spacing={0} justifyContent="center">
-
-                                <Resources />
-
-                            </Grid>
-                        </Grid>
-
-                    </TabPanel>
-                    <TabPanel value={value} index={3}>
-                        {quickLinkData.map((quicklink) => {
-                            return (
-                                <>
-                                    <ul>
-                                        <QuickLink quicklink={quicklink} />
-                                    </ul>
-                                </>
-                            );
-                        })}
-
-                    </TabPanel>
-
-                    <TabPanel value={value} index={4}>
-
-
-                        {postData.map((post) => {
-                            return (
-                                <Container key={post._id} fluid className="bg-dark p-1 mb-3">
-
-                                    <Post post={post} />
-
-                                </Container>
-                            )
-
-                        })}
-
-                    </TabPanel>
+                    <Tabs
+                        sx={{ alignContent: "center" }}
+                        value={value}
+                        onChange={handleChange}
+                        textColor="inherit"
+                        variant="scrollable"
+                        scrollButtons
+                        allowScrollButtonsMobile
+                        aria-label="scrollable Dashboard List Tabs"
+                        indicatorColor="primary">
+                        <Tab label="Search Topics" {...a11yProps(0)} />
+                        <Tab label="Search SubTopics" {...a11yProps(1)} />
+                        <Tab label="Search Resources" {...a11yProps(2)} />
+                        {/* <Tab label="QuickLinks" {...a11yProps(3)} />
+                            <Tab label="Posts" {...a11yProps(4)} /> */}
+                    </Tabs>
 
                 </Box>
-            </Main>
+                <TabPanel value={value} index={0}>
+                    <Grid direction="row" container >
+                        <Grid container spacing={0}>
+                            <Box
+                                component="form"
+                                // onSubmit={handleFormSubmit}
+                                noValidate
+                                sx={{
+                                    display: "grid",
+                                    gridTemplateColumns: { sm: "1fr" },
+                                    gap: 2,
+                                    marginBottom: "5em",
+                                    marginLeft: "2em",
+                                    justify: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <br></br>
+                                <TextField
+                                    name="title"
+                                    value={formState.title}
+                                    onChange={handleSearchChange}
+                                    label="Search Topics"
+                                    id="titleName"
+                                    variant="standard"
+                                ></TextField>
+
+
+                                {/* <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    style={{ maxWidth: "100px" }}
+                                >
+                                    search
+                                </Button> */}
+
+                                {searchedTopicData?.map((topic) => {
+                                    return (
+
+                                        <Nav.Link
+                                            key={topic._id}
+                                            as={Link}
+                                            to={`/resources/${topic._id}`}
+                                            className="topics p-2"
+                                            variant='dark'
+                                        >{topic.title}
+                                        </Nav.Link>
+
+                                    )
+                                })}
+
+                            </Box>
+
+
+
+                        </Grid>
+                    </Grid>
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <Grid direction="row" container >
+                        <Grid container spacing={0}>
+                            <Box
+                                component="form"
+                                // onSubmit={handleFormSubmit}
+                                noValidate
+                                sx={{
+                                    display: "grid",
+                                    gridTemplateColumns: { sm: "1fr" },
+                                    gap: 2,
+                                    marginBottom: "5em",
+                                    marginLeft: "2em",
+                                    justify: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <br></br>
+                                <TextField
+                                    name="title"
+                                    value={formState.title}
+                                    onChange={handleSearchChange}
+                                    label="Search Subtopics"
+                                    id="titleName"
+                                    variant="standard"
+                                ></TextField>
+
+
+                                {/* <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    style={{ maxWidth: "100px" }}
+                                >
+                                    search
+                                </Button> */}
+
+                                {searchedSubtopicData?.map((subtopic) => {
+                                    return (
+
+                                        <Nav.Link
+                                            key={subtopic._id}
+                                            as={Link}
+                                            to={`/resources/${subtopic._id}`}
+                                            className="subtopics p-2"
+                                            variant='dark'
+                                        >{subtopic.title}
+                                        </Nav.Link>
+
+                                    )
+                                })}
+
+
+                            </Box>
+
+                        </Grid>
+                    </Grid>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+
+                    <Grid direction="row" container >
+                        <Grid container spacing={0}>
+                            <Box
+                                component="form"
+                                // onSubmit={handleFormSubmit}
+                                noValidate
+                                sx={{
+                                    display: "grid",
+                                    gridTemplateColumns: { sm: "1fr" },
+                                    gap: 2,
+                                    marginBottom: "5em",
+                                    marginLeft: "2em",
+                                    justify: "center",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <br></br>
+                                <TextField
+                                    name="title"
+                                    value={formState.title}
+                                    onChange={handleSearchChange}
+                                    label="Search Resources"
+                                    id="titleName"
+                                    variant="standard"
+                                ></TextField>
+
+
+                                {/* <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    style={{ maxWidth: "100px" }}
+                                >
+                                    search
+                                </Button> */}
+
+                                {searchedResourceData?.map((resource) => {
+                                    return (
+
+                                        <Nav.Link
+                                            key={resource._id}
+                                            as={Link}
+                                            to={`/resources/${resource._id}`}
+                                            className="resources p-2"
+                                            variant='dark'
+                                        >{resource.title}
+                                        </Nav.Link>
+
+                                    )
+                                })}
+
+
+                            </Box>
+
+                        </Grid>
+                    </Grid>
+
+                </TabPanel>
+                {/* <TabPanel value={value} index={3}>
+                    {quickLinkData.map((quicklink) => {
+                        return (
+                            <>
+                                <ul>
+                                    <QuickLink quicklink={quicklink} />
+                                </ul>
+                            </>
+                        );
+                    })}
+
+                </TabPanel> */}
+                {/* 
+                <TabPanel value={value} index={4}>
+
+
+                    {postData.map((post) => {
+                        return (
+                            <Container key={post._id} fluid className="bg-dark p-1 mb-3">
+
+                                <Post post={post} />
+
+                            </Container>
+                        )
+
+                    })}
+
+                </TabPanel> */}
+
+            </Box>
         </Box>
+
     );
 }
 
-export default ContentCreator;
+export default Search;

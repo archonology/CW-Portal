@@ -188,8 +188,8 @@ query resource($_id: ID!) {
 `;
 
 export const QUERY_SEARCHED_TOPICS = gql`
-query topics($title: String!) {
-    topics(title: $title) {
+query searchedTopics($title: String!) {
+    searchedTopics(title: $title) {
       _id
       title
       text
@@ -220,8 +220,8 @@ query topics($title: String!) {
 `;
 
 export const QUERY_SEARCHED_SUBTOPIC = gql`
-query subtopic($title: String!) {
-    subtopic(title: $title) {
+query searchedSubtopics($title: String!) {
+    searchedSubtopics(title: $title) {
           _id
           title
           text
@@ -238,8 +238,8 @@ query subtopic($title: String!) {
 `;
 
 export const QUERY_SEARCHED_RESOURCE = gql`
-query resource($title: String!) {
-    resource(title: $title) {
+query searchedResources($title: String!) {
+    searchedResources(title: $title) {
       _id
       title
       text
