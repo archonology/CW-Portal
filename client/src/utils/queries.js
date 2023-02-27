@@ -186,3 +186,64 @@ query resource($_id: ID!) {
     }
 }
 `;
+
+export const QUERY_SEARCHED_TOPICS = gql`
+query topics($title: String!) {
+    topics(title: $title) {
+      _id
+      title
+      text
+      link
+      image
+      resources {
+        _id
+        link
+        title
+        text
+      }
+      subtopics {
+        _id        
+        text
+        title
+        image
+        link
+        resources {
+          _id
+          link
+          title
+          text
+        }
+
+      }
+    }
+  }
+`;
+
+export const QUERY_SEARCHED_SUBTOPIC = gql`
+query subtopic($title: String!) {
+    subtopic(title: $title) {
+          _id
+          title
+          text
+          image
+          link
+          resources {
+            _id
+            title
+            text
+            link
+          }
+        }
+}
+`;
+
+export const QUERY_SEARCHED_RESOURCE = gql`
+query resource($title: String!) {
+    resource(title: $title) {
+      _id
+      title
+      text
+      link
+    }
+}
+`;
