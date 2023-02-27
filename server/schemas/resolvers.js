@@ -35,16 +35,29 @@ const resolvers = {
 
         users: async () => {
             const userData = await User.find({})
-            .populate('favorites')
-            .populate('do')
-            .populate('doing')
-            .populate('done');
+                .populate('favorites')
+                .populate('do')
+                .populate('doing')
+                .populate('done');
 
             return userData;
         },
 
         topics: async () => {
-            const topicData = await Topic.find({}).sort({title: 1})
+            const topicData = await Topic.find({}).sort({ title: 1 })
+                .populate('resources')
+                .populate({
+                    path: 'subtopics',
+                    populate: {
+                        path: 'resources'
+                    }
+                });
+            return topicData;
+        },
+        // mongoose search is case sensitive, so need to manage fist letter being capitolized before it gets here
+        searchedTopics: async (parent, { title }) => {
+
+            const topicData = await Topic.find({ title: { $regex: new RegExp(title, "i") } }).sort({ title: 1 })
                 .populate('resources')
                 .populate({
                     path: 'subtopics',
