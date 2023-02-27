@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_SEARCHED_SUBTOPIC, QUERY_SEARCHED_TOPICS, QUERY_SEARCHED_RESOURCE } from '../utils/queries';
+import { QUERY_SEARCHED_SUBTOPIC, QUERY_SEARCHED_TOPICS, QUERY_SEARCHED_RESOURCE, QUERY_ME } from '../utils/queries';
 import Subtopic from "../components/OneSubtopic";
 import ResourceCard from "../components/OneResource";
 import Nav from 'react-bootstrap/Nav';
@@ -26,7 +26,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 6, paddingTop: 0 }}>
+                <Box sx={{ padding: 3, paddingTop: 0 }}>
                     {children}
                 </Box>
             )}
@@ -63,6 +63,10 @@ const Search = () => {
     const { loading: resourceLoading, error: resourceError, data: resourceData } = useQuery(QUERY_SEARCHED_RESOURCE, { variables: { ...formState } });
 
     const searchedResourceData = resourceData?.searchedResources || [];
+
+    const { loading: loadingMe, error: errorMe, data: dataMe } = useQuery(QUERY_ME);
+
+    const userData = dataMe?.me || {};
 
     // const { loading: quickLinkLoading, error: errQuick, data: dataQuickLink } = useQuery(QUERY_ALL_QUICKLINKS);
 
@@ -121,10 +125,9 @@ const Search = () => {
     // });
 
     return (
-        <Box sx={{ display: 'flex' }}>
-
-            <Box sx={{ width: '100%', marginTop: 2 }}>
-                <Box>
+        <Box sx={{ width: '100%' }}>
+            <Box>
+          
 
                     <Tabs
                         sx={{ alignContent: "center" }}
@@ -143,7 +146,7 @@ const Search = () => {
                             <Tab label="Posts" {...a11yProps(4)} /> */}
                     </Tabs>
 
-                </Box>
+             
                 <TabPanel value={value} index={0}>
                     <Grid direction="row" container >
                         <Grid container spacing={0}>
@@ -155,8 +158,6 @@ const Search = () => {
                                     display: "grid",
                                     gridTemplateColumns: { sm: "1fr" },
                                     gap: 2,
-                                    marginBottom: "5em",
-                                    marginLeft: "2em",
                                     justify: "center",
                                     alignItems: "center",
                                 }}
@@ -169,6 +170,7 @@ const Search = () => {
                                     label="Search Topics"
                                     id="titleName"
                                     variant="standard"
+                                    sx={{ width: '325px' }}
                                 ></TextField>
 
 
@@ -204,18 +206,19 @@ const Search = () => {
                     </Grid>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Grid direction="row" container sx={{ padding: "1rem" }}>
-                        <Grid container spacing={0} justifyContent="center">
+                    {/* <Grid direction="row" container >
+                        <Grid container spacing={0}> */}
                             <Box
                                 component="form"
                                 // onSubmit={handleFormSubmit}
+                            
                                 noValidate
                                 sx={{
                                     display: "grid",
-                                    gridTemplateColumns: { sm: "1fr" },
+                                    // gridTemplateColumns: { sm: "1fr" },
                                     gap: 2,
-                                    marginBottom: "5em",
-                                    marginLeft: "2em",
+                                    // marginBottom: "5em",
+                                    // marginLeft: "2em",
                                     justify: "center",
                                     alignItems: "center",
                                 }}
@@ -228,9 +231,11 @@ const Search = () => {
                                     label="Search Subtopics"
                                     id="titleName"
                                     variant="standard"
+                                    sx={{ width: '325px' }}
                                 ></TextField>
+                                <br></br>
 
-
+                            </Box>
                                 {/* <Button
                                     type="submit"
                                     variant="contained"
@@ -260,16 +265,16 @@ const Search = () => {
                                 })}
 
 
-                            </Box>
-
+{/* 
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <Box
                         component="form"
                         // onSubmit={handleFormSubmit}
                         noValidate
+                        sx={{ paddingBottom: "1rem" }}
                     >
                         <br></br>
                         <TextField
@@ -279,42 +284,21 @@ const Search = () => {
                             label="Search Resources"
                             id="titleName"
                             variant="standard"
+                            sx={{ width: '325px' }}
                         ></TextField>
 
                     </Box>
+
                     <Grid direction="row" container sx={{ padding: "1rem" }}>
                         <Grid container spacing={0} justifyContent="center">
 
-                            {/* <Button
-                                    type="submit"
-                                    variant="contained"
-                                    color="primary"
-                                    style={{ maxWidth: "100px" }}
-                                >
-                                    search
-                                </Button> */}
-
-
                             {searchedResourceData?.map((resource) => {
                                 return (
-
                                     <>
-                                        <ResourceCard resource={resource} />
+                                        <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
                                     </>
-                                    // <Nav.Link
-                                    //     key={resource._id}
-                                    //     as={Link}
-                                    //     to={`/resources/${resource._id}`}
-                                    //     className="resources p-2"
-                                    //     variant='dark'
-                                    // >{resource.title}
-                                    // </Nav.Link>
-
                                 )
                             })}
-
-
-
 
                         </Grid>
                     </Grid>

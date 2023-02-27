@@ -18,7 +18,7 @@ import Avatar from '@mui/material/Avatar';
 
 
 import ResourceCard from "../OneResource";
-import { Grid, IconButton } from "@mui/material";
+import { Grid, IconButton, Box } from "@mui/material";
 import { DELETE_SUBTOPIC } from "../../utils/mutations";
 
 
@@ -96,110 +96,110 @@ const Subtopic = ({ subtopic }) => {
 
     return (
         <>
+                <Stack spacing={0} sx={{marginBottom: 2}}>
 
-            <Stack spacing={0}>
+                    <Accordion key={subtopic._id} expanded={expanded === `panel${subtopic._id}`} onChange={handleAccordChange(`panel${subtopic._id}`)} sx={{ padding: 3, opacity: .93 }}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1bh-content"
+                            id="panel1bh-header"
+                        >
+                            <Avatar
+                                alt={"T"}
+                                src={subtopic.image}
+                                sx={{ width: 75, height: 75, marginRight: 2 }}
+                                className="avatar"
+                            />
 
-                <Accordion key={subtopic._id} expanded={expanded === `panel${subtopic._id}`} onChange={handleAccordChange(`panel${subtopic._id}`)} sx={{ padding: 3, opacity: .93 }}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1bh-content"
-                        id="panel1bh-header"
-                    >
-                        <Avatar
-                            alt={"T"}
-                            src={subtopic.image}
-                            sx={{ width: 75, height: 75, marginRight: 2 }}
-                            className="avatar"
-                        />
+                            <Typography sx={{ width: '100%', flexShrink: 0, textAlign: "left", fontSize: 'larger', paddingRight: 15, marginTop: 1 }} className="subtopic-headers">
+                                {subtopic.title}
+                            </Typography>
 
-                      <Typography sx={{ width: '100%', flexShrink: 0, textAlign: "left", fontSize: 'larger', paddingRight: 15, marginTop: 1 }} className="subtopic-headers">
-                            {subtopic.title}
-                        </Typography>
+                            {/* <Typography sx={{ color: 'text.secondary', paddingRight: 2 }} >{subtopic.text}</Typography> */}
 
-                        {/* <Typography sx={{ color: 'text.secondary', paddingRight: 2 }} >{subtopic.text}</Typography> */}
+                        </AccordionSummary>
 
-                    </AccordionSummary>
+                        <AccordionDetails key={subtopic._id} >
+                            {Auth.adminLoggedIn() ? (
+                                <>
+                                    {/* the admin edit button set */}
+                                    <Tooltip title="Add to a Topic">
+                                        <IconButton onClick={handleClickOpenTopics}>
+                                            <AddCircleIcon sx={{ color: "#00e676" }} />
+                                        </IconButton>
+                                    </Tooltip>
 
-                    <AccordionDetails key={subtopic._id} >
-                        {Auth.adminLoggedIn() ? (
+                                    {/* run the dialog, manage collapse */}
+                                    <Dialog open={openTopic} onClose={handleCloseTopics}>
+                                        <SubToTopicDialog subtopic={subtopic} />
+                                    </Dialog>
+
+                                    <Tooltip title="Remove from a Topic">
+                                        <IconButton onClick={handleClickOpenXsubtopics}>
+                                            <RemoveCircleIcon sx={{ color: "white" }} />
+                                        </IconButton>
+                                    </Tooltip>
+
+                                    <Dialog open={openXsubtopic} onClose={handleCloseXsubtopics}>
+                                        <XSubtopicFromTopicDialog subtopic={subtopic} />
+                                    </Dialog>
+
+                                    <Tooltip title="Edit">
+                                        <IconButton onClick={handleClickOpenSubtopics}>
+                                            <EditIcon sx={{ color: "#ffcf33" }} />
+                                        </IconButton>
+                                    </Tooltip>
+
+                                    <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
+                                        <EditSubtopicDialog subtopic={subtopic} />
+                                    </Dialog>
+
+                                    <Tooltip title="Delete Resource">
+                                        <IconButton onClick={() => handleDelete(subtopic._id)}>
+                                            <DeleteIcon
+                                                className="custom-link"
+                                                sx={{ variant: "filled", color: "#b2102f" }}
+                                            />
+                                        </IconButton>
+                                    </Tooltip>
+
+                                </>
+                            ) : (
+                                <></>
+
+                            )}
                             <>
-                                {/* the admin edit button set */}
-                                <Tooltip title="Add to a Topic">
-                                    <IconButton onClick={handleClickOpenTopics}>
-                                        <AddCircleIcon sx={{ color: "#00e676" }} />
-                                    </IconButton>
-                                </Tooltip>
+                                <Grid direction="row" container sx={{ padding: "1rem" }}>
+                                    <Grid container spacing={1} justifyContent="center">
 
-                                {/* run the dialog, manage collapse */}
-                                <Dialog open={openTopic} onClose={handleCloseTopics}>
-                                    <SubToTopicDialog subtopic={subtopic} />
-                                </Dialog>
+                                        {subtopic?.resources.map((resource) => {
+                                            console.log(resource);
+                                            return (
+                                                <>
+                                                    <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
+                                                </>
+                                            )
+                                        })}
 
-                                <Tooltip title="Remove from a Topic">
-                                    <IconButton onClick={handleClickOpenXsubtopics}>
-                                        <RemoveCircleIcon sx={{ color: "white" }} />
-                                    </IconButton>
-                                </Tooltip>
+                                    </Grid>
+                                </Grid>
 
-                                <Dialog open={openXsubtopic} onClose={handleCloseXsubtopics}>
-                                    <XSubtopicFromTopicDialog subtopic={subtopic} />
-                                </Dialog>
 
-                                <Tooltip title="Edit">
-                                    <IconButton onClick={handleClickOpenSubtopics}>
-                                        <EditIcon sx={{ color: "#ffcf33" }} />
-                                    </IconButton>
-                                </Tooltip>
+                                <Grid direction="row" container sx={{ padding: "1rem" }}>
+                                    <Grid container spacing={0} justifyContent="center">
 
-                                <Dialog open={openSubtopic} onClose={handleCloseSubtopics}>
-                                    <EditSubtopicDialog subtopic={subtopic} />
-                                </Dialog>
 
-                                <Tooltip title="Delete Resource">
-                                    <IconButton onClick={() => handleDelete(subtopic._id)}>
-                                        <DeleteIcon
-                                            className="custom-link"
-                                            sx={{ variant: "filled", color: "#b2102f" }}
-                                        />
-                                    </IconButton>
-                                </Tooltip>
-
+                                    </Grid>
+                                </Grid>
                             </>
-                        ) : (
-                            <></>
 
-                        )}
-                        <>
-                            <Grid direction="row" container sx={{ padding: "1rem" }}>
-                                <Grid container spacing={1} justifyContent="center">
+                        </AccordionDetails>
+                    </Accordion>
 
-                                    {subtopic?.resources.map((resource) => {
-                                        console.log(resource);
-                                        return (
-                                            <>
-                                                <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
-                                            </>
-                                        )
-                                    })}
-
-                                </Grid>
-                            </Grid>
-
-
-                            <Grid direction="row" container sx={{ padding: "1rem" }}>
-                                <Grid container spacing={0} justifyContent="center">
-
-
-                                </Grid>
-                            </Grid>
-                        </>
-
-                    </AccordionDetails>
-                </Accordion>
-
-            </Stack>
-
+                </Stack>
+        
         </>
+
     );
 };
 
