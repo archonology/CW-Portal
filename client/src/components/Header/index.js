@@ -51,8 +51,9 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="justify-content-end flex-grow-1 pe-3">
 
-              <Nav.Link onClick={handleShow}>Resources</Nav.Link>
+              <Nav.Link onClick={handleShow}>Topics</Nav.Link>
               <Nav.Link onClick={handleShow2}>Quick Links</Nav.Link>
+              <Nav.Link as={Link} to="/search">Search</Nav.Link>
 
               {Auth.loggedIn() || Auth.adminLoggedIn() ? (
 
@@ -74,7 +75,7 @@ function Header() {
 
           <Offcanvas show={show} onHide={handleClose} className="bg-dark variant-white" placement="end">
             <Offcanvas.Header closeButton closeVariant="white">
-              <Offcanvas.Title>Resources</Offcanvas.Title>
+              <Offcanvas.Title>Topics</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
 

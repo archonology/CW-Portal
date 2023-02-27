@@ -4,8 +4,8 @@
   --primary: rgb(228, 223, 218);
   --lightblue: rgb(143, 214, 249);
   --blue: rgb(119, 196, 234);
-  --lightHouse: rgb(231, 106, 71);
-  --lighterHouse: rgb(234, 140, 119);
+  --lightHouse: rgb(251, 206, 56);
+  --lighterHouse: rgb(253, 221, 115);
   --beacon: rgb(132, 203, 114);
   --lightbeacon: rgb(165, 212, 153);
   --violet: rgb(203, 123, 250);
@@ -162,6 +162,10 @@ img {
   color: var(--lightviolet);
 }
 
+.resources {
+  color: var(--lightbeacon);
+}
+
 .quicklink {
   color: var(--blue);
 }
@@ -180,6 +184,14 @@ img {
 
 .topics:hover {
   color: var(--lightblue);
+}
+
+.subtopics:hover {
+  color: var(--violet);
+}
+
+.resources:hover {
+  color: var(--beacon);
 }
 
 .topics2:hover {

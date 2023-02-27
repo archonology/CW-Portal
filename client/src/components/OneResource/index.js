@@ -3,13 +3,10 @@ import { useState } from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { IconButton, Divider, Button } from '@mui/material';
+import { IconButton, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import PublicIcon from '@mui/icons-material/Public';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -40,7 +37,6 @@ import Dialog from "@mui/material/Dialog";
 import Auth from "../../utils/auth";
 import XResourceFromSubtopicDialog from "../XResourceFromSubtopicDialog";
 import RemoveCircle from "@mui/icons-material/RemoveCircle";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import LooksOneIcon from '@mui/icons-material/LooksOne';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
@@ -89,28 +85,28 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
 
     // handle adding to lists
     const [addResourceToFavs, { e }] = useMutation(ADD_RESOURCE_TO_FAVS, {
-        refetchQueries: [{ query: QUERY_ME}]
+        refetchQueries: [{ query: QUERY_ME }]
     });
     const [addResourceToDo] = useMutation(ADD_RESOURCE_TO_DO, {
-        refetchQueries: [{ query: QUERY_ME}]
+        refetchQueries: [{ query: QUERY_ME }]
     });
     const [addResourceToDoing] = useMutation(ADD_RESOURCE_TO_DOING, {
-        refetchQueries: [{ query: QUERY_ME}]
+        refetchQueries: [{ query: QUERY_ME }]
     });
     const [addResourceToDone] = useMutation(ADD_RESOURCE_TO_DONE, {
-        refetchQueries: [{ query: QUERY_ME}]
+        refetchQueries: [{ query: QUERY_ME }]
     });
     const [removeResourceFromFavs] = useMutation(REMOVE_RESOURCE_FROM_FAVS, {
-        refetchQueries: [{ query: QUERY_ME}]
+        refetchQueries: [{ query: QUERY_ME }]
     });
     const [removeResourceFromDo] = useMutation(REMOVE_RESOURCE_FROM_TODO, {
-        refetchQueries: [{ query: QUERY_ME}]
+        refetchQueries: [{ query: QUERY_ME }]
     });
     const [removeResourceFromDoing] = useMutation(REMOVE_RESOURCE_FROM_DOING, {
-        refetchQueries: [{ query: QUERY_ME}]
+        refetchQueries: [{ query: QUERY_ME }]
     });
     const [removeResourceFromDone] = useMutation(REMOVE_RESOURCE_FROM_DONE, {
-        refetchQueries: [{ query: QUERY_ME}]
+        refetchQueries: [{ query: QUERY_ME }]
     });
 
     // handle delete resource and refetch minus the deleted resource
@@ -290,20 +286,18 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {resource.text}<br></br><span><Button
-                    href={resource.link}
-                    target={'_blank'}
-                    rel={'nonreferrer'}
-                    variant="outlined"
-                    color="success"
-                    sx={{ marginTop: 2 }}
-                    size="small" >Visit the Site</Button></span>
+                            href={resource.link}
+                            target={'_blank'}
+                            rel={'nonreferrer'}
+                            variant="outlined"
+                            color="success"
+                            sx={{ marginTop: 2 }}
+                            size="small" >Visit the Site</Button></span>
                     </Typography>
                 </CardContent>
                 {/* <Divider variant="middle" /> */}
 
                 <CardActions>
- 
-
 
 
                     {Auth.loggedIn() ? (

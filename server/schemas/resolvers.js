@@ -35,16 +35,16 @@ const resolvers = {
 
         users: async () => {
             const userData = await User.find({})
-            .populate('favorites')
-            .populate('do')
-            .populate('doing')
-            .populate('done');
+                .populate('favorites')
+                .populate('do')
+                .populate('doing')
+                .populate('done');
 
             return userData;
         },
 
         topics: async () => {
-            const topicData = await Topic.find({}).sort({title: 1})
+            const topicData = await Topic.find({}).sort({ title: 1 })
                 .populate('resources')
                 .populate({
                     path: 'subtopics',
@@ -53,6 +53,33 @@ const resolvers = {
                     }
                 });
             return topicData;
+        },
+
+        // the RegExp in the search queries below handles case sensitive default of Mongoose
+        searchedTopics: async (parent, { title }) => {
+
+            const topicData = await Topic.find({ title: { $regex: new RegExp(title, "i") } }).sort({ title: 1 })
+                .populate('resources')
+                .populate({
+                    path: 'subtopics',
+                    populate: {
+                        path: 'resources'
+                    }
+                });
+            return topicData;
+        },
+
+        searchedSubtopics: async (parent, { title }) => {
+
+            const subtopicData = await Subtopic.find({ title: { $regex: new RegExp(title, "i") } }).sort({ title: 1 })
+                .populate('resources');
+            return subtopicData;
+        },
+
+        searchedResources: async (parent, { title }) => {
+
+            const resourceData = await Resource.find({ title: { $regex: new RegExp(title, "i") } }).sort({ title: 1 });
+            return resourceData;
         },
 
         topic: async (parent, { _id }) => {
