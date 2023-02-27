@@ -8,7 +8,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SEARCHED_SUBTOPIC, QUERY_SEARCHED_TOPICS, QUERY_SEARCHED_RESOURCE } from '../utils/queries';
-
+import Subtopic from "../components/OneSubtopic";
+import ResourceCard from "../components/OneResource";
 import Nav from 'react-bootstrap/Nav';
 
 
@@ -203,8 +204,8 @@ const Search = () => {
                     </Grid>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <Grid direction="row" container >
-                        <Grid container spacing={0}>
+                    <Grid direction="row" container sx={{ padding: "1rem" }}>
+                        <Grid container spacing={0} justifyContent="center">
                             <Box
                                 component="form"
                                 // onSubmit={handleFormSubmit}
@@ -242,14 +243,18 @@ const Search = () => {
                                 {searchedSubtopicData?.map((subtopic) => {
                                     return (
 
-                                        <Nav.Link
-                                            key={subtopic._id}
-                                            as={Link}
-                                            to={`/resources/${subtopic._id}`}
-                                            className="subtopics p-2"
-                                            variant='dark'
-                                        >{subtopic.title}
-                                        </Nav.Link>
+                                        // <Nav.Link
+                                        //     key={subtopic._id}
+                                        //     as={Link}
+                                        //     to={`/subtopic/${subtopic._id}`}
+                                        //     className="subtopics p-2"
+                                        //     variant='dark'
+                                        // >{subtopic.title}
+                                        // </Nav.Link>
+
+                                        <>
+                                            <Subtopic subtopic={subtopic} />
+                                        </>
 
                                     )
                                 })}
@@ -261,35 +266,26 @@ const Search = () => {
                     </Grid>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
+                    <Box
+                        component="form"
+                        // onSubmit={handleFormSubmit}
+                        noValidate
+                    >
+                        <br></br>
+                        <TextField
+                            name="title"
+                            value={formState.title}
+                            onChange={handleSearchChange}
+                            label="Search Resources"
+                            id="titleName"
+                            variant="standard"
+                        ></TextField>
 
-                    <Grid direction="row" container >
-                        <Grid container spacing={0}>
-                            <Box
-                                component="form"
-                                // onSubmit={handleFormSubmit}
-                                noValidate
-                                sx={{
-                                    display: "grid",
-                                    gridTemplateColumns: { sm: "1fr" },
-                                    gap: 2,
-                                    marginBottom: "5em",
-                                    marginLeft: "2em",
-                                    justify: "center",
-                                    alignItems: "center",
-                                }}
-                            >
-                                <br></br>
-                                <TextField
-                                    name="title"
-                                    value={formState.title}
-                                    onChange={handleSearchChange}
-                                    label="Search Resources"
-                                    id="titleName"
-                                    variant="standard"
-                                ></TextField>
+                    </Box>
+                    <Grid direction="row" container sx={{ padding: "1rem" }}>
+                        <Grid container spacing={0} justifyContent="center">
 
-
-                                {/* <Button
+                            {/* <Button
                                     type="submit"
                                     variant="contained"
                                     color="primary"
@@ -298,23 +294,27 @@ const Search = () => {
                                     search
                                 </Button> */}
 
-                                {searchedResourceData?.map((resource) => {
-                                    return (
 
-                                        <Nav.Link
-                                            key={resource._id}
-                                            as={Link}
-                                            to={`/resources/${resource._id}`}
-                                            className="resources p-2"
-                                            variant='dark'
-                                        >{resource.title}
-                                        </Nav.Link>
+                            {searchedResourceData?.map((resource) => {
+                                return (
 
-                                    )
-                                })}
+                                    <>
+                                        <ResourceCard resource={resource} />
+                                    </>
+                                    // <Nav.Link
+                                    //     key={resource._id}
+                                    //     as={Link}
+                                    //     to={`/resources/${resource._id}`}
+                                    //     className="resources p-2"
+                                    //     variant='dark'
+                                    // >{resource.title}
+                                    // </Nav.Link>
+
+                                )
+                            })}
 
 
-                            </Box>
+
 
                         </Grid>
                     </Grid>

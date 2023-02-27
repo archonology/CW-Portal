@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from "./pages/Home";
 import OneTopic from "./components/OneTopic";
+import Subtopic from "./components/OneSubtopic";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -106,6 +107,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/resources/:_id" element={<OneTopic />} />
+              <Route path="/subtopic/:_id" element={<Subtopic />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/search" element={<Search />} />
               <Route path="/contentcreator" element={<ContentCreator />} />
