@@ -76,6 +76,8 @@ const typeDefs = gql`
         admins: [Admin]
         topics: [Topic]
         searchedTopics(title: String!): [Topic]
+        searchedSubtopics(title: String!): [Subtopic]
+        searchedResources(title: String!): [Resource]
         subtopics: [Subtopic]
         resources: [Resource]
         quicklinks: [QuickLink]

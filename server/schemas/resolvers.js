@@ -54,7 +54,8 @@ const resolvers = {
                 });
             return topicData;
         },
-        // mongoose search is case sensitive, so need to manage fist letter being capitolized before it gets here
+
+        // the RegExp in the search queries below handles case sensitive default of Mongoose
         searchedTopics: async (parent, { title }) => {
 
             const topicData = await Topic.find({ title: { $regex: new RegExp(title, "i") } }).sort({ title: 1 })
@@ -66,6 +67,19 @@ const resolvers = {
                     }
                 });
             return topicData;
+        },
+
+        searchedSubtopics: async (parent, { title }) => {
+
+            const subtopicData = await Subtopic.find({ title: { $regex: new RegExp(title, "i") } }).sort({ title: 1 })
+                .populate('resources');
+            return subtopicData;
+        },
+
+        searchedResources: async (parent, { title }) => {
+
+            const resourceData = await Resource.find({ title: { $regex: new RegExp(title, "i") } }).sort({ title: 1 });
+            return resourceData;
         },
 
         topic: async (parent, { _id }) => {
