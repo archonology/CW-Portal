@@ -55,7 +55,7 @@ function Header() {
               <Nav.Link onClick={handleShow2}>Quick Links</Nav.Link>
               <Nav.Link as={Link} to="/search">Search</Nav.Link>
 
-              {Auth.loggedIn() || Auth.adminLoggedIn() ? (
+              {Auth.loggedIn() ? (
 
                 <>
                   <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
@@ -69,6 +69,7 @@ function Header() {
 
                 </>
               )}
+
             </Nav>
           </Navbar.Collapse>
 

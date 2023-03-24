@@ -46,6 +46,20 @@ function Footer() {
               <Nav className="justify-content-center flex-grow-1 pe-3">
 
                 {/* <Nav.Link href="#top">Return to Top |</Nav.Link> */}
+                {Auth.adminLoggedIn() ? (
+
+                  <>
+                    <Nav.Link as={Link} to="/contentcreator" className="creator">Content Creator</Nav.Link>
+                    <Nav.Link as={Link} to="/" onClick={Auth.adminLogout} className="logging" >Admin Logout</Nav.Link>
+
+                  </>
+                ) : (
+                  <>
+                    {/* <Nav.Link as={Link} to="/login">Content</Nav.Link>
+                  <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link> */}
+
+                  </>
+                )}
 
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
                 <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link>
