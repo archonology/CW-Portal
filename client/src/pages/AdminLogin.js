@@ -82,6 +82,7 @@ const AdminLogin = () => {
             Auth.adminLogin(data.loginAdmin.adminToken);
         } catch (error) {
             console.error(error);
+            setErrorMessage(`There was a problem with your password or email address. Please make sure you have the correct email and password entered, then try again.`);
         }
         // clear form values
         setLoginState({

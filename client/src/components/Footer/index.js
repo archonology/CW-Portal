@@ -55,8 +55,6 @@ function Footer() {
                   </>
                 ) : (
                   <>
-                    {/* <Nav.Link as={Link} to="/login">Content</Nav.Link>
-                  <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link> */}
 
                   </>
                 )}

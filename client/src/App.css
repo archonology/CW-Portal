@@ -138,11 +138,6 @@ img {
   background-color: var(--lightblue);
 }
 
-/* .topic-headers:hover {
-  color: var(--lightbeacon);
-  text-decoration: none;
-} */
-
 .subtopic-headers:hover {
   color: var(--violet);
 }
