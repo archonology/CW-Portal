@@ -10,6 +10,12 @@ import { Grid, Paper } from "@mui/material";
 import ToDo from "../components/ToDo";
 import Doing from "../components/Doing";
 import Done from "../components/Done";
+import Container from 'react-bootstrap/Container';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LooksOneIcon from '@mui/icons-material/LooksOne';
+import LooksTwoIcon from '@mui/icons-material/LooksTwo';
+import Looks3Icon from '@mui/icons-material/Looks3';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,6 +57,10 @@ const Dashboard = () => {
 
   return (
     <>
+      <Container fluid className="text-center p-5 mt-3 box">
+        <h4>Welcome to your dashboard!</h4>
+        <p className="">While you're logged in you have access to your favorites and progess lists. Simply click the  <FavoriteIcon sx={{ color: "#f6685e" }} /> <span className="">heart</span> to add to favorites, the <LooksOneIcon sx={{ color: "#ffcd38" }} /> one button to add to <span className="one">To-do</span> , the <LooksTwoIcon sx={{ color: "#33bfff" }} /> two button to add to <span className="two">Doing</span>, and the <Looks3Icon sx={{ color: "#ff9800" }} /> three button to add to <span className="three">Done</span>. Click the button again to remove it from a list.</p>
+      </Container>
       <Box sx={{ width: '100%' }}>
         <Box>
           {Auth.adminLoggedIn() ? (

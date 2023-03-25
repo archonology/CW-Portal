@@ -134,6 +134,22 @@ img {
   color: var(--violet);
 }
 
+.one {
+  color: #ffcd38;
+}
+
+.two {
+  color: #33bfff;
+}
+
+.three {
+  color: #ff9800;
+}
+
+.heart {
+  color: #f6685e;
+}
+
 .search:hover {
   background-color: var(--lightblue);
 }
