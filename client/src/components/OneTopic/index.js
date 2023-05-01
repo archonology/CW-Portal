@@ -190,18 +190,18 @@ const OneTopic = ({ }) => {
                 </Box>
 
                 <TabPanel value={value} index={0}>
-                
-                        {/* see all subtopics for one topic */}
-                        {topicData?.subtopics?.map((subtopic) => {
-                            return (
-                                <>
-                                    <Subtopic
-                                        subtopic={subtopic}
-                                    />
-                                </>
-                            )
-                        })}
-                   
+
+                    {/* see all subtopics for one topic */}
+                    {topicData?.subtopics?.map((subtopic) => {
+                        return (
+                            <>
+                                <Subtopic
+                                    subtopic={subtopic}
+                                />
+                            </>
+                        )
+                    })}
+
                 </TabPanel>
                 <TabPanel value={value} index={1}>
 

@@ -5,6 +5,7 @@
 https://www.childwelfareportal.org/
 
 ## Screenshot
+[Video Walkthrough](https://youtu.be/LM2uZr6vTMc)
 ![Sreenshot](./client/src/media/Screenshot%202023-01-24%20at%209.35.13%20PM.png)    
 ## Table of Contents:
 #### [Description](#description)
