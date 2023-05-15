@@ -178,7 +178,8 @@ const OneTopic = ({ }) => {
                         value={value}
                         onChange={handleChange}
                         textColor="inherit"
-                        variant="scrollable"
+                        // variant="fullWidth"
+                        centered
                         scrollButtons
                         allowScrollButtonsMobile
                         aria-label="scrollable Dashboard List Tabs"
