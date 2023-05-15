@@ -271,7 +271,7 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
 
     return (
         <>
-            <Card key={resource._id} sx={{ width: "325px", margin: 2, boxShadow: 10, backgroundColor: "#212121" }}  >
+            <Card key={resource._id} sx={{ width: "335px", maxHeight: "450px", margin: 1, boxShadow: 10, padding: 1.5, backgroundColor: "#212121" }}  >
                 {/* client requested dropping photos for resources */}
                 {/* <CardMedia
                     component="img"
@@ -281,23 +281,25 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
                     className="bgresource"
                 /> */}
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography gutterBottom variant="h6" component="div">
                         {resource.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {resource.text}<br></br><span><Button
-                            href={resource.link}
-                            target={'_blank'}
-                            rel={'nonreferrer'}
-                            variant="outlined"
-                            color="success"
-                            sx={{ marginTop: 2 }}
-                            size="small" >Visit the Site</Button></span>
+                    <hr/>
+                    <Typography color="text.secondary" sx={{ overflow: "auto", height: "165px" }}>
+                        {resource.text}<br></br>
                     </Typography>
+                    <Button
+                        href={resource.link}
+                        target={'_blank'}
+                        rel={'nonreferrer'}
+                        variant="text"
+                        color="secondary"
+                        sx={{ marginTop: 2, marginBottom: -3 }}
+                        size="medium" >Visit Resource</Button>
                 </CardContent>
                 {/* <Divider variant="middle" /> */}
 
-                <CardActions>
+                <CardActions sx={{}}>
 
 
                     {Auth.loggedIn() ? (
