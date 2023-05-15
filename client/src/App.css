@@ -106,6 +106,11 @@ a {
 
 }
 
+.creator {
+  font-weight: bold;
+
+}
+
 .avatar {
   background-image: url("../public/Vector-Multicolor-Flower-Design.jpg");
   background-position: 30%;
@@ -129,14 +134,25 @@ img {
   color: var(--violet);
 }
 
+.one {
+  color: #ffcd38;
+}
+
+.two {
+  color: #33bfff;
+}
+
+.three {
+  color: #ff9800;
+}
+
+.heart {
+  color: #f6685e;
+}
+
 .search:hover {
   background-color: var(--lightblue);
 }
-
-/* .topic-headers:hover {
-  color: var(--lightbeacon);
-  text-decoration: none;
-} */
 
 .subtopic-headers:hover {
   color: var(--violet);
@@ -144,6 +160,10 @@ img {
 
 .logging:hover {
   color: var(--lightblue);
+}
+
+.creator:hover {
+  color: var(--lightviolet);
 }
 
 .topics {

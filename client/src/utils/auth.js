@@ -66,13 +66,18 @@ class AuthService {
   adminLogin(adminToken) {
     // Saves admin token to localStorage
     localStorage.setItem('admin_id_token', adminToken);
-    window.location.assign('/dashboard');
+    window.location.assign('/contentcreator');
 
   }
 
   logout() {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
+    // this will reload the page and reset the state of the application
+    window.location.assign('/home');
+  }
+
+  adminLogout() {
     localStorage.removeItem('admin_id_token');
     // this will reload the page and reset the state of the application
     window.location.assign('/home');
