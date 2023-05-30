@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Auth from "../utils/auth";
 import Favorites from "../components/Favorites";
+import UserLinks from "../components/UserQuickLinks";
 import { Link } from 'react-router-dom';
-import { Grid, Paper } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import ToDo from "../components/ToDo";
 import Doing from "../components/Doing";
 import Done from "../components/Done";
@@ -16,6 +18,11 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LooksOneIcon from '@mui/icons-material/LooksOne';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
+// import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import { CREATE_USER_QUICKLINK } from "../utils/mutations";
+import { QUERY_ME } from "../utils/queries";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,10 +57,53 @@ function a11yProps(index) {
 }
 
 const Dashboard = () => {
+
+  const [createUserQuickLink] = useMutation(CREATE_USER_QUICKLINK, {
+    refetchQueries: [{ query: QUERY_ME }]
+  });
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const [linkTitle, setLinkTitle] = useState('');
+  const [linkAddress, setLinkAddress] = useState('');
+
+  const handleInputChange = (e) => {
+    let { target } = e;
+    let inputType = target.name;
+    let inputValue = target.value;
+    console.log(inputValue);
+
+    if (inputType === 'linkTitle') {
+      setLinkTitle(inputValue);
+    } else if (inputType === 'linkAddress') {
+      setLinkAddress(inputValue);
+    }
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    handleClose();
+
+    console.log('hello?');
+    try {
+      const { data } = await createUserQuickLink({
+          variables: {
+            title: linkTitle,
+            link: linkAddress }
+        });
+      
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <>
@@ -106,11 +156,76 @@ const Dashboard = () => {
             </Grid>
           </Grid>
         </TabPanel>
+
         <TabPanel value={value} index={1}>
           <Grid direction="row" container sx={{ padding: "1rem" }}>
             <Grid container spacing={0} justifyContent="center">
 
-              <Favorites />
+              <Button variant="primary" onClick={handleShow}>
+                Create a Custom Quick Link
+              </Button>
+
+              <Modal show={show} onHide={handleClose} className="modal">
+                <Modal.Header closeButton>
+                  <Modal.Title>Custom Quick Link</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form
+                    // onSubmit={handleFormSubmit}
+                  >
+                    <Form.Group className="mb-3" controlId="form.ControlInput1">
+                      <Form.Label>Quick Link Title</Form.Label>
+                      <Form.Control
+                        type="title"
+                        name="linkTitle"
+                        value={linkTitle}
+                        onChange={handleInputChange}
+                        placeholder="Title"
+                        autoFocus
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="form.link"
+                    >
+                      <Form.Label>Link</Form.Label>
+                      <Form.Control
+                        type="link"
+                        name="linkAddress"
+                        value={linkAddress}
+                        onChange={handleInputChange}
+                        placeholder="Link address"
+                      />
+                    </Form.Group>
+                  </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="contained"
+                    color='error'
+                    sx={{ m: 1 }}
+                    onClick={handleClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={{ m: 1 }}
+                    onClick={handleFormSubmit}
+                    type="submit"
+                    id="submit"
+                    value='submit'
+                  >
+                    Save Quick Link
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+
+              <Grid container spacing={0} justifyContent="center" className="userLinks">
+   
+                <UserLinks />
+
+              </Grid>
+          
 
             </Grid>
           </Grid>

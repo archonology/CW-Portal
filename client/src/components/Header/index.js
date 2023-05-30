@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import Auth from "../../utils/auth";
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_TOPICS, QUERY_ALL_QUICKLINKS } from "../../utils/queries";
+import { QUERY_ALL_TOPICS, QUERY_ALL_QUICKLINKS, QUERY_ME } from "../../utils/queries";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';

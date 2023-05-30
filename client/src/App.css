@@ -194,6 +194,10 @@ img {
   color: var(--beacon);
 }
 
+.userLinks {
+  margin-top: 1em;
+}
+
 .quicklink:hover {
   color: var(--lightblue);
 }

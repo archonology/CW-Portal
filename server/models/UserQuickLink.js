@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const quickLinkSchema = new Schema(
+const userQuickLinkSchema = new Schema(
     {
         title: {
             type: String,
@@ -12,6 +12,5 @@ const quickLinkSchema = new Schema(
     }
 );
 
-const QuickLink = model('QuickLink', quickLinkSchema);
 
-module.exports = QuickLink;
+module.exports = userQuickLinkSchema;

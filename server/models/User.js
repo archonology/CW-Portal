@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-const quickLinkSchema = require("./QuickLink")
+const userQuickLinkSchema = require('./UserQuickLink');
 
 
 // define user schema
@@ -44,7 +44,7 @@ const userSchema = new Schema(
         },
         ],
         // user custom quickLinks
-        userQuickLinks: [quickLinkSchema],
+        userQuickLinks: [userQuickLinkSchema],
     }
 );
 

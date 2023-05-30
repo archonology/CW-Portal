@@ -19,7 +19,7 @@ const typeDefs = gql`
         do: [Resource]
         doing: [Resource]
         done: [Resource]
-        userQuickLinks: [QuickLink]
+        userQuickLinks: [UserQuickLink]
     }
 
     type Topic {
@@ -50,6 +50,11 @@ const typeDefs = gql`
 
     type QuickLink {
         _id: ID
+        title: String
+        link: String
+    }
+
+    type UserQuickLink {
         title: String
         link: String
     }
