@@ -109,6 +109,7 @@ const Dashboard = () => {
   return (
     <>
       <Container fluid className="text-center p-5 mt-3 box">
+        
         <h4>Welcome to your dashboard!</h4>
         <p className="">While you're logged in you have access to your favorites and progess lists. Simply click the  <FavoriteIcon sx={{ color: "#f6685e" }} /> <span className="">heart</span> to add to favorites, the <LooksOneIcon sx={{ color: "#ffcd38" }} /> one button to add to <span className="one">To-do</span> , the <LooksTwoIcon sx={{ color: "#33bfff" }} /> two button to add to <span className="two">Doing</span>, and the <Looks3Icon sx={{ color: "#ff9800" }} /> three button to add to <span className="three">Done</span>. Click the button again to remove it from a list.</p>
       </Container>
