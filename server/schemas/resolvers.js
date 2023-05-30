@@ -12,7 +12,8 @@ const resolvers = {
                     .populate('favorites')
                     .populate('do')
                     .populate('doing')
-                    .populate('done');
+                    .populate('done')
+                    .populate('userQuickLinks');
                 return userData;
             }
             throw new AuthenticationError("Logout as Admin and login as user to access lists.");
@@ -38,7 +39,8 @@ const resolvers = {
                 .populate('favorites')
                 .populate('do')
                 .populate('doing')
-                .populate('done');
+                .populate('done')
+                .populate('userQuickLinks');
 
             return userData;
         },
@@ -202,6 +204,18 @@ const resolvers = {
             return newQuickLink;
         },
 
+        createUserQuickLink: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { userQuickLinks: { ...args } } },
+                    { new: true }
+                ).populate('userQuickLinks');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
         createPost: async (parent, args) => {
             const newPost = await Post.create({ ...args });
             return newPost;
@@ -299,6 +313,17 @@ const resolvers = {
             }
         },
 
+        deleteUserQuickLink: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { userQuickLinks: _id } },
+                    { new: true }
+                ).populate('userQuickLinks');
+                return updatedUser;
+            }
+        },
+
         addResourceToSubtopic: async (parent, { _id, title, text, link, subtopicId }) => {
             const updateSubtopic = await Subtopic.findOneAndUpdate(
                 { _id: subtopicId },
@@ -366,6 +391,18 @@ const resolvers = {
                 { new: true }
             );
             return updatedQuickLink;
+        },
+
+        updateQuickLink: async (parent, { _id, title, link }) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { userQuickLinks: _id },
+                    { $set: { title, link } },
+                    { new: true }
+                ).populate('userQuickLinks');
+                return updatedUser;
+            }
         },
 
         updatePost: async (parent, { _id, title, text, image, link }) => {
