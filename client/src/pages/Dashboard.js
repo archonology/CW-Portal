@@ -99,7 +99,8 @@ const Dashboard = () => {
             title: linkTitle,
             link: linkAddress }
         });
-      
+      setLinkTitle('');
+      setLinkAddress('');
     } catch (err) {
       console.error(err);
     }
@@ -166,12 +167,13 @@ const Dashboard = () => {
               </Button>
 
               <Modal show={show} onHide={handleClose} className="modal">
-                <Modal.Header closeButton>
+                <Modal.Header className="modalForm">
                   <Modal.Title>Custom Quick Link</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="modalForm">
                   <Form
-                    // onSubmit={handleFormSubmit}
+                    
+                   
                   >
                     <Form.Group className="mb-3" controlId="form.ControlInput1">
                       <Form.Label>Quick Link Title</Form.Label>
@@ -199,7 +201,7 @@ const Dashboard = () => {
                     </Form.Group>
                   </Form>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="modalForm">
                   <Button
                     variant="contained"
                     color='error'
