@@ -30,6 +30,11 @@ query me {
           text
           link
         }
+        userQuickLinks {
+          _id
+          title
+          link
+        }
     }
 }
 `;

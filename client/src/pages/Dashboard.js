@@ -89,10 +89,11 @@ const Dashboard = () => {
               allowScrollButtonsMobile
               aria-label="scrollable Dashboard List Tabs"
               indicatorColor="primary">
-              <Tab label="Favorites" {...a11yProps(0)} />
-              <Tab label="To-Do" {...a11yProps(1)} />
-              <Tab label="Doing" {...a11yProps(2)} />
-              <Tab label="Done" {...a11yProps(3)} />
+                <Tab label="Favorites" {...a11yProps(0)} />
+                <Tab label="Quick Links" {...a11yProps(1)} />
+              <Tab label="To-Do" {...a11yProps(2)} />
+              <Tab label="Doing" {...a11yProps(3)} />
+              <Tab label="Done" {...a11yProps(4)} />
             </Tabs>
           )}
         </Box>
@@ -106,6 +107,15 @@ const Dashboard = () => {
           </Grid>
         </TabPanel>
         <TabPanel value={value} index={1}>
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={0} justifyContent="center">
+
+              <Favorites />
+
+            </Grid>
+          </Grid>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
 
           <Grid direction="row" container sx={{ padding: "1rem" }}>
             <Grid container spacing={0} justifyContent="center">
@@ -116,7 +126,7 @@ const Dashboard = () => {
           </Grid>
 
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={3}>
 
           <Grid direction="row" container sx={{ padding: "1rem" }}>
             <Grid container spacing={0} justifyContent="center">
@@ -127,7 +137,7 @@ const Dashboard = () => {
           </Grid>
 
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={4}>
 
           <Grid direction="row" container sx={{ padding: "1rem" }}>
             <Grid container spacing={0} justifyContent="center">

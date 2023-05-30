@@ -15,3 +15,4 @@ const quickLinkSchema = new Schema(
 const QuickLink = model('QuickLink', quickLinkSchema);
 
 module.exports = QuickLink;
+module.exports = quickLinkSchema;

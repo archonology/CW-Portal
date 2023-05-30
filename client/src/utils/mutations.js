@@ -120,6 +120,18 @@ mutation createQuickLink($title: String!, $link: String!) {
 }
 `;
 
+export const CREATE_USER_QUICKLINK = gql`
+mutation createUserQuickLink($_id: ID!, $title: String!, $link: String!) {
+    createUserQuickLink(_id: $_id, title: $title, link: $link){
+        userQuickLinks {
+            _id
+            title
+            link
+        }
+    }
+}
+`;
+
 export const CREATE_POST = gql`
 mutation createPost($title: String!, $text: String!, $image: String!, $link: String!) {
     createPost(title: $title, text: $text, image: $image, link: $link){
