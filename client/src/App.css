@@ -10,6 +10,7 @@
   --lightbeacon: rgb(165, 212, 153);
   --violet: rgb(203, 123, 250);
   --lightviolet: rgb(221, 172, 249);
+  --red: rgb(238, 43, 43);
 }
 
 
@@ -52,6 +53,10 @@ h3 {
 
 h5 {
   color: var(--lightblue);
+}
+
+h6 {
+  color: #ffcd38;
 }
 
 .topic-headers {
@@ -190,6 +195,14 @@ img {
   color: var(--blue);
 }
 
+.quicklinkMe {
+  color: #ff9800;
+}
+
+.quicklinkMe2 {
+  color: #f6685e;
+}
+
 .quicklink2 {
   color: var(--beacon);
 }
@@ -240,4 +253,12 @@ a:hover {
 
 .meherdevs:hover {
   color: var(--lightblue);
+}
+
+.quicklinkMe:hover {
+  color: #ffbf5f;
+}
+
+.quicklinkMe2:hover {
+  color: #f88f88;
 }
