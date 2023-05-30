@@ -89,11 +89,19 @@ a {
 }
 
 .modal {
-  color:var(--primary);
+  color: var(--primary);
 }
 
 .modalForm {
   background-color: rgb(22, 22, 23);
+}
+
+.userQLBox {
+  background-color: var(--base);
+  padding: 1em;
+  border-radius: 8px;
+  margin: 1em;
+  max-width: 500px;
 }
 
 .mainText {

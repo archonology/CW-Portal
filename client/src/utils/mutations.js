@@ -124,6 +124,7 @@ export const CREATE_USER_QUICKLINK = gql`
 mutation createUserQuickLink($title: String!, $link: String!) {
     createUserQuickLink(title: $title, link: $link){
         userQuickLinks {
+            _id
             title
             link
         }
@@ -201,6 +202,18 @@ mutation updateQuickLink($_id: ID!, $title: String!, $link: String!) {
         _id
         title
         link
+    }
+}
+`;
+
+export const UPDATE_USER_QUICKLINK = gql`
+mutation updateUserQuickLink($_id: ID!, $title: String!, $link: String!) {
+    updateUserQuickLink(_id: $_id, title: $title, link: $link){
+      userQuickLinks {
+            _id
+            title
+            link
+        }
     }
 }
 `;

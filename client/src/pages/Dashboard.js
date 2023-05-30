@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -62,6 +62,10 @@ const Dashboard = () => {
     refetchQueries: [{ query: QUERY_ME }]
   });
 
+  const { loading, error, data } = useQuery(QUERY_ME);
+
+  const userData = data?.me || {};
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -91,8 +95,6 @@ const Dashboard = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     handleClose();
-
-    console.log('hello?');
     try {
       const { data } = await createUserQuickLink({
           variables: {

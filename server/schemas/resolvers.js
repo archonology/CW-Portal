@@ -16,7 +16,7 @@ const resolvers = {
                     .populate('userQuickLinks');
                 return userData;
             }
-            throw new AuthenticationError("Logout as Admin and login as user to access lists.");
+            throw new AuthenticationError("Me Query Error");
         },
 
         admin: async (parent, args, context) => {
@@ -233,6 +233,18 @@ const resolvers = {
             throw new AuthenticationError("Please log in to add to a list.");
         },
 
+        updateUserQuickLink: async (parent, {_id, title, link}, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $set: { userQuickLinks: { _id, title, link } } },
+                    { new: true }
+                ).populate('userQuickLinks');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
         addResourceToDo: async (parent, args, context) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
@@ -391,18 +403,6 @@ const resolvers = {
                 { new: true }
             );
             return updatedQuickLink;
-        },
-
-        updateQuickLink: async (parent, { _id, title, link }) => {
-            if (context.user) {
-                const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { userQuickLinks: _id },
-                    { $set: { title, link } },
-                    { new: true }
-                ).populate('userQuickLinks');
-                return updatedUser;
-            }
         },
 
         updatePost: async (parent, { _id, title, text, image, link }) => {

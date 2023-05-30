@@ -55,6 +55,7 @@ const typeDefs = gql`
     }
 
     type UserQuickLink {
+        _id: ID
         title: String
         link: String
     }

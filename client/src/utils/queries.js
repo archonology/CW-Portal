@@ -31,6 +31,7 @@ query me {
           link
         }
         userQuickLinks {
+          _id
           title
           link
         }
