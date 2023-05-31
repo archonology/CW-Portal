@@ -58,55 +58,55 @@ function a11yProps(index) {
 
 const Dashboard = () => {
 
-  const [createUserQuickLink] = useMutation(CREATE_USER_QUICKLINK, {
-    refetchQueries: [{ query: QUERY_ME }]
-  });
+  // const [createUserQuickLink] = useMutation(CREATE_USER_QUICKLINK, {
+  //   refetchQueries: [{ query: QUERY_ME }]
+  // });
 
-  const { loading, error, data } = useQuery(QUERY_ME);
+  // const { loading, error, data } = useQuery(QUERY_ME);
 
-  const userData = data?.me || {};
+  // const userData = data?.me || {};
 
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const [linkTitle, setLinkTitle] = useState('');
-  const [linkAddress, setLinkAddress] = useState('');
+  // const [linkTitle, setLinkTitle] = useState('');
+  // const [linkAddress, setLinkAddress] = useState('');
 
-  const handleInputChange = (e) => {
-    let { target } = e;
-    let inputType = target.name;
-    let inputValue = target.value;
-    console.log(inputValue);
+  // const handleInputChange = (e) => {
+  //   let { target } = e;
+  //   let inputType = target.name;
+  //   let inputValue = target.value;
+  //   console.log(inputValue);
 
-    if (inputType === 'linkTitle') {
-      setLinkTitle(inputValue);
-    } else if (inputType === 'linkAddress') {
-      setLinkAddress(inputValue);
-    }
-  };
+  //   if (inputType === 'linkTitle') {
+  //     setLinkTitle(inputValue);
+  //   } else if (inputType === 'linkAddress') {
+  //     setLinkAddress(inputValue);
+  //   }
+  // };
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    handleClose();
-    try {
-      const { data } = await createUserQuickLink({
-          variables: {
-            title: linkTitle,
-            link: linkAddress }
-        });
-      setLinkTitle('');
-      setLinkAddress('');
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  // const handleFormSubmit = async (e) => {
+  //   e.preventDefault();
+  //   handleClose();
+  //   try {
+  //     const { data } = await createUserQuickLink({
+  //         variables: {
+  //           title: linkTitle,
+  //           link: linkAddress }
+  //       });
+  //     setLinkTitle('');
+  //     setLinkAddress('');
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
 
   return (
     <>
@@ -165,11 +165,11 @@ const Dashboard = () => {
           <Grid direction="row" container sx={{ padding: "1rem" }}>
             <Grid container spacing={0} justifyContent="center">
 
-              <Button variant="primary" onClick={handleShow}>
+              {/* <Button variant="primary" onClick={handleShow}>
                 Create a Custom Quick Link
-              </Button>
+              </Button> */}
 
-              <Modal show={show} onHide={handleClose} className="modal">
+              {/* <Modal show={show} onHide={handleClose} className="modal">
                 <Modal.Header className="modalForm">
                   <Modal.Title>Custom Quick Link</Modal.Title>
                 </Modal.Header>
@@ -223,7 +223,7 @@ const Dashboard = () => {
                     Save Quick Link
                   </Button>
                 </Modal.Footer>
-              </Modal>
+              </Modal> */}
 
               <Grid container spacing={0} justifyContent="center" className="userLinks">
    

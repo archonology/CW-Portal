@@ -113,7 +113,6 @@ const typeDefs = gql`
         updateSubtopic(_id: ID!, title: String!, text: String!, link: String!, image: String!): Subtopic
         updateTopic(_id: ID!, title: String!, text: String!, link: String!, image: String!): Topic 
         updateQuickLink(_id: ID!, title: String!, link: String!): QuickLink
-        updateUserQuickLink(_id: ID!, title: String!, link: String!): User
         updatePost(_id: ID!, title: String!, text: String!, link: String!, image: String!): Post    
         addResourceToTopic(_id: ID!, title: String!, text: String!, link: String!, topicId: ID!): Topic
         addSubtopicToTopic(_id: ID!, title: String!, text: String!, image: String!, link: String!, topicId: ID!): Topic
@@ -122,6 +121,7 @@ const typeDefs = gql`
         removeResourceFromDo(_id: ID!): User
         removeResourceFromDoing(_id: ID!): User
         removeResourceFromDone(_id: ID!): User
+        deleteUserQuickLink(_id: ID!): User
         removeResourceFromTopic(_id: ID!, topicId: ID!): Topic
         removeResourceFromSubTopic(_id: ID!, subtopicId: ID!): Subtopic
         removeSubtopicFromTopic(_id: ID!, topicId: ID!): Topic
@@ -129,7 +129,6 @@ const typeDefs = gql`
         deleteSubtopic(_id: ID!): Subtopic
         deleteTopic(_id: ID!): Topic
         deleteQuickLink(_id: ID!): QuickLink
-        deleteUserQuickLink(_id: ID!): User
         deletePost(_id: ID!): Post
     }
 

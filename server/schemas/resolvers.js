@@ -1,5 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { Admin, User, Topic, Subtopic, Resource, QuickLink, Post } = require('../models');
+
 const { signToken, signAdminToken } = require("../utils/auth");
 
 const resolvers = {
@@ -16,7 +17,7 @@ const resolvers = {
                     .populate('userQuickLinks');
                 return userData;
             }
-            throw new AuthenticationError("Me Query Error");
+            throw new AuthenticationError("Please log in to continue");
         },
 
         admin: async (parent, args, context) => {
@@ -233,18 +234,6 @@ const resolvers = {
             throw new AuthenticationError("Please log in to add to a list.");
         },
 
-        updateUserQuickLink: async (parent, {_id, title, link}, context) => {
-            if (context.user) {
-                const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $set: { userQuickLinks: { _id, title, link } } },
-                    { new: true }
-                ).populate('userQuickLinks');
-                return updatedUser;
-            }
-            throw new AuthenticationError("Please log in to add to a list.");
-        },
-
         addResourceToDo: async (parent, args, context) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
@@ -329,7 +318,7 @@ const resolvers = {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $pull: { userQuickLinks: _id } },
+                    { $pull: { userQuickLinks: { _id } } },
                     { new: true }
                 ).populate('userQuickLinks');
                 return updatedUser;
