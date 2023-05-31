@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import Auth from "../../utils/auth";
 import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
-import { QUERY_ALL_TOPICS, QUERY_ALL_QUICKLINKS } from "../../utils/queries";
+import { QUERY_ALL_TOPICS, QUERY_ALL_QUICKLINKS, QUERY_ME } from "../../utils/queries";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -40,6 +40,11 @@ function Header() {
 
   const quickLinkData = quickData?.quicklinks || [];
 
+  const { loading: userLoading, error: userErr, data: userData } = useQuery(QUERY_ME);
+
+  const userLinkData = userData?.me || [];
+
+  console.log(userLinkData);
   return (
     <>
       <Navbar  variant="dark" className="mb-2 p-3 navbar" expand="md" id="#top">
@@ -131,6 +136,21 @@ function Header() {
               <Offcanvas.Title>Quick Links</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+              {Auth.loggedIn() ? (
+                <>
+                  <h4>Your custom links:</h4>
+                  <br />
+                  {userLinkData.userQuickLinks?.map((link, index) => (
+                    <>
+                      {index % 2 === 0 ? <Nav.Link key={link._id} href={link.link} target={'_blank'} rel={'nonreferrer'} className="quicklinkMe">{link.title}</Nav.Link> : <Nav.Link key={link._id} href={link.link} target={'_blank'} rel={'nonreferrer'} className="quicklinkMe2">{link.title}</Nav.Link>}
+
+                      <hr></hr>
+                    </>
+                  ))}
+                  <h4>Standard links:</h4>
+                 <br />
+                </>
+              ) : (<></>)}
               {quickLinkData.map((quicklink, index) => (
 
                 <>
@@ -143,21 +163,6 @@ function Header() {
             </Offcanvas.Body>
           </Offcanvas>
 
-          {/* </Nav> */}
-          {/* <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2 bg-black searchbox text-white"
-                  aria-label="Search"
-                />
-                <Button className="search">
-                  <SearchIcon></SearchIcon>
-                </Button>
-              </Form> */}
-
-          {/* </Offcanvas.Body>
-          </Navbar.Offcanvas> */}
         </Container>
       </Navbar>
     </>

@@ -1,6 +1,6 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 
 const Donate = () => {
     return (

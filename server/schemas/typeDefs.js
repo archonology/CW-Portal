@@ -19,6 +19,7 @@ const typeDefs = gql`
         do: [Resource]
         doing: [Resource]
         done: [Resource]
+        userQuickLinks: [UserQuickLink]
     }
 
     type Topic {
@@ -48,6 +49,12 @@ const typeDefs = gql`
     }
 
     type QuickLink {
+        _id: ID
+        title: String
+        link: String
+    }
+
+    type UserQuickLink {
         _id: ID
         title: String
         link: String
@@ -96,6 +103,7 @@ const typeDefs = gql`
         createSubtopic(title: String!, text: String!, link: String!, image: String!): Subtopic
         createResource(title: String!, text: String!, link: String!): Resource 
         createQuickLink(title: String!, link: String!): QuickLink
+        createUserQuickLink(title: String!, link: String!): User
         createPost(title: String!, text: String!, link: String!, image: String!): Post
         addResourceToFavs(_id: ID!, title: String!, text: String!, link: String!): User
         addResourceToDo(_id: ID!, title: String!, text: String!, link: String!): User
@@ -113,6 +121,7 @@ const typeDefs = gql`
         removeResourceFromDo(_id: ID!): User
         removeResourceFromDoing(_id: ID!): User
         removeResourceFromDone(_id: ID!): User
+        deleteUserQuickLink(_id: ID!): User
         removeResourceFromTopic(_id: ID!, topicId: ID!): Topic
         removeResourceFromSubTopic(_id: ID!, subtopicId: ID!): Subtopic
         removeSubtopicFromTopic(_id: ID!, topicId: ID!): Topic

@@ -50,7 +50,6 @@ const Signup = () => {
         setValue(newValue);
     };
 
-    // update state based on signup form input changes
     const handleSignupFormChange = (event) => {
         const { name, value } = event.target;
 
@@ -60,7 +59,6 @@ const Signup = () => {
         });
     };
 
-    // submit Signup form
     const handleSignupSubmit = async (event) => {
         event.preventDefault();
 
@@ -171,7 +169,6 @@ const Signup = () => {
                                         type="password"
                                         name="password"
                                         autoComplete="current-password"
-                                        // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
                                         value={signupFormData.password}
                                         onChange={handleSignupFormChange}
                                     />

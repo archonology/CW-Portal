@@ -5,8 +5,7 @@ import { Grid, Button, TextField, Box, Container } from "@mui/material";
 
 
 function Contact() {
-    // Create state variables for the fields in the form
-    // also setting their initial values to an empty string
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
@@ -16,12 +15,11 @@ function Contact() {
 
 
     const handleInputChange = (e) => {
-        // Getting the value and name of the input which triggered the change
+
         const { target } = e;
         const inputType = target.name;
         const inputValue = target.value;
 
-        // Based on the input type, sets the state of either email, name, and message
         if (inputType === 'email') {
             setEmail(inputValue);
         } else if (inputType === 'name') {
@@ -33,7 +31,6 @@ function Contact() {
 
 
     const handleFormSubmit = (e) => {
-        // Preventing the default behavior of the form submit (which is to refresh the page)
         e.preventDefault();
 
         // First check to see if the email is not valid or if the name is empty. If so, set an error message to be displayed on the page.
@@ -44,9 +41,8 @@ function Contact() {
       Please check it and try again, 
       thanks! 🪴
       `);
-            //  exit out of this code block if something is wrong so that the user can correct it
             return;
-            // Then check to see if the message is not valid. If so, set an error message regarding the message.
+    
         }
 
         setName('');

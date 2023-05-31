@@ -128,8 +128,6 @@ const ContentCreator = () => {
 
   const postData = dataPost?.posts || [];
 
-  // const [openQuick, setOpenQuick] = React.useState(false);
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 

@@ -155,7 +155,6 @@ const Login = () => {
                                         type="password"
                                         name="password"
                                         autoComplete="current-password"
-                                        // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
                                         value={loginFormData.password}
                                         onChange={handleLoginFormChange}
                                     />

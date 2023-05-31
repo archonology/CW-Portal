@@ -1,5 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { Admin, User, Topic, Subtopic, Resource, QuickLink, Post } = require('../models');
+
 const { signToken, signAdminToken } = require("../utils/auth");
 
 const resolvers = {
@@ -12,10 +13,11 @@ const resolvers = {
                     .populate('favorites')
                     .populate('do')
                     .populate('doing')
-                    .populate('done');
+                    .populate('done')
+                    .populate('userQuickLinks');
                 return userData;
             }
-            throw new AuthenticationError("Logout as Admin and login as user to access lists.");
+            throw new AuthenticationError("Please log in to continue");
         },
 
         admin: async (parent, args, context) => {
@@ -38,7 +40,8 @@ const resolvers = {
                 .populate('favorites')
                 .populate('do')
                 .populate('doing')
-                .populate('done');
+                .populate('done')
+                .populate('userQuickLinks');
 
             return userData;
         },
@@ -202,6 +205,18 @@ const resolvers = {
             return newQuickLink;
         },
 
+        createUserQuickLink: async (parent, args, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { userQuickLinks: { ...args } } },
+                    { new: true }
+                ).populate('userQuickLinks');
+                return updatedUser;
+            }
+            throw new AuthenticationError("Please log in to add to a list.");
+        },
+
         createPost: async (parent, args) => {
             const newPost = await Post.create({ ...args });
             return newPost;
@@ -295,6 +310,17 @@ const resolvers = {
                     { $pull: { done: _id } },
                     { new: true }
                 ).populate('done');
+                return updatedUser;
+            }
+        },
+
+        deleteUserQuickLink: async (parent, { _id }, context) => {
+            if (context.user) {
+                const updatedUser = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { userQuickLinks: { _id } } },
+                    { new: true }
+                ).populate('userQuickLinks');
                 return updatedUser;
             }
         },

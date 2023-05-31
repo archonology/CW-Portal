@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Grid, Button, Link, TextField } from "@mui/material";
+import { Grid, Button, TextField } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { CREATE_ADMIN } from "../utils/mutations";
 import { validateEmail, validatePassword } from '../utils/helpers';
@@ -170,7 +169,6 @@ const AdminSignup = () => {
                                         type="password"
                                         name="password"
                                         autoComplete="current-password"
-                                        // sx={{ input: { color: "#fff" }, label: { color: "#fff" } }}
                                         value={signupState.password}
                                         onChange={handleSignupFormChange}
                                     />

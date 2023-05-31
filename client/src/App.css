@@ -10,6 +10,7 @@
   --lightbeacon: rgb(165, 212, 153);
   --violet: rgb(203, 123, 250);
   --lightviolet: rgb(221, 172, 249);
+  --red: rgb(238, 43, 43);
 }
 
 
@@ -54,6 +55,10 @@ h5 {
   color: var(--lightblue);
 }
 
+h6 {
+  color: #ffcd38;
+}
+
 .topic-headers {
   color: var(--beacon);
   text-decoration: none;
@@ -81,6 +86,22 @@ h5 {
 
 a {
   color: var(--blue);
+}
+
+.modal {
+  color: var(--primary);
+}
+
+.modalForm {
+  background-color: rgb(22, 22, 23);
+}
+
+.userQLBox {
+  background-color: var(--base);
+  padding: 1em;
+  border-radius: 8px;
+  margin: .5em;
+  max-width: 400px;
 }
 
 .mainText {
@@ -190,8 +211,20 @@ img {
   color: var(--blue);
 }
 
+.quicklinkMe {
+  color: #f6685e;
+}
+
+.quicklinkMe2 {
+  color: #ff9800;
+}
+
 .quicklink2 {
   color: var(--beacon);
+}
+
+.userLinks {
+  margin-top: 1em;
 }
 
 .quicklink:hover {
@@ -236,4 +269,12 @@ a:hover {
 
 .meherdevs:hover {
   color: var(--lightblue);
+}
+
+.quicklinkMe:hover {
+  color: #ffbf5f;
+}
+
+.quicklinkMe2:hover {
+  color: #f88f88;
 }

@@ -120,6 +120,18 @@ mutation createQuickLink($title: String!, $link: String!) {
 }
 `;
 
+export const CREATE_USER_QUICKLINK = gql`
+mutation createUserQuickLink($title: String!, $link: String!) {
+    createUserQuickLink(title: $title, link: $link){
+        userQuickLinks {
+            _id
+            title
+            link
+        }
+    }
+}
+`;
+
 export const CREATE_POST = gql`
 mutation createPost($title: String!, $text: String!, $image: String!, $link: String!) {
     createPost(title: $title, text: $text, image: $image, link: $link){
@@ -193,7 +205,6 @@ mutation updateQuickLink($_id: ID!, $title: String!, $link: String!) {
     }
 }
 `;
-
 
 export const UPDATE_RESOURCE = gql`
 mutation updateResource($_id: ID!, $title: String!, $text: String!, $link: String!) {
@@ -317,6 +328,16 @@ export const REMOVE_RESOURCE_FROM_DONE = gql`
 mutation removeResourceFromDone($_id: ID!) {
     removeResourceFromDone(_id: $_id){
         done {
+            _id
+        }
+    }
+}
+`;
+
+export const DELETE_USER_QUICKLINK = gql`
+mutation deleteUserQuickLink($_id: ID!) {
+    deleteUserQuickLink(_id: $_id){
+        userQuickLinks {
             _id
         }
     }

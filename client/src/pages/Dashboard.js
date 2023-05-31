@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Auth from "../utils/auth";
 import Favorites from "../components/Favorites";
+import UserLinks from "../components/UserQuickLinks";
 import { Link } from 'react-router-dom';
-import { Grid, Paper } from "@mui/material";
+import { Grid } from "@mui/material";
 import ToDo from "../components/ToDo";
 import Doing from "../components/Doing";
 import Done from "../components/Done";
 import Container from 'react-bootstrap/Container';
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LooksOneIcon from '@mui/icons-material/LooksOne';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
@@ -50,14 +50,18 @@ function a11yProps(index) {
 }
 
 const Dashboard = () => {
+
+
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+
   return (
     <>
       <Container fluid className="text-center p-5 mt-3 box">
+
         <h4>Welcome to your dashboard!</h4>
         <p className="">While you're logged in you have access to your favorites and progess lists. Simply click the  <FavoriteIcon sx={{ color: "#f6685e" }} /> <span className="">heart</span> to add to favorites, the <LooksOneIcon sx={{ color: "#ffcd38" }} /> one button to add to <span className="one">To-do</span> , the <LooksTwoIcon sx={{ color: "#33bfff" }} /> two button to add to <span className="two">Doing</span>, and the <Looks3Icon sx={{ color: "#ff9800" }} /> three button to add to <span className="three">Done</span>. Click the button again to remove it from a list.</p>
       </Container>
@@ -80,7 +84,6 @@ const Dashboard = () => {
             </Tabs>) : (
             <Tabs
               sx={{}}
-              // variant="fullWidth"
               value={value}
               onChange={handleChange}
               textColor="inherit"
@@ -90,9 +93,10 @@ const Dashboard = () => {
               aria-label="scrollable Dashboard List Tabs"
               indicatorColor="primary">
               <Tab label="Favorites" {...a11yProps(0)} />
-              <Tab label="To-Do" {...a11yProps(1)} />
-              <Tab label="Doing" {...a11yProps(2)} />
-              <Tab label="Done" {...a11yProps(3)} />
+              <Tab label="Quick Links" {...a11yProps(1)} />
+              <Tab label="To-Do" {...a11yProps(2)} />
+              <Tab label="Doing" {...a11yProps(3)} />
+              <Tab label="Done" {...a11yProps(4)} />
             </Tabs>
           )}
         </Box>
@@ -105,7 +109,19 @@ const Dashboard = () => {
             </Grid>
           </Grid>
         </TabPanel>
+
         <TabPanel value={value} index={1}>
+          <Grid direction="row" container sx={{ padding: "1rem" }}>
+            <Grid container spacing={1}  justifyContent="center">
+
+              <Grid item lg={10}>
+                <UserLinks />
+              </Grid>
+
+            </Grid>
+          </Grid>
+        </TabPanel>
+        <TabPanel value={value} index={2}>
 
           <Grid direction="row" container sx={{ padding: "1rem" }}>
             <Grid container spacing={0} justifyContent="center">
@@ -116,7 +132,7 @@ const Dashboard = () => {
           </Grid>
 
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={3}>
 
           <Grid direction="row" container sx={{ padding: "1rem" }}>
             <Grid container spacing={0} justifyContent="center">
@@ -127,7 +143,7 @@ const Dashboard = () => {
           </Grid>
 
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={4}>
 
           <Grid direction="row" container sx={{ padding: "1rem" }}>
             <Grid container spacing={0} justifyContent="center">
