@@ -304,35 +304,7 @@ const Search = () => {
                     </Grid>
 
                 </TabPanel>
-                {/* <TabPanel value={value} index={3}>
-                    {quickLinkData.map((quicklink) => {
-                        return (
-                            <>
-                                <ul>
-                                    <QuickLink quicklink={quicklink} />
-                                </ul>
-                            </>
-                        );
-                    })}
-
-                </TabPanel> */}
-                {/* 
-                <TabPanel value={value} index={4}>
-
-
-                    {postData.map((post) => {
-                        return (
-                            <Container key={post._id} fluid className="bg-dark p-1 mb-3">
-
-                                <Post post={post} />
-
-                            </Container>
-                        )
-
-                    })}
-
-                </TabPanel> */}
-
+              
             </Box>
         </Box>
 

@@ -7,8 +7,6 @@ import { CREATE_USER_QUICKLINK, DELETE_USER_QUICKLINK } from "../../utils/mutati
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 const UserLinks = () => {
 
@@ -73,7 +71,6 @@ const UserLinks = () => {
             console.error(err);
         }
     };
-    
 
     //Error handling if user is not logged in
     if (error) {
@@ -161,23 +158,23 @@ const UserLinks = () => {
                 return (
                     <>
                         <Container className="userQLBox d-flex justify-content center">
-                            
-                        <Button
-                            key={link._id}
-                            href={link.link}
-                            target={'_blank'}
-                            rel={'nonreferrer'}
-                            variant="contained"
-                            color="success"
-                            sx={{ m: 1 }}
-            
+
+                            <Button
+                                key={link._id}
+                                href={link.link}
+                                target={'_blank'}
+                                rel={'nonreferrer'}
+                                variant="contained"
+                                color="success"
+                                sx={{ m: 1 }}
+
                             >{link.title}
                             </Button>
                             <Button
                                 variant="contained"
                                 color="error"
                                 sx={{ m: 1 }}
-                                onClick={() => { console.log(link._id);handleDelete(link._id)}}
+                                onClick={() => { console.log(link._id); handleDelete(link._id) }}
                             >Delete
                             </Button>
 
@@ -185,7 +182,7 @@ const UserLinks = () => {
                                <p>{link.link}</p> 
                             </div> */}
                         </Container>
-                       
+
                     </>
                 )
             })}

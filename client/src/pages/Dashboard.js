@@ -111,7 +111,7 @@ const Dashboard = () => {
   return (
     <>
       <Container fluid className="text-center p-5 mt-3 box">
-        
+
         <h4>Welcome to your dashboard!</h4>
         <p className="">While you're logged in you have access to your favorites and progess lists. Simply click the  <FavoriteIcon sx={{ color: "#f6685e" }} /> <span className="">heart</span> to add to favorites, the <LooksOneIcon sx={{ color: "#ffcd38" }} /> one button to add to <span className="one">To-do</span> , the <LooksTwoIcon sx={{ color: "#33bfff" }} /> two button to add to <span className="two">Doing</span>, and the <Looks3Icon sx={{ color: "#ff9800" }} /> three button to add to <span className="three">Done</span>. Click the button again to remove it from a list.</p>
       </Container>
@@ -143,8 +143,8 @@ const Dashboard = () => {
               allowScrollButtonsMobile
               aria-label="scrollable Dashboard List Tabs"
               indicatorColor="primary">
-                <Tab label="Favorites" {...a11yProps(0)} />
-                <Tab label="Quick Links" {...a11yProps(1)} />
+              <Tab label="Favorites" {...a11yProps(0)} />
+              <Tab label="Quick Links" {...a11yProps(1)} />
               <Tab label="To-Do" {...a11yProps(2)} />
               <Tab label="Doing" {...a11yProps(3)} />
               <Tab label="Done" {...a11yProps(4)} />
@@ -163,74 +163,11 @@ const Dashboard = () => {
 
         <TabPanel value={value} index={1}>
           <Grid direction="row" container sx={{ padding: "1rem" }}>
-            <Grid container spacing={0} justifyContent="center">
+            <Grid container spacing={1}  justifyContent="center">
 
-              {/* <Button variant="primary" onClick={handleShow}>
-                Create a Custom Quick Link
-              </Button> */}
-
-              {/* <Modal show={show} onHide={handleClose} className="modal">
-                <Modal.Header className="modalForm">
-                  <Modal.Title>Custom Quick Link</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="modalForm">
-                  <Form
-                    
-                   
-                  >
-                    <Form.Group className="mb-3" controlId="form.ControlInput1">
-                      <Form.Label>Quick Link Title</Form.Label>
-                      <Form.Control
-                        type="title"
-                        name="linkTitle"
-                        value={linkTitle}
-                        onChange={handleInputChange}
-                        placeholder="Title"
-                        autoFocus
-                      />
-                    </Form.Group>
-                    <Form.Group
-                      className="mb-3"
-                      controlId="form.link"
-                    >
-                      <Form.Label>Link</Form.Label>
-                      <Form.Control
-                        type="link"
-                        name="linkAddress"
-                        value={linkAddress}
-                        onChange={handleInputChange}
-                        placeholder="Link address"
-                      />
-                    </Form.Group>
-                  </Form>
-                </Modal.Body>
-                <Modal.Footer className="modalForm">
-                  <Button
-                    variant="contained"
-                    color='error'
-                    sx={{ m: 1 }}
-                    onClick={handleClose}>
-                    Cancel
-                  </Button>
-                  <Button
-                    variant="contained"
-                    sx={{ m: 1 }}
-                    onClick={handleFormSubmit}
-                    type="submit"
-                    id="submit"
-                    value='submit'
-                  >
-                    Save Quick Link
-                  </Button>
-                </Modal.Footer>
-              </Modal> */}
-
-              <Grid container spacing={0} justifyContent="center" className="userLinks">
-   
+              <Grid item lg={10}>
                 <UserLinks />
-
               </Grid>
-          
 
             </Grid>
           </Grid>
