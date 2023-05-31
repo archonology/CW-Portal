@@ -64,7 +64,7 @@ const AddSubtopic = () => {
                     }}
                 >
                     <br></br>
-                    {/* user sets title, text, url, image */}
+        
                     <TextField
                         name="title"
                         value={formState.title}

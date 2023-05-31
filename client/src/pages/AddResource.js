@@ -95,16 +95,6 @@ const AddResource = () => {
                         variant="standard"
                     ></TextField>
 
-                    {/* <TextField
-                        name="image"
-                        value={formState.image}
-                        onChange={handleChange}
-                        onBlur={() => { handleChange.image.trim() }}
-                        label="Image URL"
-                        id="image"
-                        variant="standard"
-                    ></TextField> */}
-
                     <Button
                         type="submit"
                         variant="contained"

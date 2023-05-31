@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import React from "react";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -8,21 +7,15 @@ import Auth from "../utils/auth";
 import Favorites from "../components/Favorites";
 import UserLinks from "../components/UserQuickLinks";
 import { Link } from 'react-router-dom';
-import { Grid, Button } from "@mui/material";
+import { Grid } from "@mui/material";
 import ToDo from "../components/ToDo";
 import Doing from "../components/Doing";
 import Done from "../components/Done";
 import Container from 'react-bootstrap/Container';
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LooksOneIcon from '@mui/icons-material/LooksOne';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
-// import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import { CREATE_USER_QUICKLINK } from "../utils/mutations";
-import { QUERY_ME } from "../utils/queries";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,55 +51,12 @@ function a11yProps(index) {
 
 const Dashboard = () => {
 
-  // const [createUserQuickLink] = useMutation(CREATE_USER_QUICKLINK, {
-  //   refetchQueries: [{ query: QUERY_ME }]
-  // });
-
-  // const { loading, error, data } = useQuery(QUERY_ME);
-
-  // const userData = data?.me || {};
-
-  // const [show, setShow] = useState(false);
-
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
 
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  // const [linkTitle, setLinkTitle] = useState('');
-  // const [linkAddress, setLinkAddress] = useState('');
-
-  // const handleInputChange = (e) => {
-  //   let { target } = e;
-  //   let inputType = target.name;
-  //   let inputValue = target.value;
-  //   console.log(inputValue);
-
-  //   if (inputType === 'linkTitle') {
-  //     setLinkTitle(inputValue);
-  //   } else if (inputType === 'linkAddress') {
-  //     setLinkAddress(inputValue);
-  //   }
-  // };
-
-  // const handleFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   handleClose();
-  //   try {
-  //     const { data } = await createUserQuickLink({
-  //         variables: {
-  //           title: linkTitle,
-  //           link: linkAddress }
-  //       });
-  //     setLinkTitle('');
-  //     setLinkAddress('');
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
 
   return (
     <>
@@ -134,7 +84,6 @@ const Dashboard = () => {
             </Tabs>) : (
             <Tabs
               sx={{}}
-              // variant="fullWidth"
               value={value}
               onChange={handleChange}
               textColor="inherit"
