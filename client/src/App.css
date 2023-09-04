@@ -16,8 +16,7 @@
 
 html body {
   background: var(--base);
-  background-image: url("./media/newLeaf2.jpeg");
-  background-position: top;
+  background-image: url("./media/DNGF7977.jpeg");
   color: var(--primary);
   margin: 0;
 }
@@ -33,6 +32,11 @@ html body {
 
 .welcome {
   color: var(--beacon);
+}
+
+.allTopics {
+  margin-top: 2em;
+  margin-bottom: 7em;
 }
 
 .footspace {
@@ -59,13 +63,19 @@ h6 {
   color: #ffcd38;
 }
 
+.topicBox {
+  background-color: rgba(32, 34, 31, 0.756);
+  padding: 2em;
+  border-radius: 10px;
+}
+
 .topic-headers {
   color: var(--beacon);
   text-decoration: none;
 }
 
 .subtopic-headers {
-  color: var(--lightviolet);
+  color: var(--violet);
   text-decoration: none;
 }
 
@@ -82,6 +92,10 @@ h6 {
   max-width: 1000px;
   background-color: rgba(17, 22, 17, 0.226);
   border-radius: 10px;
+}
+
+.cardButton:hover {
+  color: var(--lightblue);
 }
 
 a {
@@ -176,7 +190,7 @@ img {
 }
 
 .subtopic-headers:hover {
-  color: var(--violet);
+  color: var(--lightviolet);
 }
 
 .logging:hover {

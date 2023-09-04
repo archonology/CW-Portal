@@ -28,12 +28,11 @@ const Topics = () => {
         <>
             {topicData.map((topic) => {
                 return (
-                    <>
-                    <Topic topic={topic} />
-                    </>
+                    <div className="topicBox">
+                        <Topic topic={topic} />
+                    </div>
                 );
             })}
-            <hr></hr>
         </>
     );
 };

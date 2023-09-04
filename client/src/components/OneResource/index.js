@@ -294,6 +294,7 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
                         rel={'nonreferrer'}
                         variant="text"
                         color="secondary"
+                        className="cardButton"
                         sx={{ marginTop: 2, marginBottom: -3 }}
                         size="medium" >Visit Resource</Button>
                 </CardContent>

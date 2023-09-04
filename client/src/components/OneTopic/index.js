@@ -126,8 +126,8 @@ const OneTopic = ({ }) => {
 
     return (
         <>
-            <Container fluid className="">
-                <Stack direction="row" spacing={2} margin={4}>
+            <Container fluid>
+                <Stack direction="row" spacing={2} margin={4} className="topicBox">
                     <Avatar
                         alt={"T"}
                         src={topicData.image}
@@ -169,7 +169,7 @@ const OneTopic = ({ }) => {
                 )}
             </Container>
 
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ margin: "2em" }}>
                 <Box>
 
                     <Tabs
