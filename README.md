@@ -8,7 +8,7 @@ https://www.childwelfareportal.org/
 
 ## Screenshot
 
-![Sreenshot](./client/src/media/Screenshot%202023-01-24%20at%209.35.13%20PM.png)
+![Sreenshot](./client/src/media/CWP%20fresh%20screenshot%20Sept23.png)
 
 ## Application Demo
 
