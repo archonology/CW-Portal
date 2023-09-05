@@ -60,7 +60,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Container fluid className="text-center p-5 mt-3 box">
+      <Container fluid className="text-center p-5 box">
 
         <h4>Welcome to your dashboard!</h4>
         <p className="">While you're logged in you have access to your favorites and progess lists. Simply click the  <FavoriteIcon sx={{ color: "#f6685e" }} /> <span className="">heart</span> to add to favorites, the <LooksOneIcon sx={{ color: "#ffcd38" }} /> one button to add to <span className="one">To-do</span> , the <LooksTwoIcon sx={{ color: "#33bfff" }} /> two button to add to <span className="two">Doing</span>, and the <Looks3Icon sx={{ color: "#ff9800" }} /> three button to add to <span className="three">Done</span>. Click the button again to remove it from a list.</p>
@@ -112,7 +112,7 @@ const Dashboard = () => {
 
         <TabPanel value={value} index={1}>
           <Grid direction="row" container sx={{ padding: "1rem" }}>
-            <Grid container spacing={1}  justifyContent="center">
+            <Grid container spacing={1} justifyContent="center">
 
               <Grid item lg={10}>
                 <UserLinks />

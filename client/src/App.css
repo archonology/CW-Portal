@@ -53,6 +53,10 @@ html body {
   color: var(--alt);
 }
 
+.box {
+  margin-top: 5em;
+}
+
 h3 {
   color: var(--beacon);
 }

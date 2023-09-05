@@ -151,7 +151,7 @@ const ContentCreator = () => {
   });
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', marginTop: '3em' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>

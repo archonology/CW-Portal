@@ -94,9 +94,8 @@ const Search = () => {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', marginTop: "7em" }}>
             <Box>
-
 
                 <Tabs
                     sx={{ alignContent: "center" }}
