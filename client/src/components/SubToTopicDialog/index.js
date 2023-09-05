@@ -26,8 +26,6 @@ export default function SubToTopicDialog({ subtopic }) {
 
 function TopicList({ subtopic }) {
 
-    console.log(subtopic);
-
     const { loading, err, data } = useQuery(QUERY_ALL_TOPICS);
     const topicData = data?.topics || [];
 

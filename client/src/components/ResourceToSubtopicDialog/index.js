@@ -15,7 +15,6 @@ import { ADD_RESOURCE_TO_SUBTOPIC } from "../../utils/mutations";
 import { SnackbarProvider, useSnackbar } from "notistack";
 
 export default function ResourceToSubtopicDialog({ resource }) {
-    console.log(resource);
     return (
         // limits the alert to 3 max
         <SnackbarProvider maxSnack={3}>

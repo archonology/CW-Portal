@@ -271,7 +271,7 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
 
     return (
         <>
-            <Card key={resource._id} sx={{ width: "335px", maxHeight: "450px", margin: 1, boxShadow: 10, padding: 1.5, backgroundColor: "#212121" }}  >
+            <Card key={resource._id} sx={{ width: "340px", minHeight: "240px", margin: 2.2, boxShadow: 10, padding: 1.5, backgroundColor: "#212121" }}  >
                 {/* client requested dropping photos for resources */}
                 {/* <CardMedia
                     component="img"
@@ -284,8 +284,9 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
                     <Typography gutterBottom variant="h6" component="div">
                         {resource.title}
                     </Typography>
-                    <hr/>
-                    <Typography color="text.secondary" sx={{ overflow: "auto", height: "165px" }}>
+                    <hr />
+                    {/* set textbox scroll and height: sx={{ overflow: "auto", height: "165px" }} */}
+                    <Typography color="text.secondary" sx={{}}>
                         {resource.text}<br></br>
                     </Typography>
                     <Button
@@ -294,10 +295,10 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
                         rel={'nonreferrer'}
                         variant="text"
                         color="secondary"
+                        className="cardButton"
                         sx={{ marginTop: 2, marginBottom: -3 }}
-                        size="medium" >Visit Resource</Button>
+                        size="medium" >Visit Website</Button>
                 </CardContent>
-                {/* <Divider variant="middle" /> */}
 
                 <CardActions sx={{}}>
 
@@ -382,9 +383,6 @@ const ResourceCard = ({ resource, favorites, toDo, doing, done }) => {
 
                     {Auth.adminLoggedIn() ? (
                         <>
-                            {/* <Divider variant="middle" /> */}
-                            {/* tools specific to admin */}
-
 
                             <Tooltip title="Add to a Topic">
                                 <IconButton onClick={handleClickOpenTopics}>

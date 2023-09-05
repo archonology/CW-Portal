@@ -1,9 +1,7 @@
 import React from "react";
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { QUERY_ALL_RESOURCES, QUERY_ME } from "../../utils/queries";
 import ResourceCard from "../OneResource";
-
-import Auth from "../../utils/auth";
 
 
 const Resources = () => {
@@ -24,8 +22,8 @@ const Resources = () => {
             {resourceData.map((resource) => {
                 return (
                     <>
-                    <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
-                </>
+                        <ResourceCard resource={resource} favorites={userData.favorites} toDo={userData.do} doing={userData.doing} done={userData.done} />
+                    </>
                 )
 
             })}

@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
-import { Container, Grid } from "@mui/material";
 import ResourceCard from "../OneResource";
 
 const Done = () => {
@@ -11,7 +10,7 @@ const Done = () => {
 
     //Error handling if user is not logged in
     if (error) {
-        console.log(error);
+        console.error(error);
         return (
             <h3
                 style={{
@@ -27,8 +26,6 @@ const Done = () => {
     if (loading) {
         return <h2>LOADING...</h2>;
     }
-
-    console.log(userData);
 
     return (
         <>

@@ -8,13 +8,11 @@ import {
     DialogContent,
     Button,
 } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import { QUERY_ALL_SUBTOPICS, QUERY_ALL_TOPICS } from "../../utils/queries";
+import { QUERY_ALL_SUBTOPICS } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { REMOVE_RESOURCE_FROM_SUBTOPIC } from "../../utils/mutations";
 import { SnackbarProvider, useSnackbar } from "notistack";
-import Subtopic from "../OneSubtopic";
 
 export default function XResourceFromSubtopicDialog({ resource }) {
 
@@ -41,7 +39,7 @@ function SubtopicList({ resource }) {
 
     // takes in a card and deck object
     const handleRemoveFromSubtopic = async (resource, subtopic) => {
-   
+
         try {
             const { data } = await removeResourceFromSubtopic({
                 variables: { subtopicId: subtopic._id, _id: resource._id },
@@ -68,7 +66,7 @@ function SubtopicList({ resource }) {
                             <ListItem key={subtopic._id}>
                                 <Tooltip title="Remove From This Topic">
                                     <Button onClick={() => handleRemoveFromSubtopic(resource, subtopic)}>
-                                        <RemoveCircleOutlineIcon/>
+                                        <RemoveCircleOutlineIcon />
                                         <ListItemText primary={subtopic.title} />
                                     </Button>
                                 </Tooltip>

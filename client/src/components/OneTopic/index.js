@@ -16,13 +16,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Subtopic from "../OneSubtopic";
-import Subtopics from "../Subtopics";
 import ResourceCard from "../OneResource";
 import EditTopicDialog from "../EditTopicDialog";
 import { DELETE_TOPIC } from "../../utils/mutations";
 import Dialog from "@mui/material/Dialog";
-import { Link } from 'react-router-dom';
-
 import Auth from "../../utils/auth";
 
 
@@ -126,8 +123,8 @@ const OneTopic = ({ }) => {
 
     return (
         <>
-            <Container fluid className="">
-                <Stack direction="row" spacing={2} margin={4}>
+            <Container fluid>
+                <Stack direction="row" spacing={2} margin={4} marginTop={15} className="topicBox">
                     <Avatar
                         alt={"T"}
                         src={topicData.image}
@@ -169,7 +166,7 @@ const OneTopic = ({ }) => {
                 )}
             </Container>
 
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{ margin: "2em" }}>
                 <Box>
 
                     <Tabs

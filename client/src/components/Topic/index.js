@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import Container from 'react-bootstrap/Container';
 import Avatar from '@mui/material/Avatar';
 import EditIcon from '@mui/icons-material/Edit';
@@ -99,7 +99,7 @@ const Topic = ({ topic }) => {
 
     return (
         <>
-        
+
             <Container key={topic._id} fluid>
                 <Stack direction="row" spacing={2} margin={2}>
                     <Avatar
@@ -165,17 +165,17 @@ const Topic = ({ topic }) => {
                 </Box>
 
                 <TabPanel value={value} index={0}>
-                
-                        {/* see all subtopics for one topic */}
-                        {topic?.subtopics?.map((subtopic) => {
-                            return (
-                                <>
-                                    <Subtopic
-                                        subtopic={subtopic}
-                                    />
-                                </>
-                            )
-                        })}
+
+                    {/* see all subtopics for one topic */}
+                    {topic?.subtopics?.map((subtopic) => {
+                        return (
+                            <>
+                                <Subtopic
+                                    subtopic={subtopic}
+                                />
+                            </>
+                        )
+                    })}
 
                 </TabPanel>
                 <TabPanel value={value} index={1}>

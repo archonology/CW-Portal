@@ -1,22 +1,18 @@
 import React from "react";
-import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ALL_TOPICS } from "../../utils/queries";
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import Container from 'react-bootstrap/Container';
-import DeleteIcon from "@mui/icons-material/Delete";
-import { IconButton, Divider } from '@mui/material';
-
-import Tooltip from '@mui/material/Tooltip';
-import { DELETE_TOPIC } from "../../utils/mutations";
+import { useQuery } from '@apollo/client';
+import { QUERY_ALL_TOPICS, QUERY_ME } from "../../utils/queries";
 import Topic from "../Topic";
-
-import Auth from "../../utils/auth";
 
 
 const Topics = () => {
-    // set up useQuery get the data from the backend
+
+    const { loading: loadingMe, error: errorMe, data: dataMe } = useQuery(QUERY_ME);
+
+    const userData = dataMe?.me || {};
+    const [expanded, setExpanded] = React.useState(false);
+
     const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
+
 
     // object to keep the topic data
     const topicData = data?.topics || {};
@@ -24,16 +20,16 @@ const Topics = () => {
     if (loading) return "loading";
     if (error) return `Error! ${error}`;
 
+
     return (
         <>
             {topicData.map((topic) => {
                 return (
-                    <>
-                    <Topic topic={topic} />
-                    </>
+                    <div className="topicBox">
+                        <Topic topic={topic} />
+                    </div>
                 );
             })}
-            <hr></hr>
         </>
     );
 };
