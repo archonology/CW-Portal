@@ -1,5 +1,5 @@
 :root {
-  --base: rgb(36, 44, 49);
+  --base: rgb(29, 31, 33);
   --alt: rgb(177, 178, 178);
   --primary: rgb(228, 223, 218);
   --lightblue: rgb(143, 214, 249);
@@ -23,7 +23,7 @@ html body {
 
 
 .navbar {
-  background-color: rgba(27, 27, 36, 0.773);
+  background-color: var(--base);
 }
 
 .navdropdown {
@@ -31,13 +31,15 @@ html body {
 }
 
 .welcome {
-  color: var(--beacon);
+  margin-top: 2em;
+  color: var(--primary);
+  font-size: 56px;
 }
 
-.allTopics {
-  margin-top: 2em;
-  margin-bottom: 7em;
+.homeResources {
+  font-size: 46px;
 }
+
 
 .footspace {
   margin-bottom: 3rem;
@@ -64,7 +66,7 @@ h6 {
 }
 
 .topicBox {
-  background-color: rgba(32, 34, 31, 0.756);
+  background-color: var(--base);
   padding: 2em;
   border-radius: 10px;
 }
@@ -291,4 +293,12 @@ a:hover {
 
 .quicklinkMe2:hover {
   color: #f88f88;
+}
+
+@media screen and (max-width: 500px) {
+  .welcome {
+    color: var(--primary);
+    font-size: 36px;
+    text-align: left;
+  }
 }

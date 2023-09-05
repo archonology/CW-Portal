@@ -29,7 +29,7 @@ const Home = () => {
         </Container>
       ))}
       <Container fluid className="text-center p-5 mt-2 box">
-        <h2>All Resources</h2>
+        <h2 className="homeResources">All Resources</h2>
       </Container>
       <Grid direction="row" container sx={{ padding: "1rem" }}>
         <Grid container spacing={0} justifyContent="center">
