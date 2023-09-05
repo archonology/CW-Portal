@@ -1,9 +1,10 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
 import Post from "../components/OnePost";
-import Topics from "../components/Topics";
+import Resources from "../components/Resources";
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_POSTS, QUERY_ALL_TOPICS } from "../utils/queries";
+import { Grid } from "@mui/material";
 
 
 
@@ -30,9 +31,13 @@ const Home = () => {
       <Container fluid className="text-center p-5 mt-2 box">
         <h2>All Resources</h2>
       </Container>
-      <div className="allTopics">
-        <Topics />
-      </div>
+      <Grid direction="row" container sx={{ padding: "1rem" }}>
+        <Grid container spacing={0} justifyContent="center">
+
+          <Resources />
+
+        </Grid>
+      </Grid>
 
 
     </>

@@ -82,7 +82,6 @@ const Signup = () => {
             const { data } = await createUser({
                 variables: { ...signupFormData },
             });
-            console.log(data);
             Auth.login(data.createUser.token);
         } catch (error) {
             console.error(error);

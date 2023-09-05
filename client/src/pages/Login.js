@@ -79,7 +79,6 @@ const Login = () => {
             const { data } = await loginUser({
                 variables: { ...loginFormData },
             });
-            console.log(data);
             Auth.login(data.loginUser.token);
         } catch (error) {
             console.error(error);

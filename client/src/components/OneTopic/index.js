@@ -16,13 +16,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Subtopic from "../OneSubtopic";
-import Subtopics from "../Subtopics";
 import ResourceCard from "../OneResource";
 import EditTopicDialog from "../EditTopicDialog";
 import { DELETE_TOPIC } from "../../utils/mutations";
 import Dialog from "@mui/material/Dialog";
-import { Link } from 'react-router-dom';
-
 import Auth from "../../utils/auth";
 
 
