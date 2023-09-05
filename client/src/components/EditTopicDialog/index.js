@@ -6,7 +6,6 @@ import {
     TextField,
     Box,
 } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { QUERY_ALL_TOPICS } from "../../utils/queries";
 import { useMutation } from "@apollo/client";
 import { UPDATE_TOPIC } from "../../utils/mutations";

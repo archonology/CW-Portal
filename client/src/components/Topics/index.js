@@ -1,9 +1,7 @@
 import React from "react";
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { QUERY_ALL_TOPICS, QUERY_ME } from "../../utils/queries";
 import Topic from "../Topic";
-import { DELETE_TOPIC } from "../../utils/mutations";
-import Auth from "../../utils/auth";
 
 
 const Topics = () => {

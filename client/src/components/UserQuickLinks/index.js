@@ -35,7 +35,6 @@ const UserLinks = () => {
         let { target } = e;
         let inputType = target.name;
         let inputValue = target.value;
-        console.log(inputValue);
 
         if (inputType === 'linkTitle') {
             setLinkTitle(inputValue);
@@ -62,7 +61,6 @@ const UserLinks = () => {
     }
 
     const handleDelete = async (_id) => {
-        console.log(_id);
         try {
             const { data } = await deleteUserQuickLink({
                 variables: { _id: _id },
@@ -74,7 +72,7 @@ const UserLinks = () => {
 
     //Error handling if user is not logged in
     if (error) {
-        console.log(error);
+        console.error(error);
         return (
             <h3
                 style={{
@@ -174,7 +172,7 @@ const UserLinks = () => {
                                 variant="contained"
                                 color="error"
                                 sx={{ m: 1 }}
-                                onClick={() => { console.log(link._id); handleDelete(link._id) }}
+                                onClick={() => { handleDelete(link._id) }}
                             >Delete
                             </Button>
 

@@ -8,7 +8,6 @@ import {
     DialogContent,
     Button,
 } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { QUERY_ALL_TOPICS } from "../../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";

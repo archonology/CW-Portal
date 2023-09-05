@@ -4,19 +4,13 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import Auth from "../../utils/auth";
-import SearchIcon from '@mui/icons-material/Search';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_TOPICS, QUERY_ALL_QUICKLINKS, QUERY_ME } from "../../utils/queries";
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { ClassNames } from '@emotion/react';
-
-
 
 
 function Header() {
@@ -44,10 +38,9 @@ function Header() {
 
   const userLinkData = userData?.me || [];
 
-  console.log(userLinkData);
   return (
     <>
-      <Navbar  variant="dark" className="mb-2 p-3 navbar" expand="md" id="#top">
+      <Navbar variant="dark" className="mb-2 p-3 navbar" expand="md" id="#top">
         <Container fluid >
 
           <Navbar.Brand as={Link} to="/" className="brand">The Child Welfare Portal</Navbar.Brand>
@@ -148,7 +141,7 @@ function Header() {
                     </>
                   ))}
                   <h4>Standard links:</h4>
-                 <br />
+                  <br />
                 </>
               ) : (<></>)}
               {quickLinkData.map((quicklink, index) => (

@@ -4,13 +4,12 @@ import { QUERY_ALL_POSTS } from "../../utils/queries";
 import { DELETE_POST } from "../../utils/mutations";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import Image from 'mui-image';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import Auth from "../../utils/auth";
 import EditPostDialog from "../EditPostDialog";
 import Tooltip from '@mui/material/Tooltip';
-import { IconButton, Divider } from '@mui/material';
+import { IconButton } from '@mui/material';
 import Dialog from "@mui/material/Dialog";
 
 const Post = ({ post }) => {
@@ -66,9 +65,9 @@ const Post = ({ post }) => {
 
             {Auth.adminLoggedIn() ? (
                 <>
-                    <Tooltip title="Edit" sx={{marginLeft: 3, padding: 2 }}>
+                    <Tooltip title="Edit" sx={{ marginLeft: 3, padding: 2 }}>
                         <IconButton onClick={handleClickOpenPosts}>
-                            <EditIcon sx={{ color: "#ffcf33"}} />
+                            <EditIcon sx={{ color: "#ffcf33" }} />
                         </IconButton>
                     </Tooltip>
 
