@@ -22,7 +22,7 @@ function Footer() {
 
   return (
     <>
-      <Navbar bg="transparent" variant="dark" className="p-3 mb-4" expand="md" relative="bottom">
+      <Navbar  variant="dark" className="p-3 footer" expand="md" fixed="bottom">
         <Container fluid >
           <Navbar.Brand as={Link} to="/" className="p-2"></Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`} />
@@ -56,7 +56,7 @@ function Footer() {
                 )}
 
                 <Nav.Link as={Link} to="/about">About</Nav.Link>
-                <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link>
+                {/* <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link> */}
 
                 <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
 

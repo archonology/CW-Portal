@@ -35,7 +35,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 2, mt: 3 }}>
+                <Box sx={{ p: 0, m: .5, mt: 3 }}>
                     {children}
                 </Box>
             )}
@@ -124,13 +124,13 @@ const OneTopic = ({ }) => {
     return (
         <>
             <Container fluid>
-                <Stack direction="row" spacing={2} margin={4} marginTop={15} className="topicBox">
-                    <Avatar
+                <Stack direction="row" spacing={2} margin={2} marginTop={15} padding={3} className="topicBox">
+                    {/* <Avatar
                         alt={"T"}
                         src={topicData.image}
                         sx={{ width: 100, height: 100, marginTop: 1.5 }}
                         className="avatar"
-                    />
+                    /> */}
                     <div>
                         <h2 className="topic-headers">{topicData.title}</h2>
                         <p className="mainText">{topicData.text}</p>
@@ -166,7 +166,7 @@ const OneTopic = ({ }) => {
                 )}
             </Container>
 
-            <Box sx={{ margin: "2em" }}>
+            <Box sx={{ margin: "1em" }}>
                 <Box>
 
                     <Tabs

@@ -102,6 +102,9 @@ function App() {
         <Router>
           <div>
             <Header />
+            <div className="donate">
+              <a href='https://buy.stripe.com/cN26ox1O4eMkf7ifYY' target='_blank' rel='nonreferrer'><button className="donate-button">DONATE</button></a>
+            </div>
           </div>
           <div className="footspace">
             <Routes>

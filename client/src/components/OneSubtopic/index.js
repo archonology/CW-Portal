@@ -103,12 +103,12 @@ const Subtopic = ({ subtopic }) => {
                         aria-controls="panel1bh-content"
                         id="panel1bh-header"
                     >
-                        <Avatar
+                        {/* <Avatar
                             alt={"T"}
                             src={subtopic.image}
                             sx={{ width: 75, height: 75, marginRight: 2 }}
                             className="avatar"
-                        />
+                        /> */}
 
                         <Typography sx={{ width: '100%', flexShrink: 0, textAlign: "left", fontSize: 'larger', paddingRight: 15, marginTop: 1 }} className="subtopic-headers">
                             {subtopic.title}
@@ -168,7 +168,7 @@ const Subtopic = ({ subtopic }) => {
 
                         )}
                         <>
-                            <Grid direction="row" container sx={{ padding: "1rem" }}>
+                            <Grid direction="row" container sx={{ padding: "2" }}>
                                 <Grid container spacing={1} justifyContent="center">
 
                                     {subtopic?.resources.map((resource) => {

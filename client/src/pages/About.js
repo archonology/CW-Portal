@@ -8,7 +8,7 @@ import Reed from '../media/IMG_4904.jpeg'
 const About = () => {
     return (
         <>
-            <h2 className="text-center p-2 mt-5">About Us</h2>
+            <h2 className="text-center p-2 about">About Us</h2>
 
             <Grid direction="row" container sx={{ padding: "1rem" }}>
                 <Grid container spacing={0} justifyContent="center">
