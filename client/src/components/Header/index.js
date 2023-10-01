@@ -51,7 +51,7 @@ function Header() {
 
               <Nav.Link onClick={handleShow}>Topics</Nav.Link>
               <Nav.Link onClick={handleShow2}>Quick Links</Nav.Link>
-              <Nav.Link as={Link} to="/search">Search</Nav.Link>
+              <Nav.Link as={Link} to="/search" onClick={show}>Search</Nav.Link>
 
               {Auth.loggedIn() ? (
 
@@ -62,8 +62,8 @@ function Header() {
                 </>
               ) : (
                 <>
-                  <Nav.Link as={Link} to="/login">Dashboard</Nav.Link>
-                  <Nav.Link as={Link} to="/login" className="logging">Login</Nav.Link>
+                    <Nav.Link as={Link} to="/login" onClick={show}>Dashboard</Nav.Link>
+                    <Nav.Link as={Link} to="/login" className="logging" onClick={show}>Login</Nav.Link>
 
                 </>
               )}
@@ -91,6 +91,7 @@ function Header() {
                         to={`/resources/${topic._id}`}
                         className="topics p-2"
                         variant='dark'
+                        onClick={show}
                       >{topic.title}
                       </Nav.Link>
                       :
@@ -100,6 +101,7 @@ function Header() {
                         to={`/resources/${topic._id}`}
                         className="topics2 p-2"
                         variant='dark'
+                        onClick={show}
                       >{topic.title}
                       </Nav.Link>
                     }

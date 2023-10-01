@@ -1,28 +1,28 @@
-import * as React from "react";
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Link } from 'react-router-dom';
 import Auth from "../../utils/auth";
-import { useQuery } from '@apollo/client';
-import { QUERY_ALL_TOPICS } from "../../utils/queries";
 
 
 function Footer() {
 
-  // set up useQuery get the data from the backend
-  const { loading, error, data } = useQuery(QUERY_ALL_TOPICS);
 
-  // object to keep the topic data
-  const topicData = data?.topics || {};
-  // check load time and errors
-  if (loading) return "loading";
-  if (error) return `Error! ${error}`;
+  const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+
 
   return (
     <>
-      <Navbar  variant="dark" className="p-3 footer" expand="md" fixed="bottom">
+      <Navbar variant="dark" className="p-3 footer" expand="md" fixed="bottom">
         <Container fluid >
           <Navbar.Brand as={Link} to="/" className="p-2"></Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md}`} />
@@ -45,8 +45,16 @@ function Footer() {
                 {Auth.adminLoggedIn() ? (
 
                   <>
-                    <Nav.Link as={Link} to="/contentcreator" className="creator">Content Creator</Nav.Link>
-                    <Nav.Link as={Link} to="/" onClick={Auth.adminLogout} className="logging" >Admin Logout</Nav.Link>
+                    <Nav.Link
+                      as={Link}
+                      to="/contentcreator" className="creator"
+                      onClick={show}
+                    >Content Creator</Nav.Link>
+                    <Nav.Link
+                      as={Link}
+                      to="/"
+                      onClick={Auth.adminLogout} className="logging"
+                    >Admin Logout</Nav.Link>
 
                   </>
                 ) : (
@@ -55,10 +63,18 @@ function Footer() {
                   </>
                 )}
 
-                <Nav.Link as={Link} to="/about">About</Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/about"
+                  onClick={show}
+                >About</Nav.Link>
                 {/* <Nav.Link href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY" target={'_blank'} rel={'nonreferrer'}>Donate</Nav.Link> */}
 
-                <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/contact"
+                  onClick={show}
+                >Contact</Nav.Link>
 
                 <Nav.Link href="https://www.meherdevs.com" target={'_blank'} rel={'nonreferrer'} className="meherdevs">Made by MeherDevs | 2023</Nav.Link>
 
