@@ -125,7 +125,7 @@ h6 {
 }
 
 .topic-headers {
-  color: var(--lightbeacon);
+  color: var(--lightblue);
   font-size: 35px;
   text-decoration: none;
 }
@@ -367,6 +367,6 @@ a:hover {
 
   .donate-button {
     margin-right: 10px;
-    margin-bottom: 60px;
+    margin-bottom: -10px;
   }
 }

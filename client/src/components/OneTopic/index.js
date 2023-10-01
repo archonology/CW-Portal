@@ -133,6 +133,7 @@ const OneTopic = ({ }) => {
                     /> */}
                     <div>
                         <h2 className="topic-headers">{topicData.title}</h2>
+                        <hr/>
                         <p className="mainText">{topicData.text}</p>
                     </div>
                 </Stack>
