@@ -31,6 +31,10 @@ html body {
   background-color: var(--base);
 }
 
+.in-footer {
+  background-color: var(--base);
+}
+
 .navdropdown {
   background-color: var(--base);
 }
@@ -121,7 +125,8 @@ h6 {
 }
 
 .topic-headers {
-  color: var(--beacon);
+  color: var(--lightbeacon);
+  font-size: 35px;
   text-decoration: none;
 }
 

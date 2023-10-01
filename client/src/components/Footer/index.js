@@ -30,7 +30,7 @@ function Footer() {
             id={`offcanvasNavbar-expand-md}`}
             aria-labelledby={`offcanvasNavbarLabel-expand-md}`}
             placement="end"
-            className="bg-dark variant-white"
+            className="variant-white in-footer"
           >
             <Offcanvas.Header closeButton closeVariant="white">
 
