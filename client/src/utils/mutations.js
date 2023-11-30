@@ -133,12 +133,11 @@ mutation createUserQuickLink($title: String!, $link: String!) {
 `;
 
 export const CREATE_POST = gql`
-mutation createPost($title: String!, $text: String!, $image: String!, $link: String!) {
-    createPost(title: $title, text: $text, image: $image, link: $link){
+mutation createPost($title: String!, $text: String!, $link: String!) {
+    createPost(title: $title, text: $text, link: $link){
         _id
         title
         text
-        image
         link
     }
 }
@@ -242,12 +241,11 @@ mutation updateTopic($_id: ID!, $title: String!, $text: String!, $image: String!
 `;
 
 export const UPDATE_POST = gql`
-mutation updatePost($_id: ID!, $title: String!, $text: String!, $image: String!, $link: String!) {
-  updatePost(_id: $_id, title: $title, text: $text, image: $image, link: $link){
+mutation updatePost($_id: ID!, $title: String!, $text: String!, $link: String!) {
+  updatePost(_id: $_id, title: $title, text: $text, link: $link){
         _id
         title
         text
-        image
         link
     }
 }

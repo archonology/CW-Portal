@@ -16,8 +16,7 @@ const AddPost = () => {
     const [formState, setFormState] = useState({
         title: "",
         text: "",
-        link: "",
-        image: ""
+        link: ""
     });
 
     const [newPost, { error, data }] = useMutation(CREATE_POST);
@@ -44,6 +43,7 @@ const AddPost = () => {
 
         } catch (e) {
             console.error(e);
+            window.alert("Something went wrong! Check the data you entered, please!");
         }
     };
     return (
@@ -96,16 +96,6 @@ const AddPost = () => {
                         variant="standard"
                     ></TextField>
 
-                    <TextField
-                        name="image"
-                        value={formState.image}
-                        onChange={handleChange}
-                        onBlur={() => { handleChange.image.trim() }}
-                        label="Image URL"
-                        id="image"
-                        variant="standard"
-                    ></TextField>
-                    
                     <Button
                         type="submit"
                         variant="contained"
