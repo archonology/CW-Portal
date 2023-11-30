@@ -127,7 +127,6 @@ query posts {
         title
         text
         link
-        image
       }
 }
 `;
