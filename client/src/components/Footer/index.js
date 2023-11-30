@@ -75,11 +75,7 @@ function Footer() {
                   to="/contact"
                   onClick={show}
                 >Contact</Nav.Link>
-
-te
-
               </Nav>
-
 
             </Offcanvas.Body>
           </Navbar.Offcanvas>
