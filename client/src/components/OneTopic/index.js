@@ -133,7 +133,7 @@ const OneTopic = ({ }) => {
                     /> */}
                     <div>
                         <h2 className="topic-headers">{topicData.title}</h2>
-                        <hr/>
+                        <hr />
                         <p className="mainText">{topicData.text}</p>
                     </div>
                 </Stack>
@@ -182,27 +182,15 @@ const OneTopic = ({ }) => {
                         allowScrollButtonsMobile
                         aria-label="scrollable Dashboard List Tabs"
                         indicatorColor="primary">
-                        <Tab label="SubTopics" {...a11yProps(0)} />
-                        <Tab label="Resources" {...a11yProps(1)} />
+                        {/* If a topic has no subtopics, don't load a subtopic tab. */}
+                        <Tab label="Resources" {...a11yProps(0)} />
+                        {topicData.subtopics.length > 0 ? (<Tab label="SubTopics" {...a11yProps(1)} />) : (<></>)}
+
                     </Tabs>
 
                 </Box>
 
                 <TabPanel value={value} index={0}>
-
-                    {/* see all subtopics for one topic */}
-                    {topicData?.subtopics?.map((subtopic) => {
-                        return (
-                            <>
-                                <Subtopic
-                                    subtopic={subtopic}
-                                />
-                            </>
-                        )
-                    })}
-
-                </TabPanel>
-                <TabPanel value={value} index={1}>
 
                     <Grid direction="row" container sx={{ padding: "1rem" }}>
                         <Grid container spacing={0} justifyContent="center">
@@ -217,8 +205,22 @@ const OneTopic = ({ }) => {
 
                         </Grid>
                     </Grid>
-
                 </TabPanel>
+                {topicData.subtopics ? (<TabPanel value={value} index={1}>
+
+                    {/* see all subtopics for one topic */}
+                    {topicData?.subtopics?.map((subtopic) => {
+                        return (
+                            <>
+                                <Subtopic
+                                    subtopic={subtopic}
+                                />
+                            </>
+                        )
+                    })}
+
+                </TabPanel>) : (<></>)}
+
 
             </Box>
 
