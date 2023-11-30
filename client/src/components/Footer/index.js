@@ -76,7 +76,7 @@ function Footer() {
                   onClick={show}
                 >Contact</Nav.Link>
 
-                <Nav.Link href="https://www.meherdevs.com" target={'_blank'} rel={'nonreferrer'} className="meherdevs">Made by MeherDevs | 2023</Nav.Link>
+te
 
               </Nav>
 
