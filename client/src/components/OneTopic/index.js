@@ -127,14 +127,20 @@ const OneTopic = ({ }) => {
                     <div>
                         <h2 className="topic-headers">{topicData.title}</h2>
                         <hr />
-                        <p className="mainText">{topicData.text}<br></br><span><Button
-                            href={topicData.link}
-                            target={'_blank'}
-                            rel={'nonreferrer'}
-                            variant="outlined"
-                            color="primary"
-                            sx={{ marginTop: 3 }}
-                            size="small" >Learn More</Button></span></p>
+                        <p className="mainText">{topicData.text}
+                            <br />
+                            <span>
+                                <Button
+                                    href={topicData.link}
+                                    target={'_blank'}
+                                    rel={'nonreferrer'}
+                                    variant="outlined"
+                                    color="primary"
+                                    sx={{ marginTop: 3 }}
+                                    size="small" >Learn More
+                                </Button>
+                            </span>
+                        </p>
                     </div>
                 </Stack>
                 {Auth.adminLoggedIn() ? (
