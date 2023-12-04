@@ -3,7 +3,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ALL_TOPICS, QUERY_ONE_TOPIC, QUERY_ME } from "../../utils/queries";
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
-import Avatar from '@mui/material/Avatar';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from "@mui/icons-material/Delete";
 import Stack from '@mui/material/Stack';
@@ -21,7 +20,7 @@ import EditTopicDialog from "../EditTopicDialog";
 import { DELETE_TOPIC } from "../../utils/mutations";
 import Dialog from "@mui/material/Dialog";
 import Auth from "../../utils/auth";
-
+import { Button } from '@mui/material';
 
 
 function TabPanel(props) {
@@ -125,16 +124,17 @@ const OneTopic = ({ }) => {
         <>
             <Container fluid>
                 <Stack direction="row" spacing={2} margin={2} marginTop={15} padding={3} className="topicBox">
-                    {/* <Avatar
-                        alt={"T"}
-                        src={topicData.image}
-                        sx={{ width: 100, height: 100, marginTop: 1.5 }}
-                        className="avatar"
-                    /> */}
                     <div>
                         <h2 className="topic-headers">{topicData.title}</h2>
                         <hr />
-                        <p className="mainText">{topicData.text}</p>
+                        <p className="mainText">{topicData.text}<br></br><span><Button
+                            href={topicData.link}
+                            target={'_blank'}
+                            rel={'nonreferrer'}
+                            variant="outlined"
+                            color="primary"
+                            sx={{ marginTop: 3 }}
+                            size="small" >Learn More</Button></span></p>
                     </div>
                 </Stack>
                 {Auth.adminLoggedIn() ? (

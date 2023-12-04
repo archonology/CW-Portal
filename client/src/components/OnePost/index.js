@@ -46,10 +46,6 @@ const Post = ({ post }) => {
         <>
 
             <Stack key={post._id} direction="column" spacing={1} margin={4}>
-                {/* <Image 
-                src={post.image}
-                alt={post.title} 
-                fit="contain"></Image> */}
                 <h4>{post.title}</h4><p>{post.text}<br></br><span><Button
                     href={post.link}
                     target={'_blank'}
