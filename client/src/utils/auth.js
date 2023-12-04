@@ -57,6 +57,12 @@ class AuthService {
   }
 
   login(idToken) {
+    // Since an admin can also have a normal user account, the admin may forget to logout as an admin before trying to login in as a user. 
+    // The tokens will conflict if both are set in localStorage, so before we login as a user we check to see if there is an adminToken. If there is, we remove it and proceed with user login.
+    const adminToken = this.getAdminToken();
+    if (adminToken) {
+      localStorage.removeItem('admin_id_token');
+    }
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
     window.location.assign('/dashboard');
@@ -64,6 +70,11 @@ class AuthService {
   }
 
   adminLogin(adminToken) {
+    // Make sure user is not logged in before attempting to login admin
+    const token = this.getToken();
+    if (token) {
+      localStorage.removeItem('id_token');
+    }
     // Saves admin token to localStorage
     localStorage.setItem('admin_id_token', adminToken);
     window.location.assign('/contentcreator');
