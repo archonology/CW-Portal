@@ -222,31 +222,15 @@ const ContentCreator = () => {
               allowScrollButtonsMobile
               aria-label="scrollable Dashboard List Tabs"
               indicatorColor="secondary">
-              <Tab label="Topics" {...a11yProps(0)} />
+              <Tab label="Resources" {...a11yProps(0)} />
               <Tab label="SubTopics" {...a11yProps(1)} />
-              <Tab label="Resources" {...a11yProps(2)} />
+              <Tab label="Topics" {...a11yProps(2)} />
               <Tab label="QuickLinks" {...a11yProps(3)} />
               <Tab label="Posts" {...a11yProps(4)} />
             </Tabs>
 
           </Box>
           <TabPanel value={value} index={0}>
-            <Grid direction="row" container >
-              <Grid container spacing={0}>
-
-                {/* see all topics */}
-                <Topics />
-
-              </Grid>
-            </Grid>
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-
-            {/* see all subtopics */}
-            <Subtopics />
-
-          </TabPanel>
-          <TabPanel value={value} index={2}>
 
             <Grid direction="row" container sx={{ padding: "1rem" }}>
               <Grid container spacing={0} justifyContent="center">
@@ -257,6 +241,25 @@ const ContentCreator = () => {
             </Grid>
 
           </TabPanel>
+
+          <TabPanel value={value} index={1}>
+
+            {/* see all subtopics */}
+            <Subtopics />
+
+          </TabPanel>
+
+          <TabPanel value={value} index={2}>
+            <Grid direction="row" container >
+              <Grid container spacing={0}>
+
+                {/* see all topics */}
+                <Topics />
+
+              </Grid>
+            </Grid>
+          </TabPanel>
+
           <TabPanel value={value} index={3}>
             {quickLinkData.map((quicklink) => {
               return (
