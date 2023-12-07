@@ -117,7 +117,7 @@ const resolvers = {
 
         resources: async () => {
             const resourceData = await Resource.find({});
-            return resourceData;
+            return resourceData.reverse();
         },
 
         resource: async (parent, { _id }) => {
