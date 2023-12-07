@@ -1,11 +1,10 @@
 import React from "react";
 import { useMutation } from '@apollo/client';
 import Container from 'react-bootstrap/Container';
-import Avatar from '@mui/material/Avatar';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from "@mui/icons-material/Delete";
 import Stack from '@mui/material/Stack';
-import { Grid, IconButton } from "@mui/material";
+import { Grid, IconButton, Button } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import PropTypes from 'prop-types';
@@ -110,7 +109,21 @@ const Topic = ({ topic }) => {
                     /> */}
                     <div>
                         <h2 className="topic-headers">{topic.title}</h2>
-                        <p className="mainText">{topic.text}</p>
+                        <hr />
+                        <p className="mainText">{topic.text}
+                            <br />
+                            <span>
+                                <Button
+                                    href={topic.link}
+                                    target={'_blank'}
+                                    rel={'nonreferrer'}
+                                    variant="outlined"
+                                    color="primary"
+                                    sx={{ marginTop: 3 }}
+                                    size="small" >Learn More
+                                </Button>
+                            </span>
+                        </p>
                     </div>
                 </Stack>
 
