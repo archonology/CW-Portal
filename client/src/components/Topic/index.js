@@ -65,7 +65,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 const Topic = ({ topic }) => {
-    const [expanded, setExpanded] = React.useState(false);
+    // const [expanded, setExpanded] = React.useState(false);
 
     const [openTopic, setOpenTopic] = React.useState(false);
 
@@ -102,12 +102,12 @@ const Topic = ({ topic }) => {
 
             <Container key={topic._id} fluid>
                 <Stack direction="row" spacing={2} margin={2}>
-                    <Avatar
+                    {/* <Avatar
                         alt={"T"}
                         src={topic.image}
                         sx={{ width: 100, height: 100, marginTop: 1.5 }}
                         className="avatar"
-                    />
+                    /> */}
                     <div>
                         <h2 className="topic-headers">{topic.title}</h2>
                         <p className="mainText">{topic.text}</p>
@@ -195,9 +195,7 @@ const Topic = ({ topic }) => {
                         </Grid>
                     </Grid>
                 </TabPanel>
-                <hr></hr>
             </Box>
-
         </>
     );
 };

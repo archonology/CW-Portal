@@ -25,7 +25,7 @@ const Topics = () => {
         <>
             {topicData.map((topic) => {
                 return (
-                    <div className="topicBox">
+                    <div className="topicBox" style={{ marginBottom: '1em' }}>
                         <Topic topic={topic} />
                     </div>
                 );
