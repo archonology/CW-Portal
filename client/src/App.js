@@ -7,7 +7,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import OneTopic from "./components/OneTopic";
 import Subtopic from "./components/OneSubtopic";
@@ -16,7 +16,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-import Donate from "./pages/Donate";
+// import Donate from "./pages/Donate";
 import ContentCreator from "./pages/ContentCreator";
 import AddTopic from "./pages/AddTopic";
 import AddSubtopic from "./pages/AddSubtopic";
@@ -24,7 +24,6 @@ import AddResource from "./pages/AddResource";
 import AddQuickLink from "./pages/AddQuickLink";
 import AddPost from "./pages/AddPost";
 import Search from "./pages/Search";
-
 
 // adminLogin is not in the navbar: admin will need to know the url to navigate to this page, so that it isn't available to the public at large. use env after development phase to conceal url route
 import AdminLogin from "./pages/AdminLogin";
@@ -35,10 +34,6 @@ import Footer from "./components/Footer";
 
 import "./App.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
-
-
-
 
 // Construct the main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -95,7 +90,6 @@ function App() {
     }
   }, []);
   return (
-
     <ApolloProvider client={client}>
       {/* keeps the default theme dark across site */}
       <ThemeProvider theme={darkTheme}>
@@ -103,7 +97,13 @@ function App() {
           <div>
             <Header />
             <div className="donate">
-              <a href='https://buy.stripe.com/cN26ox1O4eMkf7ifYY' target='_blank' rel='nonreferrer'><button className="donate-button">DONATE</button></a>
+              <a
+                href="https://buy.stripe.com/cN26ox1O4eMkf7ifYY"
+                target="_blank"
+                rel="nonreferrer"
+              >
+                <button className="donate-button">DONATE</button>
+              </a>
             </div>
           </div>
           <div className="footspace">
@@ -117,20 +117,35 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="contentcreator/addtopic" element={<AddTopic />} />
-              <Route path="contentcreator/addsubtopic" element={<AddSubtopic />} />
-              <Route path="contentcreator/addresource" element={<AddResource />} />
-              <Route path="contentcreator/addquicklink" element={<AddQuickLink />} />
+              <Route
+                path="contentcreator/addsubtopic"
+                element={<AddSubtopic />}
+              />
+              <Route
+                path="contentcreator/addresource"
+                element={<AddResource />}
+              />
+              <Route
+                path="contentcreator/addquicklink"
+                element={<AddQuickLink />}
+              />
               <Route path="contentcreator/addpost" element={<AddPost />} />
               {/* build in progess on donation features */}
-              <Route path="/donate" element={<Donate />} />
-              <Route path={process.env.REACT_APP_ADMIN_LOGIN_KEY} element={<AdminLogin />} />
-              <Route path={process.env.REACT_APP_ADMIN_SIGNUP_KEY} element={<AdminSignup />} />
+              {/* <Route path="/donate" element={<Donate />} /> */}
+              <Route
+                path={process.env.REACT_APP_ADMIN_LOGIN_KEY}
+                element={<AdminLogin />}
+              />
+              <Route
+                path={process.env.REACT_APP_ADMIN_SIGNUP_KEY}
+                element={<AdminSignup />}
+              />
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
               <Route path="/*" element={<Home />} />
             </Routes>
           </div>
-          <div >
+          <div>
             <Footer />
           </div>
         </Router>

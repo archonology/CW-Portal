@@ -1,0 +1,9 @@
+Persisted queries are enabled and are using an unbounded cache. Your server is vulnerable to denial of service attacks via memory exhaustion. Set `cache: "bounded"` or `persistedQueries: false` in your ApolloServer constructor, or see https://go.apollo.dev/s/cache-backends for other alternatives.
+Mongoose connected to mongodb://localhost:27017/portalDB
+--- Server startup ---
+NODE_ENV=production
+PORT=3001
+MongoDB: localhost
+GraphQL path: /graphql
+Use GraphQL at http://localhost:3001/graphql
+----------------------

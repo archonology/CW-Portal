@@ -1,0 +1,24 @@
+node:internal/modules/cjs/loader:1404
+  throw err;
+  ^
+
+Error: Cannot find module 'react'
+Require stack:
+- /Users/reedmeher/MyThings/projects/CW-Portal/client/node_modules/react-scripts/scripts/start.js
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+    at Function.resolve (node:internal/modules/helpers:145:19)
+    at Object.<anonymous> (/Users/reedmeher/MyThings/projects/CW-Portal/client/node_modules/react-scripts/scripts/start.js:43:31)
+    at Module._compile (node:internal/modules/cjs/loader:1730:14)
+    at Object..js (node:internal/modules/cjs/loader:1895:10)
+    at Module.load (node:internal/modules/cjs/loader:1465:32)
+    at Function._load (node:internal/modules/cjs/loader:1282:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/reedmeher/MyThings/projects/CW-Portal/client/node_modules/react-scripts/scripts/start.js'
+  ]
+}
+
+Node.js v22.17.1
