@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_SUBTOPIC } from "../utils/mutations";
 import { Container, TextField, Box, Button } from "@mui/material";
