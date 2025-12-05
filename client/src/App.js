@@ -102,7 +102,7 @@ function App() {
                 target="_blank"
                 rel="nonreferrer"
               >
-                <button className="donate-button">DONATE</button>
+                {/* <button className="donate-button">DONATE</button> */}
               </a>
             </div>
           </div>
